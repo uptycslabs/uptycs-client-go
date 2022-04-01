@@ -1,6 +1,7 @@
 package uptycs
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"github.com/golang-jwt/jwt/v4"
@@ -50,7 +51,7 @@ func NewClient(config UptycsConfig) (*Client, error) {
 	ValidateConfig(config)
 
 	c := Client{
-		HTTPClient: &http.Client{Timeout: 10 * time.Second},
+		HTTPClient: &http.Client{},
 		HostURL:    fmt.Sprintf("https://%s/public/api/customers/%s", config.Host, config.CustomerID),
 	}
 
@@ -60,6 +61,14 @@ func NewClient(config UptycsConfig) (*Client, error) {
 }
 
 func (c *Client) doRequest(req *http.Request) ([]byte, error) {
+	ctx, cancel := context.WithTimeout(
+		context.Background(),
+		time.Duration(time.Millisecond*10000),
+	)
+
+	defer cancel()
+	req = req.WithContext(ctx)
+
 	token := c.Token
 
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
