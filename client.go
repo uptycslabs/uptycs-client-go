@@ -1,15 +1,14 @@
 package uptycs
 
 import (
-	"fmt"
 	"errors"
-	"os"
+	"fmt"
+	"github.com/golang-jwt/jwt/v4"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"time"
-  "github.com/golang-jwt/jwt/v4"
 )
-
 
 // Client -
 type Client struct {
@@ -21,43 +20,41 @@ type Client struct {
 var hmacSampleSecret []byte
 
 func CreateToken(apiKey string, apiSecret string) (string, error) {
-  var err error
-  atClaims := jwt.MapClaims{}
-  atClaims["iss"] = apiKey
-  at := jwt.NewWithClaims(jwt.SigningMethodHS256, atClaims)
-  token, err := at.SignedString([]byte(apiSecret))
-  if err != nil {
-     return "", err
-  }
-  return token, nil
+	var err error
+	atClaims := jwt.MapClaims{}
+	atClaims["iss"] = apiKey
+	at := jwt.NewWithClaims(jwt.SigningMethodHS256, atClaims)
+	token, err := at.SignedString([]byte(apiSecret))
+	if err != nil {
+		return "", err
+	}
+	return token, nil
 }
 
-// NewClient -
 func NewClient() (*Client, error) {
-  host := os.Getenv("UPTYCS_HOST")
-  if len(host) == 0 {
+	host := os.Getenv("UPTYCS_HOST")
+	if len(host) == 0 {
 		return &Client{}, errors.New("required env var UPTYCS_HOST not found")
-  }
+	}
 
-  customerId := os.Getenv("UPTYCS_CUSTOMER_ID")
-  if len(customerId) == 0 {
+	customerId := os.Getenv("UPTYCS_CUSTOMER_ID")
+	if len(customerId) == 0 {
 		return &Client{}, errors.New("required env var UPTYCS_CUSTOMER_ID not found")
-  }
+	}
 
 	c := Client{
 		HTTPClient: &http.Client{Timeout: 10 * time.Second},
-		// Default Hashicups URL
-    HostURL: fmt.Sprintf("https://%s/public/api/customers/%s", host, customerId),
+		HostURL:    fmt.Sprintf("https://%s/public/api/customers/%s", host, customerId),
 	}
 
-  apiKey := os.Getenv("UPTYCS_API_KEY")
-  if len(apiKey) == 0 {
+	apiKey := os.Getenv("UPTYCS_API_KEY")
+	if len(apiKey) == 0 {
 		return &Client{}, errors.New("required env var UPTYCS_API_KEY not found")
-  }
-  apiSecret := os.Getenv("UPTYCS_API_SECRET")
-  if len(apiSecret) == 0 {
+	}
+	apiSecret := os.Getenv("UPTYCS_API_SECRET")
+	if len(apiSecret) == 0 {
 		return &Client{}, errors.New("required env var UPTYCS_API_SECRET not found")
-  }
+	}
 
 	c.Token, _ = CreateToken(apiKey, apiSecret)
 
