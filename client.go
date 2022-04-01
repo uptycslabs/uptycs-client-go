@@ -6,11 +6,16 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 	"io/ioutil"
 	"net/http"
-	"os"
 	"time"
 )
 
-// Client -
+type UptycsConfig struct {
+	Host       string
+	ApiKey     string
+	ApiSecret  string
+	CustomerID string
+}
+
 type Client struct {
 	HostURL    string
 	HTTPClient *http.Client
@@ -31,32 +36,25 @@ func CreateToken(apiKey string, apiSecret string) (string, error) {
 	return token, nil
 }
 
-func NewClient() (*Client, error) {
-	host := os.Getenv("UPTYCS_HOST")
-	if len(host) == 0 {
-		return &Client{}, errors.New("required env var UPTYCS_HOST not found")
+func ValidateConfig(config UptycsConfig) (bool, error) {
+	configKeys := []string{config.Host, config.ApiKey, config.ApiSecret, config.CustomerID}
+	for _, configVal := range configKeys {
+		if len(configVal) == 0 {
+			return false, errors.New("required config value not found")
+		}
 	}
+	return true, nil
+}
 
-	customerId := os.Getenv("UPTYCS_CUSTOMER_ID")
-	if len(customerId) == 0 {
-		return &Client{}, errors.New("required env var UPTYCS_CUSTOMER_ID not found")
-	}
+func NewClient(config UptycsConfig) (*Client, error) {
+	ValidateConfig(config)
 
 	c := Client{
 		HTTPClient: &http.Client{Timeout: 10 * time.Second},
-		HostURL:    fmt.Sprintf("https://%s/public/api/customers/%s", host, customerId),
+		HostURL:    fmt.Sprintf("https://%s/public/api/customers/%s", config.Host, config.CustomerID),
 	}
 
-	apiKey := os.Getenv("UPTYCS_API_KEY")
-	if len(apiKey) == 0 {
-		return &Client{}, errors.New("required env var UPTYCS_API_KEY not found")
-	}
-	apiSecret := os.Getenv("UPTYCS_API_SECRET")
-	if len(apiSecret) == 0 {
-		return &Client{}, errors.New("required env var UPTYCS_API_SECRET not found")
-	}
-
-	c.Token, _ = CreateToken(apiKey, apiSecret)
+	c.Token, _ = CreateToken(config.ApiKey, config.ApiSecret)
 
 	return &c, nil
 }
