@@ -60,7 +60,6 @@ func NewClient() (*Client, error) {
   }
 
 	c.Token, _ = CreateToken(apiKey, apiSecret)
-  fmt.Println(c.Token)
 
 	return &c, nil
 }
