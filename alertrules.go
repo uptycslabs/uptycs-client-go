@@ -6,8 +6,6 @@ import (
 	"net/http"
 )
 
-// GetAlertRules - Returns list of AlertRules (no auth required)
-//func (c *Client) GetAlertRules() ([]AlertRule, error) {
 func (c *Client) GetAlertRules() (AlertRules, error) {
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/alertRules", c.HostURL), nil)
 	if err != nil {
