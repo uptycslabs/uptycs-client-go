@@ -52,7 +52,7 @@ func NewClient(config UptycsConfig) (*Client, error) {
 
 	c := Client{
 		HTTPClient: &http.Client{},
-		HostURL:    fmt.Sprintf("https://%s/public/api/customers/%s", config.Host, config.CustomerID),
+		HostURL:    fmt.Sprintf("%s/public/api/customers/%s", config.Host, config.CustomerID),
 	}
 
 	c.Token, _ = CreateToken(config.ApiKey, config.ApiSecret)

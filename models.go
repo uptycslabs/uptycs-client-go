@@ -1,7 +1,7 @@
 package uptycs
 
 type AlertRules struct {
-	Links  []LinkItem  `json:"link_item"`
+	Links  []LinkItem  `json:"links"`
 	Items  []AlertRule `json:"items"`
 	Offset int         `json:"offset"`
 	Limit  int         `json:"limit"`
@@ -9,8 +9,8 @@ type AlertRules struct {
 
 type AlertRule struct {
 	ID                     string        `json:"id"`
-	CustomerID             string        `json:"id"`
-	SeedID                 string        `json:"id"`
+	CustomerID             string        `json:"customerId"`
+	SeedID                 string        `json:"seedId"`
 	Name                   string        `json:"name"`
 	Description            string        `json:"description"`
 	Code                   string        `json:"code"`
@@ -20,25 +20,25 @@ type AlertRule struct {
 	Enabled                bool          `json:"enabled"`
 	Custom                 bool          `json:"custom"`
 	Throttled              bool          `json:"throttled"`
-	CreatedAt              string        `json:"created_at"`
-	IsInternal             bool          `json:"is_internal"`
-	AlertTags              []string      `json:"link_item"`
-	CreatedBy              string        `json:"created_by"`
-	UpdatedAt              string        `json:"updated_at"`
-	TimeSuppresionStart    string        `json:"time_suppresion_start"`
-	TimeSuppresionDuration int           `json:"time_suppresion_duration"`
-	UpdatedBy              string        `json:"updated_by"`
-	GroupingL2             string        `json:"grouping_l2"`
-	GroupingL3             string        `json:"grouping_l3"`
+	CreatedAt              string        `json:"createdAt"`
+	IsInternal             bool          `json:"isInternal"`
+	AlertTags              []string      `json:"alertTags"`
+	CreatedBy              string        `json:"createdBy"`
+	UpdatedAt              string        `json:"updatedAt"`
+	TimeSuppresionStart    string        `json:"timeSuppresionStart"`
+	TimeSuppresionDuration int           `json:"timeSuppresionDuration"`
+	UpdatedBy              string        `json:"updatedBy"`
+	GroupingL2             string        `json:"groupingL2"`
+	GroupingL3             string        `json:"groupingL3"`
 	Lock                   bool          `json:"lock"`
-	AlertNotifyInterval    int           `json:"alert_notify_interval"`
-	AlertNotifyCount       int           `json:"alert_notify_count"`
+	AlertNotifyInterval    int           `json:"alertNotifyInterval"`
+	AlertNotifyCount       int           `json:"alertNotifyCount"`
 	Destinations           []Destination `json:"destinations"`
-	SqlConfig              string        `json:"sql_config"`
+	SQLConfig              SQLConfig     `json:"sqlConfig"`
 	ScriptConfig           string        `json:"script_config"`
-	AlertRuleExceptions    []string      `json:"alert_rule_exceptions"`
-	AlertRuleQueries       []string      `json:"alert_rule_queries"`
-	Links                  []LinkItem    `json:"link_item"`
+	//AlertRuleExceptions []AlertRuleException       `json:"alertRuleExceptions"`
+	//AlertRuleQueries    []AlertRuleQuery `json:"alertRuleQueries"`
+	Links []LinkItem `json:"links"`
 }
 
 type LinkItem struct {
@@ -56,4 +56,15 @@ type Destination struct {
 	NotifyEveryAlert   bool   `json:"notifyEveryAlert"`
 	CloseAfterDelivery bool   `json:"closeAfterDelivery"`
 	CreatedAt          string `json:"createdAt"`
+}
+
+type SQLConfig struct {
+	IntervalSeconds int `json:"intervalSeconds"`
+}
+
+type AlertRuleQuery struct {
+	RuleID    string `json:"ruleId"`
+	Sequence  int    `json:"sequence"`
+	QueryID   string `json:"queryId"`
+	LastRanAt string `json:"lastRanAt"`
 }
