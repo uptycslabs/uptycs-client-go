@@ -27,8 +27,11 @@ var hmacSampleSecret []byte
 
 func CreateToken(apiKey string, apiSecret string) (string, error) {
 	var err error
+	currentTime := time.Now()
 	atClaims := jwt.MapClaims{}
 	atClaims["iss"] = apiKey
+	atClaims["iat"] = currentTime
+	atClaims["exp"] = currentTime.AddDate(0, 0, 1).Unix()
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, atClaims)
 	token, err := at.SignedString([]byte(apiSecret))
 	if err != nil {
