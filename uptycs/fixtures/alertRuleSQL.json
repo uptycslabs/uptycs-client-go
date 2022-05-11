@@ -1,0 +1,66 @@
+{
+  "id": "a0c0803f-9dd8-4841-81cd-2dc8e4ae010b",
+  "customerId": "111111111111-111111-11111-111111-111111111",
+  "seedId": "304f44a9-409b-4c7c-ab38-d968f2f53c50",
+  "name": "Yara Event Alert",
+  "description": null,
+  "code": "Yara EICAR Detection Testing",
+  "type": "sql",
+  "rule": "SELECT\n    'high' AS severity,\n    'Yara Detection Event' AS description,\n    upt_time AS time,\n    'Alert' AS key,\n    matches as value,\n    'Rule' AS indicator,\n    target_path AS \"Suspicious File\",\n    upt_hostname AS \"Host ID\",\n    action as \"File Action\",\n    upt_asset_tags AS \"asset tags\",\n    category AS \"FIM Rule\"\nFROM yara_events\nWHERE yara_events.upt_time >= :from\n  AND yara_events.upt_time < :to\n  AND yara_events.upt_added = true",
+  "grouping": "MITRE",
+  "enabled": true,
+  "custom": true,
+  "throttled": false,
+  "createdAt": "2021-07-27T18:07:19.673Z",
+  "isInternal": false,
+  "alertTags": [
+    "ATTACK",
+    "Endpoint",
+    "Malicious File",
+    "Yara",
+    "user_laptop"
+  ],
+  "createdBy": "e9b93444-a442-437f-82f6-6d65e9c787d3",
+  "updatedAt": "2022-04-13T18:30:03.055Z",
+  "timeSuppresionStart": null,
+  "timeSuppresionDuration": null,
+  "updatedBy": "e9b93444-a442-437f-82f6-6d65e9c787d3",
+  "groupingL2": "Impact",
+  "groupingL3": "T1590",
+  "lock": false,
+  "alertNotifyInterval": null,
+  "alertNotifyCount": null,
+  "destinations": [
+    {
+      "id": "4e100b43-2d2e-4ddb-b345-0992f7f8cb87",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "ruleId": "a0c0803f-9dd8-4841-81cd-2dc8e4ae010b",
+      "severity": "medium",
+      "destinationId": "7ba4b15f-9602-4613-af34-3359b326bc30",
+      "notifyEveryAlert": false,
+      "closeAfterDelivery": false,
+      "createdAt": "2021-07-27T18:09:13.773Z"
+    }
+  ],
+  "sqlConfig": {
+    "id": "a0c0803f-9dd8-4841-81cd-2dc8e4ae010b",
+    "customerId": "111111111111-111111-11111-111111-111111111",
+    "intervalSeconds": 600,
+    "lastRanAt": "2022-05-13T17:22:53.795Z"
+  },
+  "scriptConfig": null,
+  "alertRuleExceptions": [],
+  "alertRuleQueries": [],
+  "links": [
+    {
+      "rel": "self",
+      "title": "Alert rule",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRules/a0c0803f-9dd8-4841-81cd-2dc8e4ae010b"
+    },
+    {
+      "rel": "parent",
+      "title": "Alert rules",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRules"
+    }
+  ]
+}

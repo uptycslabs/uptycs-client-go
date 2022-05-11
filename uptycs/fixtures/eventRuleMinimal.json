@@ -1,0 +1,44 @@
+{
+  "id": "e2f5af43-0044-40ef-b915-6dab1617166d",
+  "customerId": "111111111111-111111-11111-111111-111111111",
+  "seedId": "125b2c93-1dee-4a6c-ae80-45bcdf7000b0",
+  "name": "Process dropped script file on monitored locations - T1204.002 User Execution_LINUX",
+  "description": "Adversaries may drop scripts in system path to trick user into running them",
+  "code": "ATTACK_DROP_SCRIPT_T1204.002_LINUX_USER_EXECUTION_MALICIOUS_FILE",
+  "type": "builder",
+  "rule": "builder",
+  "grouping": "ATTACK",
+  "enabled": true,
+  "custom": false,
+  "createdAt": "2021-06-02T14:43:26.899Z",
+  "isInternal": false,
+  "eventTags": [
+    "ATTACK",
+    "Linux"
+  ],
+  "createdBy": "00000000-0000-0000-0000-000000000000",
+  "updatedAt": "2022-04-09T06:06:09.689Z",
+  "updatedBy": "00000000-0000-0000-0000-000000000000",
+  "groupingL2": "Execution",
+  "groupingL3": "T1204",
+  "score": "0.0",
+  "lock": false,
+  "builderConfig": null,
+  "eventRuleExceptions": [],
+  "tags": [],
+  "cloudResourceTags": [],
+  "exceptions": [],
+  "transformations": [],
+  "links": [
+    {
+      "rel": "self",
+      "title": "Event rule",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/eventRules/e2f5af43-0044-40ef-b915-6dab1617166d"
+    },
+    {
+      "rel": "parent",
+      "title": "Event rules",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/eventRules"
+    }
+  ]
+}
