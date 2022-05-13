@@ -1,0 +1,49 @@
+{
+  "id": "d5034520-f243-4c4d-a998-790ff88177de",
+  "customerId": "fda3f46b-c262-439c-bc93-5de6ee6993b6",
+  "seedId": "c8099dae-c97a-42a1-99f2-1f0c725bb7fd",
+  "name": "marcus test",
+  "description": "marcus test",
+  "code": "test_marc",
+  "type": "sql",
+  "rule": "SELECT\n    'foo' as description,\n    'Low' as severity,\n    instance_id as asset_id,\n    now() as time,\n    'Alert' AS key,\n    'marcus test' as value\nFROM upt_cloud_instance_inventory_current\nWHERE key_name not like 'reddit2'\nLIMIT 1\n-- :to :from\n",
+  "grouping": "MITRE",
+  "enabled": true,
+  "custom": true,
+  "throttled": false,
+  "createdAt": "2022-05-06T22:06:50.590Z",
+  "isInternal": false,
+  "alertTags": null,
+  "createdBy": "f48f4c40-9c4a-47bb-9e3f-797d4deca92a",
+  "updatedAt": "2022-05-13T20:13:21.503Z",
+  "timeSuppresionStart": null,
+  "timeSuppresionDuration": null,
+  "updatedBy": "f48f4c40-9c4a-47bb-9e3f-797d4deca92a",
+  "groupingL2": "Impact",
+  "groupingL3": "T1560",
+  "lock": false,
+  "alertNotifyInterval": null,
+  "alertNotifyCount": null,
+  "destinations": [],
+  "sqlConfig": {
+    "id": "d5034520-f243-4c4d-a998-790ff88177de",
+    "customerId": "fda3f46b-c262-439c-bc93-5de6ee6993b6",
+    "intervalSeconds": 3600,
+    "lastRanAt": null
+  },
+  "scriptConfig": null,
+  "alertRuleExceptions": [],
+  "alertRuleQueries": [],
+  "links": [
+    {
+      "rel": "self",
+      "title": "Alert rule",
+      "href": "/api/customers/fda3f46b-c262-439c-bc93-5de6ee6993b6/alertRules/d5034520-f243-4c4d-a998-790ff88177de"
+    },
+    {
+      "rel": "parent",
+      "title": "Alert rules",
+      "href": "/api/customers/fda3f46b-c262-439c-bc93-5de6ee6993b6/alertRules"
+    }
+  ]
+}

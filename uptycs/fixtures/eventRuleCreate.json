@@ -1,0 +1,66 @@
+{
+  "id": "afd0da8b-563e-4e58-b591-0fbd55f21fbb",
+  "customerId": "fda3f46b-c262-439c-bc93-5de6ee6993b6",
+  "seedId": "042cdc43-fac4-45b1-ac5a-475449d4a03d",
+  "name": "marc_is_awesomer",
+  "description": "this is a test",
+  "code": "1651259159841CODE",
+  "type": "builder",
+  "rule": "builder",
+  "grouping": "builderRules",
+  "enabled": true,
+  "custom": true,
+  "createdAt": "2022-05-13T22:03:51.377Z",
+  "isInternal": false,
+  "eventTags": [
+    "Tactic=Persistence",
+    "Version=1.1",
+    "Permissions Required=User"
+  ],
+  "createdBy": "f48f4c40-9c4a-47bb-9e3f-797d4deca92a",
+  "updatedAt": "2022-05-13T22:03:51.377Z",
+  "updatedBy": null,
+  "groupingL2": "Impact",
+  "groupingL3": "T1560",
+  "score": null,
+  "lock": false,
+  "builderConfig": {
+    "id": "afd0da8b-563e-4e58-b591-0fbd55f21fbb",
+    "customerId": "fda3f46b-c262-439c-bc93-5de6ee6993b6",
+    "tableName": "process_open_sockets",
+    "added": true,
+    "matchesFilter": true,
+    "filters": {
+      "and": [
+        {
+          "not": true,
+          "name": "remote_address",
+          "value": "^172.(1[6-9]|2[0-9]|3[01])|^10.|^192.168.",
+          "operator": "MATCHES_REGEX"
+        }
+      ]
+    },
+    "severity": "low",
+    "key": "Test",
+    "valueField": "pid",
+    "autoAlertConfig": {},
+    "addedStr": "true"
+  },
+  "eventRuleExceptions": [],
+  "tags": [],
+  "cloudResourceTags": [],
+  "exceptions": [],
+  "transformations": [],
+  "links": [
+    {
+      "rel": "self",
+      "title": "Event rule",
+      "href": "/api/customers/fda3f46b-c262-439c-bc93-5de6ee6993b6/eventRules/afd0da8b-563e-4e58-b591-0fbd55f21fbb"
+    },
+    {
+      "rel": "parent",
+      "title": "Event rules",
+      "href": "/api/customers/fda3f46b-c262-439c-bc93-5de6ee6993b6/eventRules"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "links": [
+    {
+      "rel": "self",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRules"
+    },
+    {
+      "rel": "parent",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111"
+    }
+  ],
+  "items": [
+    {
+      "id": "1d4720ce-19a9-4a03-bb3a-905717b8a60f",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "seedId": "30bd9a6f-259a-4506-b9da-80a8f392cced",
+      "name": "7zip.exe execution detected - T1560.001 - Archive via Utility - Windows",
+      "description": "Adversaries may use 7zip utility to compress or encrypt exfilterated data in order to send it undetected to the attacker.",
+      "code": "ATTACK_ARCHIVE_VIA_UTILITY_DATA_T1560_001_WINDOWS_LOLBAS_7ZIP",
+      "type": "builder",
+      "rule": "Auto create alert rule for 7zip.exe execution detected - T1560.001 - Archive via Utility - Windows",
+      "grouping": "ATTACK",
+      "enabled": true,
+      "custom": false,
+      "throttled": false,
+      "createdAt": "2021-06-02T14:44:59.818Z",
+      "isInternal": false,
+      "alertTags": [
+        "ATTACK",
+        "Archive Collected Data",
+        "Collection",
+        "T1560",
+        "T1560.001",
+        "Windows",
+        "Endpoint",
+        "process_events"
+      ],
+      "createdBy": "00000000-0000-0000-0000-000000000000",
+      "updatedAt": "2022-04-09T06:01:41.060Z",
+      "timeSuppresionStart": null,
+      "timeSuppresionDuration": null,
+      "updatedBy": "00000000-0000-0000-0000-000000000000",
+      "groupingL2": "Collection",
+      "groupingL3": "T1560",
+      "lock": false,
+      "alertNotifyInterval": null,
+      "alertNotifyCount": null,
+      "destinations": [],
+      "sqlConfig": null,
+      "scriptConfig": null,
+      "alertRuleExceptions": [],
+      "alertRuleQueries": [],
+      "links": [
+        {
+          "rel": "self",
+          "title": "Alert rule",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRules/1d4720ce-19a9-4a03-bb3a-905717b8a60f"
+        },
+        {
+          "rel": "parent",
+          "title": "Alert rules",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRules"
+        }
+      ]
+    },
+    {
+      "id": "86d111f4-9fcb-4495-9cef-e2c35e63a47f",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "seedId": "AWS_THREAT_DEFENSE_EVASION_MODIFY_IAAS_1",
+      "name": "A VPC is deleted by an unknown user",
+      "description": "A VPC is deleted by an unknown user",
+      "code": "AWS_THREAT_DEFENSE_EVASION_MODIFY_IAAS_1",
+      "type": "builder",
+      "rule": "Auto create alert rule for A VPC is deleted by an unknown user",
+      "grouping": "ATTACK",
+      "enabled": true,
+      "custom": false,
+      "throttled": false,
+      "createdAt": "2022-01-14T21:16:36.900Z",
+      "isInternal": false,
+      "alertTags": [
+        "ATTACK",
+        "AWS",
+        "Defense Evasion",
+        "IAAS",
+        "MITRE",
+        "MODIFY_IAAS",
+        "Cloud",
+        "T1578",
+        "THREAT",
+        "VPC"
+      ],
+      "createdBy": "66a9a52c-5fa0-4cf4-abe7-da5504f67950",
+      "updatedAt": "2022-05-02T06:33:36.126Z",
+      "timeSuppresionStart": null,
+      "timeSuppresionDuration": null,
+      "updatedBy": "00000000-0000-0000-0000-000000000000",
+      "groupingL2": "Defense Evasion",
+      "groupingL3": "T1578",
+      "lock": true,
+      "alertNotifyInterval": null,
+      "alertNotifyCount": null,
+      "destinations": [],
+      "sqlConfig": null,
+      "scriptConfig": null,
+      "alertRuleExceptions": [],
+      "alertRuleQueries": [],
+      "links": [
+        {
+          "rel": "self",
+          "title": "Alert rule",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRules/86d111f4-9fcb-4495-9cef-e2c35e63a47f"
+        },
+        {
+          "rel": "parent",
+          "title": "Alert rules",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRules"
+        }
+      ]
+    }
+  ],
+  "offset": 0,
+  "limit": 999
+}

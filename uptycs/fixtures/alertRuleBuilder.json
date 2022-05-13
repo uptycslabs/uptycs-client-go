@@ -1,0 +1,81 @@
+{
+  "id": "bcfe1cda-9eba-40fa-9686-9c1caea47732",
+  "customerId": "111111111111-111111-11111-111111-111111111",
+  "seedId": "3a606e79-0e91-4e48-bcfe-dfb3798d0d33",
+  "name": "Login Profile Changes Detected_REDDIT",
+  "description": "Changes detected in Login Profiles, which can result in Privilege Escalations",
+  "code": "AWS_THREAT_PRIV_ESC_4_REDDIT",
+  "type": "builder",
+  "rule": "Auto create alert rule for Login Profile Changes Detected_REDDIT",
+  "grouping": "ATTACK",
+  "enabled": true,
+  "custom": false,
+  "throttled": false,
+  "createdAt": "2022-04-27T18:09:32.790Z",
+  "isInternal": false,
+  "alertTags": [
+    "ATTACK",
+    "AWS",
+    "Cloud",
+    "IAM",
+    "Privilege Escalation",
+    "T1078",
+    "THREAT",
+    "elastalert"
+  ],
+  "createdBy": "e9b93444-a442-437f-82f6-6d65e9c787d3",
+  "updatedAt": "2022-04-27T18:09:32.790Z",
+  "timeSuppresionStart": null,
+  "timeSuppresionDuration": null,
+  "updatedBy": "e9b93444-a442-437f-82f6-6d65e9c787d3",
+  "groupingL2": "Privilege Escalation",
+  "groupingL3": "T1078",
+  "lock": false,
+  "alertNotifyInterval": 600,
+  "alertNotifyCount": 1,
+  "destinations": [
+    {
+      "id": "caefdd0b-ca6a-4cec-b2ef-38cc45f73037",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "ruleId": "bcfe1cda-9eba-40fa-9686-9c1caea47732",
+      "severity": "medium",
+      "destinationId": "f99515c0-9b6f-47df-a1a3-77bc1196b480",
+      "notifyEveryAlert": false,
+      "closeAfterDelivery": false,
+      "createdAt": "2022-04-28T20:07:57.800Z"
+    }
+  ],
+  "sqlConfig": null,
+  "scriptConfig": null,
+  "alertRuleExceptions": [
+    {
+      "id": "37e2f71c-5e5c-47b2-8d3b-6da4c198583d",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "ruleId": "b4475f27-eaf4-44f3-9fa0-6dd0ca06089a",
+      "exceptionId": "3c3dbd96-3f53-4123-8176-08b5c6d80db5",
+      "createdAt": "2022-04-22T18:21:33.272Z",
+      "updatedAt": "2022-04-22T18:21:33.277Z"
+    },
+    {
+      "id": "fa15d011-621b-4b18-a341-213a18659e03",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "ruleId": "b4475f27-eaf4-44f3-9fa0-6dd0ca06089a",
+      "exceptionId": "904eeeeb-cfb7-4e70-bfc1-955ec0b50971",
+      "createdAt": "2022-04-22T18:21:33.277Z",
+      "updatedAt": "2022-04-22T18:21:33.277Z"
+    }
+  ],
+  "alertRuleQueries": [],
+  "links": [
+    {
+      "rel": "self",
+      "title": "Alert rule",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRules/bcfe1cda-9eba-40fa-9686-9c1caea47732"
+    },
+    {
+      "rel": "parent",
+      "title": "Alert rules",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRules"
+    }
+  ]
+}
