@@ -98,6 +98,7 @@ type BuilderConfig struct {
 	Added           bool                `json:"added,omitempty"`
 	MatchesFilter   bool                `json:"matchesFilter,omitempty"`
 	Filters         BuilderConfigFilter `json:"filters,omitempty"`
+	FiltersJson     string              `json:"filtersjson,omitempty"`
 	Severity        string              `json:"severity,omitempty"`
 	Key             string              `json:"key,omitempty"`
 	ValueField      string              `json:"valueField,omitempty"`

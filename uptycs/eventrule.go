@@ -81,6 +81,16 @@ func (c *Client) DeleteEventRule(eventRule EventRule) (EventRule, error) {
 }
 
 func (c *Client) CreateEventRule(eventRule EventRule) (EventRule, error) {
+
+	if len(eventRule.BuilderConfig.FiltersJson) > 0 {
+		filters := BuilderConfigFilter{}
+		if err := json.Unmarshal([]byte(eventRule.BuilderConfig.FiltersJson), &filters); err != nil {
+			panic(err)
+		}
+		eventRule.BuilderConfig.Filters = filters
+		eventRule.BuilderConfig.FiltersJson = ""
+	}
+
 	rb, err := json.Marshal(eventRule)
 	if err != nil {
 		return eventRule, err
