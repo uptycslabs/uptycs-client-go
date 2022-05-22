@@ -88,22 +88,22 @@ func (aos ArrayOrString) MarshalJSON() ([]byte, error) {
 }
 
 type AutoAlertConfig struct {
-	RaiseAlert   bool `json:"raiseAlert,omitempty"`
-	DisableAlert bool `json:"disableAlert,omitempty"`
+	RaiseAlert   bool `json:"raiseAlert"`
+	DisableAlert bool `json:"disableAlert"`
 }
 
 type BuilderConfig struct {
 	ID              string              `json:"id,omitempty"`
 	CustomerID      string              `json:"customerId,omitempty"`
 	TableName       string              `json:"tableName,omitempty"`
-	Added           bool                `json:"added,omitempty"`
-	MatchesFilter   bool                `json:"matchesFilter,omitempty"`
+	Added           bool                `json:"added"`
+	MatchesFilter   bool                `json:"matchesFilter"`
 	Filters         BuilderConfigFilter `json:"filters,omitempty"`
 	FiltersJson     string              `json:"filtersjson,omitempty"`
 	Severity        string              `json:"severity,omitempty"`
 	Key             string              `json:"key,omitempty"`
 	ValueField      string              `json:"valueField,omitempty"`
-	AutoAlertConfig AutoAlertConfig     `json:"autoAlertConfig,omitempty"`
+	AutoAlertConfig AutoAlertConfig     `json:"autoAlertConfig"`
 }
 
 type AlertRules struct {
