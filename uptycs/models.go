@@ -26,31 +26,32 @@ type ScriptConfig struct {
 }
 
 type EventRule struct {
-	ID            string        `json:"id,omitempty"`
-	CustomerID    string        `json:"customerId,omitempty"`
-	SeedID        string        `json:"seedId,omitempty"`
-	Name          string        `json:"name,omitempty"`
-	Description   string        `json:"description,omitempty"`
-	Code          string        `json:"code,omitempty"`
-	Type          string        `json:"type,omitempty"`
-	Rule          string        `json:"rule,omitempty"`
-	Grouping      string        `json:"grouping,omitempty"`
-	Enabled       bool          `json:"enabled,omitempty"`
-	Custom        bool          `json:"custom,omitempty"`
-	CreatedAt     string        `json:"createdAt,omitempty"`
-	IsInternal    bool          `json:"isInternal,omitempty"`
-	EventTags     []string      `json:"eventTags,omitempty"`
-	CreatedBy     string        `json:"createdBy,omitempty"`
-	UpdatedAt     string        `json:"updatedAt,omitempty"`
-	UpdatedBy     string        `json:"updatedBy,omitempty"`
-	GroupingL2    string        `json:"groupingL2,omitempty"`
-	GroupingL3    string        `json:"groupingL3,omitempty"`
-	Score         string        `json:"score,omitempty"`
-	Lock          bool          `json:"lock,omitempty"`
-	ScriptConfig  ScriptConfig  `json:"scriptConfig,omitempty"`
-	SQLConfig     SQLConfig     `json:"sqlConfig,omitempty"`
-	BuilderConfig BuilderConfig `json:"builderConfig"`
-	Links         []LinkItem    `json:"links"`
+	ID                string        `json:"id,omitempty"`
+	CustomerID        string        `json:"customerId,omitempty"`
+	SeedID            string        `json:"seedId,omitempty"`
+	Name              string        `json:"name,omitempty"`
+	Description       string        `json:"description,omitempty"`
+	Code              string        `json:"code,omitempty"`
+	Type              string        `json:"type,omitempty"`
+	Rule              string        `json:"rule,omitempty"`
+	Grouping          string        `json:"grouping,omitempty"`
+	Enabled           bool          `json:"enabled,omitempty"`
+	Custom            bool          `json:"custom,omitempty"`
+	CreatedAt         string        `json:"createdAt,omitempty"`
+	IsInternal        bool          `json:"isInternal,omitempty"`
+	EventTags         []string      `json:"eventTags,omitempty"`
+	CreatedBy         string        `json:"createdBy,omitempty"`
+	UpdatedAt         string        `json:"updatedAt,omitempty"`
+	UpdatedBy         string        `json:"updatedBy,omitempty"`
+	GroupingL2        string        `json:"groupingL2,omitempty"`
+	GroupingL3        string        `json:"groupingL3,omitempty"`
+	Score             string        `json:"score,omitempty"`
+	Lock              bool          `json:"lock,omitempty"`
+	ScriptConfig      ScriptConfig  `json:"scriptConfig,omitempty"`
+	SQLConfig         SQLConfig     `json:"sqlConfig,omitempty"`
+	BuilderConfig     BuilderConfig `json:"builderConfig"`
+	BuilderConfigJson string        `json:"builderConfigJson,omitempty"`
+	Links             []LinkItem    `json:"links"`
 }
 
 type BuilderConfigFilter struct {
