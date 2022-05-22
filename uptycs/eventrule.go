@@ -12,6 +12,15 @@ func (c *Client) UpdateEventRule(eventRule EventRule) (EventRule, error) {
 		return eventRule, fmt.Errorf("ID of the Event Rule is required")
 	}
 
+	if len(eventRule.BuilderConfig.FiltersJson) > 0 {
+		filters := BuilderConfigFilter{}
+		if err := json.Unmarshal([]byte(eventRule.BuilderConfig.FiltersJson), &filters); err != nil {
+			panic(err)
+		}
+		eventRule.BuilderConfig.Filters = filters
+		eventRule.BuilderConfig.FiltersJson = ""
+	}
+
 	rb, err := json.Marshal(eventRule)
 	if err != nil {
 		return eventRule, err
