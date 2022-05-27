@@ -1,0 +1,11 @@
+{
+  "name": "tony-test",
+  "type": "email",
+  "address": "tony.snook@reddit.com",
+  "config": {
+    "sender": null
+  },
+  "enabled": true,
+  "default": false,
+  "template": null
+}

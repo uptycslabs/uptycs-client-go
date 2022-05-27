@@ -22,27 +22,23 @@ func (c *Client) CreateAlertRule(alertRule AlertRule) (AlertRule, error) {
 			"id",
 			"customerId",
 			"seedId",
-			"alertRuleQueries",
-			"enabled",
-			"custom",
 			"throttled",
 			"createdAt",
-			"isInternal",
 			"createdBy",
 			"updatedAt",
-			"timeSuppresionStart",
-			"timeSuppresionDuration",
-			"updatedBy",
 			"lock",
 			"alertTags",
-			"alertNotifyInterval",
-			"alertNotifyCount",
-			"destinations",
-			"script_config",
-			"alertRuleQueries",
 			"links",
 		} {
 			delete(m, item)
+		}
+
+		//TODO the client really shouldnt be doing backend logic
+		if alertRule.Type != "sql" {
+			delete(m, "sqlConfig")
+		}
+		if alertRule.Type != "javascript" {
+			delete(m, "scriptConfig")
 		}
 	}
 
@@ -95,26 +91,12 @@ func (c *Client) UpdateAlertRule(alertRule AlertRule) (AlertRule, error) {
 			"id",
 			"customerId",
 			"seedId",
-			"type",
-			"alertRuleExceptions",
-			"alertRuleQueries",
-			"enabled",
-			"custom",
 			"throttled",
 			"createdAt",
-			"isInternal",
 			"createdBy",
 			"updatedAt",
-			"timeSuppresionStart",
-			"timeSuppresionDuration",
-			"updatedBy",
 			"lock",
 			"alertTags",
-			"alertNotifyInterval",
-			"alertNotifyCount",
-			"destinations",
-			"script_config",
-			"alertRuleQueries",
 			"links",
 		} {
 			delete(m, item)
@@ -148,7 +130,12 @@ func (c *Client) UpdateAlertRule(alertRule AlertRule) (AlertRule, error) {
 }
 
 func (c *Client) GetAlertRule(alertRule AlertRule) (AlertRule, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/alertRules/%s", c.HostURL, alertRule.ID), nil)
+	urlStr := fmt.Sprintf("%s/alertRules/%s", c.HostURL, alertRule.ID)
+	if len(alertRule.ID) == 0 {
+		urlStr = fmt.Sprintf("%s/alertRules", c.HostURL)
+	}
+
+	req, err := http.NewRequest("GET", urlStr, nil)
 	if err != nil {
 		return alertRule, err
 	}
@@ -159,9 +146,25 @@ func (c *Client) GetAlertRule(alertRule AlertRule) (AlertRule, error) {
 	}
 
 	foundAlertRule := AlertRule{}
-	err = json.Unmarshal(body, &foundAlertRule)
-	if err != nil {
-		return AlertRule{}, err
+
+	if len(alertRule.ID) == 0 {
+		urlStr = fmt.Sprintf("%s/alertRules", c.HostURL)
+		alertRules := AlertRules{}
+		err = json.Unmarshal(body, &alertRules)
+		if err != nil {
+			return AlertRule{}, err
+		}
+		for _, dest := range alertRules.Items {
+			if dest.Name == alertRule.Name {
+				foundAlertRule = dest
+				break
+			}
+		}
+	} else {
+		err = json.Unmarshal(body, &foundAlertRule)
+		if err != nil {
+			return AlertRule{}, err
+		}
 	}
 
 	return foundAlertRule, nil

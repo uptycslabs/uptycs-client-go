@@ -1,0 +1,47 @@
+{
+  "links": [
+    {
+      "rel": "self",
+      "title": "Notification destinations",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/destinations"
+    },
+    {
+      "rel": "parent",
+      "title": "Customer information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111"
+    }
+  ],
+  "items": [
+    {
+      "id": "4c0dee1f-c19a-45fe-bf5d-fd031d6f694f",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "name": "tony-test",
+      "type": "email",
+      "address": "tony.snook@reddit.com",
+      "config": {
+        "sender": null
+      },
+      "createdAt": "2021-07-12T21:13:09.778Z",
+      "createdBy": "66a9a52c-5fa0-4cf4-abe7-da5504f67950",
+      "updatedAt": "2021-07-12T21:13:09.778Z",
+      "updatedBy": null,
+      "enabled": true,
+      "default": false,
+      "template": null,
+      "links": [
+        {
+          "rel": "self",
+          "title": "Notification destination",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/destinations/4c0dee1f-c19a-45fe-bf5d-fd031d6f694f"
+        },
+        {
+          "rel": "parent",
+          "title": "Notification destinations",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/destinations"
+        }
+      ]
+    }
+  ],
+  "offset": 0,
+  "limit": 1000
+}

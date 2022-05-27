@@ -3,6 +3,7 @@ package uptycs
 import (
 	"encoding/json"
 	"errors"
+	"strconv"
 )
 
 var (
@@ -70,10 +71,50 @@ type BuilderConfigFilter struct {
 type ArrayOrString []string
 
 func (aos *ArrayOrString) UnmarshalJSON(raw []byte) error {
-	if raw[0] != '[' {
-		raw = []byte("[" + string(raw) + "]")
+	var dyval interface{}
+	err := json.Unmarshal(raw, &dyval)
+	if err != nil {
+		return err
 	}
-	return json.Unmarshal(raw, (*[]string)(aos))
+
+	// Have to figure out the type and parse appropriately
+	// For now everything is a string, so turn all values
+	// (float64, bool, string, array of [float64, bool, string])
+	// to simply an array of strings
+	// TODO: Perhaps preserve value but currently there's no use-case
+	switch conval := dyval.(type) {
+	case float64:
+		*aos = ArrayOrString{strconv.FormatFloat(conval, 'f', -1, 64)}
+	case bool:
+		if conval {
+			*aos = ArrayOrString{"true"}
+		} else {
+			*aos = ArrayOrString{"false"}
+		}
+	case string:
+		*aos = ArrayOrString{conval}
+	case []interface{}:
+		// A slice of these can...yet again.. be anything (except another array fortunately)
+		*aos = ArrayOrString(make([]string, 0, len(conval)))
+		for _, dynX := range conval {
+			var finalVal string
+			switch conXval := dynX.(type) {
+			case float64:
+				finalVal = strconv.FormatFloat(conXval, 'f', -1, 64)
+			case bool:
+				if conXval {
+					finalVal = "true"
+				} else {
+					finalVal = "false"
+				}
+			case string:
+				finalVal = conXval
+			}
+			*aos = append(*aos, finalVal)
+		}
+	}
+
+	return nil
 }
 
 func (aos ArrayOrString) MarshalJSON() ([]byte, error) {
@@ -114,36 +155,46 @@ type AlertRules struct {
 }
 
 type AlertRule struct {
-	ID                     string          `json:"id,omitempty"`
-	CustomerID             string          `json:"customerId,omitempty"`
-	SeedID                 string          `json:"seedId,omitempty"`
-	Name                   string          `json:"name,omitempty"`
-	Description            string          `json:"description,omitempty"`
-	Code                   string          `json:"code,omitempty"`
-	Type                   string          `json:"type,omitempty"`
-	Rule                   string          `json:"rule,omitempty"`
-	Grouping               string          `json:"grouping,omitempty"`
-	Enabled                bool            `json:"enabled,omitempty"`
-	Custom                 bool            `json:"custom,omitempty"`
-	Throttled              bool            `json:"throttled,omitempty"`
-	CreatedAt              string          `json:"createdAt,omitempty"`
-	IsInternal             bool            `json:"isInternal,omitempty"`
-	AlertTags              []string        `json:"alertTags,omitempty"`
-	CreatedBy              string          `json:"createdBy,omitempty"`
-	UpdatedAt              string          `json:"updatedAt,omitempty"`
-	TimeSuppresionStart    string          `json:"timeSuppresionStart,omitempty"`
-	TimeSuppresionDuration int             `json:"timeSuppresionDuration,omitempty"`
-	UpdatedBy              string          `json:"updatedBy,omitempty"`
-	GroupingL2             string          `json:"groupingL2,omitempty"`
-	GroupingL3             string          `json:"groupingL3,omitempty"`
-	Lock                   bool            `json:"lock,omitempty"`
-	AlertNotifyInterval    int             `json:"alertNotifyInterval,omitempty"`
-	AlertNotifyCount       int             `json:"alertNotifyCount,omitempty"`
-	AlertRuleExceptions    []RuleException `json:"alertRuleExceptions,omitempty"`
-	Destinations           []Destination   `json:"destinations,omitempty"`
-	SQLConfig              SQLConfig       `json:"sqlConfig,omitempty"`
-	ScriptConfig           ScriptConfig    `json:"scriptConfig,omitempty"`
-	Links                  []LinkItem      `json:"links,omitempty"`
+	ID                     string                 `json:"id,omitempty"`
+	CustomerID             string                 `json:"customerId,omitempty"`
+	SeedID                 string                 `json:"seedId,omitempty"`
+	Name                   string                 `json:"name,omitempty"`
+	Description            string                 `json:"description,omitempty"`
+	Code                   string                 `json:"code,omitempty"`
+	Type                   string                 `json:"type,omitempty"`
+	Rule                   string                 `json:"rule,omitempty"`
+	Grouping               string                 `json:"grouping,omitempty"`
+	Enabled                bool                   `json:"enabled,omitempty"`
+	Custom                 bool                   `json:"custom,omitempty"`
+	Throttled              bool                   `json:"throttled,omitempty"`
+	CreatedAt              string                 `json:"createdAt,omitempty"`
+	IsInternal             bool                   `json:"isInternal,omitempty"`
+	AlertTags              []string               `json:"alertTags,omitempty"`
+	CreatedBy              string                 `json:"createdBy,omitempty"`
+	UpdatedAt              string                 `json:"updatedAt,omitempty"`
+	TimeSuppresionStart    string                 `json:"timeSuppresionStart,omitempty"`
+	TimeSuppresionDuration int                    `json:"timeSuppresionDuration,omitempty"`
+	UpdatedBy              string                 `json:"updatedBy,omitempty"`
+	GroupingL2             string                 `json:"groupingL2,omitempty"`
+	GroupingL3             string                 `json:"groupingL3,omitempty"`
+	Lock                   bool                   `json:"lock,omitempty"`
+	AlertNotifyInterval    int                    `json:"alertNotifyInterval,omitempty"`
+	AlertNotifyCount       int                    `json:"alertNotifyCount,omitempty"`
+	AlertRuleExceptions    []RuleException        `json:"alertRuleExceptions,omitempty"`
+	Destinations           []AlertRuleDestination `json:"destinations,omitempty"`
+	SQLConfig              SQLConfig              `json:"sqlConfig,omitempty"`
+	ScriptConfig           ScriptConfig           `json:"scriptConfig,omitempty"`
+	Links                  []LinkItem             `json:"links,omitempty"`
+}
+
+type AlertRuleDestination struct {
+	ID                 string `json:"id,omitempty"`
+	RuleID             string `json:"ruleId,omitempty"`
+	Severity           string `json:"severity,omitempty"`
+	DestinationID      string `json:"destinationId,omitempty"`
+	NotifyEveryAlert   bool   `json:"notifyEveryAlert,omitempty"`
+	CloseAfterDelivery bool   `json:"closeAfterDelivery,omitempty"`
+	CreatedAt          string `json:"createdAt,omitempty"`
 }
 
 type RuleException struct {
@@ -161,15 +212,31 @@ type LinkItem struct {
 	Href  string `json:"href,omitempty"`
 }
 
+type Destinations struct {
+	Links  []LinkItem    `json:"links,omitempty"`
+	Items  []Destination `json:"items,omitempty"`
+	Offset int           `json:"offset,omitempty"`
+	Limit  int           `json:"limit,omitempty"`
+}
+
 type Destination struct {
-	ID                 string `json:"id,omitempty"`
-	CustomerID         string `json:"customerId,omitempty"`
-	RuleID             string `json:"ruleId,omitempty"`
-	Severity           string `json:"severity,omitempty"`
-	DestinationID      string `json:"destinationId,omitempty"`
-	NotifyEveryAlert   bool   `json:"notifyEveryAlert,omitempty"`
-	CloseAfterDelivery bool   `json:"closeAfterDelivery,omitempty"`
-	CreatedAt          string `json:"createdAt,omitempty"`
+	ID         string `json:"id,omitempty"`
+	CustomerID string `json:"customerId,omitempty"`
+	Name       string `json:"name,omitempty"`
+	Type       string `json:"type,omitempty"`
+	Address    string `json:"address,omitempty"`
+	//Config TODO
+	//"config": {
+	//  "sender": null
+	//},
+	CreatedAt string `json:"createdAt,omitempty"`
+	CreatedBy string `json:"createdBy,omitempty"`
+	UpdatedAt string `json:"updatedAt,omitempty"`
+	UpdatedBy string `json:"updatedBy,omitempty"`
+	Enabled   bool   `json:"enabled,omitempty"`
+	Default   bool   `json:"default,omitempty"`
+	//Template TODO
+	Links []LinkItem `json:"links,omitempty"`
 }
 
 type SQLConfig struct {

@@ -326,7 +326,7 @@ func TestGetEventRule(t *testing.T) {
 									BuilderConfigFilter{
 										Not:             false,
 										Name:            "path",
-										Value:           ArrayOrString{"/usr/local/sbin/"},
+										Value:           ArrayOrString{"false"},
 										IsDate:          false,
 										Operator:        "STARTS_WITH",
 										CaseInsensitive: true,
@@ -334,7 +334,7 @@ func TestGetEventRule(t *testing.T) {
 									BuilderConfigFilter{
 										Not:             false,
 										Name:            "path",
-										Value:           ArrayOrString{"/usr/local/bin/"},
+										Value:           ArrayOrString{"91"},
 										IsDate:          false,
 										Operator:        "STARTS_WITH",
 										CaseInsensitive: true,

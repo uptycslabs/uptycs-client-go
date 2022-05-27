@@ -1,6 +1,6 @@
 {
   "id": "d5034520-f243-4c4d-a998-790ff88177de",
-  "customerId": "fda3f46b-c262-439c-bc93-5de6ee6993b6",
+  "customerId": "111111111111-111111-11111-111111-111111111",
   "seedId": "c8099dae-c97a-42a1-99f2-1f0c725bb7fd",
   "name": "marcus test",
   "description": "marcus test",
@@ -27,7 +27,7 @@
   "destinations": [],
   "sqlConfig": {
     "id": "d5034520-f243-4c4d-a998-790ff88177de",
-    "customerId": "fda3f46b-c262-439c-bc93-5de6ee6993b6",
+    "customerId": "111111111111-111111-11111-111111-111111111",
     "intervalSeconds": 3600,
     "lastRanAt": null
   },
@@ -38,12 +38,12 @@
     {
       "rel": "self",
       "title": "Alert rule",
-      "href": "/api/customers/fda3f46b-c262-439c-bc93-5de6ee6993b6/alertRules/d5034520-f243-4c4d-a998-790ff88177de"
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRules/d5034520-f243-4c4d-a998-790ff88177de"
     },
     {
       "rel": "parent",
       "title": "Alert rules",
-      "href": "/api/customers/fda3f46b-c262-439c-bc93-5de6ee6993b6/alertRules"
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRules"
     }
   ]
 }

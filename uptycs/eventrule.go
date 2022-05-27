@@ -50,8 +50,6 @@ func (c *Client) UpdateEventRule(eventRule EventRule) (EventRule, error) {
 			"createdBy",
 			"updatedAt",
 			"updatedBy",
-			"sqlConfig",
-			"scriptConfig",
 			"links",
 		} {
 			delete(m, item)
@@ -137,8 +135,6 @@ func (c *Client) CreateEventRule(eventRule EventRule) (EventRule, error) {
 			"createdBy",
 			"updatedAt",
 			"updatedBy",
-			"sqlConfig",
-			"scriptConfig",
 			"links",
 		} {
 			delete(m, item)
@@ -176,7 +172,12 @@ func (c *Client) CreateEventRule(eventRule EventRule) (EventRule, error) {
 }
 
 func (c *Client) GetEventRule(eventRule EventRule) (EventRule, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/eventRules/%s", c.HostURL, eventRule.ID), nil)
+	urlStr := fmt.Sprintf("%s/eventRules/%s", c.HostURL, eventRule.ID)
+	if len(eventRule.ID) == 0 {
+		urlStr = fmt.Sprintf("%s/eventRules", c.HostURL)
+	}
+
+	req, err := http.NewRequest("GET", urlStr, nil)
 	if err != nil {
 		return eventRule, err
 	}
@@ -187,9 +188,25 @@ func (c *Client) GetEventRule(eventRule EventRule) (EventRule, error) {
 	}
 
 	foundEventRule := EventRule{}
-	err = json.Unmarshal(body, &foundEventRule)
-	if err != nil {
-		return EventRule{}, err
+
+	if len(eventRule.ID) == 0 {
+		urlStr = fmt.Sprintf("%s/eventRules", c.HostURL)
+		eventRules := EventRules{}
+		err = json.Unmarshal(body, &eventRules)
+		if err != nil {
+			return EventRule{}, err
+		}
+		for _, dest := range eventRules.Items {
+			if dest.Name == eventRule.Name {
+				foundEventRule = dest
+				break
+			}
+		}
+	} else {
+		err = json.Unmarshal(body, &foundEventRule)
+		if err != nil {
+			return EventRule{}, err
+		}
 	}
 
 	return foundEventRule, nil

@@ -18,6 +18,7 @@ func (c *Client) GetEventRules() (EventRules, error) {
 	}
 
 	eventRules := EventRules{}
+
 	err = json.Unmarshal(body, &eventRules)
 	if err != nil {
 		return EventRules{}, err
