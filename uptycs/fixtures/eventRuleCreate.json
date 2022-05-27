@@ -1,6 +1,6 @@
 {
   "id": "afd0da8b-563e-4e58-b591-0fbd55f21fbb",
-  "customerId": "fda3f46b-c262-439c-bc93-5de6ee6993b6",
+  "customerId": "111111111111-111111-11111-111111-111111111",
   "seedId": "042cdc43-fac4-45b1-ac5a-475449d4a03d",
   "name": "marc_is_awesomer",
   "description": "this is a test",
@@ -26,7 +26,7 @@
   "lock": false,
   "builderConfig": {
     "id": "afd0da8b-563e-4e58-b591-0fbd55f21fbb",
-    "customerId": "fda3f46b-c262-439c-bc93-5de6ee6993b6",
+    "customerId": "111111111111-111111-11111-111111-111111111",
     "tableName": "process_open_sockets",
     "added": true,
     "matchesFilter": true,
@@ -55,12 +55,12 @@
     {
       "rel": "self",
       "title": "Event rule",
-      "href": "/api/customers/fda3f46b-c262-439c-bc93-5de6ee6993b6/eventRules/afd0da8b-563e-4e58-b591-0fbd55f21fbb"
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/eventRules/afd0da8b-563e-4e58-b591-0fbd55f21fbb"
     },
     {
       "rel": "parent",
       "title": "Event rules",
-      "href": "/api/customers/fda3f46b-c262-439c-bc93-5de6ee6993b6/eventRules"
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/eventRules"
     }
   ]
 }

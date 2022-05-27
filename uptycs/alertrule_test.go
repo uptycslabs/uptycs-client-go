@@ -174,10 +174,9 @@ func TestGetAlertRule(t *testing.T) {
 				Lock:                false,
 				AlertNotifyInterval: 600,
 				AlertNotifyCount:    1,
-				Destinations: []Destination{
-					Destination{
+				Destinations: []AlertRuleDestination{
+					AlertRuleDestination{
 						ID:                 "caefdd0b-ca6a-4cec-b2ef-38cc45f73037",
-						CustomerID:         "111111111111-111111-11111-111111-111111111",
 						RuleID:             "bcfe1cda-9eba-40fa-9686-9c1caea47732",
 						Severity:           "medium",
 						DestinationID:      "f99515c0-9b6f-47df-a1a3-77bc1196b480",

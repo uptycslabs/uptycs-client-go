@@ -64,6 +64,7 @@ func NewClient(config UptycsConfig) (*Client, error) {
 }
 
 func (c *Client) doRequest(req *http.Request) ([]byte, error) {
+  //TODO Support pagination
 	ctx, cancel := context.WithTimeout(
 		context.Background(),
 		time.Duration(time.Millisecond*10000),

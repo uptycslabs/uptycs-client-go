@@ -1,0 +1,27 @@
+{
+  "id": "b7c9c973-e2a3-4913-a755-919026267679",
+  "customerId": "111111111111-111111-11111-111111-111111111",
+  "name": "#it-sec-alerts",
+  "type": "slack",
+  "address": "https://hooks.slack.com/services/wut/foo/asdf",
+  "config": {},
+  "createdAt": "2022-03-09T20:49:04.283Z",
+  "createdBy": "e9b93444-a442-437f-82f6-6d65e9c787d3",
+  "updatedAt": "2022-03-09T20:49:41.189Z",
+  "updatedBy": "e9b93444-a442-437f-82f6-6d65e9c787d3",
+  "enabled": true,
+  "default": false,
+  "template": null,
+  "links": [
+    {
+      "rel": "self",
+      "title": "Notification destination",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/destinations/b7c9c973-e2a3-4913-a755-919026267679"
+    },
+    {
+      "rel": "parent",
+      "title": "Notification destinations",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/destinations"
+    }
+  ]
+}

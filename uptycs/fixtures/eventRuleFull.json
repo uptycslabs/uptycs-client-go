@@ -42,7 +42,7 @@
             {
               "not": false,
               "name": "path",
-              "value": "/usr/local/sbin/",
+              "value": false,
               "isDate": false,
               "operator": "STARTS_WITH",
               "caseInsensitive": true
@@ -50,7 +50,7 @@
             {
               "not": false,
               "name": "path",
-              "value": "/usr/local/bin/",
+              "value": 91,
               "isDate": false,
               "operator": "STARTS_WITH",
               "caseInsensitive": true
