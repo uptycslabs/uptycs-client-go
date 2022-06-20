@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/myoung34/uptycs-client-go/uptycs"
+	"github.com/uptycslabs/uptycs-client-go/uptycs"
 	"log"
 	"os"
 )

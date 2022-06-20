@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	//"github.com/MakeNowJust/heredoc"
-	"github.com/myoung34/uptycs-client-go/uptycs"
+	"github.com/uptycslabs/uptycs-client-go/uptycs"
 	"os"
 )
 

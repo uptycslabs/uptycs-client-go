@@ -1,4 +1,4 @@
-module github.com/myoung34/uptycs-client-go
+module github.com/uptycslabs/uptycs-client-go
 
 go 1.13
 
