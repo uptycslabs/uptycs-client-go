@@ -1,2 +1,3 @@
 coverage.out
 *.sw[o-p]
+main.go
