@@ -249,3 +249,62 @@ type AlertRuleQuery struct {
 	QueryID   string `json:"queryId,omitempty"`
 	LastRanAt string `json:"lastRanAt,omitempty"`
 }
+
+type EventExcludeProfiles struct {
+	Links  []LinkItem            `json:"links,omitempty"`
+	Items  []EventExcludeProfile `json:"items,omitempty"`
+	Offset int                   `json:"offset,omitempty"`
+	Limit  int                   `json:"limit,omitempty"`
+}
+
+type EventExcludeProfile struct {
+	ID           string                      `json:"id,omitempty"`
+	CustomerID   string                      `json:"customerId,omitempty"`
+	Name         string                      `json:"name,omitempty"`
+	Description  string                      `json:"description,omitempty"`
+	Priority     int                         `json:"priority,omitempty"`
+	Metadata     EventExcludeProfileMetadata `json:"metadata,omitempty"`
+	ResourceType string                      `json:"resourceType,omitempty"`
+	Platform     string                      `json:"platform,omitempty"`
+	CreatedAt    string                      `json:"createdAt,omitempty"`
+	CreatedBy    string                      `json:"createdBy,omitempty"`
+	UpdatedAt    string                      `json:"updatedAt,omitempty"`
+	UpdatedBy    string                      `json:"updatedBy,omitempty"`
+	Links        []LinkItem                  `json:"links,omitempty"`
+}
+
+type EventExcludeProfileMetadata struct {
+	DnsLookupEvents   DnsLookupEvents   `json:"dns_lookup_events,omitempty"`
+	UserEvents        UserEvents        `json:"user_events,omitempty"`
+	SocketEvents      SocketEvents      `json:"socket_events,omitempty"`
+	ProcessEvents     ProcessEvents     `json:"process_events,omitempty"`
+	RegistryEvents    RegistryEvents    `json:"registry_events,omitempty"`
+	ProcessFileEvents ProcessFileEvents `json:"process_file_events,omitempty"`
+}
+
+type DnsLookupEvents struct {
+	Answer   []string `json:"answer,omitempty"`
+	Question []string `json:"question,omitempty"`
+}
+
+type RegistryEvents struct {
+	Action []string `json:"action,omitempty"`
+}
+
+type UserEvents struct {
+	Message []string `json:"message,omitempty"`
+}
+
+type SocketEvents struct {
+	RemoteAddress []string `json:"remote_address,omitempty"`
+}
+
+type ProcessEvents struct {
+	Path []string `json:"path,omitempty"`
+}
+
+type ProcessFileEvents struct {
+	Path       []string `json:"path,omitempty"`
+	Operation  []string `json:"operation,omitempty"`
+	Executable []string `json:"executable,omitempty"`
+}

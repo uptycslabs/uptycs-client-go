@@ -1,0 +1,78 @@
+{
+  "id": "13da8bc4-3c70-4bb9-a4d4-7ca320860926",
+  "customerId": "11111111-1111-1111-1111-111111111111",
+  "seedId": "DEFAULT_EVENT_EXCLUDE",
+  "name": "Uptycs default event exclude profile",
+  "description": "Filters known paths, IPs and domains",
+  "priority": 20200227,
+  "metadata": {
+    "user_events": {
+      "message": [
+        "^cwd=.*",
+        "^op=PAM:accountingS",
+        "^op=PAM:session_closeS",
+        "^op=PAM:session_openS",
+        "^op=PAM:setcredS"
+      ]
+    },
+    "socket_events": {
+      "remote_address": [
+        "^S",
+        "^::S"
+      ]
+    },
+    "process_events": {
+      "path": [
+        "^.*ntp\\.orgS",
+        "^/bin/bashS"
+      ]
+    },
+    "registry_events": {
+      "action": [
+        "SET_INFORMATION",
+        "CREATED"
+      ]
+    },
+    "dns_lookup_events": {
+      "answer": [
+        "^(?![\\s\\S])"
+      ],
+      "question": [
+        "^0\\.pool\\.ntp\\.orgS",
+        "^1\\.pool\\.ntp\\.orgS"
+      ]
+    },
+    "process_file_events": {
+      "path": [
+        "\\.uptycs.ioS",
+        ".*(cache|notification|localstate|resource|safety|automaticdestination|packages|tempstate|((edb|cf|gthr|dir|crwl|exd|db-journal|aodl|evtx|json|dat|log|tmp|etl|db|ini|xml|chk|jfm|pf|temp))S)"
+      ],
+      "operation": [
+        "^open\\+readS",
+        "attributes_modified",
+        "unlink"
+      ],
+      "executable": [
+        "^.*osqueryd\\.exeS|^.*collectguestlogs\\.exeS|^.*MsMpEng\\.exeS"
+      ]
+    }
+  },
+  "createdBy": "00000000-0000-0000-0000-000000000000",
+  "updatedBy": "00000000-0000-0000-0000-000000000000",
+  "createdAt": "2022-06-27T04:09:05.342Z",
+  "updatedAt": "2022-06-27T04:09:05.342Z",
+  "resourceType": "asset",
+  "platform": "all",
+  "links": [
+    {
+      "rel": "self",
+      "title": "Event exlude profile information",
+      "href": "/api/customers/11111111-1111-1111-1111-111111111111/eventExcludeProfiles/13da8bc4-3c70-4bb9-a4d4-7ca320860926"
+    },
+    {
+      "rel": "parent",
+      "title": "Event exlude profiles information",
+      "href": "/api/customers/11111111-1111-1111-1111-111111111111/eventExcludeProfiles"
+    }
+  ]
+}
