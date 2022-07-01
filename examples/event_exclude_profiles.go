@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/MakeNowJust/heredoc"
 	"github.com/uptycslabs/uptycs-client-go/uptycs"
 	"log"
 	"os"
@@ -82,9 +83,27 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created Event Exclude Profile '%s' with id %s", eventExcludeProfile.Name, eventExcludeProfile.ID))
 
+  // Update but use JSON for the metadata
 	_, err = c.UpdateEventExcludeProfile(uptycs.EventExcludeProfile{
 		ID:           eventExcludeProfile.ID,
-		Metadata:     eventExcludeProfile.Metadata,
+		MetadataJson: heredoc.Doc(`
+  {
+    "process_events": {
+      "path": [
+        "^/Library/Developer/Xcode$"
+      ]
+    },
+    "process_file_events": {
+      "path": [
+        "^/Library/Developer/Xcode$",
+        "^/Library/Application Support/JAMF$"
+      ],
+      "executable": [
+        "^.*osqueryd\\.exe$|^.*collectguestlogs\\.exe$|^.*MsMpEng\\.exe$"
+      ]
+    }
+  }
+	    `),
 		Name:         "marc test",
 		Description:  "marcs test",
 		Priority:     76,

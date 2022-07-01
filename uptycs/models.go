@@ -264,6 +264,7 @@ type EventExcludeProfile struct {
 	Description  string                      `json:"description,omitempty"`
 	Priority     int                         `json:"priority,omitempty"`
 	Metadata     EventExcludeProfileMetadata `json:"metadata,omitempty"`
+	MetadataJson string                      `json:"metadataJson,omitempty"`
 	ResourceType string                      `json:"resourceType,omitempty"`
 	Platform     string                      `json:"platform,omitempty"`
 	CreatedAt    string                      `json:"createdAt,omitempty"`
