@@ -275,17 +275,28 @@ type EventExcludeProfile struct {
 }
 
 type EventExcludeProfileMetadata struct {
-	DnsLookupEvents   DnsLookupEvents   `json:"dns_lookup_events,omitempty"`
-	UserEvents        UserEvents        `json:"user_events,omitempty"`
-	SocketEvents      SocketEvents      `json:"socket_events,omitempty"`
-	ProcessEvents     ProcessEvents     `json:"process_events,omitempty"`
-	RegistryEvents    RegistryEvents    `json:"registry_events,omitempty"`
-	ProcessFileEvents ProcessFileEvents `json:"process_file_events,omitempty"`
+	DnsLookupEvents     DnsLookupEvents     `json:"dns_lookup_events,omitempty"`
+	UserEvents          UserEvents          `json:"user_events,omitempty"`
+	SocketEvents        SocketEvents        `json:"socket_events,omitempty"`
+	ProcessEvents       ProcessEvents       `json:"process_events,omitempty"`
+	RegistryEvents      RegistryEvents      `json:"registry_events,omitempty"`
+	ProcessFileEvents   ProcessFileEvents   `json:"process_file_events,omitempty"`
+	HttpEvents          HttpEvents          `json:"http_events,omitempty"`
+	EbpfDnsLookupEvents EbpfDnsLookupEvents `json:"ebpf_dns_lookup_events,omitempty"`
+}
+
+type EbpfDnsLookupEvents struct {
+	Answer   []string `json:"answer,omitempty"`
+	Question []string `json:"question,omitempty"`
 }
 
 type DnsLookupEvents struct {
 	Answer   []string `json:"answer,omitempty"`
 	Question []string `json:"question,omitempty"`
+}
+
+type HttpEvents struct {
+	Host []string `json:"action,omitempty"`
 }
 
 type RegistryEvents struct {

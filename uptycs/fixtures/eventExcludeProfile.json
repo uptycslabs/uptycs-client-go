@@ -33,13 +33,17 @@
         "CREATED"
       ]
     },
-    "dns_lookup_events": {
-      "answer": [
-        "^(?![\\s\\S])"
-      ],
+    "ebpf_dns_lookup_events": {
       "question": [
-        "^0\\.pool\\.ntp\\.orgS",
-        "^1\\.pool\\.ntp\\.orgS"
+        "wut"
+      ],
+      "answer": [
+        "foo"
+      ]
+    },
+    "http_events": {
+      "host": [
+        "www.google.com"
       ]
     },
     "process_file_events": {
@@ -54,6 +58,15 @@
       ],
       "executable": [
         "^.*osqueryd\\.exeS|^.*collectguestlogs\\.exeS|^.*MsMpEng\\.exeS"
+      ]
+    },
+    "dns_lookup_events": {
+      "answer": [
+        "^(?![\\s\\S])"
+      ],
+      "question": [
+        "^0\\.pool\\.ntp\\.orgS",
+        "^1\\.pool\\.ntp\\.orgS"
       ]
     }
   },

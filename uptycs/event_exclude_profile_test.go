@@ -37,6 +37,12 @@ func TestGetEventExcludeProfile(t *testing.T) {
 				Description: "Filters known paths, IPs and domains",
 				Priority:    20200227,
 				Metadata: EventExcludeProfileMetadata{
+          //TODO
+          //HttpEvents: HttpEvents{
+          //  Host: []string{
+          //    "www.google.com",
+          //  },
+          //},
 					SocketEvents: SocketEvents{
 						RemoteAddress: []string{
 							"^S",
@@ -76,6 +82,14 @@ func TestGetEventExcludeProfile(t *testing.T) {
 						Action: []string{
 							"SET_INFORMATION",
 							"CREATED",
+						},
+					},
+					EbpfDnsLookupEvents: EbpfDnsLookupEvents{
+						Answer: []string{
+							"foo",
+						},
+						Question: []string{
+							"wut",
 						},
 					},
 					DnsLookupEvents: DnsLookupEvents{
