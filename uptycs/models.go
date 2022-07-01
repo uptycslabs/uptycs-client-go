@@ -296,7 +296,7 @@ type DnsLookupEvents struct {
 }
 
 type HttpEvents struct {
-	Host []string `json:"action,omitempty"`
+	Host []string `json:"host,omitempty"`
 }
 
 type RegistryEvents struct {
