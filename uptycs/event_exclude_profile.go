@@ -50,6 +50,15 @@ func (c *Client) GetEventExcludeProfile(eventExcludeProfile EventExcludeProfile)
 }
 
 func (c *Client) CreateEventExcludeProfile(eventExcludeProfile EventExcludeProfile) (EventExcludeProfile, error) {
+	if len(eventExcludeProfile.MetadataJson) > 0 {
+		metadata := EventExcludeProfileMetadata{}
+		if err := json.Unmarshal([]byte(eventExcludeProfile.MetadataJson), &metadata); err != nil {
+			panic(err)
+		}
+		eventExcludeProfile.Metadata = metadata
+		eventExcludeProfile.MetadataJson = ""
+	}
+
 	rb, err := json.Marshal(eventExcludeProfile)
 	if err != nil {
 		return eventExcludeProfile, err
@@ -125,6 +134,15 @@ func (c *Client) DeleteEventExcludeProfile(eventExcludeProfile EventExcludeProfi
 func (c *Client) UpdateEventExcludeProfile(eventExcludeProfile EventExcludeProfile) (EventExcludeProfile, error) {
 	if len(eventExcludeProfile.ID) == 0 {
 		return eventExcludeProfile, fmt.Errorf("ID of the eventExcludeProfile is required")
+	}
+
+	if len(eventExcludeProfile.MetadataJson) > 0 {
+		metadata := EventExcludeProfileMetadata{}
+		if err := json.Unmarshal([]byte(eventExcludeProfile.MetadataJson), &metadata); err != nil {
+			panic(err)
+		}
+		eventExcludeProfile.Metadata = metadata
+		eventExcludeProfile.MetadataJson = ""
 	}
 
 	rb, err := json.Marshal(eventExcludeProfile)
