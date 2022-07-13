@@ -21,10 +21,10 @@ func TestGetAlertRules(t *testing.T) {
 		},
 	)
 
-	c, _ := NewClient(UptycsConfig{
+	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
-		ApiKey:     "b",
-		ApiSecret:  "c",
+		APIKey:     "b",
+		APISecret:  "c",
 		CustomerID: "d",
 	})
 
@@ -51,7 +51,6 @@ func TestGetAlertRules(t *testing.T) {
 				Items: []AlertRule{
 					AlertRule{
 						ID:          "1d4720ce-19a9-4a03-bb3a-905717b8a60f",
-						CustomerID:  "111111111111-111111-11111-111111-111111111",
 						SeedID:      "30bd9a6f-259a-4506-b9da-80a8f392cced",
 						Name:        "7zip.exe execution detected - T1560.001 - Archive via Utility - Windows",
 						Description: "Adversaries may use 7zip utility to compress or encrypt exfilterated data in order to send it undetected to the attacker.",
@@ -89,7 +88,6 @@ func TestGetAlertRules(t *testing.T) {
 					},
 					AlertRule{
 						ID:          "86d111f4-9fcb-4495-9cef-e2c35e63a47f",
-						CustomerID:  "111111111111-111111-11111-111111-111111111",
 						SeedID:      "AWS_THREAT_DEFENSE_EVASION_MODIFY_IAAS_1",
 						Name:        "A VPC is deleted by an unknown user",
 						Description: "A VPC is deleted by an unknown user",

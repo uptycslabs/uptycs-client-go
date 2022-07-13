@@ -42,33 +42,33 @@ func (c *Client) DeleteEventExcludeProfile(eventExcludeProfile EventExcludeProfi
 }
 
 func (c *Client) CreateEventExcludeProfile(eventExcludeProfile EventExcludeProfile) (EventExcludeProfile, error) {
-	if len(eventExcludeProfile.MetadataJson) > 0 {
+	if len(eventExcludeProfile.MetadataJSON) > 0 {
 		metadata := EventExcludeProfileMetadata{}
-		if err := json.Unmarshal([]byte(eventExcludeProfile.MetadataJson), &metadata); err != nil {
+		if err := json.Unmarshal([]byte(eventExcludeProfile.MetadataJSON), &metadata); err != nil {
 			panic(err)
 		}
 		eventExcludeProfile.Metadata = metadata
-		eventExcludeProfile.MetadataJson = ""
+		eventExcludeProfile.MetadataJSON = ""
 	}
 
 	if eventExcludeProfile.Priority > 999999999 {
-		return eventExcludeProfile, errors.New("Priority is too large. Should be less than 999999999")
+		return eventExcludeProfile, errors.New("priority is too large. Should be less than 999999999")
 	}
 	return doCreate(c, eventExcludeProfile, "eventExcludeProfiles")
 }
 
 func (c *Client) UpdateEventExcludeProfile(eventExcludeProfile EventExcludeProfile) (EventExcludeProfile, error) {
-	if len(eventExcludeProfile.MetadataJson) > 0 {
+	if len(eventExcludeProfile.MetadataJSON) > 0 {
 		metadata := EventExcludeProfileMetadata{}
-		if err := json.Unmarshal([]byte(eventExcludeProfile.MetadataJson), &metadata); err != nil {
+		if err := json.Unmarshal([]byte(eventExcludeProfile.MetadataJSON), &metadata); err != nil {
 			panic(err)
 		}
 		eventExcludeProfile.Metadata = metadata
-		eventExcludeProfile.MetadataJson = ""
+		eventExcludeProfile.MetadataJSON = ""
 	}
 
 	if eventExcludeProfile.Priority > 999999999 {
-		return eventExcludeProfile, errors.New("Priority is too large. Should be less than 999999999")
+		return eventExcludeProfile, errors.New("priority is too large. Should be less than 999999999")
 	}
 
 	return doUpdate(c, eventExcludeProfile, "eventExcludeProfiles")

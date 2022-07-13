@@ -12,10 +12,10 @@ import (
 
 func TestDeleteAlertRule(t *testing.T) {
 
-	c, _ := NewClient(UptycsConfig{
+	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
-		ApiKey:     "b",
-		ApiSecret:  "c",
+		APIKey:     "b",
+		APISecret:  "c",
 		CustomerID: "d",
 	})
 
@@ -62,10 +62,10 @@ func TestDeleteAlertRule(t *testing.T) {
 
 func TestPutAlertRule(t *testing.T) {
 
-	c, _ := NewClient(UptycsConfig{
+	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
-		ApiKey:     "b",
-		ApiSecret:  "c",
+		APIKey:     "b",
+		APISecret:  "c",
 		CustomerID: "d",
 	})
 
@@ -123,10 +123,10 @@ func TestPutAlertRule(t *testing.T) {
 
 func TestGetAlertRule(t *testing.T) {
 
-	c, _ := NewClient(UptycsConfig{
+	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
-		ApiKey:     "b",
-		ApiSecret:  "c",
+		APIKey:     "b",
+		APISecret:  "c",
 		CustomerID: "d",
 	})
 
@@ -144,7 +144,6 @@ func TestGetAlertRule(t *testing.T) {
 			id:      "bcfe1cda-9eba-40fa-9686-9c1caea47732",
 			out: AlertRule{
 				ID:          "bcfe1cda-9eba-40fa-9686-9c1caea47732",
-				CustomerID:  "111111111111-111111-11111-111111-111111111",
 				SeedID:      "3a606e79-0e91-4e48-bcfe-dfb3798d0d33",
 				Name:        "Login Profile Changes Detected_REDDIT",
 				Description: "Changes detected in Login Profiles, which can result in Privilege Escalations",
@@ -191,7 +190,6 @@ func TestGetAlertRule(t *testing.T) {
 				AlertRuleExceptions: []RuleException{
 					RuleException{
 						ID:          "37e2f71c-5e5c-47b2-8d3b-6da4c198583d",
-						CustomerID:  "111111111111-111111-11111-111111-111111111",
 						RuleID:      "b4475f27-eaf4-44f3-9fa0-6dd0ca06089a",
 						ExceptionID: "3c3dbd96-3f53-4123-8176-08b5c6d80db5",
 						CreatedAt:   "2022-04-22T18:21:33.272Z",
@@ -199,7 +197,6 @@ func TestGetAlertRule(t *testing.T) {
 					},
 					RuleException{
 						ID:          "fa15d011-621b-4b18-a341-213a18659e03",
-						CustomerID:  "111111111111-111111-11111-111111-111111111",
 						RuleID:      "b4475f27-eaf4-44f3-9fa0-6dd0ca06089a",
 						ExceptionID: "904eeeeb-cfb7-4e70-bfc1-955ec0b50971",
 						CreatedAt:   "2022-04-22T18:21:33.277Z",
@@ -250,10 +247,10 @@ func TestGetAlertRule(t *testing.T) {
 
 func TestCreateAlertRule(t *testing.T) {
 
-	c, _ := NewClient(UptycsConfig{
+	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
-		ApiKey:     "b",
-		ApiSecret:  "c",
+		APIKey:     "b",
+		APISecret:  "c",
 		CustomerID: "d",
 	})
 

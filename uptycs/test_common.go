@@ -2,10 +2,9 @@ package uptycs
 
 import (
 	"encoding/json"
-	"io/ioutil"
-	"net/http"
-
 	"github.com/jarcoal/httpmock"
+	"net/http"
+	"os"
 )
 
 type MockClient struct {
@@ -14,11 +13,11 @@ type MockClient struct {
 
 func RespFromFixture(fixtureFile string) (*http.Response, error) {
 	var fixture map[string]interface{}
-	fixture_str, err := ioutil.ReadFile(fixtureFile)
+	fixtureStr, err := os.ReadFile(fixtureFile)
 	if err != nil {
 		return nil, err
 	}
-	err = json.Unmarshal(fixture_str, &fixture)
+	err = json.Unmarshal(fixtureStr, &fixture)
 	if err != nil {
 		return nil, err
 	}

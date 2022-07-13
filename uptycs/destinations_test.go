@@ -21,10 +21,10 @@ func TestGetDestinations(t *testing.T) {
 		},
 	)
 
-	c, _ := NewClient(UptycsConfig{
+	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
-		ApiKey:     "b",
-		ApiSecret:  "c",
+		APIKey:     "b",
+		APISecret:  "c",
 		CustomerID: "d",
 	})
 
@@ -50,11 +50,10 @@ func TestGetDestinations(t *testing.T) {
 				},
 				Items: []Destination{
 					Destination{
-						ID:         "4c0dee1f-c19a-45fe-bf5d-fd031d6f694f",
-						CustomerID: "111111111111-111111-11111-111111-111111111",
-						Name:       "tony-test",
-						Type:       "email",
-						Address:    "tony.snook@reddit.com",
+						ID:      "4c0dee1f-c19a-45fe-bf5d-fd031d6f694f",
+						Name:    "tony-test",
+						Type:    "email",
+						Address: "tony.snook@reddit.com",
 						//config: {},
 						CreatedAt: "2021-07-12T21:13:09.778Z",
 						CreatedBy: "66a9a52c-5fa0-4cf4-abe7-da5504f67950",

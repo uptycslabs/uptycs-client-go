@@ -5,15 +5,15 @@ import (
 	"errors"
 	"fmt"
 	"github.com/golang-jwt/jwt/v4"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"time"
 )
 
-type UptycsConfig struct {
+type Config struct {
 	Host       string
-	ApiKey     string
-	ApiSecret  string
+	APIKey     string
+	APISecret  string
 	CustomerID string
 }
 
@@ -22,8 +22,6 @@ type Client struct {
 	HTTPClient *http.Client
 	Token      string
 }
-
-var hmacSampleSecret []byte
 
 func CreateToken(apiKey string, apiSecret string) (string, error) {
 	var err error
@@ -40,8 +38,8 @@ func CreateToken(apiKey string, apiSecret string) (string, error) {
 	return token, nil
 }
 
-func ValidateConfig(config UptycsConfig) (bool, error) {
-	configKeys := []string{config.Host, config.ApiKey, config.ApiSecret, config.CustomerID}
+func ValidateConfig(config Config) (bool, error) {
+	configKeys := []string{config.Host, config.APIKey, config.APISecret, config.CustomerID}
 	for _, configVal := range configKeys {
 		if len(configVal) == 0 {
 			return false, errors.New("required config value not found")
@@ -50,15 +48,15 @@ func ValidateConfig(config UptycsConfig) (bool, error) {
 	return true, nil
 }
 
-func NewClient(config UptycsConfig) (*Client, error) {
-	ValidateConfig(config)
+func NewClient(config Config) (*Client, error) {
+	ValidateConfig(config) //nolint:errcheck
 
 	c := Client{
 		HTTPClient: &http.Client{},
 		HostURL:    fmt.Sprintf("%s/public/api/customers/%s", config.Host, config.CustomerID),
 	}
 
-	c.Token, _ = CreateToken(config.ApiKey, config.ApiSecret)
+	c.Token, _ = CreateToken(config.APIKey, config.APISecret)
 
 	return &c, nil
 }
@@ -83,7 +81,7 @@ func (c *Client) doRequest(req *http.Request) ([]byte, error) {
 	}
 	defer res.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		return nil, err
 	}

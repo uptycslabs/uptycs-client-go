@@ -9,10 +9,10 @@ import (
 )
 
 func main() {
-	c, _ := uptycs.NewClient(uptycs.UptycsConfig{
+	c, _ := uptycs.NewClient(uptycs.Config{
 		Host:       os.Getenv("UPTYCS_HOST"),
-		ApiKey:     os.Getenv("UPTYCS_API_KEY"),
-		ApiSecret:  os.Getenv("UPTYCS_API_SECRET"),
+		APIKey:     os.Getenv("UPTYCS_API_KEY"),
+		APISecret:  os.Getenv("UPTYCS_API_SECRET"),
 		CustomerID: os.Getenv("UPTYCS_CUSTOMER_ID"),
 	})
 
@@ -81,7 +81,7 @@ func main() {
 		log.Println(err)
 		return
 	}
-	log.Println(fmt.Sprintf("Created Event Exclude Profile '%s' with id %s", eventExcludeProfile.Name, eventExcludeProfile.ID))
+	log.Println(fmt.Sprintf("Created Event Exclude Profile '%s' with id '%s'", eventExcludeProfile.Name, eventExcludeProfile.ID))
 
 	// Update but use JSON for the metadata
 	_, err = c.UpdateEventExcludeProfile(uptycs.EventExcludeProfile{
@@ -114,12 +114,12 @@ func main() {
 		log.Println(err)
 		return
 	}
-	log.Println(fmt.Sprintf("Updated Event Exclude Profile '%s' with id %s", eventExcludeProfile.Name, eventExcludeProfile.ID))
+	log.Println(fmt.Sprintf("Updated Event Exclude Profile '%s' with id '%s'", eventExcludeProfile.Name, eventExcludeProfile.ID))
 
 	// Delete an event exclude profile by ID
 	_, err = c.DeleteEventExcludeProfile(uptycs.EventExcludeProfile{
 		ID: eventExcludeProfile.ID,
 	})
-	log.Println(fmt.Sprintf("Deleted Event Exclude Profile '%s' with id %s", eventExcludeProfile.Name, eventExcludeProfile.ID))
+	log.Println(fmt.Sprintf("Deleted Event Exclude Profile '%s' with id '%s'", eventExcludeProfile.Name, eventExcludeProfile.ID))
 
 }
