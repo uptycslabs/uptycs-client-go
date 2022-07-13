@@ -48,8 +48,8 @@ type EventRule struct {
 	GroupingL3        string        `json:"groupingL3,omitempty"`
 	Score             string        `json:"score,omitempty"`
 	Lock              bool          `json:"lock,omitempty"`
-	ScriptConfig      *ScriptConfig  `json:"scriptConfig,omitempty"`
-	SQLConfig         *SQLConfig     `json:"sqlConfig,omitempty"`
+	ScriptConfig      *ScriptConfig `json:"scriptConfig,omitempty"`
+	SQLConfig         *SQLConfig    `json:"sqlConfig,omitempty"`
 	BuilderConfig     BuilderConfig `json:"builderConfig"`
 	BuilderConfigJson string        `json:"builderConfigJson,omitempty"`
 	Links             []LinkItem    `json:"links"`
@@ -182,8 +182,8 @@ type AlertRule struct {
 	AlertNotifyCount       int                    `json:"alertNotifyCount,omitempty"`
 	AlertRuleExceptions    []RuleException        `json:"alertRuleExceptions,omitempty"`
 	Destinations           []AlertRuleDestination `json:"destinations,omitempty"`
-	SQLConfig              *SQLConfig              `json:"sqlConfig,omitempty"`
-	ScriptConfig           *ScriptConfig           `json:"scriptConfig,omitempty"`
+	SQLConfig              *SQLConfig             `json:"sqlConfig,omitempty"`
+	ScriptConfig           *ScriptConfig          `json:"scriptConfig,omitempty"`
 	Links                  []LinkItem             `json:"links,omitempty"`
 }
 
