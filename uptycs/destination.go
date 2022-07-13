@@ -1,126 +1,45 @@
 package uptycs
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-	"strings"
-)
+import "errors"
+
+func (T Destination) GetID() string {
+	return T.ID
+}
+
+func (T Destination) GetName() string {
+	return T.Name
+}
+
+func (T Destination) KeysToDelete() []string {
+	return []string{}
+}
 
 func (c *Client) CreateDestination(destination Destination) (Destination, error) {
-	slimmedDestination, err := SlimStructAsJsonString(destination, []string{})
-	if err != nil {
-		return destination, err
-	}
-
-	req, err := http.NewRequest(
-		"POST",
-		fmt.Sprintf("%s/destinations", c.HostURL),
-		strings.NewReader(string(slimmedDestination)),
-	)
-	req.Header.Set("Content-Type", "application/json")
-
-	if err != nil {
-		return destination, err
-	}
-
-	body, err := c.doRequest(req)
-	if err != nil {
-		return destination, err
-	}
-
-	newDestination := Destination{}
-	err = json.Unmarshal(body, &newDestination)
-	if err != nil {
-		return Destination{}, err
-	}
-
-	return newDestination, nil
+	return doCreate(c, destination, "destinations")
 }
 
 func (c *Client) UpdateDestination(destination Destination) (Destination, error) {
-	if len(destination.ID) == 0 {
-		return destination, fmt.Errorf("ID of the destination is required")
-	}
+	return doUpdate(c, destination, "destinations")
+}
 
-	slimmedDestination, err := SlimStructAsJsonString(destination, []string{"id"})
-	if err != nil {
-		return destination, err
-	}
-
-	req, err := http.NewRequest(
-		"PUT",
-		fmt.Sprintf("%s/destinations/%s", c.HostURL, destination.ID),
-		strings.NewReader(string(slimmedDestination)),
-	)
-	req.Header.Set("Content-Type", "application/json")
-
-	if err != nil {
-		return destination, err
-	}
-
-	_, err = c.doRequest(req)
-	if err != nil {
-		return destination, err
-	}
-	if err != nil {
-		return destination, err
-	}
-
-	return destination, nil
+func (c *Client) GetDestinations() (Destinations, error) {
+	return doGetMany(c, Destinations{}, "destinations")
 }
 
 func (c *Client) GetDestination(destination Destination) (Destination, error) {
-	urlStr := fmt.Sprintf("%s/destinations/%s", c.HostURL, destination.ID)
 	if len(destination.ID) == 0 {
-		urlStr = fmt.Sprintf("%s/destinations", c.HostURL)
-	}
-
-	req, err := http.NewRequest("GET", urlStr, nil)
-	if err != nil {
-		return destination, err
-	}
-
-	body, err := c.doRequest(req)
-	if err != nil {
-		return Destination{}, err
-	}
-
-	foundDestination := Destination{}
-
-	if len(destination.ID) == 0 {
-		urlStr = fmt.Sprintf("%s/destinations", c.HostURL)
-		destinations := Destinations{}
-		err = json.Unmarshal(body, &destinations)
-		if err != nil {
-			return Destination{}, err
-		}
-		for _, dest := range destinations.Items {
-			if dest.Name == destination.Name {
-				foundDestination = dest
-				break
+		all, _ := c.GetDestinations()
+		for _, _item := range all.Items {
+			if _item.Name == destination.Name {
+				return _item, nil
 			}
 		}
 	} else {
-		err = json.Unmarshal(body, &foundDestination)
-		if err != nil {
-			return Destination{}, err
-		}
+		return doGet(c, destination, "destinations")
 	}
-
-	return foundDestination, nil
+	return destination, errors.New("Destination was not found")
 }
 
 func (c *Client) DeleteDestination(destination Destination) (Destination, error) {
-	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/destinations/%s", c.HostURL, destination.ID), nil)
-	if err != nil {
-		return destination, err
-	}
-
-	_, err = c.doRequest(req)
-	if err != nil {
-		return destination, err
-	}
-
-	return destination, nil
+	return doDelete(c, destination, "destinations")
 }

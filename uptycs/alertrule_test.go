@@ -2,11 +2,12 @@ package uptycs
 
 import (
 	"fmt"
-	"github.com/jarcoal/httpmock"
-	"github.com/stretchr/testify/assert"
 	"net/http"
 	"reflect"
 	"testing"
+
+	"github.com/jarcoal/httpmock"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestDeleteAlertRule(t *testing.T) {
@@ -69,13 +70,15 @@ func TestPutAlertRule(t *testing.T) {
 	})
 
 	type convTest struct {
-		name string
-		in   AlertRule
+		name    string
+		fixture string
+		in      AlertRule
 	}
 
 	theTests := []convTest{
 		{
-			name: "TestAlertRule",
+			name:    "TestAlertRule",
+			fixture: "fixtures/alertRuleBuilder.json",
 			in: AlertRule{
 				ID:          "9cde7195-ec0c-475e-a208-dbf81a32798a",
 				Name:        "marcus test",
@@ -98,11 +101,11 @@ func TestPutAlertRule(t *testing.T) {
 		t.Run(theT.name, func(t *testing.T) {
 			httpmock.RegisterResponder("PUT", fmt.Sprintf("https://uptycs.foo/public/api/customers/d/alertRules/%v", theT.in.ID),
 				func(req *http.Request) (*http.Response, error) {
-					resp, err := httpmock.NewJsonResponse(200, "{}")
+					fixture, err := RespFromFixture(theT.fixture)
 					if err != nil {
 						t.Errorf(err.Error())
 					}
-					return resp, err
+					return fixture, err
 				},
 			)
 

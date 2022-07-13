@@ -2,78 +2,44 @@ package uptycs
 
 import (
 	"encoding/json"
-	"fmt"
-	"net/http"
-	"strings"
+	"errors"
 )
 
-func (c *Client) UpdateEventRule(eventRule EventRule) (EventRule, error) {
-	if len(eventRule.ID) == 0 {
-		return eventRule, fmt.Errorf("ID of the Event Rule is required")
-	}
+func (T EventRule) GetID() string {
+	return T.ID
+}
 
-	if len(eventRule.BuilderConfigJson) > 0 {
-		builderConfig := BuilderConfig{}
-		if err := json.Unmarshal([]byte(eventRule.BuilderConfigJson), &builderConfig); err != nil {
-			panic(err)
-		}
-		eventRule.BuilderConfig = builderConfig
-		eventRule.BuilderConfigJson = ""
-	}
+func (T EventRule) GetName() string {
+	return T.Name
+}
 
-	if len(eventRule.BuilderConfig.FiltersJson) > 0 {
-		filters := BuilderConfigFilter{}
-		if err := json.Unmarshal([]byte(eventRule.BuilderConfig.FiltersJson), &filters); err != nil {
-			panic(err)
-		}
-		eventRule.BuilderConfig.Filters = filters
-		eventRule.BuilderConfig.FiltersJson = ""
-	}
-
-	var keysToDelete = []string{
+func (T EventRule) KeysToDelete() []string {
+	return []string{
 		"throttled",
 		"isInternal",
 	}
+}
 
-	slimmedEventRule, err := SlimStructAsJsonString(eventRule, keysToDelete)
-	if err != nil {
-		return eventRule, err
+func (c *Client) GetEventRules() (EventRules, error) {
+	return doGetMany(c, EventRules{}, "eventRules")
+}
+
+func (c *Client) GetEventRule(eventRule EventRule) (EventRule, error) {
+	if len(eventRule.ID) == 0 {
+		all, _ := c.GetEventRules()
+		for _, _item := range all.Items {
+			if _item.Name == eventRule.Name {
+				return _item, nil
+			}
+		}
+	} else {
+		return doGet(c, eventRule, "eventRules")
 	}
-
-	req, err := http.NewRequest(
-		"PUT",
-		fmt.Sprintf("%s/eventRules/%s", c.HostURL, eventRule.ID),
-		strings.NewReader(string(slimmedEventRule)),
-	)
-	req.Header.Set("Content-Type", "application/json")
-
-	if err != nil {
-		return eventRule, err
-	}
-
-	_, err = c.doRequest(req)
-	if err != nil {
-		return eventRule, err
-	}
-	if err != nil {
-		return eventRule, err
-	}
-
-	return eventRule, nil
+	return eventRule, errors.New("event rule was not found")
 }
 
 func (c *Client) DeleteEventRule(eventRule EventRule) (EventRule, error) {
-	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/eventRules/%s", c.HostURL, eventRule.ID), nil)
-	if err != nil {
-		return eventRule, err
-	}
-
-	_, err = c.doRequest(req)
-	if err != nil {
-		return eventRule, err
-	}
-
-	return eventRule, nil
+	return doDelete(c, eventRule, "eventRules")
 }
 
 func (c *Client) CreateEventRule(eventRule EventRule) (EventRule, error) {
@@ -95,78 +61,27 @@ func (c *Client) CreateEventRule(eventRule EventRule) (EventRule, error) {
 		eventRule.BuilderConfig.FiltersJson = ""
 	}
 
-	var keysToDelete = []string{
-		"throttled",
-		"isInternal",
-	}
-
-	slimmedEventRule, err := SlimStructAsJsonString(eventRule, keysToDelete)
-	if err != nil {
-		return eventRule, err
-	}
-
-	req, err := http.NewRequest(
-		"POST",
-		fmt.Sprintf("%s/eventRules", c.HostURL),
-		strings.NewReader(string(slimmedEventRule)),
-	)
-	req.Header.Set("Content-Type", "application/json")
-
-	if err != nil {
-		return eventRule, err
-	}
-
-	body, err := c.doRequest(req)
-	if err != nil {
-		return eventRule, err
-	}
-
-	newEventRule := EventRule{}
-	err = json.Unmarshal(body, &newEventRule)
-	if err != nil {
-		return EventRule{}, err
-	}
-
-	return newEventRule, nil
+	return doCreate(c, eventRule, "eventRules")
 }
 
-func (c *Client) GetEventRule(eventRule EventRule) (EventRule, error) {
-	urlStr := fmt.Sprintf("%s/eventRules/%s", c.HostURL, eventRule.ID)
-	if len(eventRule.ID) == 0 {
-		urlStr = fmt.Sprintf("%s/eventRules", c.HostURL)
-	}
-
-	req, err := http.NewRequest("GET", urlStr, nil)
-	if err != nil {
-		return eventRule, err
-	}
-
-	body, err := c.doRequest(req)
-	if err != nil {
-		return EventRule{}, err
-	}
-
-	foundEventRule := EventRule{}
-
-	if len(eventRule.ID) == 0 {
-		urlStr = fmt.Sprintf("%s/eventRules", c.HostURL)
-		eventRules := EventRules{}
-		err = json.Unmarshal(body, &eventRules)
-		if err != nil {
-			return EventRule{}, err
+func (c *Client) UpdateEventRule(eventRule EventRule) (EventRule, error) {
+	if len(eventRule.BuilderConfigJson) > 0 {
+		builderConfig := BuilderConfig{}
+		if err := json.Unmarshal([]byte(eventRule.BuilderConfigJson), &builderConfig); err != nil {
+			panic(err)
 		}
-		for _, dest := range eventRules.Items {
-			if dest.Name == eventRule.Name {
-				foundEventRule = dest
-				break
-			}
-		}
-	} else {
-		err = json.Unmarshal(body, &foundEventRule)
-		if err != nil {
-			return EventRule{}, err
-		}
+		eventRule.BuilderConfig = builderConfig
+		eventRule.BuilderConfigJson = ""
 	}
 
-	return foundEventRule, nil
+	if len(eventRule.BuilderConfig.FiltersJson) > 0 {
+		filters := BuilderConfigFilter{}
+		if err := json.Unmarshal([]byte(eventRule.BuilderConfig.FiltersJson), &filters); err != nil {
+			panic(err)
+		}
+		eventRule.BuilderConfig.Filters = filters
+		eventRule.BuilderConfig.FiltersJson = ""
+	}
+
+	return doUpdate(c, eventRule, "eventRules")
 }

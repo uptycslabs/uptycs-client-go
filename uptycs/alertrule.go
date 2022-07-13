@@ -1,154 +1,60 @@
 package uptycs
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-	"strings"
-)
+import "errors"
 
-func (c *Client) CreateAlertRule(alertRule AlertRule) (AlertRule, error) {
-	var keysToDelete = []string{
-		"seedId",
-		"throttled",
-		"lock",
-		"alertTags",
-		"links",
-	}
-	//TODO the client really shouldnt be doing backend logic
-	if alertRule.Type != "sql" {
-		keysToDelete = append(keysToDelete, "sqlConfig")
-	}
-	if alertRule.Type != "javascript" {
-		keysToDelete = append(keysToDelete, "scriptConfig")
-	}
-
-	slimmedAlertRule, err := SlimStructAsJsonString(alertRule, keysToDelete)
-	if err != nil {
-		return alertRule, err
-	}
-	req, err := http.NewRequest(
-		"POST",
-		fmt.Sprintf("%s/alertRules", c.HostURL),
-		strings.NewReader(string(slimmedAlertRule)),
-	)
-	req.Header.Set("Content-Type", "application/json")
-
-	if err != nil {
-		return alertRule, err
-	}
-
-	body, err := c.doRequest(req)
-	if err != nil {
-		return alertRule, err
-	}
-
-	newAlertRule := AlertRule{}
-	err = json.Unmarshal(body, &newAlertRule)
-	if err != nil {
-		return AlertRule{}, err
-	}
-
-	return newAlertRule, nil
+func (T AlertRule) GetID() string {
+	return T.ID
 }
 
-func (c *Client) UpdateAlertRule(alertRule AlertRule) (AlertRule, error) {
-	if len(alertRule.ID) == 0 {
-		return alertRule, fmt.Errorf("ID of the Alert Rule is required")
-	}
-	var keysToDelete = []string{
+func (T AlertRule) GetName() string {
+	return T.Name
+}
+
+func (T AlertRule) KeysToDelete() []string {
+	keysToDelete := []string{
 		"seedId",
 		"throttled",
 		"lock",
 		"alertTags",
 		"links",
 	}
-	//TODO the client really shouldnt be doing backend logic
-	if alertRule.Type != "sql" {
+
+	if T.Type != "sql" {
 		keysToDelete = append(keysToDelete, "sqlConfig")
 	}
-	if alertRule.Type != "javascript" {
+	if T.Type != "javascript" {
 		keysToDelete = append(keysToDelete, "scriptConfig")
 	}
 
-	slimmedAlertRule, err := SlimStructAsJsonString(alertRule, keysToDelete)
-	if err != nil {
-		return alertRule, err
-	}
+	return keysToDelete
+}
 
-	req, err := http.NewRequest(
-		"PUT",
-		fmt.Sprintf("%s/alertRules/%s", c.HostURL, alertRule.ID),
-		strings.NewReader(string(slimmedAlertRule)),
-	)
-	req.Header.Set("Content-Type", "application/json")
-
-	if err != nil {
-		return alertRule, err
-	}
-
-	_, err = c.doRequest(req)
-	if err != nil {
-		return alertRule, err
-	}
-	if err != nil {
-		return alertRule, err
-	}
-
-	return alertRule, nil
+func (c *Client) GetAlertRules() (AlertRules, error) {
+	return doGetMany(c, AlertRules{}, "alertRules")
 }
 
 func (c *Client) GetAlertRule(alertRule AlertRule) (AlertRule, error) {
-	urlStr := fmt.Sprintf("%s/alertRules/%s", c.HostURL, alertRule.ID)
 	if len(alertRule.ID) == 0 {
-		urlStr = fmt.Sprintf("%s/alertRules", c.HostURL)
-	}
-
-	req, err := http.NewRequest("GET", urlStr, nil)
-	if err != nil {
-		return alertRule, err
-	}
-
-	body, err := c.doRequest(req)
-	if err != nil {
-		return AlertRule{}, err
-	}
-
-	foundAlertRule := AlertRule{}
-
-	if len(alertRule.ID) == 0 {
-		urlStr = fmt.Sprintf("%s/alertRules", c.HostURL)
-		alertRules := AlertRules{}
-		err = json.Unmarshal(body, &alertRules)
-		if err != nil {
-			return AlertRule{}, err
-		}
-		for _, dest := range alertRules.Items {
-			if dest.Name == alertRule.Name {
-				foundAlertRule = dest
-				break
+		all, _ := c.GetAlertRules()
+		for _, _item := range all.Items {
+			if _item.Name == alertRule.Name {
+				return _item, nil
 			}
 		}
 	} else {
-		err = json.Unmarshal(body, &foundAlertRule)
-		if err != nil {
-			return AlertRule{}, err
-		}
+		return doGet(c, alertRule, "alertRules")
 	}
-
-	return foundAlertRule, nil
+	return alertRule, errors.New("Alert Rule was not found")
 }
 
 func (c *Client) DeleteAlertRule(alertRule AlertRule) (AlertRule, error) {
-	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/alertRules/%s", c.HostURL, alertRule.ID), nil)
-	if err != nil {
-		return alertRule, err
-	}
+	return doDelete(c, alertRule, "alertRules")
+}
 
-	_, err = c.doRequest(req)
-	if err != nil {
-		return alertRule, err
-	}
+func (c *Client) CreateAlertRule(alertRule AlertRule) (AlertRule, error) {
+	return doCreate(c, alertRule, "alertRules")
+}
 
-	return alertRule, nil
+func (c *Client) UpdateAlertRule(alertRule AlertRule) (AlertRule, error) {
+	return doUpdate(c, alertRule, "alertRules")
 }

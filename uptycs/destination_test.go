@@ -2,11 +2,12 @@ package uptycs
 
 import (
 	"fmt"
-	"github.com/jarcoal/httpmock"
-	"github.com/stretchr/testify/assert"
 	"net/http"
 	"reflect"
 	"testing"
+
+	"github.com/jarcoal/httpmock"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetDestination(t *testing.T) {
@@ -145,13 +146,15 @@ func TestPutDestination(t *testing.T) {
 	})
 
 	type convTest struct {
-		name string
-		in   Destination
+		name    string
+		fixture string
+		in      Destination
 	}
 
 	theTests := []convTest{
 		{
-			name: "TestDestination",
+			name:    "TestDestination",
+			fixture: "fixtures/destinationCreate.json",
 			in: Destination{
 				ID:         "b7c9c973-e2a3-4913-a755-919026267679",
 				CustomerID: "111111111111-111111-11111-111111-111111111",
@@ -181,11 +184,11 @@ func TestPutDestination(t *testing.T) {
 		t.Run(theT.name, func(t *testing.T) {
 			httpmock.RegisterResponder("PUT", fmt.Sprintf("https://uptycs.foo/public/api/customers/d/destinations/%v", theT.in.ID),
 				func(req *http.Request) (*http.Response, error) {
-					resp, err := httpmock.NewJsonResponse(200, "{}")
+					fixture, err := RespFromFixture(theT.fixture)
 					if err != nil {
 						t.Errorf(err.Error())
 					}
-					return resp, err
+					return fixture, err
 				},
 			)
 
