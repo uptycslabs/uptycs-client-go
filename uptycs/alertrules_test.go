@@ -81,8 +81,6 @@ func TestGetAlertRules(t *testing.T) {
 						GroupingL3:          "T1560",
 						Lock:                false,
 						Destinations:        []AlertRuleDestination{},
-						SQLConfig:           SQLConfig{},
-						ScriptConfig:        ScriptConfig{},
 						AlertRuleExceptions: []RuleException{},
 						Links: []LinkItem{
 							LinkItem{Rel: "self", Title: "Alert rule", Href: "/api/customers/111111111111-111111-11111-111111-111111111/alertRules/1d4720ce-19a9-4a03-bb3a-905717b8a60f"},
@@ -123,8 +121,6 @@ func TestGetAlertRules(t *testing.T) {
 						GroupingL3:          "T1578",
 						Lock:                true,
 						Destinations:        []AlertRuleDestination{},
-						SQLConfig:           SQLConfig{},
-						ScriptConfig:        ScriptConfig{},
 						AlertRuleExceptions: []RuleException{},
 						Links: []LinkItem{
 							LinkItem{Rel: "self", Title: "Alert rule", Href: "/api/customers/111111111111-111111-11111-111111-111111111/alertRules/86d111f4-9fcb-4495-9cef-e2c35e63a47f"},

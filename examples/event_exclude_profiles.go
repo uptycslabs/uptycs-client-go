@@ -83,9 +83,9 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created Event Exclude Profile '%s' with id %s", eventExcludeProfile.Name, eventExcludeProfile.ID))
 
-  // Update but use JSON for the metadata
+	// Update but use JSON for the metadata
 	_, err = c.UpdateEventExcludeProfile(uptycs.EventExcludeProfile{
-		ID:           eventExcludeProfile.ID,
+		ID: eventExcludeProfile.ID,
 		MetadataJson: heredoc.Doc(`
   {
     "process_events": {

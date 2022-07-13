@@ -59,35 +59,13 @@ func (c *Client) CreateEventExcludeProfile(eventExcludeProfile EventExcludeProfi
 		eventExcludeProfile.MetadataJson = ""
 	}
 
-	rb, err := json.Marshal(eventExcludeProfile)
-	if err != nil {
-		return eventExcludeProfile, err
-	}
-
 	if eventExcludeProfile.Priority > 999999999 {
 		return eventExcludeProfile, errors.New("Priority is too large. Should be less than 999999999")
 	}
 
-	var eventExcludeProfileInterface interface{}
-	if err := json.Unmarshal([]byte(rb), &eventExcludeProfileInterface); err != nil {
-		panic(err)
-	}
-	if m, ok := eventExcludeProfileInterface.(map[string]interface{}); ok {
-		for _, item := range []string{
-			"id",
-			"customerId",
-			"createdAt",
-			"createdBy",
-			"updatedAt",
-			"updatedBy",
-			"resourceType",
-			"links",
-		} {
-			delete(m, item)
-		}
-	}
-
-	slimmedEventExcludeProfile, err := json.Marshal(eventExcludeProfileInterface)
+	slimmedEventExcludeProfile, err := SlimStructAsJsonString(eventExcludeProfile, []string{
+		"resourceType",
+	})
 	if err != nil {
 		return eventExcludeProfile, err
 	}
@@ -145,34 +123,17 @@ func (c *Client) UpdateEventExcludeProfile(eventExcludeProfile EventExcludeProfi
 		eventExcludeProfile.MetadataJson = ""
 	}
 
-	rb, err := json.Marshal(eventExcludeProfile)
+	if eventExcludeProfile.Priority > 999999999 {
+		return eventExcludeProfile, errors.New("Priority is too large. Should be less than 999999999")
+	}
+
+	slimmedEventExcludeProfile, err := SlimStructAsJsonString(eventExcludeProfile, []string{
+		"resourceType",
+	})
 	if err != nil {
 		return eventExcludeProfile, err
 	}
 
-	var eventExcludeProfileInterface interface{}
-	if err := json.Unmarshal([]byte(rb), &eventExcludeProfileInterface); err != nil {
-		panic(err)
-	}
-	if m, ok := eventExcludeProfileInterface.(map[string]interface{}); ok {
-		for _, item := range []string{
-			"id",
-			"customerId",
-			"createdAt",
-			"createdBy",
-			"updatedAt",
-			"updatedBy",
-			"resourceType",
-			"links",
-		} {
-			delete(m, item)
-		}
-	}
-
-	slimmedEventExcludeProfile, err := json.Marshal(eventExcludeProfileInterface)
-	if err != nil {
-		return eventExcludeProfile, err
-	}
 	req, err := http.NewRequest(
 		"PUT",
 		fmt.Sprintf("%s/eventExcludeProfiles/%s", c.HostURL, eventExcludeProfile.ID),

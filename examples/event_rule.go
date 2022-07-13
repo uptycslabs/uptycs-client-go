@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
-	//"github.com/MakeNowJust/heredoc"
+	"github.com/MakeNowJust/heredoc"
 	"github.com/uptycslabs/uptycs-client-go/uptycs"
 	"os"
 )
@@ -35,16 +35,6 @@ func main() {
 		return
 	}
 	log.Println(fmt.Sprintf("Found rule by ID with name %s as %s", eventRule.Name, eventRule.ID))
-
-	// Get an event rule by Name
-	differentEventRule, err := c.GetEventRule(uptycs.EventRule{
-		Name: "AWS AMI not encrypted for data that is at rest",
-	})
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	log.Println(fmt.Sprintf("Found rule by Name with name %s as %s", differentEventRule.Name, differentEventRule.ID))
 
 	//Create an event rule with BuilderConfig as raw JSON
 

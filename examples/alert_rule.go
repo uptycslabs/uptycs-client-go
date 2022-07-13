@@ -44,7 +44,7 @@ func main() {
 		Grouping:    "MITRE",
 		GroupingL2:  "Impact",
 		GroupingL3:  "T1560",
-		SQLConfig: uptycs.SQLConfig{
+		SQLConfig: &uptycs.SQLConfig{
 			IntervalSeconds: 3600,
 		},
 		Code: "test_marc",
@@ -66,7 +66,7 @@ func main() {
 		Grouping:    "MITRE",
 		GroupingL2:  "Impact",
 		GroupingL3:  "T1580",
-		SQLConfig: uptycs.SQLConfig{
+		SQLConfig: &uptycs.SQLConfig{
 			IntervalSeconds: 1800,
 		},
 		Code: "test_marc2",

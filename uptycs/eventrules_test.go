@@ -71,8 +71,6 @@ func TestGetEventRules(t *testing.T) {
 						GroupingL3:    "Impact2",
 						Score:         "9.0",
 						Lock:          false,
-						ScriptConfig:  ScriptConfig{},
-						SQLConfig:     SQLConfig{},
 						BuilderConfig: BuilderConfig{},
 						Links: []LinkItem{
 							LinkItem{Rel: "self", Title: "Event generating rules", Href: "/api/customers/11111111-1111-1111-1111-111111111111/eventRules/ae79898a-7437-419d-88ff-e0e8d2c7902a"},

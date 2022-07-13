@@ -30,36 +30,16 @@ func (c *Client) UpdateEventRule(eventRule EventRule) (EventRule, error) {
 		eventRule.BuilderConfig.FiltersJson = ""
 	}
 
-	rb, err := json.Marshal(eventRule)
+	var keysToDelete = []string{
+		"throttled",
+		"isInternal",
+	}
+
+	slimmedEventRule, err := SlimStructAsJsonString(eventRule, keysToDelete)
 	if err != nil {
 		return eventRule, err
 	}
 
-	var eventRuleInterface interface{}
-	if err := json.Unmarshal([]byte(rb), &eventRuleInterface); err != nil {
-		panic(err)
-	}
-	if m, ok := eventRuleInterface.(map[string]interface{}); ok {
-		for _, item := range []string{
-			"id",
-			"customerId",
-			"seedId",
-			"throttled",
-			"createdAt",
-			"isInternal",
-			"createdBy",
-			"updatedAt",
-			"updatedBy",
-			"links",
-		} {
-			delete(m, item)
-		}
-	}
-
-	slimmedEventRule, err := json.Marshal(eventRuleInterface)
-	if err != nil {
-		return eventRule, err
-	}
 	req, err := http.NewRequest(
 		"PUT",
 		fmt.Sprintf("%s/eventRules/%s", c.HostURL, eventRule.ID),
@@ -115,33 +95,12 @@ func (c *Client) CreateEventRule(eventRule EventRule) (EventRule, error) {
 		eventRule.BuilderConfig.FiltersJson = ""
 	}
 
-	rb, err := json.Marshal(eventRule)
-	if err != nil {
-		return eventRule, err
+	var keysToDelete = []string{
+		"throttled",
+		"isInternal",
 	}
 
-	var eventRuleInterface interface{}
-	if err := json.Unmarshal([]byte(rb), &eventRuleInterface); err != nil {
-		panic(err)
-	}
-	if m, ok := eventRuleInterface.(map[string]interface{}); ok {
-		for _, item := range []string{
-			"id",
-			"customerId",
-			"seedId",
-			"throttled",
-			"createdAt",
-			"isInternal",
-			"createdBy",
-			"updatedAt",
-			"updatedBy",
-			"links",
-		} {
-			delete(m, item)
-		}
-	}
-
-	slimmedEventRule, err := json.Marshal(eventRuleInterface)
+	slimmedEventRule, err := SlimStructAsJsonString(eventRule, keysToDelete)
 	if err != nil {
 		return eventRule, err
 	}

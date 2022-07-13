@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/uptycslabs/uptycs-client-go/uptycs"
+	"fmt"
 	"log"
 	"os"
+	"uptycs-client-go/uptycs"
 )
 
 func main() {
@@ -23,4 +24,38 @@ func main() {
 		ID: "b7c9c973-e2a3-4913-a755-919026267679",
 	})
 	log.Println("Got Destination with Name %s", destinationByID.Name)
+
+	// Create a destination
+
+	newDestination, err := c.CreateDestination(uptycs.Destination{
+		Name:    "marcus test",
+		Type:    "email",
+		Address: "test@email.com",
+	})
+	if err != nil {
+		panic(err)
+	}
+	log.Println(fmt.Sprintf("Created destination '%s' with id %s", newDestination.Name, newDestination.ID))
+
+	// Update a destination by by ID
+
+	updatedDestination, err := c.UpdateDestination(uptycs.Destination{
+		ID:   newDestination.ID,
+		Name: "marcus test updated",
+	})
+	if err != nil {
+		panic(err)
+	}
+	log.Println(fmt.Sprintf("Updated destination '%s' with id %s", updatedDestination.Name, updatedDestination.ID))
+
+	// Delete a destination by ID
+
+	_, err = c.DeleteDestination(uptycs.Destination{
+		ID: newDestination.ID,
+	})
+	if err != nil {
+		panic(err)
+	}
+	log.Println(fmt.Sprintf("Deleted destination '%s' with id %s", updatedDestination.Name, newDestination.ID))
+
 }
