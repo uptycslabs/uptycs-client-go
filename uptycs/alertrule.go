@@ -8,45 +8,25 @@ import (
 )
 
 func (c *Client) CreateAlertRule(alertRule AlertRule) (AlertRule, error) {
-	rb, err := json.Marshal(alertRule)
+	var keysToDelete = []string{
+		"seedId",
+		"throttled",
+		"lock",
+		"alertTags",
+		"links",
+	}
+	//TODO the client really shouldnt be doing backend logic
+	if alertRule.Type != "sql" {
+		keysToDelete = append(keysToDelete, "sqlConfig")
+	}
+	if alertRule.Type != "javascript" {
+		keysToDelete = append(keysToDelete, "scriptConfig")
+	}
+
+	slimmedAlertRule, err := SlimStructAsJsonString(alertRule, keysToDelete)
 	if err != nil {
 		return alertRule, err
 	}
-
-	var alertRuleInterface interface{}
-	if err := json.Unmarshal([]byte(rb), &alertRuleInterface); err != nil {
-		panic(err)
-	}
-	if m, ok := alertRuleInterface.(map[string]interface{}); ok {
-		for _, item := range []string{
-			"id",
-			"customerId",
-			"seedId",
-			"throttled",
-			"createdAt",
-			"createdBy",
-			"updatedAt",
-			"lock",
-			"alertTags",
-			"links",
-		} {
-			delete(m, item)
-		}
-
-		//TODO the client really shouldnt be doing backend logic
-		if alertRule.Type != "sql" {
-			delete(m, "sqlConfig")
-		}
-		if alertRule.Type != "javascript" {
-			delete(m, "scriptConfig")
-		}
-	}
-
-	slimmedAlertRule, err := json.Marshal(alertRuleInterface)
-	if err != nil {
-		return alertRule, err
-	}
-
 	req, err := http.NewRequest(
 		"POST",
 		fmt.Sprintf("%s/alertRules", c.HostURL),
@@ -76,37 +56,26 @@ func (c *Client) UpdateAlertRule(alertRule AlertRule) (AlertRule, error) {
 	if len(alertRule.ID) == 0 {
 		return alertRule, fmt.Errorf("ID of the Alert Rule is required")
 	}
+	var keysToDelete = []string{
+		"seedId",
+		"throttled",
+		"lock",
+		"alertTags",
+		"links",
+	}
+	//TODO the client really shouldnt be doing backend logic
+	if alertRule.Type != "sql" {
+		keysToDelete = append(keysToDelete, "sqlConfig")
+	}
+	if alertRule.Type != "javascript" {
+		keysToDelete = append(keysToDelete, "scriptConfig")
+	}
 
-	rb, err := json.Marshal(alertRule)
+	slimmedAlertRule, err := SlimStructAsJsonString(alertRule, keysToDelete)
 	if err != nil {
 		return alertRule, err
 	}
 
-	var alertRuleInterface interface{}
-	if err := json.Unmarshal([]byte(rb), &alertRuleInterface); err != nil {
-		panic(err)
-	}
-	if m, ok := alertRuleInterface.(map[string]interface{}); ok {
-		for _, item := range []string{
-			"id",
-			"customerId",
-			"seedId",
-			"throttled",
-			"createdAt",
-			"createdBy",
-			"updatedAt",
-			"lock",
-			"alertTags",
-			"links",
-		} {
-			delete(m, item)
-		}
-	}
-
-	slimmedAlertRule, err := json.Marshal(alertRuleInterface)
-	if err != nil {
-		return alertRule, err
-	}
 	req, err := http.NewRequest(
 		"PUT",
 		fmt.Sprintf("%s/alertRules/%s", c.HostURL, alertRule.ID),

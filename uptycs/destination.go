@@ -8,29 +8,7 @@ import (
 )
 
 func (c *Client) CreateDestination(destination Destination) (Destination, error) {
-	rb, err := json.Marshal(destination)
-	if err != nil {
-		return destination, err
-	}
-
-	var destinationInterface interface{}
-	if err := json.Unmarshal([]byte(rb), &destinationInterface); err != nil {
-		panic(err)
-	}
-	if m, ok := destinationInterface.(map[string]interface{}); ok {
-		for _, item := range []string{
-			"id",
-			"customerId",
-			"createdAt",
-			"createdBy",
-			"updatedAt",
-			"updatedBy",
-		} {
-			delete(m, item)
-		}
-	}
-
-	slimmedDestination, err := json.Marshal(destinationInterface)
+	slimmedDestination, err := SlimStructAsJsonString(destination, []string{})
 	if err != nil {
 		return destination, err
 	}
@@ -65,33 +43,11 @@ func (c *Client) UpdateDestination(destination Destination) (Destination, error)
 		return destination, fmt.Errorf("ID of the destination is required")
 	}
 
-	rb, err := json.Marshal(destination)
+	slimmedDestination, err := SlimStructAsJsonString(destination, []string{"id"})
 	if err != nil {
 		return destination, err
 	}
 
-	var destinationInterface interface{}
-	if err := json.Unmarshal([]byte(rb), &destinationInterface); err != nil {
-		panic(err)
-	}
-	if m, ok := destinationInterface.(map[string]interface{}); ok {
-		for _, item := range []string{
-			"id",
-			"customerId",
-			"createdAt",
-			"createdBy",
-			"updatedAt",
-			"updatedBy",
-			"links",
-		} {
-			delete(m, item)
-		}
-	}
-
-	slimmedDestination, err := json.Marshal(destinationInterface)
-	if err != nil {
-		return destination, err
-	}
 	req, err := http.NewRequest(
 		"PUT",
 		fmt.Sprintf("%s/destinations/%s", c.HostURL, destination.ID),

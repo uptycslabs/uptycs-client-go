@@ -185,8 +185,6 @@ func TestGetAlertRule(t *testing.T) {
 						CreatedAt:          "2022-04-28T20:07:57.800Z",
 					},
 				},
-				ScriptConfig: ScriptConfig{},
-				SQLConfig:    SQLConfig{},
 				AlertRuleExceptions: []RuleException{
 					RuleException{
 						ID:          "37e2f71c-5e5c-47b2-8d3b-6da4c198583d",

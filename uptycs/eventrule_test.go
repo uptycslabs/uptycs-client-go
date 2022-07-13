@@ -264,8 +264,6 @@ func TestGetEventRule(t *testing.T) {
 				GroupingL3:    "T1204",
 				Score:         "0.0",
 				Lock:          false,
-				ScriptConfig:  ScriptConfig{},
-				SQLConfig:     SQLConfig{},
 				BuilderConfig: BuilderConfig{},
 				//EventRuleExceptions: []string{},
 				//Tags: []string{},
