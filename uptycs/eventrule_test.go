@@ -2,11 +2,12 @@ package uptycs
 
 import (
 	"fmt"
-	"github.com/jarcoal/httpmock"
-	"github.com/stretchr/testify/assert"
 	"net/http"
 	"reflect"
 	"testing"
+
+	"github.com/jarcoal/httpmock"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestPutEventRule(t *testing.T) {
@@ -19,13 +20,15 @@ func TestPutEventRule(t *testing.T) {
 	})
 
 	type convTest struct {
-		name string
-		in   EventRule
+		name    string
+		fixture string
+		in      EventRule
 	}
 
 	theTests := []convTest{
 		{
-			name: "TestEventRule",
+			name:    "TestEventRule",
+			fixture: "fixtures/eventRuleCreate.json",
 			in: EventRule{
 				ID:          "b760d905-c161-43cd-8d44-d0ae8e1de1d5",
 				Name:        "marc_is_awesomer",
@@ -70,11 +73,11 @@ func TestPutEventRule(t *testing.T) {
 		t.Run(theT.name, func(t *testing.T) {
 			httpmock.RegisterResponder("PUT", fmt.Sprintf("https://uptycs.foo/public/api/customers/d/eventRules/%v", theT.in.ID),
 				func(req *http.Request) (*http.Response, error) {
-					resp, err := httpmock.NewJsonResponse(200, "{}")
+					fixture, err := RespFromFixture(theT.fixture)
 					if err != nil {
 						t.Errorf(err.Error())
 					}
-					return resp, err
+					return fixture, err
 				},
 			)
 

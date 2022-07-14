@@ -2,11 +2,12 @@ package uptycs
 
 import (
 	"fmt"
-	"github.com/jarcoal/httpmock"
-	"github.com/stretchr/testify/assert"
 	"net/http"
 	"reflect"
 	"testing"
+
+	"github.com/jarcoal/httpmock"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetEventExcludeProfile(t *testing.T) {
@@ -208,13 +209,15 @@ func TestPutEventExcludeProfile(t *testing.T) {
 	})
 
 	type convTest struct {
-		name string
-		in   EventExcludeProfile
+		name    string
+		fixture string
+		in      EventExcludeProfile
 	}
 
 	theTests := []convTest{
 		{
-			name: "TestEventExcludeProfile",
+			name:    "TestEventExcludeProfile",
+			fixture: "fixtures/eventExcludeProfile.json",
 			in: EventExcludeProfile{
 				ID:          "13da8bc4-3c70-4bb9-a4d4-7ca320860926",
 				CustomerID:  "11111111-1111-1111-1111-111111111111",
@@ -234,11 +237,11 @@ func TestPutEventExcludeProfile(t *testing.T) {
 		t.Run(theT.name, func(t *testing.T) {
 			httpmock.RegisterResponder("PUT", fmt.Sprintf("https://uptycs.foo/public/api/customers/d/eventExcludeProfiles/%v", theT.in.ID),
 				func(req *http.Request) (*http.Response, error) {
-					resp, err := httpmock.NewJsonResponse(200, "{}")
+					fixture, err := RespFromFixture(theT.fixture)
 					if err != nil {
 						t.Errorf(err.Error())
 					}
-					return resp, err
+					return fixture, err
 				},
 			)
 

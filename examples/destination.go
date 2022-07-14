@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/uptycslabs/uptycs-client-go/uptycs"
 	"log"
 	"os"
+	"uptycs-client-go/uptycs"
 )
 
 func main() {
@@ -39,6 +39,7 @@ func main() {
 
 	// Update a destination by by ID
 
+	log.Println(fmt.Sprintf("Attempting to update destination with id %s: '%s' to 'marcus test updated'", newDestination.ID, newDestination.Name))
 	updatedDestination, err := c.UpdateDestination(uptycs.Destination{
 		ID:   newDestination.ID,
 		Name: "marcus test updated",

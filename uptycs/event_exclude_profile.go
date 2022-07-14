@@ -3,50 +3,42 @@ package uptycs
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
-	"net/http"
-	"strings"
 )
 
+func (T EventExcludeProfile) GetID() string {
+	return T.ID
+}
+
+func (T EventExcludeProfile) GetName() string {
+	return T.Name
+}
+
+func (T EventExcludeProfile) KeysToDelete() []string {
+	return []string{
+		"resourceType",
+	}
+}
+
+func (c *Client) GetEventExcludeProfiles() (EventExcludeProfiles, error) {
+	return doGetMany(c, EventExcludeProfiles{}, "eventExcludeProfiles")
+}
+
 func (c *Client) GetEventExcludeProfile(eventExcludeProfile EventExcludeProfile) (EventExcludeProfile, error) {
-	urlStr := fmt.Sprintf("%s/eventExcludeProfiles/%s", c.HostURL, eventExcludeProfile.ID)
 	if len(eventExcludeProfile.ID) == 0 {
-		urlStr = fmt.Sprintf("%s/eventExcludeProfiles", c.HostURL)
-	}
-
-	req, err := http.NewRequest("GET", urlStr, nil)
-	if err != nil {
-		return eventExcludeProfile, err
-	}
-
-	body, err := c.doRequest(req)
-	if err != nil {
-		return EventExcludeProfile{}, err
-	}
-
-	foundEventExcludeProfile := EventExcludeProfile{}
-
-	if len(eventExcludeProfile.ID) == 0 {
-		urlStr = fmt.Sprintf("%s/eventExcludeProfiles", c.HostURL)
-		eventExcludeProfiles := EventExcludeProfiles{}
-		err = json.Unmarshal(body, &eventExcludeProfiles)
-		if err != nil {
-			return EventExcludeProfile{}, err
-		}
-		for _, dest := range eventExcludeProfiles.Items {
-			if dest.Name == eventExcludeProfile.Name {
-				foundEventExcludeProfile = dest
-				break
+		all, _ := c.GetEventExcludeProfiles()
+		for _, _item := range all.Items {
+			if _item.Name == eventExcludeProfile.Name {
+				return _item, nil
 			}
 		}
 	} else {
-		err = json.Unmarshal(body, &foundEventExcludeProfile)
-		if err != nil {
-			return EventExcludeProfile{}, err
-		}
+		return doGet(c, eventExcludeProfile, "eventExcludeProfiles")
 	}
+	return eventExcludeProfile, errors.New("event exclude profile was not found")
+}
 
-	return foundEventExcludeProfile, nil
+func (c *Client) DeleteEventExcludeProfile(eventExcludeProfile EventExcludeProfile) (EventExcludeProfile, error) {
+	return doDelete(c, eventExcludeProfile, "eventExcludeProfiles")
 }
 
 func (c *Client) CreateEventExcludeProfile(eventExcludeProfile EventExcludeProfile) (EventExcludeProfile, error) {
@@ -62,58 +54,10 @@ func (c *Client) CreateEventExcludeProfile(eventExcludeProfile EventExcludeProfi
 	if eventExcludeProfile.Priority > 999999999 {
 		return eventExcludeProfile, errors.New("Priority is too large. Should be less than 999999999")
 	}
-
-	slimmedEventExcludeProfile, err := SlimStructAsJsonString(eventExcludeProfile, []string{
-		"resourceType",
-	})
-	if err != nil {
-		return eventExcludeProfile, err
-	}
-
-	req, err := http.NewRequest(
-		"POST",
-		fmt.Sprintf("%s/eventExcludeProfiles", c.HostURL),
-		strings.NewReader(string(slimmedEventExcludeProfile)),
-	)
-	req.Header.Set("Content-Type", "application/json")
-
-	if err != nil {
-		return eventExcludeProfile, err
-	}
-
-	body, err := c.doRequest(req)
-	if err != nil {
-		return eventExcludeProfile, err
-	}
-
-	newEventExcludeProfile := EventExcludeProfile{}
-	err = json.Unmarshal(body, &newEventExcludeProfile)
-	if err != nil {
-		return EventExcludeProfile{}, err
-	}
-
-	return newEventExcludeProfile, nil
-}
-
-func (c *Client) DeleteEventExcludeProfile(eventExcludeProfile EventExcludeProfile) (EventExcludeProfile, error) {
-	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/eventExcludeProfiles/%s", c.HostURL, eventExcludeProfile.ID), nil)
-	if err != nil {
-		return eventExcludeProfile, err
-	}
-
-	_, err = c.doRequest(req)
-	if err != nil {
-		return eventExcludeProfile, err
-	}
-
-	return eventExcludeProfile, nil
+	return doCreate(c, eventExcludeProfile, "eventExcludeProfiles")
 }
 
 func (c *Client) UpdateEventExcludeProfile(eventExcludeProfile EventExcludeProfile) (EventExcludeProfile, error) {
-	if len(eventExcludeProfile.ID) == 0 {
-		return eventExcludeProfile, fmt.Errorf("ID of the eventExcludeProfile is required")
-	}
-
 	if len(eventExcludeProfile.MetadataJson) > 0 {
 		metadata := EventExcludeProfileMetadata{}
 		if err := json.Unmarshal([]byte(eventExcludeProfile.MetadataJson), &metadata); err != nil {
@@ -127,28 +71,5 @@ func (c *Client) UpdateEventExcludeProfile(eventExcludeProfile EventExcludeProfi
 		return eventExcludeProfile, errors.New("Priority is too large. Should be less than 999999999")
 	}
 
-	slimmedEventExcludeProfile, err := SlimStructAsJsonString(eventExcludeProfile, []string{
-		"resourceType",
-	})
-	if err != nil {
-		return eventExcludeProfile, err
-	}
-
-	req, err := http.NewRequest(
-		"PUT",
-		fmt.Sprintf("%s/eventExcludeProfiles/%s", c.HostURL, eventExcludeProfile.ID),
-		strings.NewReader(string(slimmedEventExcludeProfile)),
-	)
-	req.Header.Set("Content-Type", "application/json")
-
-	if err != nil {
-		return eventExcludeProfile, err
-	}
-
-	_, err = c.doRequest(req)
-	if err != nil {
-		return eventExcludeProfile, err
-	}
-
-	return eventExcludeProfile, nil
+	return doUpdate(c, eventExcludeProfile, "eventExcludeProfiles")
 }

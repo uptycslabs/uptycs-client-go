@@ -321,6 +321,43 @@ type ProcessFileEvents struct {
 	Executable []string `json:"executable,omitempty"`
 }
 
-type apiType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule
+type iApiType interface {
+	AlertRule | Destination | EventExcludeProfile | EventRule | User
+	GetID() string
+	GetName() string
+	KeysToDelete() []string
+}
+
+type iApiTypes interface {
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users
+}
+
+type User struct {
+	ID                  string   `json:"id,omitempty"`
+	Name                string   `json:"name,omitempty"`
+	Email               string   `json:"email,omitempty"`
+	Phone               string   `json:"phone,omitempty"`
+	Active              bool     `json:"active,omitempty"`
+	SuperAdmin          bool     `json:"superAdmin,omitempty"`
+	Bot                 bool     `json:"bot,omitempty"`
+	Support             bool     `json:"support,omitempty"`
+	PriorLogin          bool     `json:"priorLogin,omitempty"`
+	ImageURL            string   `json:"imageUrl,omitempty"`
+	Password            string   `json:"password,omitempty"`
+	CreatedAt           string   `json:"createdAt,omitempty"`
+	MaxIdleTimeMins     int      `json:"maxIdleTimeMins,omitempty"`
+	AlertHiddenColumns  []string `json:"alertHiddenColumns,omitempty"`
+	UpdatedAt           string   `json:"updatedAt,omitempty"`
+	LastUpdatedByUptycs string   `json:"lastUpdatedByUptycs,omitempty"`
+	//TODO: Unknown type
+	// DetectionHiddenColumns interface{} `json:"detectionHiddenColumns,omitempty"`
+	// RangerID               interface{} `json:"rangerId,omitempty"`
+	// LastSyncedWithRanger   interface{} `json:"lastSyncedWithRanger,omitempty"`
+}
+
+type Users struct {
+	Links  []LinkItem `json:"links,omitempty"`
+	Items  []User     `json:"items,omitempty"`
+	Offset int        `json:"offset,omitempty"`
+	Limit  int        `json:"limit,omitempty"`
 }
