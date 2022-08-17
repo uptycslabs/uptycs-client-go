@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/MakeNowJust/heredoc"
+	"github.com/uptycslabs/uptycs-client-go/uptycs"
 	"log"
 	"os"
-	"uptycs-client-go/uptycs"
 )
 
 func main() {
