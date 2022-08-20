@@ -1,9 +1,7 @@
 package uptycs
 
 import (
-	"encoding/json"
 	"errors"
-	"strconv"
 )
 
 var (
@@ -27,124 +25,69 @@ type ScriptConfig struct {
 }
 
 type EventRule struct {
-	ID                string        `json:"id,omitempty"`
-	CustomerID        string        `json:"customerId,omitempty"`
-	SeedID            string        `json:"seedId,omitempty"`
-	Name              string        `json:"name,omitempty"`
-	Description       string        `json:"description,omitempty"`
-	Code              string        `json:"code,omitempty"`
-	Type              string        `json:"type,omitempty"`
-	Rule              string        `json:"rule,omitempty"`
-	Grouping          string        `json:"grouping,omitempty"`
-	Enabled           bool          `json:"enabled,omitempty"`
-	Custom            bool          `json:"custom,omitempty"`
-	CreatedAt         string        `json:"createdAt,omitempty"`
-	IsInternal        bool          `json:"isInternal,omitempty"`
-	EventTags         []string      `json:"eventTags,omitempty"`
-	CreatedBy         string        `json:"createdBy,omitempty"`
-	UpdatedAt         string        `json:"updatedAt,omitempty"`
-	UpdatedBy         string        `json:"updatedBy,omitempty"`
-	GroupingL2        string        `json:"groupingL2,omitempty"`
-	GroupingL3        string        `json:"groupingL3,omitempty"`
-	Score             string        `json:"score,omitempty"`
-	Lock              bool          `json:"lock,omitempty"`
-	ScriptConfig      *ScriptConfig `json:"scriptConfig,omitempty"`
-	SQLConfig         *SQLConfig    `json:"sqlConfig,omitempty"`
-	BuilderConfig     BuilderConfig `json:"builderConfig"`
-	BuilderConfigJson string        `json:"builderConfigJson,omitempty"`
-	Links             []LinkItem    `json:"links"`
+	ID            string        `json:"id,omitempty"`
+	CustomerID    string        `json:"customerId,omitempty"`
+	SeedID        string        `json:"seedId,omitempty"`
+	Name          string        `json:"name,omitempty"`
+	Description   string        `json:"description,omitempty"`
+	Code          string        `json:"code,omitempty"`
+	Type          string        `json:"type,omitempty"`
+	Rule          string        `json:"rule,omitempty"`
+	Grouping      string        `json:"grouping,omitempty"`
+	Enabled       bool          `json:"enabled,omitempty"`
+	Custom        bool          `json:"custom,omitempty"`
+	CreatedAt     string        `json:"createdAt,omitempty"`
+	IsInternal    bool          `json:"isInternal,omitempty"`
+	EventTags     []string      `json:"eventTags,omitempty"`
+	CreatedBy     string        `json:"createdBy,omitempty"`
+	UpdatedAt     string        `json:"updatedAt,omitempty"`
+	UpdatedBy     string        `json:"updatedBy,omitempty"`
+	GroupingL2    string        `json:"groupingL2,omitempty"`
+	GroupingL3    string        `json:"groupingL3,omitempty"`
+	Score         string        `json:"score,omitempty"`
+	Lock          bool          `json:"lock,omitempty"`
+	ScriptConfig  *ScriptConfig `json:"scriptConfig,omitempty"`
+	SQLConfig     *SQLConfig    `json:"sqlConfig,omitempty"`
+	BuilderConfig BuilderConfig `json:"builderConfig,omitempty"`
+	Links         []LinkItem    `json:"links"`
 }
 
-type BuilderConfigFilter struct {
-	And             []BuilderConfigFilter `json:"and,omitempty"`
-	Or              []BuilderConfigFilter `json:"or,omitempty"`
-	Not             bool                  `json:"not,omitempty"`
-	Name            string                `json:"name,omitempty"`
-	Value           ArrayOrString         `json:"value,omitempty"`
-	Operator        string                `json:"operator,omitempty"`
-	IsDate          bool                  `json:"isDate,omitempty"`
-	IsVersion       bool                  `json:"isVersion,omitempty"`
-	IsWordMatch     bool                  `json:"isWordMatch,omitempty"`
-	CaseInsensitive bool                  `json:"caseInsensitive,omitempty"`
+type BuilderConfig struct {
+	ID              string                    `json:"id,omitempty"`
+	CustomerID      string                    `json:"customerId,omitempty"`
+	TableName       string                    `json:"tableName,omitempty"`
+	Added           bool                      `json:"added"`
+	MatchesFilter   bool                      `json:"matchesFilter"`
+	Filters         BuilderConfigFilterString `json:"filters,omitempty"`
+	Severity        string                    `json:"severity,omitempty"`
+	Key             string                    `json:"key,omitempty"`
+	ValueField      string                    `json:"valueField,omitempty"`
+	AutoAlertConfig AutoAlertConfig           `json:"autoAlertConfig"`
 }
 
-type ArrayOrString []string
+type BuilderConfigFilterString string
 
-func (aos *ArrayOrString) UnmarshalJSON(raw []byte) error {
-	var dyval interface{}
-	err := json.Unmarshal(raw, &dyval)
-	if err != nil {
-		return err
+func (bcfs *BuilderConfigFilterString) UnmarshalJSON(raw []byte) error {
+	if string(raw) == "null" {
+		*bcfs = BuilderConfigFilterString("{}")
+	} else {
+		*bcfs = BuilderConfigFilterString(string(raw))
 	}
-
-	// Have to figure out the type and parse appropriately
-	// For now everything is a string, so turn all values
-	// (float64, bool, string, array of [float64, bool, string])
-	// to simply an array of strings
-	// TODO: Perhaps preserve value but currently there's no use-case
-	switch conval := dyval.(type) {
-	case float64:
-		*aos = ArrayOrString{strconv.FormatFloat(conval, 'f', -1, 64)}
-	case bool:
-		if conval {
-			*aos = ArrayOrString{"true"}
-		} else {
-			*aos = ArrayOrString{"false"}
-		}
-	case string:
-		*aos = ArrayOrString{conval}
-	case []interface{}:
-		// A slice of these can...yet again.. be anything (except another array fortunately)
-		*aos = ArrayOrString(make([]string, 0, len(conval)))
-		for _, dynX := range conval {
-			var finalVal string
-			switch conXval := dynX.(type) {
-			case float64:
-				finalVal = strconv.FormatFloat(conXval, 'f', -1, 64)
-			case bool:
-				if conXval {
-					finalVal = "true"
-				} else {
-					finalVal = "false"
-				}
-			case string:
-				finalVal = conXval
-			}
-			*aos = append(*aos, finalVal)
-		}
-	}
-
 	return nil
 }
 
-func (aos ArrayOrString) MarshalJSON() ([]byte, error) {
-	switch len(aos) {
+func (bcfs BuilderConfigFilterString) MarshalJSON() ([]byte, error) {
+	switch len(bcfs) {
 	case 0:
-		return json.Marshal([]byte(""))
-	case 1:
-		return json.Marshal(string(aos[0]))
+		return []byte("{}"), nil
 	default:
-		return json.Marshal([]string(aos))
+		return []byte(bcfs), nil
 	}
 }
 
 type AutoAlertConfig struct {
 	RaiseAlert   bool `json:"raiseAlert"`
 	DisableAlert bool `json:"disableAlert"`
-}
-
-type BuilderConfig struct {
-	ID              string              `json:"id,omitempty"`
-	CustomerID      string              `json:"customerId,omitempty"`
-	TableName       string              `json:"tableName,omitempty"`
-	Added           bool                `json:"added"`
-	MatchesFilter   bool                `json:"matchesFilter"`
-	Filters         BuilderConfigFilter `json:"filters,omitempty"`
-	FiltersJson     string              `json:"filtersjson,omitempty"`
-	Severity        string              `json:"severity,omitempty"`
-	Key             string              `json:"key,omitempty"`
-	ValueField      string              `json:"valueField,omitempty"`
-	AutoAlertConfig AutoAlertConfig     `json:"autoAlertConfig"`
 }
 
 type AlertRules struct {

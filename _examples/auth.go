@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/uptycslabs/uptycs-client-go/uptycs"
 	"log"
 	"os"
-	"uptycs-client-go/uptycs"
 )
 
 func main() {

@@ -2,3 +2,5 @@ coverage.out
 *.sw[o-p]
 main.go
 *.code-workspace
+.vscode
+.idea

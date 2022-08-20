@@ -1,10 +1,11 @@
 package uptycs
 
 import (
-	"github.com/jarcoal/httpmock"
 	"net/http"
 	"reflect"
 	"testing"
+
+	"github.com/jarcoal/httpmock"
 )
 
 func TestGetEventRules(t *testing.T) {

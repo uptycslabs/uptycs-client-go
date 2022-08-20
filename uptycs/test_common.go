@@ -2,9 +2,10 @@ package uptycs
 
 import (
 	"encoding/json"
-	"github.com/jarcoal/httpmock"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/jarcoal/httpmock"
 )
 
 type MockClient struct {

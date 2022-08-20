@@ -1,7 +1,6 @@
 package uptycs
 
 import (
-	"encoding/json"
 	"errors"
 )
 
@@ -43,45 +42,9 @@ func (c *Client) DeleteEventRule(eventRule EventRule) (EventRule, error) {
 }
 
 func (c *Client) CreateEventRule(eventRule EventRule) (EventRule, error) {
-	if len(eventRule.BuilderConfigJson) > 0 {
-		builderConfig := BuilderConfig{}
-		if err := json.Unmarshal([]byte(eventRule.BuilderConfigJson), &builderConfig); err != nil {
-			panic(err)
-		}
-		eventRule.BuilderConfig = builderConfig
-		eventRule.BuilderConfigJson = ""
-	}
-
-	if len(eventRule.BuilderConfig.FiltersJson) > 0 {
-		filters := BuilderConfigFilter{}
-		if err := json.Unmarshal([]byte(eventRule.BuilderConfig.FiltersJson), &filters); err != nil {
-			panic(err)
-		}
-		eventRule.BuilderConfig.Filters = filters
-		eventRule.BuilderConfig.FiltersJson = ""
-	}
-
 	return doCreate(c, eventRule, "eventRules")
 }
 
 func (c *Client) UpdateEventRule(eventRule EventRule) (EventRule, error) {
-	if len(eventRule.BuilderConfigJson) > 0 {
-		builderConfig := BuilderConfig{}
-		if err := json.Unmarshal([]byte(eventRule.BuilderConfigJson), &builderConfig); err != nil {
-			panic(err)
-		}
-		eventRule.BuilderConfig = builderConfig
-		eventRule.BuilderConfigJson = ""
-	}
-
-	if len(eventRule.BuilderConfig.FiltersJson) > 0 {
-		filters := BuilderConfigFilter{}
-		if err := json.Unmarshal([]byte(eventRule.BuilderConfig.FiltersJson), &filters); err != nil {
-			panic(err)
-		}
-		eventRule.BuilderConfig.Filters = filters
-		eventRule.BuilderConfig.FiltersJson = ""
-	}
-
 	return doUpdate(c, eventRule, "eventRules")
 }

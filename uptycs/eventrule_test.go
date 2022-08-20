@@ -6,6 +6,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/MakeNowJust/heredoc"
 	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
 )
@@ -40,16 +41,16 @@ func TestPutEventRule(t *testing.T) {
 					TableName:     "process_open_sockets",
 					Added:         true,
 					MatchesFilter: true,
-					Filters: BuilderConfigFilter{
-						And: []BuilderConfigFilter{
-							{
-								Name:     "remote_address",
-								Operator: "MATCHES_REGEX",
-								Value:    ArrayOrString{"^172.(1[6-9]|2[0-9]|3[01])|^10.|^192.168."},
-								Not:      true,
-							},
-						},
-					},
+					Filters: BuilderConfigFilterString(heredoc.Doc(`{
+				      "and": [
+				        {
+				          "not": true,
+				          "name": "remote_address",
+				          "value": "^172.(1[6-9]|2[0-9]|3[01])|^10.|^192.168.",
+				          "operator": "MATCHES_REGEX"
+				        }
+				      ]
+				    }`)),
 					Severity:   "low",
 					Key:        "Test",
 					ValueField: "pid",
@@ -172,16 +173,16 @@ func TestCreateEventRule(t *testing.T) {
 					TableName:     "process_open_sockets",
 					Added:         true,
 					MatchesFilter: true,
-					Filters: BuilderConfigFilter{
-						And: []BuilderConfigFilter{
-							{
-								Name:     "remote_address",
-								Operator: "MATCHES_REGEX",
-								Value:    ArrayOrString{"^172.(1[6-9]|2[0-9]|3[01])|^10.|^192.168."},
-								Not:      true,
-							},
-						},
-					},
+					Filters: BuilderConfigFilterString(heredoc.Doc(`{
+	    			  "and": [
+	    			    {
+	    			      "not": true,
+	    			      "name": "remote_address",
+	    			      "value": "^172.(1[6-9]|2[0-9]|3[01])|^10.|^192.168.",
+	    			      "operator": "MATCHES_REGEX"
+	    			    }
+	    			  ]
+	    			}`)),
 					Severity:   "low",
 					Key:        "Test",
 					ValueField: "pid",
@@ -315,163 +316,12 @@ func TestGetEventRule(t *testing.T) {
 				Score:      "0.0",
 				Lock:       false,
 				BuilderConfig: BuilderConfig{
-					ID:            "69bc42ba-d7c5-401d-b746-61afe5b372a2",
-					CustomerID:    "111111111111-111111-11111-111111-111111111",
-					TableName:     "process_file_events",
-					Added:         true,
-					MatchesFilter: true,
-					Filters: BuilderConfigFilter{
-						And: []BuilderConfigFilter{
-							BuilderConfigFilter{
-								Or: []BuilderConfigFilter{
-									BuilderConfigFilter{
-										Not:             false,
-										Name:            "path",
-										Value:           ArrayOrString{"false"},
-										IsDate:          false,
-										Operator:        "STARTS_WITH",
-										CaseInsensitive: true,
-									},
-									BuilderConfigFilter{
-										Not:             false,
-										Name:            "path",
-										Value:           ArrayOrString{"91"},
-										IsDate:          false,
-										Operator:        "STARTS_WITH",
-										CaseInsensitive: true,
-									},
-									BuilderConfigFilter{
-										Not:             false,
-										Name:            "path",
-										Value:           ArrayOrString{"/usr/sbin/"},
-										IsDate:          false,
-										Operator:        "STARTS_WITH",
-										CaseInsensitive: true,
-									},
-									BuilderConfigFilter{
-										Not:             false,
-										Name:            "path",
-										Value:           ArrayOrString{"/usr/bin/"},
-										IsDate:          false,
-										Operator:        "STARTS_WITH",
-										CaseInsensitive: true,
-									},
-									BuilderConfigFilter{
-										Not:             false,
-										Name:            "path",
-										Value:           ArrayOrString{"/sbin/"},
-										IsDate:          false,
-										Operator:        "STARTS_WITH",
-										CaseInsensitive: true,
-									},
-									BuilderConfigFilter{
-										Not:             false,
-										Name:            "path",
-										Value:           ArrayOrString{"/bin/"},
-										IsDate:          false,
-										Operator:        "STARTS_WITH",
-										CaseInsensitive: true,
-									},
-									BuilderConfigFilter{
-										Not:             false,
-										Name:            "path",
-										Value:           ArrayOrString{"/usr/games/"},
-										IsDate:          false,
-										Operator:        "STARTS_WITH",
-										CaseInsensitive: true,
-									},
-									BuilderConfigFilter{
-										Not:             false,
-										Name:            "path",
-										Value:           ArrayOrString{"/usr/local/games/"},
-										IsDate:          false,
-										Operator:        "STARTS_WITH",
-										CaseInsensitive: true,
-									},
-									BuilderConfigFilter{
-										Not:             false,
-										Name:            "path",
-										Value:           ArrayOrString{"/snap/bin/"},
-										IsDate:          false,
-										Operator:        "STARTS_WITH",
-										CaseInsensitive: true,
-									},
-									BuilderConfigFilter{
-										And: []BuilderConfigFilter{
-											BuilderConfigFilter{
-												Or: []BuilderConfigFilter{
-													BuilderConfigFilter{
-														Not:             false,
-														Name:            "path",
-														Value:           ArrayOrString{"/home/"},
-														IsDate:          false,
-														Operator:        "STARTS_WITH",
-														IsVersion:       false,
-														IsWordMatch:     false,
-														CaseInsensitive: true,
-													},
-													BuilderConfigFilter{
-														Not:             false,
-														Name:            "path",
-														Value:           ArrayOrString{"/root/"},
-														IsDate:          false,
-														Operator:        "STARTS_WITH",
-														IsVersion:       false,
-														IsWordMatch:     false,
-														CaseInsensitive: true,
-													},
-												},
-											},
-											BuilderConfigFilter{
-												Or: []BuilderConfigFilter{
-													BuilderConfigFilter{
-														Not:             false,
-														Name:            "path",
-														Value:           ArrayOrString{"/Downloads/"},
-														IsDate:          false,
-														Operator:        "CONTAINS",
-														IsVersion:       false,
-														IsWordMatch:     false,
-														CaseInsensitive: true,
-													},
-													BuilderConfigFilter{
-														Not:             false,
-														Name:            "path",
-														Value:           ArrayOrString{"/Download/"},
-														IsDate:          false,
-														Operator:        "CONTAINS",
-														IsVersion:       false,
-														IsWordMatch:     false,
-														CaseInsensitive: true,
-													},
-													BuilderConfigFilter{
-														Not:             false,
-														Name:            "path",
-														Value:           ArrayOrString{"/downloads/"},
-														IsDate:          false,
-														Operator:        "CONTAINS",
-														IsVersion:       false,
-														IsWordMatch:     false,
-														CaseInsensitive: true,
-													},
-													BuilderConfigFilter{
-														Not:             false,
-														Name:            "path",
-														Value:           ArrayOrString{"/download/"},
-														IsDate:          false,
-														Operator:        "CONTAINS",
-														IsVersion:       false,
-														IsWordMatch:     false,
-														CaseInsensitive: true,
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-					},
+					ID:              "69bc42ba-d7c5-401d-b746-61afe5b372a2",
+					CustomerID:      "111111111111-111111-11111-111111-111111111",
+					TableName:       "process_file_events",
+					Added:           true,
+					MatchesFilter:   true,
+					Filters:         BuilderConfigFilterString(heredoc.Doc(`{"and":[{"or":[{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":false},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":91},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/sbin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/bin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/sbin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/bin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/games/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/local/games/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/snap/bin/"},{"and":[{"or":[{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/home/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/root/"}]},{"or":[{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/Downloads/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/Download/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/downloads/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/download/"}]}]}]}]}`)),
 					Severity:        "medium",
 					Key:             "Path",
 					ValueField:      "path",
