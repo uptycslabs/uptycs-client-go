@@ -67,7 +67,7 @@ func main() {
 					"CREATED",
 				},
 			},
-			DnsLookupEvents: uptycs.DnsLookupEvents{
+			DNSLookupEvents: uptycs.DNSLookupEvents{
 				Question: []string{
 					"^0\\.foo\\.ntp\\.orgS",
 					"^1\\.pool\\.ntp\\.orgS",
@@ -86,7 +86,7 @@ func main() {
 	// Update but use JSON for the metadata
 	_, err = c.UpdateEventExcludeProfile(uptycs.EventExcludeProfile{
 		ID: eventExcludeProfile.ID,
-		MetadataJson: heredoc.Doc(`
+		MetadataJSON: heredoc.Doc(`
   {
     "process_events": {
       "path": [

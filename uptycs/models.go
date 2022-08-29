@@ -269,7 +269,7 @@ type User struct {
 	UpdatedAt           string        `json:"updatedAt"`
 	LastUpdatedByUptycs string        `json:"lastUpdatedByUptycs"`
 	Roles               []Role        `json:"roles" validate:"required,min=0"`
-	UserObjectGroups    []ObjectGroup `json:"userObjectGroups"`
+	UserObjectGroups    []ObjectGroup `json:"userObjectGroups" validate:"required,min=0"`
 	//DetectionHiddenColumns interface{} `json:"detectionHiddenColumns"`
 	//RangerID               interface{} `json:"rangerId"`
 	//LastSyncedWithRanger   interface{} `json:"lastSyncedWithRanger"`
@@ -286,7 +286,7 @@ type Role struct {
 	ID                   string        `json:"id,omitempty"`
 	Name                 string        `json:"name"`
 	Description          string        `json:"description,omitempty"`
-	Permissions          []string      `json:"permissions"`
+	Permissions          []string      `json:"permissions" validate:"required,min=0"`
 	Custom               bool          `json:"custom"`
 	Hidden               bool          `json:"hidden"`
 	CreatedBy            string        `json:"createdBy"`
@@ -294,7 +294,7 @@ type Role struct {
 	CreatedAt            string        `json:"createdAt"`
 	UpdatedAt            string        `json:"updatedAt"`
 	NoMinimalPermissions bool          `json:"noMinimalPermissions"`
-	RoleObjectGroups     []ObjectGroup `json:"roleObjectGroups"`
+	RoleObjectGroups     []ObjectGroup `json:"roleObjectGroups" validate:"required,min=0"`
 }
 type Roles struct {
 	Links  []LinkItem `json:"links,omitempty"`
@@ -332,13 +332,120 @@ type ObjectGroups struct {
 	Limit  int           `json:"limit,omitempty"`
 }
 
+type TagConfigurations struct {
+	Links  []LinkItem         `json:"links,omitempty"`
+	Items  []TagConfiguration `json:"items,omitempty"`
+	Offset int                `json:"offset,omitempty"`
+	Limit  int                `json:"limit,omitempty"`
+}
+type TagConfiguration Tag
+
+type TagRules struct {
+	Links  []LinkItem `json:"links,omitempty"`
+	Items  []TagRule  `json:"items,omitempty"`
+	Offset int        `json:"offset,omitempty"`
+	Limit  int        `json:"limit,omitempty"`
+}
+
+type TagRule struct {
+	ID             string `json:"id,omitempty"`
+	Name           string `json:"name,omitempty" validate:"required,max=255,min=1"`
+	Description    string `json:"description,omitempty"`
+	Query          string `json:"query,omitempty" validate:"required"`
+	Source         string `json:"source,omitempty" validate:"required,oneof=global realtime"`
+	RunOnce        bool   `json:"runOnce,omitempty"`
+	Interval       int    `json:"interval,omitempty" validate:"required,min=30"`
+	OSqueryVersion string `json:"osqueryVersion,omitempty"`
+	Platform       string `json:"platform,omitempty"`
+	SeedID         string `json:"seedId,omitempty"`
+	Enabled        bool   `json:"enabled,omitempty"`
+	System         bool   `json:"system,omitempty"`
+	LastRunAt      string `json:"lastRunAt,omitempty"`
+	CreatedBy      string `json:"createdBy,omitempty"`
+	UpdatedBy      string `json:"updatedBy,omitempty"`
+	CreatedAt      string `json:"createdAt,omitempty"`
+	UpdatedAt      string `json:"updatedAt,omitempty"`
+	ResourceType   string `json:"resourceType,omitempty"`
+}
+
+type Tags struct {
+	Links  []LinkItem `json:"links,omitempty"`
+	Items  []Tag      `json:"items,omitempty"`
+	Offset int        `json:"offset,omitempty"`
+	Limit  int        `json:"limit,omitempty"`
+}
+
+type Tag struct {
+	ID                          string                   `json:"id,omitempty"`
+	Name                        string                   `json:"-"` // There is no name, so just throw the ID in there
+	Value                       string                   `json:"value"`
+	SeedID                      string                   `json:"seedId,omitempty"`
+	Key                         string                   `json:"key,omitempty"`
+	CreatedBy                   string                   `json:"createdBy,omitempty"`
+	UpdatedBy                   string                   `json:"updatedBy,omitempty"`
+	FlagProfileID               string                   `json:"flagProfileId,omitempty"`
+	CustomProfileID             string                   `json:"customProfileId,omitempty"`
+	ComplianceProfileID         string                   `json:"complianceProfileId,omitempty"`
+	ProcessBlockRuleID          string                   `json:"processBlockRuleId,omitempty"`
+	DNSBlockRuleID              string                   `json:"dnsBlockRuleId,omitempty"`
+	WindowsDefenderPreferenceID string                   `json:"windowsDefenderPreferenceId,omitempty"`
+	Tag                         string                   `json:"tag,omitempty"`
+	Custom                      bool                     `json:"custom,omitempty"`
+	System                      bool                     `json:"system,omitempty"`
+	CreatedAt                   string                   `json:"createdAt,omitempty"`
+	TagRuleID                   string                   `json:"tagRuleId,omitempty"`
+	ExpireAt                    string                   `json:"expireAt,omitempty"`
+	Status                      string                   `json:"status,omitempty"`
+	Source                      string                   `json:"source,omitempty"`
+	UpdatedAt                   string                   `json:"updatedAt,omitempty"`
+	ResourceType                string                   `json:"resourceType,omitempty"`
+	FilePathGroups              []TagConfigurationObject `json:"filePathGroups" validate:"required,min=0"`
+	EventExcludeProfiles        []TagConfigurationObject `json:"eventExcludeProfiles" validate:"required,min=0"`
+	RegistryPaths               []TagConfigurationObject `json:"registryPaths" validate:"required,min=0"`
+	Querypacks                  []TagConfigurationObject `json:"querypacks" validate:"required,min=0"`
+	YaraGroupRules              []TagConfigurationObject `json:"yaraGroupRules" validate:"required,min=0"`
+	AuditConfigurations         []TagConfigurationObject `json:"auditConfigurations" validate:"required,min=0"`
+	//ImageLoadExclusions []interface{} `json:"imageLoadExclusions"` # TODO: cant find any examples of this
+	//AuditGroups         []interface{} `json:"auditGroups"` # TODO: cant find any examples of this
+	//Destinations        []interface{} `json:"destinations"` # TODO: cant find any examples of this
+	//Redactions          []interface{} `json:"redactions"` # TODO: cant find any examples of this
+	//AuditRules          []interface{} `json:"auditRules"` # TODO: cant find any examples of this
+	//PrometheusTargets   []interface{} `json:"prometheusTargets"` # TODO: cant find any examples of this
+	//AtcQueries          []interface{} `json:"atcQueries"` # TODO: cant find any examples of this
+}
+
+type TagConfigurationObjectDetails struct {
+	ID                   string `json:"id,omitempty"`
+	AuditConfigurationID string `json:"auditConfigurationId,omitempty"`
+	YaraGroupRuleID      string `json:"yaraGroupRuleId,omitempty"`
+	QuerypackID          string `json:"querypackId,omitempty"`
+	RegistryPathID       string `json:"registryPathId,omitempty"`
+	EventExcludeProfile  string `json:"eventExcludeProfile,omitempty"`
+	FilePathGroupID      string `json:"filePathGroupId,omitempty"`
+	TagID                string `json:"tagId,omitempty"`
+	CreatedBy            string `json:"createdBy,omitempty"`
+	CreatedAt            string `json:"createdAt,omitempty"`
+}
+
+type TagConfigurationObject struct {
+	ID                     string                         `json:"id,omitempty"`
+	Name                   string                         `json:"name,omitempty"`
+	AuditConfigurationTag  *TagConfigurationObjectDetails `json:"AuditConfigurationTag,omitempty"`
+	YaraGroupRuleTag       *TagConfigurationObjectDetails `json:"YaraGroupRuleTag,omitempty"`
+	QuerypackTag           *TagConfigurationObjectDetails `json:"QuerypackTag,omitempty"`
+	RegistryPathTag        *TagConfigurationObjectDetails `json:"RegistryPathTag,omitempty"`
+	EventExcludeProfileTag *TagConfigurationObjectDetails `json:"EventExcludeProfileTag,omitempty"`
+	FilePathGroupTag       *TagConfigurationObjectDetails `json:"FilePathGroupTag,omitempty"`
+	Links                  []LinkItem                     `json:"links,omitempty"`
+}
+
 type iAPIType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag
 	GetID() string
 	GetName() string
 	KeysToDelete() []string
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags
 }

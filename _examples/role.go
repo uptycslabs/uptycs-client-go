@@ -4,7 +4,6 @@ import (
 	"github.com/uptycslabs/uptycs-client-go/uptycs"
 	"log"
 	"os"
-	"time"
 )
 
 func main() {
@@ -35,7 +34,9 @@ func main() {
 
 	// Create a role
 	newRole, err := c.CreateRole(uptycs.Role{
-		Name: "marcus test",
+		Name:             "marcus test",
+		Permissions:      []string{},
+		RoleObjectGroups: []uptycs.ObjectGroup{},
 	})
 	if err != nil {
 		panic(err)
@@ -50,11 +51,8 @@ func main() {
 		Permissions:          []string{},
 		Custom:               false,
 		Hidden:               false,
-		CreatedBy:            "",
-		UpdatedBy:            "",
-		CreatedAt:            time.Time{},
-		UpdatedAt:            time.Time{},
 		NoMinimalPermissions: false,
+		RoleObjectGroups:     []uptycs.ObjectGroup{},
 	})
 	if err != nil {
 		panic(err)

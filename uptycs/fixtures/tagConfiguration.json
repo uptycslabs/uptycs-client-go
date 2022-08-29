@@ -1,0 +1,49 @@
+{
+  "id": "9dfc53a4-bf1e-4efe-8f04-e1fd8802e9e3",
+  "customerId": "fda3f46b-c262-439c-bc93-5de6ee6993b6",
+  "key": "636776063332",
+  "value": null,
+  "createdBy": "66a9a52c-5fa0-4cf4-abe7-da5504f67950",
+  "updatedBy": null,
+  "flagProfileId": null,
+  "customProfileId": null,
+  "complianceProfileId": null,
+  "processBlockRuleId": null,
+  "dnsBlockRuleId": null,
+  "windowsDefenderPreferenceId": null,
+  "tag": "636776063332",
+  "custom": true,
+  "system": false,
+  "createdAt": "2022-02-03T05:06:53.918Z",
+  "tagRuleId": null,
+  "expireAt": null,
+  "status": "active",
+  "source": "direct",
+  "updatedAt": "2022-02-03T05:06:53.918Z",
+  "resourceType": "asset",
+  "filePathGroups": [],
+  "eventExcludeProfiles": [],
+  "prometheusTargets": [],
+  "querypacks": [],
+  "yaraGroupRules": [],
+  "atcQueries": [],
+  "registryPaths": [],
+  "auditRules": [],
+  "auditConfigurations": [],
+  "imageLoadExclusions": [],
+  "auditGroups": [],
+  "destinations": [],
+  "redactions": [],
+  "links": [
+    {
+      "rel": "self",
+      "title": "TagConfiguration information",
+      "href": "/api/customers/fda3f46b-c262-439c-bc93-5de6ee6993b6/tagConfigurations/9dfc53a4-bf1e-4efe-8f04-e1fd8802e9e3"
+    },
+    {
+      "rel": "parent",
+      "title": "TagConfigurations information",
+      "href": "/api/customers/fda3f46b-c262-439c-bc93-5de6ee6993b6/tagConfigurationss"
+    }
+  ]
+}

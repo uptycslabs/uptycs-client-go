@@ -150,10 +150,11 @@ func TestPutRole(t *testing.T) {
 			name:    "TestRole",
 			fixture: "fixtures/roleCreate.json",
 			in: Role{
-				ID:          "ac6ef928-36a5-4388-86d4-575ba1085e7d",
-				Name:        "Monitoring Profile",
-				Description: "Role for Uptycs monitoring team to perform necessary tasks",
-				Permissions: []string{},
+				ID:               "ac6ef928-36a5-4388-86d4-575ba1085e7d",
+				Name:             "Monitoring Profile",
+				Description:      "Role for Uptycs monitoring team to perform necessary tasks",
+				Permissions:      []string{},
+				RoleObjectGroups: []ObjectGroup{},
 			},
 		},
 	}
@@ -209,6 +210,7 @@ func TestCreateRole(t *testing.T) {
 				Name:                 "Monitoring Profile",
 				Description:          "Role for Uptycs monitoring team to perform necessary tasks",
 				Permissions:          []string{"EXCEPTION:READ", "EXCEPTION:CREATE"},
+				RoleObjectGroups:     []ObjectGroup{},
 				Custom:               true,
 				Hidden:               false,
 				CreatedBy:            "61b98805-54ea-40d9-89b7-f8bf7780666c",
