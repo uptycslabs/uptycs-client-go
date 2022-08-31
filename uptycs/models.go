@@ -269,7 +269,7 @@ type User struct {
 	UpdatedAt           string        `json:"updatedAt"`
 	LastUpdatedByUptycs string        `json:"lastUpdatedByUptycs"`
 	Roles               []Role        `json:"roles" validate:"required,min=0"`
-	UserObjectGroups    []ObjectGroup `json:"userObjectGroups,omitempty"`
+	UserObjectGroups    []ObjectGroup `json:"userObjectGroups"`
 	//DetectionHiddenColumns interface{} `json:"detectionHiddenColumns"`
 	//RangerID               interface{} `json:"rangerId"`
 	//LastSyncedWithRanger   interface{} `json:"lastSyncedWithRanger"`
@@ -286,7 +286,7 @@ type Role struct {
 	ID                   string        `json:"id,omitempty"`
 	Name                 string        `json:"name"`
 	Description          string        `json:"description,omitempty"`
-	Permissions          []string      `json:"permissions,omitempty"`
+	Permissions          []string      `json:"permissions"`
 	Custom               bool          `json:"custom"`
 	Hidden               bool          `json:"hidden"`
 	CreatedBy            string        `json:"createdBy"`
@@ -294,7 +294,7 @@ type Role struct {
 	CreatedAt            string        `json:"createdAt"`
 	UpdatedAt            string        `json:"updatedAt"`
 	NoMinimalPermissions bool          `json:"noMinimalPermissions"`
-	RoleObjectGroups     []ObjectGroup `json:"roleObjectGroups,omitempty"`
+	RoleObjectGroups     []ObjectGroup `json:"roleObjectGroups"`
 }
 type Roles struct {
 	Links  []LinkItem `json:"links,omitempty"`
