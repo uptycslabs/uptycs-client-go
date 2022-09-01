@@ -44,7 +44,7 @@ func (c *Client) GetAlertRule(alertRule AlertRule) (AlertRule, error) {
 	} else {
 		return doGet(c, alertRule, "alertRules")
 	}
-	return alertRule, errors.New("Alert Rule was not found")
+	return alertRule, errors.New("alertRule was not found")
 }
 
 func (c *Client) DeleteAlertRule(alertRule AlertRule) (AlertRule, error) {

@@ -14,6 +14,7 @@ func (T User) KeysToDelete() []string {
 	return []string{
 		"priorLogin",
 		"rangerId",
+		"password",
 		"lastUpdatedByUptycs",
 		"lastSyncedWithRanger",
 		"superAdmin",
@@ -35,7 +36,7 @@ func (c *Client) GetUser(user User) (User, error) {
 	} else {
 		return doGet(c, user, "users")
 	}
-	return user, errors.New("User was not found")
+	return user, errors.New("user was not found")
 }
 
 func (c *Client) DeleteUser(user User) (User, error) {

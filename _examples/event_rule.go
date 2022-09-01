@@ -10,10 +10,10 @@ import (
 )
 
 func main() {
-	c, _ := uptycs.NewClient(uptycs.UptycsConfig{
+	c, _ := uptycs.NewClient(uptycs.Config{
 		Host:       os.Getenv("UPTYCS_HOST"),
-		ApiKey:     os.Getenv("UPTYCS_API_KEY"),
-		ApiSecret:  os.Getenv("UPTYCS_API_SECRET"),
+		APIKey:     os.Getenv("UPTYCS_API_KEY"),
+		APISecret:  os.Getenv("UPTYCS_API_SECRET"),
 		CustomerID: os.Getenv("UPTYCS_CUSTOMER_ID"),
 	})
 	//Get all event rules
@@ -42,26 +42,26 @@ func main() {
 		Code:        "1651259159841CODE",
 		Type:        "builder",
 		Rule:        "builder",
-		BuilderConfig: uptycs.BuilderConfigString(heredoc.Doc(`{
-  "tableName": "process_open_sockets",
-  "added": true,
-  "matchesFilter": true,
-  "filters": {
-    "and": [
-      {
-        "not": true,
-        "name": "remote_address",
-        "value": "^172.(1[6-9]|2[0-9]|3[01])|^10.|^192.168.",
-        "operator": "MATCHES_REGEX"
-      }
-    ]
-  },
-  "severity": "low",
-  "key": "Test",
-  "valueField": "pid",
-  "autoAlertConfig": {},
-  "addedStr": "true"
-	}`)),
+		BuilderConfig: uptycs.BuilderConfig{
+			TableName:     "process_open_sockets",
+			Added:         true,
+			MatchesFilter: true,
+			Filters: uptycs.BuilderConfigFilterString(heredoc.Doc(`{
+			    "and": [
+			      {
+			        "not": true,
+			        "name": "remote_address",
+			        "value": "^172.(1[6-9]|2[0-9]|3[01])|^10.|^192.168.",
+			        "operator": "MATCHES_REGEX"
+			      }
+			    ]
+			  }
+			`)),
+			Severity:        "low",
+			Key:             "Test",
+			ValueField:      "pid",
+			AutoAlertConfig: uptycs.AutoAlertConfig{},
+		},
 		EventTags: []string{
 			"Tactic=Persistence",
 			"Version=1.1",

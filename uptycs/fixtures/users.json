@@ -1,0 +1,47 @@
+{
+  "items": [
+    {
+      "id": "aaadd6ed-b85f-42fe-b0ec-01f89abf7249",
+      "name": "Foo Threat Research",
+      "email": "atest@example.com",
+      "phone": null,
+      "active": false,
+      "customerId": "11111111-1111-1111-1111-111111111111",
+      "superAdmin": false,
+      "bot": false,
+      "support": false,
+      "priorLogin": false,
+      "imageUrl": null,
+      "password": null,
+      "createdAt": "2021-06-09T02:53:53.183Z",
+      "maxIdleTimeMins": 30,
+      "alertHiddenColumns": null,
+      "detectionHiddenColumns": null,
+      "updatedAt": "2022-03-24T15:09:57.539Z",
+      "rangerId": 2391234,
+      "lastUpdatedByUptycs": "2022-03-24T15:09:57.539Z",
+      "lastSyncedWithRanger": "2022-03-24T15:09:57.539Z",
+      "links": [
+        {
+          "rel": "self",
+          "title": "User information",
+          "href": "/api/customers/11111111-1111-1111-1111-111111111111/users/aaadd6ed-b85f-42fe-b0ec-01f89abf7249"
+        },
+        {
+          "rel": "parent",
+          "title": "Users information",
+          "href": "/api/customers/11111111-1111-1111-1111-111111111111/users"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "title": "Users information",
+      "href": "/api/customers/11111111-1111-1111-1111-111111111111/users"
+    }
+  ],
+  "offset": 0,
+  "limit": 1000
+}

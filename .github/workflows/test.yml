@@ -14,4 +14,6 @@ jobs:
       with:
         go-version: ${{ matrix.go-version }}
     - uses: actions/checkout@v3
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v3
     - run: go test -coverprofile coverage.out -v ./uptycs/...

@@ -37,7 +37,7 @@ func (c *Client) GetDestination(destination Destination) (Destination, error) {
 	} else {
 		return doGet(c, destination, "destinations")
 	}
-	return destination, errors.New("Destination was not found")
+	return destination, errors.New("destination was not found")
 }
 
 func (c *Client) DeleteDestination(destination Destination) (Destination, error) {

@@ -12,10 +12,10 @@ import (
 
 func TestGetDestination(t *testing.T) {
 
-	c, _ := NewClient(UptycsConfig{
+	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
-		ApiKey:     "b",
-		ApiSecret:  "c",
+		APIKey:     "b",
+		APISecret:  "c",
 		CustomerID: "d",
 	})
 
@@ -32,11 +32,10 @@ func TestGetDestination(t *testing.T) {
 			fixture: "fixtures/destination.json",
 			id:      "b7c9c973-e2a3-4913-a755-919026267679",
 			out: Destination{
-				ID:         "b7c9c973-e2a3-4913-a755-919026267679",
-				CustomerID: "111111111111-111111-11111-111111-111111111",
-				Name:       "#it-sec-alerts",
-				Type:       "slack",
-				Address:    "https://hooks.slack.com/services/wut/foo/asdf",
+				ID:      "b7c9c973-e2a3-4913-a755-919026267679",
+				Name:    "#it-sec-alerts",
+				Type:    "slack",
+				Address: "https://hooks.slack.com/services/wut/foo/asdf",
 				//Config: {}, TODO
 				CreatedAt: "2022-03-09T20:49:04.283Z",
 				CreatedBy: "e9b93444-a442-437f-82f6-6d65e9c787d3",
@@ -88,10 +87,10 @@ func TestGetDestination(t *testing.T) {
 
 func TestDeleteDestination(t *testing.T) {
 
-	c, _ := NewClient(UptycsConfig{
+	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
-		ApiKey:     "b",
-		ApiSecret:  "c",
+		APIKey:     "b",
+		APISecret:  "c",
 		CustomerID: "d",
 	})
 
@@ -138,10 +137,10 @@ func TestDeleteDestination(t *testing.T) {
 
 func TestPutDestination(t *testing.T) {
 
-	c, _ := NewClient(UptycsConfig{
+	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
-		ApiKey:     "b",
-		ApiSecret:  "c",
+		APIKey:     "b",
+		APISecret:  "c",
 		CustomerID: "d",
 	})
 
@@ -156,11 +155,10 @@ func TestPutDestination(t *testing.T) {
 			name:    "TestDestination",
 			fixture: "fixtures/destinationCreate.json",
 			in: Destination{
-				ID:         "b7c9c973-e2a3-4913-a755-919026267679",
-				CustomerID: "111111111111-111111-11111-111111-111111111",
-				Name:       "#it-sec-alerts",
-				Type:       "slack",
-				Address:    "https://hooks.slack.com/services/wut/foo/asdf",
+				ID:      "b7c9c973-e2a3-4913-a755-919026267679",
+				Name:    "#it-sec-alerts",
+				Type:    "slack",
+				Address: "https://hooks.slack.com/services/wut/foo/asdf",
 				//Config: {}, TODO
 				CreatedAt: "2022-03-09T20:49:04.283Z",
 				CreatedBy: "e9b93444-a442-437f-82f6-6d65e9c787d3",
@@ -206,10 +204,10 @@ func TestPutDestination(t *testing.T) {
 
 func TestCreateDestination(t *testing.T) {
 
-	c, _ := NewClient(UptycsConfig{
+	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
-		ApiKey:     "b",
-		ApiSecret:  "c",
+		APIKey:     "b",
+		APISecret:  "c",
 		CustomerID: "d",
 	})
 
@@ -224,11 +222,10 @@ func TestCreateDestination(t *testing.T) {
 			name:    "TestDestination",
 			fixture: "fixtures/destinationCreate.json",
 			in: Destination{
-				ID:         "b7c9c973-e2a3-4913-a755-919026267679",
-				CustomerID: "111111111111-111111-11111-111111-111111111",
-				Name:       "#it-sec-alerts",
-				Type:       "slack",
-				Address:    "https://hooks.slack.com/services/wut/foo/asdf",
+				ID:      "b7c9c973-e2a3-4913-a755-919026267679",
+				Name:    "#it-sec-alerts",
+				Type:    "slack",
+				Address: "https://hooks.slack.com/services/wut/foo/asdf",
 				//Config: {}, TODO
 				CreatedAt: "2022-03-09T20:49:04.283Z",
 				CreatedBy: "e9b93444-a442-437f-82f6-6d65e9c787d3",

@@ -3,11 +3,14 @@ package uptycs
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/go-playground/validator/v10"
 	"net/http"
 	"strings"
 )
 
-func SlimStructAsJsonString[T iApiType](objectToSlim T, keysToDelete []string) ([]byte, error) {
+var validate = validator.New()
+
+func SlimStructAsJSONString[T iAPIType](objectToSlim T, keysToDelete []string) ([]byte, error) {
 	var commonKeysToDelete = []string{
 		"id",
 		"customerId",
@@ -17,9 +20,7 @@ func SlimStructAsJsonString[T iApiType](objectToSlim T, keysToDelete []string) (
 		"updatedBy",
 		"links",
 	}
-	for _, commonKeyItem := range commonKeysToDelete {
-		keysToDelete = append(keysToDelete, commonKeyItem)
-	}
+	keysToDelete = append(keysToDelete, commonKeysToDelete...)
 
 	rb, err := json.Marshal(objectToSlim)
 	if err != nil {
@@ -38,7 +39,7 @@ func SlimStructAsJsonString[T iApiType](objectToSlim T, keysToDelete []string) (
 	return json.Marshal(_interface)
 }
 
-func doDelete[T iApiType](c *Client, apiObject T, endpointStr string) (T, error) {
+func doDelete[T iAPIType](c *Client, apiObject T, endpointStr string) (T, error) {
 	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/%s/%s", c.HostURL, endpointStr, apiObject.GetID()), nil)
 	if err != nil {
 		return apiObject, err
@@ -52,7 +53,7 @@ func doDelete[T iApiType](c *Client, apiObject T, endpointStr string) (T, error)
 	return apiObject, nil
 }
 
-func doGetMany[T iApiTypes](c *Client, apiObject T, endpointStr string) (T, error) {
+func doGetMany[T iAPITypes](c *Client, apiObject T, endpointStr string) (T, error) {
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/%s", c.HostURL, endpointStr), nil)
 	if err != nil {
 		return apiObject, err
@@ -73,7 +74,7 @@ func doGetMany[T iApiTypes](c *Client, apiObject T, endpointStr string) (T, erro
 	return foundItems[0], nil
 }
 
-func doGet[T iApiType](c *Client, apiObject T, endpointStr string) (T, error) {
+func doGet[T iAPIType](c *Client, apiObject T, endpointStr string) (T, error) {
 	urlStr := fmt.Sprintf("%s/%s/%s", c.HostURL, endpointStr, apiObject.GetID())
 	if len(apiObject.GetID()) == 0 {
 		urlStr = fmt.Sprintf("%s/%s", c.HostURL, endpointStr)
@@ -104,8 +105,13 @@ func doGet[T iApiType](c *Client, apiObject T, endpointStr string) (T, error) {
 	return foundItems[0], nil
 }
 
-func doCreate[T iApiType](c *Client, apiObject T, endpointStr string) (T, error) {
-	slimmedObj, err := SlimStructAsJsonString(apiObject, apiObject.KeysToDelete())
+func doCreate[T iAPIType](c *Client, apiObject T, endpointStr string) (T, error) {
+	err := validate.Struct(apiObject)
+	if err != nil {
+		return apiObject, err
+	}
+
+	slimmedObj, err := SlimStructAsJSONString(apiObject, apiObject.KeysToDelete())
 	if err != nil {
 		return apiObject, err
 	}
@@ -126,17 +132,21 @@ func doCreate[T iApiType](c *Client, apiObject T, endpointStr string) (T, error)
 		return apiObject, err
 	}
 
-	newApiObject := make([]T, 1)
-	err = json.Unmarshal(body, &newApiObject[0])
+	newAPIObject := make([]T, 1)
+	err = json.Unmarshal(body, &newAPIObject[0])
 	if err != nil {
 		return apiObject, err
 	}
 
-	return newApiObject[0], nil
+	return newAPIObject[0], nil
 }
 
-func doUpdate[T iApiType](c *Client, apiObject T, endpointStr string) (T, error) {
-	slimmedObj, err := SlimStructAsJsonString(apiObject, apiObject.KeysToDelete())
+func doUpdate[T iAPIType](c *Client, apiObject T, endpointStr string) (T, error) {
+	err := validate.Struct(apiObject)
+	if err != nil {
+		return apiObject, err
+	}
+	slimmedObj, err := SlimStructAsJSONString(apiObject, apiObject.KeysToDelete())
 	if err != nil {
 		return apiObject, err
 	}
@@ -156,11 +166,11 @@ func doUpdate[T iApiType](c *Client, apiObject T, endpointStr string) (T, error)
 		return apiObject, err
 	}
 
-	newApiObject := make([]T, 1)
-	err = json.Unmarshal(body, &newApiObject[0])
+	newAPIObject := make([]T, 1)
+	err = json.Unmarshal(body, &newAPIObject[0])
 	if err != nil {
 		return apiObject, err
 	}
 
-	return newApiObject[0], nil
+	return newAPIObject[0], nil
 }

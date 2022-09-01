@@ -1,14 +1,5 @@
 package uptycs
 
-import (
-	"errors"
-)
-
-var (
-	// ErrUnsupportedType is returned if the type is not implemented
-	ErrUnsupportedType = errors.New("unsupported type")
-)
-
 type EventRules struct {
 	Links  []LinkItem  `json:"links,omitempty"`
 	Items  []EventRule `json:"items,omitempty"`
@@ -99,7 +90,6 @@ type AlertRules struct {
 
 type AlertRule struct {
 	ID                     string                 `json:"id,omitempty"`
-	CustomerID             string                 `json:"customerId,omitempty"`
 	SeedID                 string                 `json:"seedId,omitempty"`
 	Name                   string                 `json:"name,omitempty"`
 	Description            string                 `json:"description,omitempty"`
@@ -142,7 +132,6 @@ type AlertRuleDestination struct {
 
 type RuleException struct {
 	ID          string `json:"id,omitempty"`
-	CustomerID  string `json:"customerId,omitempty"`
 	RuleID      string `json:"ruleId,omitempty"`
 	ExceptionID string `json:"exceptionId,omitempty"`
 	CreatedAt   string `json:"createdAt,omitempty"`
@@ -163,11 +152,10 @@ type Destinations struct {
 }
 
 type Destination struct {
-	ID         string `json:"id,omitempty"`
-	CustomerID string `json:"customerId,omitempty"`
-	Name       string `json:"name,omitempty"`
-	Type       string `json:"type,omitempty"`
-	Address    string `json:"address,omitempty"`
+	ID      string `json:"id,omitempty"`
+	Name    string `json:"name,omitempty"`
+	Type    string `json:"type,omitempty"`
+	Address string `json:"address,omitempty"`
 	//Config TODO
 	//"config": {
 	//  "sender": null
@@ -202,12 +190,11 @@ type EventExcludeProfiles struct {
 
 type EventExcludeProfile struct {
 	ID           string                      `json:"id,omitempty"`
-	CustomerID   string                      `json:"customerId,omitempty"`
 	Name         string                      `json:"name,omitempty"`
 	Description  string                      `json:"description,omitempty"`
 	Priority     int                         `json:"priority,omitempty"`
 	Metadata     EventExcludeProfileMetadata `json:"metadata,omitempty"`
-	MetadataJson string                      `json:"metadataJson,omitempty"`
+	MetadataJSON string                      `json:"metadataJson,omitempty"`
 	ResourceType string                      `json:"resourceType,omitempty"`
 	Platform     string                      `json:"platform,omitempty"`
 	CreatedAt    string                      `json:"createdAt,omitempty"`
@@ -218,27 +205,27 @@ type EventExcludeProfile struct {
 }
 
 type EventExcludeProfileMetadata struct {
-	DnsLookupEvents     DnsLookupEvents     `json:"dns_lookup_events,omitempty"`
+	DNSLookupEvents     DNSLookupEvents     `json:"dns_lookup_events,omitempty"`
 	UserEvents          UserEvents          `json:"user_events,omitempty"`
 	SocketEvents        SocketEvents        `json:"socket_events,omitempty"`
 	ProcessEvents       ProcessEvents       `json:"process_events,omitempty"`
 	RegistryEvents      RegistryEvents      `json:"registry_events,omitempty"`
 	ProcessFileEvents   ProcessFileEvents   `json:"process_file_events,omitempty"`
-	HttpEvents          HttpEvents          `json:"http_events,omitempty"`
-	EbpfDnsLookupEvents EbpfDnsLookupEvents `json:"ebpf_dns_lookup_events,omitempty"`
+	HTTPEvents          HTTPEvents          `json:"http_events,omitempty"`
+	EbpfDNSLookupEvents EbpfDNSLookupEvents `json:"ebpf_dns_lookup_events,omitempty"`
 }
 
-type EbpfDnsLookupEvents struct {
+type EbpfDNSLookupEvents struct {
 	Answer   []string `json:"answer,omitempty"`
 	Question []string `json:"question,omitempty"`
 }
 
-type DnsLookupEvents struct {
+type DNSLookupEvents struct {
 	Answer   []string `json:"answer,omitempty"`
 	Question []string `json:"question,omitempty"`
 }
 
-type HttpEvents struct {
+type HTTPEvents struct {
 	Host []string `json:"host,omitempty"`
 }
 
@@ -264,38 +251,28 @@ type ProcessFileEvents struct {
 	Executable []string `json:"executable,omitempty"`
 }
 
-type iApiType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User
-	GetID() string
-	GetName() string
-	KeysToDelete() []string
-}
-
-type iApiTypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users
-}
-
 type User struct {
-	ID                  string   `json:"id,omitempty"`
-	Name                string   `json:"name,omitempty"`
-	Email               string   `json:"email,omitempty"`
-	Phone               string   `json:"phone,omitempty"`
-	Active              bool     `json:"active"`
-	SuperAdmin          bool     `json:"superAdmin,omitempty"`
-	Bot                 bool     `json:"bot,omitempty"`
-	Support             bool     `json:"support,omitempty"`
-	PriorLogin          bool     `json:"priorLogin,omitempty"`
-	ImageURL            string   `json:"imageUrl,omitempty"`
-	Password            string   `json:"password,omitempty"`
-	CreatedAt           string   `json:"createdAt,omitempty"`
-	MaxIdleTimeMins     int      `json:"maxIdleTimeMins,omitempty"`
-	AlertHiddenColumns  []string `json:"alertHiddenColumns,omitempty"`
-	UpdatedAt           string   `json:"updatedAt,omitempty"`
-	LastUpdatedByUptycs string   `json:"lastUpdatedByUptycs,omitempty"`
-	//TODO: Unknown type
-	// DetectionHiddenColumns interface{} `json:"detectionHiddenColumns,omitempty"`
-	// RangerID               interface{} `json:"rangerId,omitempty"`
-	// LastSyncedWithRanger   interface{} `json:"lastSyncedWithRanger,omitempty"`
+	ID                  string        `json:"id"`
+	Name                string        `json:"name"`
+	Email               string        `json:"email" validate:"required,max=512,min=1"`
+	Phone               string        `json:"phone"`
+	Active              bool          `json:"active"`
+	SuperAdmin          bool          `json:"superAdmin"`
+	Bot                 bool          `json:"bot"`
+	Support             bool          `json:"support"`
+	PriorLogin          bool          `json:"priorLogin"`
+	ImageURL            string        `json:"imageUrl" validate:"required,max=512,min=1"`
+	Password            string        `json:"password"`
+	CreatedAt           string        `json:"createdAt"`
+	MaxIdleTimeMins     int           `json:"maxIdleTimeMins" validate:"required,max=360,min=1"`
+	AlertHiddenColumns  []string      `json:"alertHiddenColumns" validate:"required,min=0"`
+	UpdatedAt           string        `json:"updatedAt"`
+	LastUpdatedByUptycs string        `json:"lastUpdatedByUptycs"`
+	Roles               []Role        `json:"roles" validate:"required,min=0"`
+	UserObjectGroups    []ObjectGroup `json:"userObjectGroups"`
+	//DetectionHiddenColumns interface{} `json:"detectionHiddenColumns"`
+	//RangerID               interface{} `json:"rangerId"`
+	//LastSyncedWithRanger   interface{} `json:"lastSyncedWithRanger"`
 }
 
 type Users struct {
@@ -303,4 +280,65 @@ type Users struct {
 	Items  []User     `json:"items,omitempty"`
 	Offset int        `json:"offset,omitempty"`
 	Limit  int        `json:"limit,omitempty"`
+}
+
+type Role struct {
+	ID                   string        `json:"id,omitempty"`
+	Name                 string        `json:"name"`
+	Description          string        `json:"description,omitempty"`
+	Permissions          []string      `json:"permissions"`
+	Custom               bool          `json:"custom"`
+	Hidden               bool          `json:"hidden"`
+	CreatedBy            string        `json:"createdBy"`
+	UpdatedBy            string        `json:"updatedBy"`
+	CreatedAt            string        `json:"createdAt"`
+	UpdatedAt            string        `json:"updatedAt"`
+	NoMinimalPermissions bool          `json:"noMinimalPermissions"`
+	RoleObjectGroups     []ObjectGroup `json:"roleObjectGroups"`
+}
+type Roles struct {
+	Links  []LinkItem `json:"links,omitempty"`
+	Items  []Role     `json:"items,omitempty"`
+	Offset int        `json:"offset,omitempty"`
+	Limit  int        `json:"limit,omitempty"`
+}
+
+type ObjectGroup struct {
+	ID               string        `json:"id,omitempty"`
+	Name             string        `json:"name,omitempty"`
+	Key              string        `json:"key,omitempty"`
+	Value            string        `json:"value,omitempty"`
+	AssetGroupRuleID string        `json:"assetGroupRuleId,omitempty"`
+	ObjectGroupID    string        `json:"objectGroupId,omitempty"`
+	UserID           string        `json:"userid,omitempty"`
+	RoleID           string        `json:"roleid,omitempty"`
+	Description      string        `json:"description,omitempty"`
+	Secret           string        `json:"secret,omitempty"`
+	ObjectType       string        `json:"objectType,omitempty"`
+	Custom           bool          `json:"custom,omitempty"`
+	RetentionDays    int           `json:"retentionDays,omitempty"`
+	RangerID         int           `json:"rangerId,omitempty"`
+	CreatedBy        string        `json:"createdBy,omitempty"`
+	UpdatedBy        string        `json:"updatedBy,omitempty"`
+	CreatedAt        string        `json:"createdAt,omitempty"`
+	UpdatedAt        string        `json:"updatedAt,omitempty"`
+	Destinations     []Destination `json:"destinations,omitempty"`
+}
+
+type ObjectGroups struct {
+	Links  []LinkItem    `json:"links,omitempty"`
+	Items  []ObjectGroup `json:"items,omitempty"`
+	Offset int           `json:"offset,omitempty"`
+	Limit  int           `json:"limit,omitempty"`
+}
+
+type iAPIType interface {
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup
+	GetID() string
+	GetName() string
+	KeysToDelete() []string
+}
+
+type iAPITypes interface {
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups
 }

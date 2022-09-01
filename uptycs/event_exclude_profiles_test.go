@@ -21,10 +21,10 @@ func TestGetEventExcludeProfiles(t *testing.T) {
 		},
 	)
 
-	c, _ := NewClient(UptycsConfig{
+	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
-		ApiKey:     "b",
-		ApiSecret:  "c",
+		APIKey:     "b",
+		APISecret:  "c",
 		CustomerID: "d",
 	})
 
@@ -47,7 +47,6 @@ func TestGetEventExcludeProfiles(t *testing.T) {
 				Items: []EventExcludeProfile{
 					EventExcludeProfile{
 						ID:          "13da8bc4-3c70-4bb9-a4d4-7ca320860926",
-						CustomerID:  "11111111-1111-1111-1111-111111111111",
 						Name:        "Uptycs default event exclude profile",
 						Description: "Filters known paths, IPs and domains",
 						Priority:    20200227,
@@ -157,7 +156,7 @@ func TestGetEventExcludeProfiles(t *testing.T) {
 									"CREATED",
 								},
 							},
-							DnsLookupEvents: DnsLookupEvents{
+							DNSLookupEvents: DNSLookupEvents{
 								Answer: []string{
 									"^(?![\\s\\S])",
 								},

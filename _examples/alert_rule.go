@@ -8,10 +8,10 @@ import (
 )
 
 func main() {
-	c, _ := uptycs.NewClient(uptycs.UptycsConfig{
+	c, _ := uptycs.NewClient(uptycs.Config{
 		Host:       os.Getenv("UPTYCS_HOST"),
-		ApiKey:     os.Getenv("UPTYCS_API_KEY"),
-		ApiSecret:  os.Getenv("UPTYCS_API_SECRET"),
+		APIKey:     os.Getenv("UPTYCS_API_KEY"),
+		APISecret:  os.Getenv("UPTYCS_API_SECRET"),
 		CustomerID: os.Getenv("UPTYCS_CUSTOMER_ID"),
 	})
 	// Get all alert rules
@@ -55,7 +55,7 @@ func main() {
 		log.Println(err)
 		return
 	}
-	log.Println(fmt.Sprintf("Created Rule '%s' with id %s", rule.Name, rule.ID))
+	log.Println(fmt.Sprintf("Created Rule '%s' with id '%s'", rule.Name, rule.ID))
 
 	// Update an alert rule by by ID
 
@@ -77,13 +77,13 @@ func main() {
 		log.Println(err)
 		return
 	}
-	log.Println(fmt.Sprintf("Updated Rule '%s' with id %s", updatedRule.Name, updatedRule.ID))
+	log.Println(fmt.Sprintf("Updated Rule '%s' with id '%s'", updatedRule.Name, updatedRule.ID))
 
 	// Delete an alert rule by ID
 
 	_, err = c.DeleteAlertRule(uptycs.AlertRule{
 		ID: rule.ID,
 	})
-	log.Println(fmt.Sprintf("Deleted Rule '%s' with id %s", rule.Name, rule.ID))
+	log.Println(fmt.Sprintf("Deleted Rule '%s' with id '%s'", rule.Name, rule.ID))
 
 }
