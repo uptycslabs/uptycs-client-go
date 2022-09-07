@@ -1,0 +1,14 @@
+{
+    "id": "abbcccdddd-eeeeef-fffff",
+    "name": "Foo Threat Research",
+    "description": "Test description",
+    "seedId": "random-string-of-characters-for-seed",
+    "customerId": "11111111-1111-1111-1111-111111111111",
+    "custom": true,
+    "priority": 1,
+    "createdBy": "",
+    "updatedBy": "",
+    "createdAt": "2022-03-24T15:09:57.539Z",
+    "updatedAt": "2022-03-24T15:09:57.539Z",
+    "links": null
+  }
