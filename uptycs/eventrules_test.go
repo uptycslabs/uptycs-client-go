@@ -52,8 +52,6 @@ func TestGetEventRules(t *testing.T) {
 				Items: []EventRule{
 					EventRule{
 						ID:            "ae79898a-7437-419d-88ff-e0e8d2c7902a",
-						CustomerID:    "11111111-1111-1111-1111-111111111111",
-						SeedID:        "f64a792c-cdd0-43aa-8b71-eae28e3c3f65",
 						Name:          "badmonkey1652087888893",
 						Description:   "test",
 						Code:          "TESTCODE",

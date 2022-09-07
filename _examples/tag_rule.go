@@ -30,6 +30,7 @@ func main() {
 	newTagRule, err := c.CreateTagRule(uptycs.TagRule{
 		Description: "a test",
 		Source:      "realtime",
+    Platform:    "all",
 		Interval:    30,
 		Name:        "marcus test",
 		Query:       "SELECT upt-mac-edr AS tag FROM system_info WHERE name = 'Mac OS X'",

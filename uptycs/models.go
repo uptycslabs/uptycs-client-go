@@ -9,7 +9,6 @@ type EventRules struct {
 
 type ScriptConfig struct {
 	ID          string `json:"id,omitempty"`
-	CustomerID  string `json:"customerId,omitempty"`
 	QueryPackID string `json:"querypackId,omitempty"`
 	TableName   string `json:"tableName,omitempty"`
 	Added       bool   `json:"added,omitempty"`
@@ -17,8 +16,6 @@ type ScriptConfig struct {
 
 type EventRule struct {
 	ID            string        `json:"id,omitempty"`
-	CustomerID    string        `json:"customerId,omitempty"`
-	SeedID        string        `json:"seedId,omitempty"`
 	Name          string        `json:"name,omitempty"`
 	Description   string        `json:"description,omitempty"`
 	Code          string        `json:"code,omitempty"`
@@ -44,30 +41,29 @@ type EventRule struct {
 }
 
 type BuilderConfig struct {
-	ID              string                    `json:"id,omitempty"`
-	CustomerID      string                    `json:"customerId,omitempty"`
-	TableName       string                    `json:"tableName,omitempty"`
-	Added           bool                      `json:"added"`
-	MatchesFilter   bool                      `json:"matchesFilter"`
-	Filters         BuilderConfigFilterString `json:"filters,omitempty"`
-	Severity        string                    `json:"severity,omitempty"`
-	Key             string                    `json:"key,omitempty"`
-	ValueField      string                    `json:"valueField,omitempty"`
-	AutoAlertConfig AutoAlertConfig           `json:"autoAlertConfig"`
+	ID              string           `json:"id,omitempty"`
+	TableName       string           `json:"tableName,omitempty"`
+	Added           bool             `json:"added"`
+	MatchesFilter   bool             `json:"matchesFilter"`
+	Filters         CustomJSONString `json:"filters,omitempty"`
+	Severity        string           `json:"severity,omitempty"`
+	Key             string           `json:"key,omitempty"`
+	ValueField      string           `json:"valueField,omitempty"`
+	AutoAlertConfig AutoAlertConfig  `json:"autoAlertConfig"`
 }
 
-type BuilderConfigFilterString string
+type CustomJSONString string
 
-func (bcfs *BuilderConfigFilterString) UnmarshalJSON(raw []byte) error {
+func (bcfs *CustomJSONString) UnmarshalJSON(raw []byte) error {
 	if string(raw) == "null" {
-		*bcfs = BuilderConfigFilterString("{}")
+		*bcfs = CustomJSONString("{}")
 	} else {
-		*bcfs = BuilderConfigFilterString(string(raw))
+		*bcfs = CustomJSONString(string(raw))
 	}
 	return nil
 }
 
-func (bcfs BuilderConfigFilterString) MarshalJSON() ([]byte, error) {
+func (bcfs CustomJSONString) MarshalJSON() ([]byte, error) {
 	switch len(bcfs) {
 	case 0:
 		return []byte("{}"), nil
@@ -90,7 +86,6 @@ type AlertRules struct {
 
 type AlertRule struct {
 	ID                     string                 `json:"id,omitempty"`
-	SeedID                 string                 `json:"seedId,omitempty"`
 	Name                   string                 `json:"name,omitempty"`
 	Description            string                 `json:"description,omitempty"`
 	Code                   string                 `json:"code,omitempty"`
@@ -354,10 +349,9 @@ type TagRule struct {
 	Query          string `json:"query,omitempty" validate:"required"`
 	Source         string `json:"source,omitempty" validate:"required,oneof=global realtime"`
 	RunOnce        bool   `json:"runOnce,omitempty"`
-	Interval       int    `json:"interval,omitempty" validate:"required,min=30"`
+	Interval       int    `json:"interval,omitempty" validate:"min=30,excluded_if=RunOnce false"`
 	OSqueryVersion string `json:"osqueryVersion,omitempty"`
-	Platform       string `json:"platform,omitempty"`
-	SeedID         string `json:"seedId,omitempty"`
+	Platform       string `json:"platform" validate:"required_if=Source realtime"`
 	Enabled        bool   `json:"enabled,omitempty"`
 	System         bool   `json:"system,omitempty"`
 	LastRunAt      string `json:"lastRunAt,omitempty"`
@@ -379,7 +373,6 @@ type Tag struct {
 	ID                          string                   `json:"id,omitempty"`
 	Name                        string                   `json:"-"` // There is no name, so just throw the ID in there
 	Value                       string                   `json:"value"`
-	SeedID                      string                   `json:"seedId,omitempty"`
 	Key                         string                   `json:"key,omitempty"`
 	CreatedBy                   string                   `json:"createdBy,omitempty"`
 	UpdatedBy                   string                   `json:"updatedBy,omitempty"`
@@ -438,14 +431,171 @@ type TagConfigurationObject struct {
 	FilePathGroupTag       *TagConfigurationObjectDetails `json:"FilePathGroupTag,omitempty"`
 	Links                  []LinkItem                     `json:"links,omitempty"`
 }
+type FilePathGroups struct {
+	Links  []LinkItem      `json:"links,omitempty"`
+	Items  []FilePathGroup `json:"items,omitempty"`
+	Offset int             `json:"offset,omitempty"`
+	Limit  int             `json:"limit,omitempty"`
+}
+
+type FilePathGroup struct {
+	ID                    string   `json:"id,omitempty"`
+	Name                  string   `json:"name,omitempty"`
+	Description           string   `json:"description,omitempty"`
+	Grouping              string   `json:"grouping,omitempty"`
+	IncludePaths          []string `json:"includePaths"`
+	IncludePathExtensions []string `json:"includePathExtensions"`
+	ExcludePaths          []string `json:"excludePaths"`
+	Custom                bool     `json:"custom" validate:"required"`
+	CheckSignature        bool     `json:"checkSignature"`
+	FileAccesses          bool     `json:"fileAccesses"`
+	//ExcludeProcessPaths   []string                 `json:"excludeProcessPaths"` //TODO this seems broken in the API. returns null or {}
+	ExcludeProcessNames []string                 `json:"excludeProcessNames"`
+	PriorityPaths       []string                 `json:"priorityPaths"`
+	CreatedBy           string                   `json:"createdBy,omitempty"`
+	UpdatedBy           string                   `json:"updatedBy,omitempty"`
+	CreatedAt           string                   `json:"createdAt,omitempty"`
+	UpdatedAt           string                   `json:"updatedAt,omitempty"`
+	Signatures          []FilePathGroupSignature `json:"signatures" validate:"required,min=0"`
+	YaraGroupRules      []YaraGroupRule          `json:"yaraGroupRules" validate:"required,min=0"`
+	Links               []LinkItem               `json:"links"`
+}
+
+type FilePathGroupSignature struct {
+	ID          string   `json:"id,omitempty"`
+	Name        string   `json:"name,omitempty"`
+	Description string   `json:"description,omitempty"`
+	Paths       []string `json:"paths"`
+	CreatedBy   string   `json:"createdBy,omitempty"`
+	UpdatedBy   string   `json:"updatedBy,omitempty"`
+	CreatedAt   string   `json:"createdAt,omitempty"`
+	UpdatedAt   string   `json:"updatedAt,omitempty"`
+}
+
+type YaraGroupRules struct {
+	Links  []LinkItem      `json:"links,omitempty"`
+	Items  []YaraGroupRule `json:"items,omitempty"`
+	Offset int             `json:"offset,omitempty"`
+	Limit  int             `json:"limit,omitempty"`
+}
+
+type YaraGroupRule struct {
+	ID          string     `json:"id,omitempty"`
+	Name        string     `json:"name,omitempty"`
+	Description string     `json:"description,omitempty"`
+	Rules       string     `json:"rules,omitempty"`
+	Custom      bool       `json:"custom,omitempty"`
+	CreatedBy   string     `json:"createdBy,omitempty"`
+	UpdatedBy   string     `json:"updatedBy,omitempty"`
+	CreatedAt   string     `json:"createdAt,omitempty"`
+	UpdatedAt   string     `json:"updatedAt,omitempty"`
+	Links       []LinkItem `json:"links,omitempty"`
+}
+
+type RegistryPaths struct {
+	Links  []LinkItem     `json:"links,omitempty"`
+	Items  []RegistryPath `json:"items,omitempty"`
+	Offset int            `json:"offset,omitempty"`
+	Limit  int            `json:"limit,omitempty"`
+}
+
+type RegistryPath struct {
+	ID                   string     `json:"id"`
+	Name                 string     `json:"name,omitempty"`
+	Description          string     `json:"description,omitempty"`
+	Grouping             string     `json:"grouping,omitempty"`
+	IncludeRegistryPaths []string   `json:"includeRegistryPaths" validate:"required,min=1"`
+	RegAccesses          bool       `json:"regAccesses"`
+	ExcludeRegistryPaths []string   `json:"excludeRegistryPaths"`
+	Custom               bool       `json:"custom"`
+	CreatedBy            string     `json:"createdBy,omitempty"`
+	UpdatedBy            string     `json:"updatedBy,omitempty"`
+	CreatedAt            string     `json:"createdAt,omitempty"`
+	UpdatedAt            string     `json:"updatedAt,omitempty"`
+	Links                []LinkItem `json:"links,omitempty"`
+}
+
+type Querypacks struct {
+	Links  []LinkItem  `json:"links,omitempty"`
+	Items  []Querypack `json:"items,omitempty"`
+	Offset int         `json:"offset,omitempty"`
+	Limit  int         `json:"limit,omitempty"`
+}
+
+type Querypack struct {
+	ID string `json:"id"`
+	//Sha              string           `json:"sha" validate:"required,max=40,min=1"` //TODO Does not work
+	Name             string           `json:"name,omitempty"`
+	Description      string           `json:"description" validate:"required,max=1024,min=1"`
+	Type             string           `json:"type" validate:"required,oneof=compliance default hardware incident system vulnerability"`
+	AdditionalLogger bool             `json:"additionalLogger"`
+	Custom           bool             `json:"custom"`
+	CreatedBy        string           `json:"createdBy,omitempty"`
+	UpdatedBy        string           `json:"updatedBy,omitempty"`
+	CreatedAt        string           `json:"createdAt,omitempty"`
+	UpdatedAt        string           `json:"updatedAt,omitempty"`
+	IsInternal       bool             `json:"isInternal"`
+	ResourceType     string           `json:"resourceType"`
+	Queries          []Query          `json:"queries,omitempty"`
+	Conf             CustomJSONString `json:"conf,omitempty"`
+	Links            []LinkItem       `json:"links"`
+}
+
+type Query struct {
+	ID          string           `json:"id"`
+	Name        string           `json:"name"`
+	Description string           `json:"description"`
+	Query       string           `json:"query"`
+	Removed     bool             `json:"removed"`
+	Version     string           `json:"version"`
+	Interval    int              `json:"interval"`
+	Platform    string           `json:"platform"`
+	Snapshot    bool             `json:"snapshot"`
+	RunNow      bool             `json:"runNow"`
+	Value       string           `json:"value"`
+	QuerypackID string           `json:"querypackId"`
+	TableName   string           `json:"tableName"`
+	DataTypes   CustomJSONString `json:"dataTypes,omitempty"` //This is super ephemeral
+	Verified    bool             `json:"verified"`
+	CreatedBy   string           `json:"createdBy"`
+	UpdatedBy   string           `json:"updatedBy"`
+	CreatedAt   string           `json:"createdAt"`
+	UpdatedAt   string           `json:"updatedAt"`
+}
+
+type AuditConfigurations struct {
+	Links  []LinkItem           `json:"links,omitempty"`
+	Items  []AuditConfiguration `json:"items,omitempty"`
+	Offset int                  `json:"offset,omitempty"`
+	Limit  int                  `json:"limit,omitempty"`
+}
+
+type AuditConfiguration struct {
+	ID          string     `json:"id"`
+	Name        string     `json:"name,omitempty"`
+	Description string     `json:"description,omitempty"`
+	Framework   string     `json:"framework" validate:"required,oneof=CIS PCI CUSTOM FEDRAMP SOC2 HIPAA STIG NIST ISO VDA-TISAX"`
+	Version     string     `json:"version" validate:"required,max=256,min=1"`
+	OsVersion   string     `json:"osVersion" validate:"required,min=1"`
+	Platform    string     `json:"platform" validate:"required,min=1"`
+	TableName   string     `json:"tableName" validate:"required,min=1"`
+	Sha256      string     `json:"sha256,omitempty"`
+	CreatedBy   string     `json:"createdBy,omitempty"`
+	UpdatedBy   string     `json:"updatedBy,omitempty"`
+	CreatedAt   string     `json:"createdAt,omitempty"`
+	UpdatedAt   string     `json:"updatedAt,omitempty"`
+	Type        string     `json:"type,omitempty"`
+	Checks      int        `json:"checks,omitempty"`
+	Links       []LinkItem `json:"links"`
+}
 
 type iAPIType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration
 	GetID() string
 	GetName() string
 	KeysToDelete() []string
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations
 }

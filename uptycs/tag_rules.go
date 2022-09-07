@@ -11,7 +11,9 @@ func (T TagRule) GetName() string {
 }
 
 func (T TagRule) KeysToDelete() []string {
-	return []string{}
+	return []string{
+		"resourceType",
+	}
 }
 
 func (c *Client) CreateTagRule(tagRule TagRule) (TagRule, error) {

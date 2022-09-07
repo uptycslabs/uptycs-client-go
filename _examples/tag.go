@@ -31,9 +31,14 @@ func main() {
 		Key:           "somekey",
 		FlagProfileID: "ed4c1240-ffcb-492a-b95f-82976c8bbab5",
 		Value:         "aws",
-		FilePathGroups: []uptycs.TagConfigurationObject{{
-			ID: "a7335d0e-bf70-4ec1-b422-feefedb6dcd9",
-		}},
+		FilePathGroups: []uptycs.TagConfigurationObject{
+			{
+				ID: "a7335d0e-bf70-4ec1-b422-feefedb6dcd9",
+			},
+			{
+				Name: "FIM - USB Storage File Events",
+			},
+		},
 		RegistryPaths:        []uptycs.TagConfigurationObject{},
 		Querypacks:           []uptycs.TagConfigurationObject{},
 		YaraGroupRules:       []uptycs.TagConfigurationObject{},
