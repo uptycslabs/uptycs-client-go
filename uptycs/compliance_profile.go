@@ -1,6 +1,9 @@
 package uptycs
 
-import "errors"
+import (
+	"errors" 
+	
+)
 
 func (T ComplianceProfile) GetID() string {
 	return T.ID
@@ -21,10 +24,10 @@ func (c *Client) GetComplianceProfiles() (ComplianceProfiles, error) {
 }
 
 func (c *Client) GetComplianceProfile(complianceProfile ComplianceProfile) (ComplianceProfile, error) {
-	if len(complianceProfile.ID) == 0 {
+	if len(complianceProfile.GetID()) == 0 {
 		all, _ := c.GetComplianceProfiles()
 		for _, _item := range all.Items {
-			if _item.Name == complianceProfile.Name {
+			if _item.GetName() == complianceProfile.GetName() {
 				return _item, nil
 			}
 		}

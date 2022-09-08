@@ -1,0 +1,36 @@
+{
+  "Links": [],
+  "Offset": 1,
+  "Limit": 2,
+  "Decorators": null,
+  "Items": [
+    {
+      "id": "compliance-profile-1",
+      "name": "Foo Threat Research",
+      "description": "Test description",
+      "seedId": "random-string-of-characters-for-seed",
+      "customerId": "11111111-1111-1111-1111-111111111111",
+      "custom": true,
+      "priority": 1,
+      "createdBy": "",
+      "updatedBy": "",
+      "createdAt": "2022-03-24T15:09:57.539Z",
+      "updatedAt": "2022-03-24T15:09:57.539Z",
+      "links": null
+    },
+    {
+      "id": "compliance-profile-2",
+      "name": "Foo Threat Research 2",
+      "description": "Test description 2",
+      "seedId": "random-string-of-characters-for-seed-2",
+      "customerId": "11111111-1111-1111-1111-111111111112",
+      "custom": true,
+      "priority": 1,
+      "createdBy": "",
+      "updatedBy": "",
+      "createdAt": "2022-03-24T15:09:57.539Z",
+      "updatedAt": "2022-03-24T15:09:57.539Z",
+      "links": null
+    }
+  ]
+}
