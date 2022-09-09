@@ -290,3 +290,48 @@ func TestCreateComplianceProfile(t *testing.T) {
 	})
 	
 }
+
+func TestUpdateComplianceProfile(t *testing.T) {
+	c, _ := NewClient(Config{
+		Host:       "https://uptycs.foo",
+		APIKey:     "b",
+		APISecret:  "c",
+		CustomerID: "d",
+	})
+
+	updateComplianceProfileData := testHelper{
+		name:    "TestUpdateComplianceProfile",
+		apiMethod: "PUT",
+		fixture: "fixtures/complianceProfiles.json",
+		id:      "compliance-profile-1",
+		out: nil,
+	}
+
+	newComplianceProfile := testComplianceProfile1
+	
+	httpmock.Activate()
+	defer httpmock.DeactivateAndReset()
+
+	t.Run(updateComplianceProfileData.name, func(t *testing.T) {
+		httpmock.RegisterResponder(updateComplianceProfileData.apiMethod, fmt.Sprintf("https://uptycs.foo/public/api/customers/d/complianceProfiles/%v", updateComplianceProfileData.id),
+			func(req *http.Request) (*http.Response, error) {
+				fixture, err := RespFromFixture(updateComplianceProfileData.fixture)
+				if err != nil {
+					t.Errorf(err.Error())
+				}
+				return fixture, err
+			},
+		)
+
+		_, err := c.UpdateComplianceProfile(newComplianceProfile)
+
+		if err != nil {
+			t.Errorf(err.Error())
+		}
+
+		countInfo := httpmock.GetCallCountInfo()
+
+		assert.Equal(t, countInfo[fmt.Sprintf("PUT https://uptycs.foo/public/api/customers/d/complianceProfiles/%v", updateComplianceProfileData.id)], 1)
+	})
+
+}
