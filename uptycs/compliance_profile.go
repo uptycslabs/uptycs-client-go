@@ -36,3 +36,15 @@ func (c *Client) GetComplianceProfile(complianceProfile ComplianceProfile) (Comp
 	}
 	return complianceProfile, errors.New("Compliance profile was not found")
 }
+
+func (c *Client) DeleteComplianceProfile(complianceProfile ComplianceProfile) (ComplianceProfile, error) {
+	return doDelete(c, complianceProfile, "complianceProfiles")
+}
+
+func (c *Client) CreateComplianceProfile(complianceProfile ComplianceProfile) (ComplianceProfile, error) {
+	return doCreate(c, complianceProfile, "complianceProfiles")
+}
+
+func (c *Client) UpdateComplianceProfile(complianceProfile ComplianceProfile) (ComplianceProfile, error) {
+	return doUpdate(c, complianceProfile, "complianceProfiles")
+}
