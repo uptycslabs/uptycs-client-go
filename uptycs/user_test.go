@@ -168,6 +168,7 @@ func TestPutUser(t *testing.T) {
 				Roles:               []Role{},
 				UpdatedAt:           "2022-03-24T15:09:57.539Z",
 				LastUpdatedByUptycs: "2022-03-24T15:09:57.539Z",
+				UserObjectGroups:    []ObjectGroup{},
 			},
 		},
 	}
@@ -234,6 +235,7 @@ func TestCreateUser(t *testing.T) {
 				Roles:               []Role{},
 				UpdatedAt:           "2022-03-24T15:09:57.539Z",
 				LastUpdatedByUptycs: "2022-03-24T15:09:57.539Z",
+				UserObjectGroups:    []ObjectGroup{},
 			},
 		},
 	}

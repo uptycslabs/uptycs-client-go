@@ -144,7 +144,6 @@ func TestGetAlertRule(t *testing.T) {
 			id:      "bcfe1cda-9eba-40fa-9686-9c1caea47732",
 			out: AlertRule{
 				ID:          "bcfe1cda-9eba-40fa-9686-9c1caea47732",
-				SeedID:      "3a606e79-0e91-4e48-bcfe-dfb3798d0d33",
 				Name:        "Login Profile Changes Detected_REDDIT",
 				Description: "Changes detected in Login Profiles, which can result in Privilege Escalations",
 				Code:        "AWS_THREAT_PRIV_ESC_4_REDDIT",

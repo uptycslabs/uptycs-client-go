@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "id": "9a5a3262-ee74-417c-ade0-c1948ec8bc27",
+      "seedId": "caa7f17c-d7a8-4332-a984-c1bcf8bf71bc",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "name": "AmazonAccessKeyId",
+      "description": "amazon access key id",
+      "rules": "rule AwsAccessKeyIdRule : AWS\n{\n    meta:\n        name = \"AWS Access Key ID\"\n        author = \"github.com/pseudo-security\"\n        date = \"2020-01-01\"\n\n        /* Test Cases */\n        test_match_1 = \"AKIA00TESTAWSIDKEY00\"\n\n    strings:\n        $ = /(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}/ fullword\n\n    condition:\n        any of them\n}",
+      "custom": false,
+      "createdBy": "00000000-0000-0000-0000-000000000000",
+      "updatedBy": "00000000-0000-0000-0000-000000000000",
+      "createdAt": "2022-01-17T08:12:16.882Z",
+      "updatedAt": "2022-04-09T06:07:16.431Z",
+      "links": [
+        {
+          "rel": "self",
+          "title": "YaraGroupRule information",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/yaraGroupRules/9a5a3262-ee74-417c-ade0-c1948ec8bc27"
+        },
+        {
+          "rel": "parent",
+          "title": "YaraGroupRules information",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/yaraGroupRules"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "title": "YaraGroupRules information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/yaraGroupRules"
+    },
+    {
+      "rel": "parent",
+      "title": "Customer information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111"
+    }
+  ],
+  "decorators": [],
+  "offset": 0,
+  "limit": 1000
+}

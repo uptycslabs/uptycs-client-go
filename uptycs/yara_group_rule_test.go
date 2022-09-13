@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetRole(t *testing.T) {
+func TestGetYaraGroupRule(t *testing.T) {
 
 	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
@@ -28,21 +28,23 @@ func TestGetRole(t *testing.T) {
 
 	theTests := []convTest{
 		{
-			name:    "TestRole",
-			fixture: "fixtures/role.json",
+			name:    "TestYaraGroupRule",
+			fixture: "fixtures/yaraGroupRule.json",
 			id:      "b7c9c973-e2a3-4913-a755-919026267679",
-			out: Role{
-				ID:                   "ac6ef928-36a5-4388-86d4-575ba1085e7d",
-				Name:                 "Monitoring Profile",
-				Description:          "Role for Uptycs monitoring team to perform necessary tasks",
-				Permissions:          []string{"EXCEPTION:READ", "EXCEPTION:CREATE"},
-				Custom:               true,
-				Hidden:               false,
-				CreatedBy:            "61b98805-54ea-40d9-89b7-f8bf7780666c",
-				UpdatedBy:            "61b98805-54ea-40d9-89b7-f8bf7780666c",
-				CreatedAt:            "2022-08-25T13:54:35.768Z",
-				UpdatedAt:            "2022-08-25T14:46:48.409Z",
-				NoMinimalPermissions: true,
+			out: YaraGroupRule{
+				ID:          "9a5a3262-ee74-417c-ade0-c1948ec8bc27",
+				Name:        "AmazonAccessKeyId",
+				Description: "amazon access key id",
+				Rules:       "rule AwsAccessKeyIdRule : AWS\n{\n    meta:\n        name = \"AWS Access Key ID\"\n        author = \"github.com/pseudo-security\"\n        date = \"2020-01-01\"\n\n        /* Test Cases */\n        test_match_1 = \"AKIA00TESTAWSIDKEY00\"\n\n    strings:\n        $ = /(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}/ fullword\n\n    condition:\n        any of them\n}",
+				Custom:      false,
+				CreatedBy:   "00000000-0000-0000-0000-000000000000",
+				UpdatedBy:   "00000000-0000-0000-0000-000000000000",
+				CreatedAt:   "2022-01-17T08:12:16.882Z",
+				UpdatedAt:   "2022-04-09T06:07:16.431Z",
+				Links: []LinkItem{
+					LinkItem{Rel: "self", Title: "YaraGroupRule information", Href: "/api/customers/111111111111-111111-11111-111111-111111111/yaraGroupRules/9a5a3262-ee74-417c-ade0-c1948ec8bc27"},
+					LinkItem{Rel: "parent", Title: "YaraGroupRules information", Href: "/api/customers/111111111111-111111-11111-111111-111111111/yaraGroupRules"},
+				},
 			},
 		},
 	}
@@ -52,7 +54,7 @@ func TestGetRole(t *testing.T) {
 		defer httpmock.DeactivateAndReset()
 
 		t.Run(theT.name, func(t *testing.T) {
-			httpmock.RegisterResponder("GET", fmt.Sprintf("https://uptycs.foo/public/api/customers/d/roles/%v", theT.id),
+			httpmock.RegisterResponder("GET", fmt.Sprintf("https://uptycs.foo/public/api/customers/d/yaraGroupRules/%v", theT.id),
 				func(req *http.Request) (*http.Response, error) {
 					fixture, err := RespFromFixture(theT.fixture)
 					if err != nil {
@@ -62,7 +64,7 @@ func TestGetRole(t *testing.T) {
 				},
 			)
 
-			roleResp, err := c.GetRole(Role{
+			yaraGroupRuleResp, err := c.GetYaraGroupRule(YaraGroupRule{
 				ID: theT.id,
 			})
 
@@ -70,17 +72,17 @@ func TestGetRole(t *testing.T) {
 				t.Errorf(err.Error())
 			}
 
-			if !reflect.DeepEqual(roleResp, theT.out) {
+			if !reflect.DeepEqual(yaraGroupRuleResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", roleResp)
+				t.Logf("Actual: %v", yaraGroupRuleResp)
 				t.Fail()
 			}
 		})
 	}
 }
 
-func TestDeleteRole(t *testing.T) {
+func TestDeleteYaraGroupRule(t *testing.T) {
 
 	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
@@ -91,13 +93,13 @@ func TestDeleteRole(t *testing.T) {
 
 	type convTest struct {
 		name string
-		in   Role
+		in   YaraGroupRule
 	}
 
 	theTests := []convTest{
 		{
-			name: "TestRole",
-			in: Role{
+			name: "TestYaraGroupRule",
+			in: YaraGroupRule{
 				ID: "9cde7195-ec0c-475e-a208-dbf81a32798a",
 			},
 		},
@@ -108,7 +110,7 @@ func TestDeleteRole(t *testing.T) {
 		defer httpmock.DeactivateAndReset()
 
 		t.Run(theT.name, func(t *testing.T) {
-			httpmock.RegisterResponder("DELETE", fmt.Sprintf("https://uptycs.foo/public/api/customers/d/roles/%v", theT.in.ID),
+			httpmock.RegisterResponder("DELETE", fmt.Sprintf("https://uptycs.foo/public/api/customers/d/yaraGroupRules/%v", theT.in.ID),
 				func(req *http.Request) (*http.Response, error) {
 					resp, err := httpmock.NewJsonResponse(200, "{}")
 					if err != nil {
@@ -118,19 +120,19 @@ func TestDeleteRole(t *testing.T) {
 				},
 			)
 
-			_, err := c.DeleteRole(theT.in)
+			_, err := c.DeleteYaraGroupRule(theT.in)
 			if err != nil {
 				t.Errorf(err.Error())
 			}
 			countInfo := httpmock.GetCallCountInfo()
 
-			assert.Equal(t, countInfo[fmt.Sprintf("DELETE https://uptycs.foo/public/api/customers/d/roles/%v", theT.in.ID)], 1)
+			assert.Equal(t, countInfo[fmt.Sprintf("DELETE https://uptycs.foo/public/api/customers/d/yaraGroupRules/%v", theT.in.ID)], 1)
 			// TODO: assert the body that was intercepted by the mock
 		})
 	}
 }
 
-func TestPutRole(t *testing.T) {
+func TestPutYaraGroupRule(t *testing.T) {
 
 	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
@@ -142,20 +144,14 @@ func TestPutRole(t *testing.T) {
 	type convTest struct {
 		name    string
 		fixture string
-		in      Role
+		in      YaraGroupRule
 	}
 
 	theTests := []convTest{
 		{
-			name:    "TestRole",
-			fixture: "fixtures/roleCreate.json",
-			in: Role{
-				ID:               "ac6ef928-36a5-4388-86d4-575ba1085e7d",
-				Name:             "Monitoring Profile",
-				Description:      "Role for Uptycs monitoring team to perform necessary tasks",
-				Permissions:      []string{},
-				RoleObjectGroups: []ObjectGroup{},
-			},
+			name:    "TestYaraGroupRule",
+			fixture: "fixtures/yaraGroupRule.json",
+			in:      YaraGroupRule{},
 		},
 	}
 
@@ -164,7 +160,7 @@ func TestPutRole(t *testing.T) {
 		defer httpmock.DeactivateAndReset()
 
 		t.Run(theT.name, func(t *testing.T) {
-			httpmock.RegisterResponder("PUT", fmt.Sprintf("https://uptycs.foo/public/api/customers/d/roles/%v", theT.in.ID),
+			httpmock.RegisterResponder("PUT", fmt.Sprintf("https://uptycs.foo/public/api/customers/d/yaraGroupRules/%v", theT.in.ID),
 				func(req *http.Request) (*http.Response, error) {
 					fixture, err := RespFromFixture(theT.fixture)
 					if err != nil {
@@ -174,19 +170,19 @@ func TestPutRole(t *testing.T) {
 				},
 			)
 
-			_, err := c.UpdateRole(theT.in)
+			_, err := c.UpdateYaraGroupRule(theT.in)
 			if err != nil {
 				t.Errorf(err.Error())
 			}
 			countInfo := httpmock.GetCallCountInfo()
 
-			assert.Equal(t, countInfo[fmt.Sprintf("PUT https://uptycs.foo/public/api/customers/d/roles/%v", theT.in.ID)], 1)
+			assert.Equal(t, countInfo[fmt.Sprintf("PUT https://uptycs.foo/public/api/customers/d/yaraGroupRules/%v", theT.in.ID)], 1)
 			// TODO: assert the body that was intercepted by the mock
 		})
 	}
 }
 
-func TestCreateRole(t *testing.T) {
+func TestCreateYaraGroupRule(t *testing.T) {
 
 	c, _ := NewClient(Config{
 		Host:       "https://uptycs.foo",
@@ -198,27 +194,14 @@ func TestCreateRole(t *testing.T) {
 	type convTest struct {
 		name    string
 		fixture string
-		in      Role
+		in      YaraGroupRule
 	}
 
 	theTests := []convTest{
 		{
-			name:    "TestRole",
-			fixture: "fixtures/roleCreate.json",
-			in: Role{
-				ID:                   "ac6ef928-36a5-4388-86d4-575ba1085e7d",
-				Name:                 "Monitoring Profile",
-				Description:          "Role for Uptycs monitoring team to perform necessary tasks",
-				Permissions:          []string{"EXCEPTION:READ", "EXCEPTION:CREATE"},
-				RoleObjectGroups:     []ObjectGroup{},
-				Custom:               true,
-				Hidden:               false,
-				CreatedBy:            "61b98805-54ea-40d9-89b7-f8bf7780666c",
-				UpdatedBy:            "61b98805-54ea-40d9-89b7-f8bf7780666c",
-				CreatedAt:            "2022-08-25T13:54:35.768Z",
-				UpdatedAt:            "2022-08-25T14:46:48.409Z",
-				NoMinimalPermissions: true,
-			},
+			name:    "TestYaraGroupRule",
+			fixture: "fixtures/yaraGroupRule.json",
+			in:      YaraGroupRule{},
 		},
 	}
 
@@ -227,7 +210,7 @@ func TestCreateRole(t *testing.T) {
 		defer httpmock.DeactivateAndReset()
 
 		t.Run(theT.name, func(t *testing.T) {
-			httpmock.RegisterResponder("POST", "https://uptycs.foo/public/api/customers/d/roles",
+			httpmock.RegisterResponder("POST", "https://uptycs.foo/public/api/customers/d/yaraGroupRules",
 				func(req *http.Request) (*http.Response, error) {
 					fixture, err := RespFromFixture(theT.fixture)
 					if err != nil {
@@ -237,13 +220,13 @@ func TestCreateRole(t *testing.T) {
 				},
 			)
 
-			_, err := c.CreateRole(theT.in)
+			_, err := c.CreateYaraGroupRule(theT.in)
 			if err != nil {
 				t.Errorf(err.Error())
 			}
 			countInfo := httpmock.GetCallCountInfo()
 
-			assert.Equal(t, countInfo["POST https://uptycs.foo/public/api/customers/d/roles"], 1)
+			assert.Equal(t, countInfo["POST https://uptycs.foo/public/api/customers/d/yaraGroupRules"], 1)
 		})
 	}
 }

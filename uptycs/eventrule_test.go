@@ -41,7 +41,7 @@ func TestPutEventRule(t *testing.T) {
 					TableName:     "process_open_sockets",
 					Added:         true,
 					MatchesFilter: true,
-					Filters: BuilderConfigFilterString(heredoc.Doc(`{
+					Filters: CustomJSONString(heredoc.Doc(`{
 				      "and": [
 				        {
 				          "not": true,
@@ -173,7 +173,7 @@ func TestCreateEventRule(t *testing.T) {
 					TableName:     "process_open_sockets",
 					Added:         true,
 					MatchesFilter: true,
-					Filters: BuilderConfigFilterString(heredoc.Doc(`{
+					Filters: CustomJSONString(heredoc.Doc(`{
 	    			  "and": [
 	    			    {
 	    			      "not": true,
@@ -248,8 +248,6 @@ func TestGetEventRule(t *testing.T) {
 			id:      "e2f5af43-0044-40ef-b915-6dab1617166d",
 			out: EventRule{
 				ID:            "e2f5af43-0044-40ef-b915-6dab1617166d",
-				CustomerID:    "111111111111-111111-11111-111111-111111111",
-				SeedID:        "125b2c93-1dee-4a6c-ae80-45bcdf7000b0",
 				Name:          "Process dropped script file on monitored locations - T1204.002 User Execution_LINUX",
 				Description:   "Adversaries may drop scripts in system path to trick user into running them",
 				Code:          "ATTACK_DROP_SCRIPT_T1204.002_LINUX_USER_EXECUTION_MALICIOUS_FILE",
@@ -286,8 +284,6 @@ func TestGetEventRule(t *testing.T) {
 			id:      "69bc42ba-d7c5-401d-b746-61afe5b372a2",
 			out: EventRule{
 				ID:          "69bc42ba-d7c5-401d-b746-61afe5b372a2",
-				CustomerID:  "111111111111-111111-11111-111111-111111111",
-				SeedID:      "125b2c93-1dee-4a6c-ae80-45bcdf7000b0",
 				Name:        "Process dropped script file on monitored locations - T1204.002 User Execution_LINUX",
 				Description: "Adversaries may drop scripts in system path to trick user into running them",
 				Code:        "ATTACK_DROP_SCRIPT_T1204.002_LINUX_USER_EXECUTION_MALICIOUS_FILE",
@@ -317,11 +313,10 @@ func TestGetEventRule(t *testing.T) {
 				Lock:       false,
 				BuilderConfig: BuilderConfig{
 					ID:              "69bc42ba-d7c5-401d-b746-61afe5b372a2",
-					CustomerID:      "111111111111-111111-11111-111111-111111111",
 					TableName:       "process_file_events",
 					Added:           true,
 					MatchesFilter:   true,
-					Filters:         BuilderConfigFilterString(heredoc.Doc(`{"and":[{"or":[{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":false},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":91},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/sbin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/bin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/sbin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/bin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/games/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/local/games/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/snap/bin/"},{"and":[{"or":[{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/home/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/root/"}]},{"or":[{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/Downloads/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/Download/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/downloads/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/download/"}]}]}]}]}`)),
+					Filters:         CustomJSONString(heredoc.Doc(`{"and":[{"or":[{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":false},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":91},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/sbin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/bin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/sbin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/bin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/games/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/local/games/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/snap/bin/"},{"and":[{"or":[{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/home/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/root/"}]},{"or":[{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/Downloads/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/Download/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/downloads/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/download/"}]}]}]}]}`)),
 					Severity:        "medium",
 					Key:             "Path",
 					ValueField:      "path",

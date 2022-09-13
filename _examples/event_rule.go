@@ -46,7 +46,7 @@ func main() {
 			TableName:     "process_open_sockets",
 			Added:         true,
 			MatchesFilter: true,
-			Filters: uptycs.BuilderConfigFilterString(heredoc.Doc(`{
+			Filters: uptycs.CustomJSONString(heredoc.Doc(`{
 			    "and": [
 			      {
 			        "not": true,
