@@ -309,7 +309,6 @@ type ComplianceProfile struct {
 	CreatedAt                     string        `json:"createdAt"`
 	UpdatedAt                     string        `json:"updatedAt"`
 	Links                         []LinkItem    `json:"links"`
-	ComplianceProfileObjectGroups []ObjectGroup `json:"complianceProfileObjectGroups"`
 }
 
 type ComplianceProfiles struct {
