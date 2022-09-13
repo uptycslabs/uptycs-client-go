@@ -1,8 +1,7 @@
 package uptycs
 
 import (
-	"errors" 
-	
+	"errors"
 )
 
 func (T ComplianceProfile) GetID() string {
@@ -14,9 +13,7 @@ func (T ComplianceProfile) GetName() string {
 }
 
 func (T ComplianceProfile) KeysToDelete() []string {
-	return []string{
-		
-	}
+	return []string{}
 }
 
 func (c *Client) GetComplianceProfiles() (ComplianceProfiles, error) {

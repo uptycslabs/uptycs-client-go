@@ -6,7 +6,7 @@ A Go library for [uptycs](https://uptycs.io)
 
 Addition of a new config type requires the baseline addition of several files and a modification to a few other files.
 
-Each config type needs 
+Each config type needs
 - an entry (or multiple) in models.go describing the exact structure of that object type
 - a file in fixtures file with the expected output from the get call to the api
 - a go file in the uptycs folder following the naming convention of the rest of the config types

@@ -299,27 +299,25 @@ type Roles struct {
 }
 
 type ComplianceProfile struct {
-	ID                   			  string        `json:"id"`
-	Name                 			  string        `json:"name,omitempty"`
-	Description          			  string        `json:"description,omitempty"`
-	SeedId	             			  string        `json:"seedId"`
-	CustomerId           			  string        `json:"customerId,omitempty"`
-	Custom               			  bool          `json:"custom"`
-	Priority             			  int           `json:"priority,omitempty"`
-	CreatedBy            			  string        `json:"createdBy"`
-	UpdatedBy            			  string        `json:"updatedBy"`
-	CreatedAt            			  string        `json:"createdAt"`
-	UpdatedAt             			  string        `json:"updatedAt"`
-	Links						   	  []LinkItem    `json:"links"`
-	ComplianceProfileObjectGroups     []ObjectGroup `json:"complianceProfileObjectGroups"`
+	ID                            string        `json:"id"`
+	Name                          string        `json:"name,omitempty"`
+	Description                   string        `json:"description,omitempty"`
+	Custom                        bool          `json:"custom"`
+	Priority                      int           `json:"priority,omitempty"`
+	CreatedBy                     string        `json:"createdBy"`
+	UpdatedBy                     string        `json:"updatedBy"`
+	CreatedAt                     string        `json:"createdAt"`
+	UpdatedAt                     string        `json:"updatedAt"`
+	Links                         []LinkItem    `json:"links"`
+	ComplianceProfileObjectGroups []ObjectGroup `json:"complianceProfileObjectGroups"`
 }
 
 type ComplianceProfiles struct {
-	Links  		[]LinkItem 		     `json:"links,omitempty"`
-	Items  		[]ComplianceProfile  `json:"items,omitempty"`
-	Offset 		int        			 `json:"offset,omitempty"`
-	Limit  		int        			 `json:"limit,omitempty"`
-	Decorators  []string             `json:"decorators,omitempty"`
+	Links      []LinkItem          `json:"links,omitempty"`
+	Items      []ComplianceProfile `json:"items,omitempty"`
+	Offset     int                 `json:"offset,omitempty"`
+	Limit      int                 `json:"limit,omitempty"`
+	Decorators []string            `json:"decorators,omitempty"`
 }
 
 type ObjectGroup struct {
@@ -655,5 +653,5 @@ type iAPIType interface {
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles 
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles
 }

@@ -11,41 +11,37 @@ import (
 )
 
 type testHelper struct {
-	name    string
+	name      string
 	apiMethod string
-	fixture string
-	id      string
-	out     interface{}
+	fixture   string
+	id        string
+	out       interface{}
 }
 
-var testComplianceProfile1 ComplianceProfile = ComplianceProfile{
-	ID:                  "compliance-profile-1",
-	Name:                "Foo Threat Research",
-	SeedId:              "random-string-of-characters-for-seed",
-	CustomerId:          "11111111-1111-1111-1111-111111111111",
-	Description:         "Test description",
-	Custom:              true,
-	Priority:            1,
-	CreatedAt:           "2022-03-24T15:09:57.539Z",
-	CreatedBy:           "",
-	UpdatedAt:           "2022-03-24T15:09:57.539Z",
-	UpdatedBy:           "",
-	Links:     			 nil,
+var testComplianceProfile1 = ComplianceProfile{
+	ID:          "compliance-profile-1",
+	Name:        "Foo Threat Research",
+	Description: "Test description",
+	Custom:      true,
+	Priority:    1,
+	CreatedAt:   "2022-03-24T15:09:57.539Z",
+	CreatedBy:   "",
+	UpdatedAt:   "2022-03-24T15:09:57.539Z",
+	UpdatedBy:   "",
+	Links:       nil,
 }
 
-var testComplianceProfile2 ComplianceProfile = ComplianceProfile{
-	ID:                  "compliance-profile-2",
-	Name:                "Foo Threat Research 2",
-	SeedId:              "random-string-of-characters-for-seed-2",
-	CustomerId:          "11111111-1111-1111-1111-111111111112",
-	Description:         "Test description 2",
-	Custom:              true,
-	Priority:            1,
-	CreatedAt:           "2022-03-24T15:09:57.539Z",
-	CreatedBy:           "",
-	UpdatedAt:           "2022-03-24T15:09:57.539Z",
-	UpdatedBy:           "",
-	Links:     			 nil,
+var testComplianceProfile2 = ComplianceProfile{
+	ID:          "compliance-profile-2",
+	Name:        "Foo Threat Research 2",
+	Description: "Test description 2",
+	Custom:      true,
+	Priority:    1,
+	CreatedAt:   "2022-03-24T15:09:57.539Z",
+	CreatedBy:   "",
+	UpdatedAt:   "2022-03-24T15:09:57.539Z",
+	UpdatedBy:   "",
+	Links:       nil,
 }
 
 func TestGetComplianceProfile(t *testing.T) {
@@ -57,22 +53,21 @@ func TestGetComplianceProfile(t *testing.T) {
 	})
 
 	simpleSuccessfulTestNeededValues := testHelper{
-		name:    "TestComplianceProfile",
+		name:      "TestComplianceProfile",
 		apiMethod: "GET",
-		fixture: "fixtures/complianceProfile.json",
-		id:      "bbcccdddd-eeeeef-fffff",
-		out: testComplianceProfile1,
+		fixture:   "fixtures/complianceProfile.json",
+		id:        "bbcccdddd-eeeeef-fffff",
+		out:       testComplianceProfile1,
 	}
 
 	simpleSuccessfulTestMultiple := testHelper{
-		name:    "Simple Successful test with no id but found by name",
+		name:      "Simple Successful test with no id but found by name",
 		apiMethod: "GET",
-		fixture: "fixtures/complianceProfile.json",
-		id:      "",
-		out: testComplianceProfile2,
+		fixture:   "fixtures/complianceProfile.json",
+		id:        "",
+		out:       testComplianceProfile2,
 	}
 
-	
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 
@@ -86,7 +81,6 @@ func TestGetComplianceProfile(t *testing.T) {
 				return fixture, err
 			},
 		)
-
 
 		complianceProfileResp, err := c.GetComplianceProfile(ComplianceProfile{
 			ID: simpleSuccessfulTestNeededValues.id,
@@ -103,9 +97,7 @@ func TestGetComplianceProfile(t *testing.T) {
 			t.Fail()
 		}
 	})
-	
 
-	
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 
@@ -119,7 +111,7 @@ func TestGetComplianceProfile(t *testing.T) {
 				return fixture, err
 			},
 		)
-		httpmock.RegisterResponder(simpleSuccessfulTestMultiple.apiMethod, fmt.Sprintf("https://uptycs.foo/public/api/customers/d/complianceProfiles"),
+		httpmock.RegisterResponder(simpleSuccessfulTestMultiple.apiMethod, "https://uptycs.foo/public/api/customers/d/complianceProfiles",
 			func(req *http.Request) (*http.Response, error) {
 				fixture, err := RespFromFixture("fixtures/complianceProfiles.json")
 				if err != nil {
@@ -155,16 +147,16 @@ func TestGetComplianceProfiles(t *testing.T) {
 	})
 
 	simpleSuccessfulTestProfiles := testHelper{
-		name:    "TestComplianceProfilesGet",
+		name:      "TestComplianceProfilesGet",
 		apiMethod: "GET",
-		fixture: "fixtures/complianceProfiles.json",
-		id:      "",
+		fixture:   "fixtures/complianceProfiles.json",
+		id:        "",
 		out: ComplianceProfiles{
-			Links: []LinkItem{},
-			Offset: 1, 
-			Limit: 2,
+			Links:      []LinkItem{},
+			Offset:     1,
+			Limit:      2,
 			Decorators: nil,
-			Items: []ComplianceProfile {
+			Items: []ComplianceProfile{
 				testComplianceProfile1,
 				testComplianceProfile2,
 			},
@@ -175,7 +167,7 @@ func TestGetComplianceProfiles(t *testing.T) {
 	defer httpmock.DeactivateAndReset()
 
 	t.Run(simpleSuccessfulTestProfiles.name, func(t *testing.T) {
-		httpmock.RegisterResponder(simpleSuccessfulTestProfiles.apiMethod, fmt.Sprintf("https://uptycs.foo/public/api/customers/d/complianceProfiles"),
+		httpmock.RegisterResponder(simpleSuccessfulTestProfiles.apiMethod, "https://uptycs.foo/public/api/customers/d/complianceProfiles",
 			func(req *http.Request) (*http.Response, error) {
 				fixture, err := RespFromFixture("fixtures/complianceProfiles.json")
 				if err != nil {
@@ -209,13 +201,13 @@ func TestDeleteComplianceProfile(t *testing.T) {
 	})
 
 	deleteUserTestData := testHelper{
-		name:    "TestDeleteComplianceProfile",
+		name:      "TestDeleteComplianceProfile",
 		apiMethod: "DELETE",
-		fixture: "",
-		id:      "bbcccdddd-eeeeef-fffff",
-		out: nil,
+		fixture:   "",
+		id:        "bbcccdddd-eeeeef-fffff",
+		out:       nil,
 	}
-	
+
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 
@@ -229,7 +221,6 @@ func TestDeleteComplianceProfile(t *testing.T) {
 				return resp, err
 			},
 		)
-
 
 		_, err := c.DeleteComplianceProfile(ComplianceProfile{
 			ID: "bbcccdddd-eeeeef-fffff",
@@ -255,20 +246,20 @@ func TestCreateComplianceProfile(t *testing.T) {
 	})
 
 	createComplianceProfileData := testHelper{
-		name:    "TestCreateComplianceProfile",
+		name:      "TestCreateComplianceProfile",
 		apiMethod: "POST",
-		fixture: "fixtures/complianceProfile.json",
-		id:      "bbcccdddd-eeeeef-fffff",
-		out: nil,
+		fixture:   "fixtures/complianceProfile.json",
+		id:        "bbcccdddd-eeeeef-fffff",
+		out:       nil,
 	}
 
 	newComplianceProfile := testComplianceProfile1
-	
+
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 
 	t.Run(createComplianceProfileData.name, func(t *testing.T) {
-		httpmock.RegisterResponder(createComplianceProfileData.apiMethod, fmt.Sprintf("https://uptycs.foo/public/api/customers/d/complianceProfiles"),
+		httpmock.RegisterResponder(createComplianceProfileData.apiMethod, "https://uptycs.foo/public/api/customers/d/complianceProfiles",
 			func(req *http.Request) (*http.Response, error) {
 				fixture, err := RespFromFixture(createComplianceProfileData.fixture)
 				if err != nil {
@@ -288,7 +279,7 @@ func TestCreateComplianceProfile(t *testing.T) {
 
 		assert.Equal(t, countInfo["POST https://uptycs.foo/public/api/customers/d/complianceProfiles"], 1)
 	})
-	
+
 }
 
 func TestUpdateComplianceProfile(t *testing.T) {
@@ -300,15 +291,15 @@ func TestUpdateComplianceProfile(t *testing.T) {
 	})
 
 	updateComplianceProfileData := testHelper{
-		name:    "TestUpdateComplianceProfile",
+		name:      "TestUpdateComplianceProfile",
 		apiMethod: "PUT",
-		fixture: "fixtures/complianceProfiles.json",
-		id:      "compliance-profile-1",
-		out: nil,
+		fixture:   "fixtures/complianceProfiles.json",
+		id:        "compliance-profile-1",
+		out:       nil,
 	}
 
 	newComplianceProfile := testComplianceProfile1
-	
+
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 
