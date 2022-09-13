@@ -1,0 +1,53 @@
+{
+  "id": "ac4cea47-17d4-4199-8fa8-f658355c36ae",
+  "customerId": "111111111111-111111-11111-111111-111111111",
+  "sha": null,
+  "seedId": "f30f19f6-c728-45c1-8669-869dd9896ec8",
+  "name": "asset_catalog_os_baseline",
+  "description": "linux os baseline for list binaries",
+  "type": "default",
+  "additionalLogger": false,
+  "custom": false,
+  "createdBy": "00000000-0000-0000-0000-000000000000",
+  "updatedBy": "00000000-0000-0000-0000-000000000000",
+  "createdAt": "2022-05-02T06:29:48.711Z",
+  "updatedAt": "2022-09-13T04:46:50.098Z",
+  "isInternal": false,
+  "resourceType": "asset",
+  "queries": [
+    {
+      "id": "a541f9eb-59d9-464d-ab35-854b47dd06f2",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "name": "linux_baseline_lib_directory",
+      "description": "",
+      "query": "SELECT\n    path,\n    directory,\n    filename,\n    symlink\nFROM\n    file\nWHERE path like '/lib/%%'\n  and filename != '.'",
+      "removed": true,
+      "version": null,
+      "interval": 86400,
+      "platform": "linux",
+      "snapshot": true,
+      "runNow": false,
+      "value": "",
+      "querypackId": "ac4cea47-17d4-4199-8fa8-f658355c36ae",
+      "tableName": "qp_asset_catalog_os_baseline_q_linux_baseline_lib_directory",
+      "dataTypes": {
+        "path": "VARCHAR",
+        "symlink": "BIGINT",
+        "filename": "VARCHAR",
+        "directory": "VARCHAR"
+      },
+      "verified": true,
+      "createdBy": "00000000-0000-0000-0000-000000000000",
+      "updatedBy": null,
+      "createdAt": "2022-09-13T04:46:50.152Z",
+      "updatedAt": "2022-09-13T04:46:50.152Z"
+    }
+  ],
+  "conf": {
+    "queries": {
+      "linux_baseline_lib_directory": {
+        "description": ""
+      }
+    }
+  }
+}

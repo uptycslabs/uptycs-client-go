@@ -1,0 +1,78 @@
+{
+  "items": [
+    {
+      "id": "54755880-2f1a-430f-9c52-4787c3b24fb7",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "name": "AWS Account ID Tag",
+      "description": "Tag assets with their AWS account ID",
+      "query": "select owner_id as tag, upt_asset_id from upt_cloud_instance_inventory;",
+      "source": "realtime",
+      "runOnce": false,
+      "interval": 60,
+      "osqueryVersion": null,
+      "platform": "linux",
+      "seedId": "d4004ffc-74a9-436c-bf25-070c32032db2",
+      "enabled": false,
+      "system": false,
+      "lastRunAt": null,
+      "createdBy": "66a9a52c-5fa0-4cf4-abe7-da5504f67950",
+      "updatedBy": "66a9a52c-5fa0-4cf4-abe7-da5504f67950",
+      "createdAt": "2022-02-03T04:48:09.945Z",
+      "updatedAt": "2022-07-11T19:28:16.532Z",
+      "resourceType": "asset",
+      "links": [
+        {
+          "rel": "self",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/tagRules/54755880-2f1a-430f-9c52-4787c3b24fb7"
+        },
+        {
+          "rel": "parent",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/tagRules"
+        }
+      ]
+    },
+    {
+      "id": "3b231f3a-f852-4d86-8611-2d3a1a368851",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "name": "Log4jshell tag rule",
+      "description": "Auto tag all assets",
+      "query": "SELECT\n\tCASE\n  \tWHEN vercmp(split(osquery_version, '-Uptycs')[1], '5.0.1.22') < 0 THEN 'upt-log4shell-exploit-tracker-osq-pre-5.0.1.22'\n  \tWHEN vercmp(split(osquery_version, '-Uptycs')[1], '5.0.1.22') >= 0 THEN 'upt-log4shell-exploit-tracker-osq-post-5.0.1.22'\n\tEND\n\t\tAS tag,\n\tupt_asset_id\nFROM\n\tupt_assets;",
+      "source": "global",
+      "runOnce": false,
+      "interval": 3600,
+      "osqueryVersion": null,
+      "platform": "all",
+      "seedId": "614aba88-e7b5-4eaf-bcac-c0b39e98f77d",
+      "enabled": false,
+      "system": false,
+      "lastRunAt": null,
+      "createdBy": "00000000-0000-0000-0000-000000000000",
+      "updatedBy": "00000000-0000-0000-0000-000000000000",
+      "createdAt": "2022-01-03T05:34:17.964Z",
+      "updatedAt": "2022-04-09T05:59:46.315Z",
+      "resourceType": "asset",
+      "links": [
+        {
+          "rel": "self",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/tagRules/3b231f3a-f852-4d86-8611-2d3a1a368851"
+        },
+        {
+          "rel": "parent",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/tagRules"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/tagRules"
+    },
+    {
+      "rel": "parent",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111"
+    }
+  ],
+  "offset": 0,
+  "limit": 1000
+}

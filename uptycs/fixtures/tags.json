@@ -1,0 +1,116 @@
+{
+  "links": [
+    {
+      "rel": "self",
+      "title": "Tags information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/tags"
+    },
+    {
+      "rel": "parent",
+      "title": "Customer information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111"
+    }
+  ],
+  "items": [
+    {
+      "id": "9dfc53a4-bf1e-4efe-8f04-e1fd8802e9e3",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "key": "636776063332",
+      "value": null,
+      "createdBy": "66a9a52c-5fa0-4cf4-abe7-da5504f67950",
+      "updatedBy": null,
+      "flagProfileId": null,
+      "customProfileId": null,
+      "complianceProfileId": null,
+      "processBlockRuleId": null,
+      "dnsBlockRuleId": null,
+      "windowsDefenderPreferenceId": null,
+      "tag": "636776063332",
+      "custom": true,
+      "system": false,
+      "createdAt": "2022-02-03T05:06:53.918Z",
+      "tagRuleId": null,
+      "expireAt": null,
+      "status": "active",
+      "source": "direct",
+      "updatedAt": "2022-02-03T05:06:53.918Z",
+      "resourceType": "asset",
+      "filePathGroups": [],
+      "eventExcludeProfiles": [],
+      "atcQueries": [],
+      "registryPaths": [],
+      "auditRules": [],
+      "prometheusTargets": [],
+      "querypacks": [],
+      "yaraGroupRules": [],
+      "auditConfigurations": [],
+      "imageLoadExclusions": [],
+      "auditGroups": [],
+      "destinations": [],
+      "redactions": [],
+      "links": [
+        {
+          "rel": "self",
+          "title": "Tag information",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/tags/9dfc53a4-bf1e-4efe-8f04-e1fd8802e9e3"
+        },
+        {
+          "rel": "parent",
+          "title": "Tags information",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/tags"
+        }
+      ]
+    },
+    {
+      "id": "925dd20d-ec90-4c27-9f95-afc7ec6bdc14",
+      "customerId": "111111111111-111111-11111-111111-111111111",
+      "key": "ads-1",
+      "value": null,
+      "createdBy": "00000000-0000-0000-0000-000000000000",
+      "updatedBy": null,
+      "flagProfileId": null,
+      "customProfileId": null,
+      "complianceProfileId": null,
+      "processBlockRuleId": null,
+      "dnsBlockRuleId": null,
+      "windowsDefenderPreferenceId": null,
+      "tag": "ads-1",
+      "custom": false,
+      "system": false,
+      "createdAt": "2022-08-01T16:01:08.853Z",
+      "tagRuleId": null,
+      "expireAt": null,
+      "status": "active",
+      "source": "direct",
+      "updatedAt": "2022-08-01T16:01:08.857Z",
+      "resourceType": "kubernetes",
+      "filePathGroups": [],
+      "eventExcludeProfiles": [],
+      "atcQueries": [],
+      "registryPaths": [],
+      "auditRules": [],
+      "prometheusTargets": [],
+      "querypacks": [],
+      "yaraGroupRules": [],
+      "auditConfigurations": [],
+      "imageLoadExclusions": [],
+      "auditGroups": [],
+      "destinations": [],
+      "redactions": [],
+      "links": [
+        {
+          "rel": "self",
+          "title": "Tag information",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/tags/925dd20d-ec90-4c27-9f95-afc7ec6bdc14"
+        },
+        {
+          "rel": "parent",
+          "title": "Tags information",
+          "href": "/api/customers/111111111111-111111-11111-111111-111111111/tags"
+        }
+      ]
+    }
+  ],
+  "offset": 0,
+  "limit": 1000
+}
