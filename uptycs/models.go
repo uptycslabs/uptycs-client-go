@@ -571,22 +571,56 @@ type AuditConfigurations struct {
 }
 
 type AuditConfiguration struct {
-	ID          string     `json:"id"`
-	Name        string     `json:"name,omitempty"`
-	Description string     `json:"description,omitempty"`
-	Framework   string     `json:"framework" validate:"required,oneof=CIS PCI CUSTOM FEDRAMP SOC2 HIPAA STIG NIST ISO VDA-TISAX"`
-	Version     string     `json:"version" validate:"required,max=256,min=1"`
-	OsVersion   string     `json:"osVersion" validate:"required,min=1"`
-	Platform    string     `json:"platform" validate:"required,min=1"`
-	TableName   string     `json:"tableName" validate:"required,min=1"`
-	Sha256      string     `json:"sha256,omitempty"`
-	CreatedBy   string     `json:"createdBy,omitempty"`
-	UpdatedBy   string     `json:"updatedBy,omitempty"`
-	CreatedAt   string     `json:"createdAt,omitempty"`
-	UpdatedAt   string     `json:"updatedAt,omitempty"`
-	Type        string     `json:"type,omitempty"`
-	Checks      int        `json:"checks,omitempty"`
-	Links       []LinkItem `json:"links"`
+	ID          string       `json:"id"`
+	Name        string       `json:"name,omitempty"`
+	Description string       `json:"description,omitempty"`
+	Framework   string       `json:"framework" validate:"required,oneof=CIS PCI CUSTOM FEDRAMP SOC2 HIPAA STIG NIST ISO VDA-TISAX"`
+	Version     string       `json:"version" validate:"required,max=256,min=1"`
+	OsVersion   string       `json:"osVersion" validate:"required,min=1"`
+	Platform    string       `json:"platform" validate:"required,min=1"`
+	TableName   string       `json:"tableName" validate:"required,min=1"`
+	Sha256      string       `json:"sha256,omitempty"`
+	CreatedBy   string       `json:"createdBy,omitempty"`
+	UpdatedBy   string       `json:"updatedBy,omitempty"`
+	CreatedAt   string       `json:"createdAt,omitempty"`
+	UpdatedAt   string       `json:"updatedAt,omitempty"`
+	Type        string       `json:"type,omitempty"`
+	Checks      int          `json:"checks,omitempty"`
+	AuditEntry  []AuditEntry `json:"auditEntities"`
+	Links       []LinkItem   `json:"links"`
+}
+
+type AuditEntry struct {
+	ID                   string   `json:"id"`
+	AuditConfigurationID string   `json:"auditConfigurationId"`
+	AuditName            []string `json:"auditName"`
+	Standard             string   `json:"standard"`
+	Version              string   `json:"version"`
+	Section              string   `json:"section"`
+	Title                string   `json:"title"`
+	Scored               bool     `json:"scored"`
+	Level                string   `json:"level"`
+	Description          string   `json:"description"`
+	Rationale            string   `json:"rationale"`
+	Command              string   `json:"command"`
+	Remediation          string   `json:"remediation"`
+	ExpectedValue        string   `json:"expectedValue"`
+	AuthoritativeSource  string   `json:"authoritativeSource"`
+	Exception            string   `json:"exception"`
+	Chapter              string   `json:"chapter"`
+	CheckID              string   `json:"checkId"`
+	Enabled              bool     `json:"enabled"`
+	Service              string   `json:"service"`
+	CreatedBy            string   `json:"createdBy"`
+	Score                float64  `json:"score"`
+	UpdatedBy            string   `json:"updatedBy"`
+	RunCategory          int      `json:"runCategory"`
+	Timeout              int      `json:"timeout"`
+	CreatedAt            string   `json:"createdAt"`
+	UpdatedAt            string   `json:"updatedAt"`
+	IsManual             bool     `json:"isManual"`
+	//RemediationAction    interface{} `json:"remediationAction"`// TODO there are no examples of this
+	//Parameters           interface{} `json:"parameters"` // TODO there are no examples of this
 }
 
 type iAPIType interface {

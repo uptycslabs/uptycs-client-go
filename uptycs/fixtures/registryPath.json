@@ -1,0 +1,31 @@
+{
+  "id": "ce064913-0c00-4b14-8df3-b1dd90372f04",
+  "customerId": "111111111111-111111-11111-111111-111111111",
+  "seedId": "d6ab4e6a-1db9-4afe-9736-6d4da53991d2",
+  "name": "upt_lsa_provider",
+  "description": "LSA Providers",
+  "grouping": "ATTACK",
+  "includeRegistryPaths": [
+    "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\%",
+    "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SecurityProviders\\%%"
+  ],
+  "regAccesses": false,
+  "excludeRegistryPaths": [],
+  "custom": true,
+  "createdBy": "82c8c71f-12a3-40c3-ba35-b59c08ab4412",
+  "updatedBy": "82c8c71f-12a3-40c3-ba35-b59c08ab4412",
+  "createdAt": "2021-06-10T11:05:01.943Z",
+  "updatedAt": "2021-06-10T11:05:01.943Z",
+  "links": [
+    {
+      "rel": "self",
+      "title": "Registry path information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/registryPaths/ce064913-0c00-4b14-8df3-b1dd90372f04"
+    },
+    {
+      "rel": "parent",
+      "title": "Registry paths information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/registryPaths"
+    }
+  ]
+}
