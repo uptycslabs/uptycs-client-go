@@ -247,21 +247,21 @@ type ProcessFileEvents struct {
 }
 
 type User struct {
-	ID                  string        `json:"id"`
+	ID                  string        `json:"id,omitempty"`
 	Name                string        `json:"name"`
-	Email               string        `json:"email"`
-	Phone               string        `json:"phone"`
+	Email               string        `json:"email,omitempty"`
+	Phone               string        `json:"phone,omitempty"`
 	Active              bool          `json:"active"`
 	SuperAdmin          bool          `json:"superAdmin"`
 	Bot                 bool          `json:"bot"`
 	Support             bool          `json:"support"`
 	PriorLogin          bool          `json:"priorLogin"`
-	ImageURL            string        `json:"imageUrl"`
-	Password            string        `json:"password"`
-	CreatedAt           string        `json:"createdAt"`
+	ImageURL            string        `json:"imageUrl,omitempty"`
+	Password            string        `json:"password,omitempty"`
 	MaxIdleTimeMins     int           `json:"maxIdleTimeMins" validate:"required,max=360,min=1"`
 	AlertHiddenColumns  []string      `json:"alertHiddenColumns" validate:"required,min=0"`
-	UpdatedAt           string        `json:"updatedAt"`
+	UpdatedAt           string        `json:"updatedAt,omitempty"`
+	CreatedAt           string        `json:"createdAt,omitempty"`
 	LastUpdatedByUptycs string        `json:"lastUpdatedByUptycs"`
 	Roles               []Role        `json:"roles" validate:"required,min=0"`
 	UserObjectGroups    []ObjectGroup `json:"userObjectGroups" validate:"required,min=0"`
