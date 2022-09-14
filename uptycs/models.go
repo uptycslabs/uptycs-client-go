@@ -299,16 +299,16 @@ type Roles struct {
 }
 
 type ComplianceProfile struct {
-	ID                            string        `json:"id"`
-	Name                          string        `json:"name,omitempty"`
-	Description                   string        `json:"description,omitempty"`
-	Custom                        bool          `json:"custom"`
-	Priority                      int           `json:"priority,omitempty"`
-	CreatedBy                     string        `json:"createdBy"`
-	UpdatedBy                     string        `json:"updatedBy"`
-	CreatedAt                     string        `json:"createdAt"`
-	UpdatedAt                     string        `json:"updatedAt"`
-	Links                         []LinkItem    `json:"links"`
+	ID          string     `json:"id"`
+	Name        string     `json:"name,omitempty"`
+	Description string     `json:"description,omitempty"`
+	Custom      bool       `json:"custom"`
+	Priority    int        `json:"priority,omitempty"`
+	CreatedBy   string     `json:"createdBy"`
+	UpdatedBy   string     `json:"updatedBy"`
+	CreatedAt   string     `json:"createdAt"`
+	UpdatedAt   string     `json:"updatedAt"`
+	Links       []LinkItem `json:"links"`
 }
 
 type ComplianceProfiles struct {

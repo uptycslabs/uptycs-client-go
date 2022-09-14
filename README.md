@@ -15,6 +15,19 @@ Each config type needs
 The entry within the models.go file will come from the output of the get call for that particular config type. Note, if there are options to make calls to the api for one or multiple items, the singular and plural versions of these structs should be made seperately. User and Users / Role and Roles can be used as examples for this structure.
 
 
+## Tests
+
+Tests should be included within reason. to run them: `make test`
+
+## Linting/Syntax
+
+[pre-commit](https://pre-commit.com/) hooks are included for ease and are recommended. They are run as a blocking check in CI as well.
+
+```
+$ pre-commit install
+$ pre-commit run --all-files
+```
+
 
 ### Examples ###
 

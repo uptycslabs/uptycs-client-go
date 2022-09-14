@@ -19,13 +19,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	for _, item := range complianceProfiles.Items{
+	for _, item := range complianceProfiles.Items {
 		log.Printf("Name: %v, ID: %v \n", item.Name, item.ID)
 	}
-		
+
 	complianceProfilesByID, err2 := c.GetComplianceProfile(uptycs.ComplianceProfile{
-			ID: complianceProfiles.Items[0].ID,
-		},
+		ID: complianceProfiles.Items[0].ID,
+	},
 	)
 	if err2 != nil {
 		panic(err2)
@@ -43,7 +43,7 @@ func main() {
 	// }
 	// log.Printf("Created new ComplianceProfile with ID %s\n", newComplianceProfile.ID)
 
-		// No permissions to delete compliance profile
+	// No permissions to delete compliance profile
 	// _, err4 := c.DeleteComplianceProfile(uptycs.ComplianceProfile{
 	// 		ID: "24829f9b-ce8e-4c6b-89ee-0d3889da3c34",
 	// 	},
