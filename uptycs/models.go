@@ -249,14 +249,14 @@ type ProcessFileEvents struct {
 type User struct {
 	ID                  string        `json:"id"`
 	Name                string        `json:"name"`
-	Email               string        `json:"email" validate:"required,max=512,min=1"`
+	Email               string        `json:"email"`
 	Phone               string        `json:"phone"`
 	Active              bool          `json:"active"`
 	SuperAdmin          bool          `json:"superAdmin"`
 	Bot                 bool          `json:"bot"`
 	Support             bool          `json:"support"`
 	PriorLogin          bool          `json:"priorLogin"`
-	ImageURL            string        `json:"imageUrl" validate:"required,max=512,min=1"`
+	ImageURL            string        `json:"imageUrl"`
 	Password            string        `json:"password"`
 	CreatedAt           string        `json:"createdAt"`
 	MaxIdleTimeMins     int           `json:"maxIdleTimeMins" validate:"required,max=360,min=1"`
