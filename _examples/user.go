@@ -60,7 +60,7 @@ func main() {
 		ImageURL:           "asdf",
 		MaxIdleTimeMins:    10,
 		SuperAdmin:         true,
-		Bot:                true,
+		Bot:                false,
 		Roles:              []uptycs.Role{newRole},
 		Support:            false,
 		UserObjectGroups: []uptycs.ObjectGroup{
@@ -90,5 +90,5 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	log.Printf("Deleted user with id '%s'\n", newRole.ID)
+	log.Printf("Deleted role with id '%s'\n", newRole.ID)
 }
