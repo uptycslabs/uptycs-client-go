@@ -13,7 +13,6 @@ func (T Role) GetName() string {
 func (T Role) KeysToDelete() []string {
 	return []string{
 		"UserRole",
-		"noMinimalPermissions",
 	}
 }
 
