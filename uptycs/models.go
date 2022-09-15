@@ -249,11 +249,11 @@ type ProcessFileEvents struct {
 type User struct {
 	ID                  string        `json:"id,omitempty"`
 	Name                string        `json:"name"`
-	Email               string        `json:"email,omitempty"`
-	Phone               string        `json:"phone,omitempty"`
+	Email               string        `json:"email,omitempty" validate:"required_if=Bot false"`
+	Phone               string        `json:"phone,omitempty" validate:"required_if=Bot false"`
 	Active              bool          `json:"active"`
 	SuperAdmin          bool          `json:"superAdmin"`
-	Bot                 bool          `json:"bot"`
+	Bot                 bool          `json:"bot" validate:"excluded_with=Email"`
 	Support             bool          `json:"support"`
 	PriorLogin          bool          `json:"priorLogin"`
 	ImageURL            string        `json:"imageUrl,omitempty"`
