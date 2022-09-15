@@ -279,15 +279,15 @@ type Users struct {
 
 type Role struct {
 	ID                   string        `json:"id,omitempty"`
-	Name                 string        `json:"name"`
+	Name                 string        `json:"name,omitempty"`
 	Description          string        `json:"description,omitempty"`
 	Permissions          []string      `json:"permissions" validate:"required,min=0"`
 	Custom               bool          `json:"custom"`
 	Hidden               bool          `json:"hidden"`
-	CreatedBy            string        `json:"createdBy"`
-	UpdatedBy            string        `json:"updatedBy"`
-	CreatedAt            string        `json:"createdAt"`
-	UpdatedAt            string        `json:"updatedAt"`
+	CreatedBy            string        `json:"createdBy,omitempty"`
+	UpdatedBy            string        `json:"updatedBy,omitempty"`
+	CreatedAt            string        `json:"createdAt,omitempty"`
+	UpdatedAt            string        `json:"updatedAt,omitempty"`
 	NoMinimalPermissions bool          `json:"noMinimalPermissions"`
 	RoleObjectGroups     []ObjectGroup `json:"roleObjectGroups" validate:"required,min=0"`
 }
@@ -304,10 +304,10 @@ type ComplianceProfile struct {
 	Description string     `json:"description,omitempty"`
 	Custom      bool       `json:"custom"`
 	Priority    int        `json:"priority,omitempty"`
-	CreatedBy   string     `json:"createdBy"`
-	UpdatedBy   string     `json:"updatedBy"`
-	CreatedAt   string     `json:"createdAt"`
-	UpdatedAt   string     `json:"updatedAt"`
+	CreatedBy   string     `json:"createdBy,omitempty"`
+	UpdatedBy   string     `json:"updatedBy,omitempty"`
+	CreatedAt   string     `json:"createdAt,omitempty"`
+	UpdatedAt   string     `json:"updatedAt,omitempty"`
 	Links       []LinkItem `json:"links"`
 }
 
@@ -564,24 +564,24 @@ type Querypack struct {
 
 type Query struct {
 	ID          string           `json:"id"`
-	Name        string           `json:"name"`
-	Description string           `json:"description"`
-	Query       string           `json:"query"`
+	Name        string           `json:"name,omitempty"`
+	Description string           `json:"description,omitempty"`
+	Query       string           `json:"query,omitempty"`
 	Removed     bool             `json:"removed"`
-	Version     string           `json:"version"`
+	Version     string           `json:"version,omitempty"`
 	Interval    int              `json:"interval"`
-	Platform    string           `json:"platform"`
+	Platform    string           `json:"platform,omitempty"`
 	Snapshot    bool             `json:"snapshot"`
 	RunNow      bool             `json:"runNow"`
-	Value       string           `json:"value"`
-	QuerypackID string           `json:"querypackId"`
-	TableName   string           `json:"tableName"`
+	Value       string           `json:"value,omitempty"`
+	QuerypackID string           `json:"querypackId,omitempty"`
+	TableName   string           `json:"tableName,omitempty"`
 	DataTypes   CustomJSONString `json:"dataTypes,omitempty"` //This is super ephemeral
 	Verified    bool             `json:"verified"`
-	CreatedBy   string           `json:"createdBy"`
-	UpdatedBy   string           `json:"updatedBy"`
-	CreatedAt   string           `json:"createdAt"`
-	UpdatedAt   string           `json:"updatedAt"`
+	CreatedBy   string           `json:"createdBy,omitempty"`
+	UpdatedBy   string           `json:"updatedBy,omitempty"`
+	CreatedAt   string           `json:"createdAt,omitempty"`
+	UpdatedAt   string           `json:"updatedAt,omitempty"`
 }
 
 type AuditConfigurations struct {
@@ -613,32 +613,32 @@ type AuditConfiguration struct {
 
 type AuditEntry struct {
 	ID                   string   `json:"id"`
-	AuditConfigurationID string   `json:"auditConfigurationId"`
+	AuditConfigurationID string   `json:"auditConfigurationId,omitempty"`
 	AuditName            []string `json:"auditName"`
-	Standard             string   `json:"standard"`
-	Version              string   `json:"version"`
-	Section              string   `json:"section"`
-	Title                string   `json:"title"`
+	Standard             string   `json:"standard,omitempty"`
+	Version              string   `json:"version,omitempty"`
+	Section              string   `json:"section,omitempty"`
+	Title                string   `json:"title,omitempty"`
 	Scored               bool     `json:"scored"`
-	Level                string   `json:"level"`
-	Description          string   `json:"description"`
-	Rationale            string   `json:"rationale"`
-	Command              string   `json:"command"`
-	Remediation          string   `json:"remediation"`
-	ExpectedValue        string   `json:"expectedValue"`
-	AuthoritativeSource  string   `json:"authoritativeSource"`
-	Exception            string   `json:"exception"`
-	Chapter              string   `json:"chapter"`
-	CheckID              string   `json:"checkId"`
+	Level                string   `json:"level,omitempty"`
+	Description          string   `json:"description,omitempty"`
+	Rationale            string   `json:"rationale,omitempty"`
+	Command              string   `json:"command,omitempty"`
+	Remediation          string   `json:"remediation,omitempty"`
+	ExpectedValue        string   `json:"expectedValue,omitempty"`
+	AuthoritativeSource  string   `json:"authoritativeSource,omitempty"`
+	Exception            string   `json:"exception,omitempty"`
+	Chapter              string   `json:"chapter,omitempty"`
+	CheckID              string   `json:"checkId,omitempty"`
 	Enabled              bool     `json:"enabled"`
-	Service              string   `json:"service"`
-	CreatedBy            string   `json:"createdBy"`
+	Service              string   `json:"service,omitempty"`
+	CreatedBy            string   `json:"createdBy,omitempty"`
 	Score                float64  `json:"score"`
-	UpdatedBy            string   `json:"updatedBy"`
+	UpdatedBy            string   `json:"updatedBy,omitempty"`
 	RunCategory          int      `json:"runCategory"`
 	Timeout              int      `json:"timeout"`
-	CreatedAt            string   `json:"createdAt"`
-	UpdatedAt            string   `json:"updatedAt"`
+	CreatedAt            string   `json:"createdAt,omitempty"`
+	UpdatedAt            string   `json:"updatedAt,omitempty"`
 	IsManual             bool     `json:"isManual"`
 	//RemediationAction    interface{} `json:"remediationAction"`// TODO there are no examples of this
 	//Parameters           interface{} `json:"parameters"` // TODO there are no examples of this
