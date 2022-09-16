@@ -8,10 +8,12 @@ type EventRules struct {
 }
 
 type ScriptConfig struct {
-	ID          string `json:"id,omitempty"`
-	QueryPackID string `json:"querypackId,omitempty"`
-	TableName   string `json:"tableName,omitempty"`
-	Added       bool   `json:"added,omitempty"`
+	ID               string `json:"id,omitempty"`
+	QueryPackID      string `json:"querypackId,omitempty"`
+	TableName        string `json:"tableName,omitempty"`
+	EventCode        string `json:"eventCode,omitempty"`
+	EventMinSeverity string `json:"eventMinSeverity,omitempty"`
+	Added            bool   `json:"added,omitempty"`
 }
 
 type EventRule struct {
