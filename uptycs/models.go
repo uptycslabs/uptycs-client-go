@@ -1,8 +1,8 @@
 package uptycs
 
 type EventRules struct {
-	Links  []LinkItem  `json:"links,omitempty"`
-	Items  []EventRule `json:"items,omitempty"`
+	Links  []LinkItem  `json:"links"`
+	Items  []EventRule `json:"items"`
 	Offset int         `json:"offset,omitempty"`
 	Limit  int         `json:"limit,omitempty"`
 }
@@ -26,7 +26,7 @@ type EventRule struct {
 	Custom        bool          `json:"custom,omitempty"`
 	CreatedAt     string        `json:"createdAt,omitempty"`
 	IsInternal    bool          `json:"isInternal,omitempty"`
-	EventTags     []string      `json:"eventTags,omitempty"`
+	EventTags     []string      `json:"eventTags"`
 	CreatedBy     string        `json:"createdBy,omitempty"`
 	UpdatedAt     string        `json:"updatedAt,omitempty"`
 	UpdatedBy     string        `json:"updatedBy,omitempty"`
@@ -78,8 +78,8 @@ type AutoAlertConfig struct {
 }
 
 type AlertRules struct {
-	Links  []LinkItem  `json:"links,omitempty"`
-	Items  []AlertRule `json:"items,omitempty"`
+	Links  []LinkItem  `json:"links"`
+	Items  []AlertRule `json:"items"`
 	Offset int         `json:"offset,omitempty"`
 	Limit  int         `json:"limit,omitempty"`
 }
@@ -97,7 +97,7 @@ type AlertRule struct {
 	Throttled              bool                   `json:"throttled,omitempty"`
 	CreatedAt              string                 `json:"createdAt,omitempty"`
 	IsInternal             bool                   `json:"isInternal,omitempty"`
-	AlertTags              []string               `json:"alertTags,omitempty"`
+	AlertTags              []string               `json:"alertTags"`
 	CreatedBy              string                 `json:"createdBy,omitempty"`
 	UpdatedAt              string                 `json:"updatedAt,omitempty"`
 	TimeSuppresionStart    string                 `json:"timeSuppresionStart,omitempty"`
@@ -108,11 +108,11 @@ type AlertRule struct {
 	Lock                   bool                   `json:"lock,omitempty"`
 	AlertNotifyInterval    int                    `json:"alertNotifyInterval,omitempty"`
 	AlertNotifyCount       int                    `json:"alertNotifyCount,omitempty"`
-	AlertRuleExceptions    []RuleException        `json:"alertRuleExceptions,omitempty"`
-	Destinations           []AlertRuleDestination `json:"destinations,omitempty"`
+	AlertRuleExceptions    []RuleException        `json:"alertRuleExceptions"`
+	Destinations           []AlertRuleDestination `json:"destinations"`
 	SQLConfig              *SQLConfig             `json:"sqlConfig,omitempty"`
 	ScriptConfig           *ScriptConfig          `json:"scriptConfig,omitempty"`
-	Links                  []LinkItem             `json:"links,omitempty"`
+	Links                  []LinkItem             `json:"links"`
 }
 
 type AlertRuleDestination struct {
@@ -140,8 +140,8 @@ type LinkItem struct {
 }
 
 type Destinations struct {
-	Links  []LinkItem    `json:"links,omitempty"`
-	Items  []Destination `json:"items,omitempty"`
+	Links  []LinkItem    `json:"links"`
+	Items  []Destination `json:"items"`
 	Offset int           `json:"offset,omitempty"`
 	Limit  int           `json:"limit,omitempty"`
 }
@@ -162,7 +162,7 @@ type Destination struct {
 	Enabled   bool   `json:"enabled,omitempty"`
 	Default   bool   `json:"default,omitempty"`
 	//Template TODO
-	Links []LinkItem `json:"links,omitempty"`
+	Links []LinkItem `json:"links"`
 }
 
 type SQLConfig struct {
@@ -177,8 +177,8 @@ type AlertRuleQuery struct {
 }
 
 type EventExcludeProfiles struct {
-	Links  []LinkItem            `json:"links,omitempty"`
-	Items  []EventExcludeProfile `json:"items,omitempty"`
+	Links  []LinkItem            `json:"links"`
+	Items  []EventExcludeProfile `json:"items"`
 	Offset int                   `json:"offset,omitempty"`
 	Limit  int                   `json:"limit,omitempty"`
 }
@@ -196,7 +196,7 @@ type EventExcludeProfile struct {
 	CreatedBy    string                      `json:"createdBy,omitempty"`
 	UpdatedAt    string                      `json:"updatedAt,omitempty"`
 	UpdatedBy    string                      `json:"updatedBy,omitempty"`
-	Links        []LinkItem                  `json:"links,omitempty"`
+	Links        []LinkItem                  `json:"links"`
 }
 
 type EventExcludeProfileMetadata struct {
@@ -211,39 +211,39 @@ type EventExcludeProfileMetadata struct {
 }
 
 type EbpfDNSLookupEvents struct {
-	Answer   []string `json:"answer,omitempty"`
-	Question []string `json:"question,omitempty"`
+	Answer   []string `json:"answer"`
+	Question []string `json:"question"`
 }
 
 type DNSLookupEvents struct {
-	Answer   []string `json:"answer,omitempty"`
-	Question []string `json:"question,omitempty"`
+	Answer   []string `json:"answer"`
+	Question []string `json:"question"`
 }
 
 type HTTPEvents struct {
-	Host []string `json:"host,omitempty"`
+	Host []string `json:"host"`
 }
 
 type RegistryEvents struct {
-	Action []string `json:"action,omitempty"`
+	Action []string `json:"action"`
 }
 
 type UserEvents struct {
-	Message []string `json:"message,omitempty"`
+	Message []string `json:"message"`
 }
 
 type SocketEvents struct {
-	RemoteAddress []string `json:"remote_address,omitempty"`
+	RemoteAddress []string `json:"remote_address"`
 }
 
 type ProcessEvents struct {
-	Path []string `json:"path,omitempty"`
+	Path []string `json:"path"`
 }
 
 type ProcessFileEvents struct {
-	Path       []string `json:"path,omitempty"`
-	Operation  []string `json:"operation,omitempty"`
-	Executable []string `json:"executable,omitempty"`
+	Path       []string `json:"path"`
+	Operation  []string `json:"operation"`
+	Executable []string `json:"executable"`
 }
 
 type User struct {
@@ -271,8 +271,8 @@ type User struct {
 }
 
 type Users struct {
-	Links  []LinkItem `json:"links,omitempty"`
-	Items  []User     `json:"items,omitempty"`
+	Links  []LinkItem `json:"links"`
+	Items  []User     `json:"items"`
 	Offset int        `json:"offset,omitempty"`
 	Limit  int        `json:"limit,omitempty"`
 }
@@ -292,8 +292,8 @@ type Role struct {
 	RoleObjectGroups     []ObjectGroup `json:"roleObjectGroups" validate:"required,min=0"`
 }
 type Roles struct {
-	Links  []LinkItem `json:"links,omitempty"`
-	Items  []Role     `json:"items,omitempty"`
+	Links  []LinkItem `json:"links"`
+	Items  []Role     `json:"items"`
 	Offset int        `json:"offset,omitempty"`
 	Limit  int        `json:"limit,omitempty"`
 }
@@ -312,11 +312,11 @@ type ComplianceProfile struct {
 }
 
 type ComplianceProfiles struct {
-	Links      []LinkItem          `json:"links,omitempty"`
-	Items      []ComplianceProfile `json:"items,omitempty"`
+	Links      []LinkItem          `json:"links"`
+	Items      []ComplianceProfile `json:"items"`
 	Offset     int                 `json:"offset,omitempty"`
 	Limit      int                 `json:"limit,omitempty"`
-	Decorators []string            `json:"decorators,omitempty"`
+	Decorators []string            `json:"decorators"`
 }
 
 type ObjectGroup struct {
@@ -338,27 +338,27 @@ type ObjectGroup struct {
 	UpdatedBy        string        `json:"updatedBy,omitempty"`
 	CreatedAt        string        `json:"createdAt,omitempty"`
 	UpdatedAt        string        `json:"updatedAt,omitempty"`
-	Destinations     []Destination `json:"destinations,omitempty"`
+	Destinations     []Destination `json:"destinations"`
 }
 
 type ObjectGroups struct {
-	Links  []LinkItem    `json:"links,omitempty"`
-	Items  []ObjectGroup `json:"items,omitempty"`
+	Links  []LinkItem    `json:"links"`
+	Items  []ObjectGroup `json:"items"`
 	Offset int           `json:"offset,omitempty"`
 	Limit  int           `json:"limit,omitempty"`
 }
 
 type TagConfigurations struct {
-	Links  []LinkItem         `json:"links,omitempty"`
-	Items  []TagConfiguration `json:"items,omitempty"`
+	Links  []LinkItem         `json:"links"`
+	Items  []TagConfiguration `json:"items"`
 	Offset int                `json:"offset,omitempty"`
 	Limit  int                `json:"limit,omitempty"`
 }
 type TagConfiguration Tag
 
 type TagRules struct {
-	Links  []LinkItem `json:"links,omitempty"`
-	Items  []TagRule  `json:"items,omitempty"`
+	Links  []LinkItem `json:"links"`
+	Items  []TagRule  `json:"items"`
 	Offset int        `json:"offset,omitempty"`
 	Limit  int        `json:"limit,omitempty"`
 }
@@ -384,8 +384,8 @@ type TagRule struct {
 }
 
 type Tags struct {
-	Links  []LinkItem `json:"links,omitempty"`
-	Items  []Tag      `json:"items,omitempty"`
+	Links  []LinkItem `json:"links"`
+	Items  []Tag      `json:"items"`
 	Offset int        `json:"offset,omitempty"`
 	Limit  int        `json:"limit,omitempty"`
 }
@@ -450,11 +450,11 @@ type TagConfigurationObject struct {
 	RegistryPathTag        *TagConfigurationObjectDetails `json:"RegistryPathTag,omitempty"`
 	EventExcludeProfileTag *TagConfigurationObjectDetails `json:"EventExcludeProfileTag,omitempty"`
 	FilePathGroupTag       *TagConfigurationObjectDetails `json:"FilePathGroupTag,omitempty"`
-	Links                  []LinkItem                     `json:"links,omitempty"`
+	Links                  []LinkItem                     `json:"links"`
 }
 type FilePathGroups struct {
-	Links  []LinkItem      `json:"links,omitempty"`
-	Items  []FilePathGroup `json:"items,omitempty"`
+	Links  []LinkItem      `json:"links"`
+	Items  []FilePathGroup `json:"items"`
 	Offset int             `json:"offset,omitempty"`
 	Limit  int             `json:"limit,omitempty"`
 }
@@ -494,8 +494,8 @@ type FilePathGroupSignature struct {
 }
 
 type YaraGroupRules struct {
-	Links  []LinkItem      `json:"links,omitempty"`
-	Items  []YaraGroupRule `json:"items,omitempty"`
+	Links  []LinkItem      `json:"links"`
+	Items  []YaraGroupRule `json:"items"`
 	Offset int             `json:"offset,omitempty"`
 	Limit  int             `json:"limit,omitempty"`
 }
@@ -510,12 +510,12 @@ type YaraGroupRule struct {
 	UpdatedBy   string     `json:"updatedBy,omitempty"`
 	CreatedAt   string     `json:"createdAt,omitempty"`
 	UpdatedAt   string     `json:"updatedAt,omitempty"`
-	Links       []LinkItem `json:"links,omitempty"`
+	Links       []LinkItem `json:"links"`
 }
 
 type RegistryPaths struct {
-	Links  []LinkItem     `json:"links,omitempty"`
-	Items  []RegistryPath `json:"items,omitempty"`
+	Links  []LinkItem     `json:"links"`
+	Items  []RegistryPath `json:"items"`
 	Offset int            `json:"offset,omitempty"`
 	Limit  int            `json:"limit,omitempty"`
 }
@@ -533,12 +533,12 @@ type RegistryPath struct {
 	UpdatedBy            string     `json:"updatedBy,omitempty"`
 	CreatedAt            string     `json:"createdAt,omitempty"`
 	UpdatedAt            string     `json:"updatedAt,omitempty"`
-	Links                []LinkItem `json:"links,omitempty"`
+	Links                []LinkItem `json:"links"`
 }
 
 type Querypacks struct {
-	Links  []LinkItem  `json:"links,omitempty"`
-	Items  []Querypack `json:"items,omitempty"`
+	Links  []LinkItem  `json:"links"`
+	Items  []Querypack `json:"items"`
 	Offset int         `json:"offset,omitempty"`
 	Limit  int         `json:"limit,omitempty"`
 }
@@ -557,7 +557,7 @@ type Querypack struct {
 	UpdatedAt        string           `json:"updatedAt,omitempty"`
 	IsInternal       bool             `json:"isInternal"`
 	ResourceType     string           `json:"resourceType"`
-	Queries          []Query          `json:"queries,omitempty"`
+	Queries          []Query          `json:"queries"`
 	Conf             CustomJSONString `json:"conf,omitempty"`
 	Links            []LinkItem       `json:"links"`
 }
@@ -585,8 +585,8 @@ type Query struct {
 }
 
 type AuditConfigurations struct {
-	Links  []LinkItem           `json:"links,omitempty"`
-	Items  []AuditConfiguration `json:"items,omitempty"`
+	Links  []LinkItem           `json:"links"`
+	Items  []AuditConfiguration `json:"items"`
 	Offset int                  `json:"offset,omitempty"`
 	Limit  int                  `json:"limit,omitempty"`
 }
