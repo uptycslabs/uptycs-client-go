@@ -37,7 +37,6 @@ func main() {
 	log.Println(fmt.Sprintf("Found rule by Name with name %s as %s", anotherRule.Name, anotherRule.ID))
 
 	// Create an alert rule
-
 	rule, err := c.CreateAlertRule(uptycs.AlertRule{
 		Name:        "marcus test",
 		Description: "marcus test",
@@ -46,6 +45,19 @@ func main() {
 		GroupingL3:  "T1560",
 		SQLConfig: &uptycs.SQLConfig{
 			IntervalSeconds: 3600,
+		},
+		AlertRuleExceptions: []uptycs.RuleException{
+			{
+				ExceptionID: "70daa6e6-26b1-4b41-be3a-d613d96fca9d",
+			},
+		},
+		Destinations: []uptycs.AlertRuleDestination{
+			{
+				Severity:           "medium",
+				DestinationID:      "4c0dee1f-c19a-45fe-bf5d-fd031d6f694f",
+				NotifyEveryAlert:   false,
+				CloseAfterDelivery: true,
+			},
 		},
 		Code: "test_marc",
 		Type: "sql",
@@ -69,9 +81,11 @@ func main() {
 		SQLConfig: &uptycs.SQLConfig{
 			IntervalSeconds: 1800,
 		},
-		Code: "test_marc2",
-		Type: "sql",
-		Rule: "select * from processes limit 2 :to;",
+		AlertRuleExceptions: []uptycs.RuleException{},
+		Destinations:        []uptycs.AlertRuleDestination{},
+		Code:                "test_marc2",
+		Type:                "sql",
+		Rule:                "select * from processes limit 2 :to;",
 	})
 	if err != nil {
 		log.Println(err)
@@ -80,7 +94,6 @@ func main() {
 	log.Println(fmt.Sprintf("Updated Rule '%s' with id '%s'", updatedRule.Name, updatedRule.ID))
 
 	// Delete an alert rule by ID
-
 	_, err = c.DeleteAlertRule(uptycs.AlertRule{
 		ID: rule.ID,
 	})
