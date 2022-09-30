@@ -394,9 +394,9 @@ type Tags struct {
 
 type Tag struct {
 	ID                          string                   `json:"id,omitempty"`
-	Name                        string                   `json:"-"` // There is no name, so just throw the ID in there
-	Value                       string                   `json:"value"`
-	Key                         string                   `json:"key,omitempty"`
+	Name                        string                   `json:"-"` // There is no name
+	Value                       string                   `json:"value,omitempty"`
+	Key                         string                   `json:"key"`
 	CreatedBy                   string                   `json:"createdBy,omitempty"`
 	UpdatedBy                   string                   `json:"updatedBy,omitempty"`
 	FlagProfileID               string                   `json:"flagProfileId,omitempty"`
