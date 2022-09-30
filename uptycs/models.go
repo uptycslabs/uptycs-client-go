@@ -374,7 +374,7 @@ type TagRule struct {
 	RunOnce        bool   `json:"runOnce,omitempty"`
 	Interval       int    `json:"interval,omitempty" validate:"min=30,excluded_if=RunOnce false"`
 	OSqueryVersion string `json:"osqueryVersion,omitempty"`
-	Platform       string `json:"platform" validate:"required_if=Source realtime"`
+	Platform       string `json:"platform,omitempty" validate:"required_if=Source realtime"`
 	Enabled        bool   `json:"enabled,omitempty"`
 	System         bool   `json:"system,omitempty"`
 	LastRunAt      string `json:"lastRunAt,omitempty"`
