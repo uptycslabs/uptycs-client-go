@@ -1,0 +1,20 @@
+{
+  "id": "79e61fc3-0557-431f-956f-80dee7a8a5fa",
+  "customerId": "111111111111-111111-11111-111111-111111111",
+  "ruleId": "7cf0b57d-1dea-4e91-b531-7661e5d97e7d",
+  "name": "foo",
+  "createdAt": "2022-10-25T19:00:54.275Z",
+  "createdBy": "f48f4c40-9c4a-47bb-9e3f-797d4deca92a",
+  "links": [
+    {
+      "rel": "self",
+      "title": "Alert rule category information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRuleCategories/79e61fc3-0557-431f-956f-80dee7a8a5fa"
+    },
+    {
+      "rel": "parent",
+      "title": "Alert rule category information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/alertRuleCategories"
+    }
+  ]
+}

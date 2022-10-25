@@ -178,6 +178,23 @@ type AlertRuleQuery struct {
 	LastRanAt string `json:"lastRanAt,omitempty"`
 }
 
+type AlertRuleCategories struct {
+	Links  []LinkItem          `json:"links"`
+	Items  []AlertRuleCategory `json:"items"`
+	Offset int                 `json:"offset,omitempty"`
+	Limit  int                 `json:"limit,omitempty"`
+}
+
+type AlertRuleCategory struct {
+	ID         string     `json:"id"`
+	CustomerID string     `json:"customerId"`
+	RuleID     string     `json:"ruleId"`
+	Name       string     `json:"name"`
+	CreatedAt  string     `json:"createdAt"`
+	CreatedBy  string     `json:"createdBy"`
+	Links      []LinkItem `json:"links"`
+}
+
 type EventExcludeProfiles struct {
 	Links  []LinkItem            `json:"links"`
 	Items  []EventExcludeProfile `json:"items"`
@@ -647,12 +664,12 @@ type AuditEntry struct {
 }
 
 type iAPIType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory
 	GetID() string
 	GetName() string
 	KeysToDelete() []string
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories
 }
