@@ -1,0 +1,25 @@
+{
+  "id": "d774ac13-ad82-4fb2-8bc9-893a1b957264",
+  "customerId": "111111111111-111111-11111-111111-111111111",
+  "name": "servers",
+  "description": "",
+  "query": "select 'servers' as value from ec2_instance_metadata\nwhere instance_id is not null\nunion\nselect 'servers' as value from gce_instance_metadata\nwhere id is not null",
+  "interval": 3600,
+  "osqueryVersion": "",
+  "platform": "all",
+  "enabled": true,
+  "createdBy": "66a9a52c-5fa0-4cf4-abe7-da5504f67950",
+  "updatedBy": "69a61265-f2fa-40a5-a5c9-48f354533c9a",
+  "createdAt": "2021-10-05T17:35:18.425Z",
+  "updatedAt": "2022-03-30T20:18:23.016Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/assetGroupRules/d774ac13-ad82-4fb2-8bc9-893a1b957264"
+    },
+    {
+      "rel": "parent",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/assetGroupRules"
+    }
+  ]
+}

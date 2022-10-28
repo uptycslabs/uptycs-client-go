@@ -65,7 +65,7 @@ func (c *Client) doRequest(req *http.Request) ([]byte, error) {
 	//TODO Support pagination
 	ctx, cancel := context.WithTimeout(
 		context.Background(),
-		time.Duration(time.Millisecond*10000),
+		time.Duration(time.Millisecond*60000),
 	)
 
 	defer cancel()

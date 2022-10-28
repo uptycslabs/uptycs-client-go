@@ -178,6 +178,22 @@ type AlertRuleQuery struct {
 	LastRanAt string `json:"lastRanAt,omitempty"`
 }
 
+type AlertRuleCategories struct {
+	Links  []LinkItem          `json:"links"`
+	Items  []AlertRuleCategory `json:"items"`
+	Offset int                 `json:"offset,omitempty"`
+	Limit  int                 `json:"limit,omitempty"`
+}
+
+type AlertRuleCategory struct {
+	ID        string     `json:"id"`
+	RuleID    string     `json:"ruleId"`
+	Name      string     `json:"name"`
+	CreatedAt string     `json:"createdAt"`
+	CreatedBy string     `json:"createdBy"`
+	Links     []LinkItem `json:"links"`
+}
+
 type EventExcludeProfiles struct {
 	Links  []LinkItem            `json:"links"`
 	Items  []EventExcludeProfile `json:"items"`
@@ -646,13 +662,91 @@ type AuditEntry struct {
 	//Parameters           interface{} `json:"parameters"` // TODO there are no examples of this
 }
 
+type AssetGroupRules struct {
+	Links  []LinkItem       `json:"links"`
+	Items  []AssetGroupRule `json:"items"`
+	Offset int              `json:"offset,omitempty"`
+	Limit  int              `json:"limit,omitempty"`
+}
+
+type AssetGroupRule struct {
+	ID             string     `json:"id"`
+	Name           string     `json:"name"`
+	Description    string     `json:"description,omitempty"`
+	Query          string     `json:"query"`
+	Interval       int        `json:"interval,omitempty"`
+	OsqueryVersion string     `json:"osqueryVersion,omitempty"`
+	Platform       string     `json:"platform,omitempty"`
+	Enabled        bool       `json:"enabled"`
+	CreatedBy      string     `json:"createdBy,omitempty"`
+	UpdatedBy      string     `json:"updatedBy,omitempty"`
+	CreatedAt      string     `json:"createdAt,omitempty"`
+	UpdatedAt      string     `json:"updatedAt,omitempty"`
+	Links          []LinkItem `json:"links"`
+}
+
+type PathStruct struct {
+	Path string `json:"path,omitempty"`
+}
+
+type AtcQueries struct {
+	Links  []LinkItem `json:"links"`
+	Items  []AtcQuery `json:"items"`
+	Offset int        `json:"offset,omitempty"`
+	Limit  int        `json:"limit,omitempty"`
+}
+
+type AtcQuery struct {
+	ID          string `json:"id,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+	Query       string `json:"query,omitempty"`
+	OsPaths     struct {
+		Darwin  []PathStruct `json:"darwin,omitempty"`
+		Debian  []PathStruct `json:"debian,omitempty"`
+		Windows []PathStruct `json:"windows,omitempty"`
+	} `json:"osPaths,omitempty"`
+	Columns []struct {
+		Name        string `json:"name,omitempty"`
+		Description string `json:"description,omitempty"`
+	} `json:"columns,omitempty"`
+	CreatedBy string     `json:"createdBy,omitempty"`
+	UpdatedBy string     `json:"updatedBy,omitempty"`
+	CreatedAt string     `json:"createdAt,omitempty"`
+	UpdatedAt string     `json:"updatedAt,omitempty"`
+	Links     []LinkItem `json:"links"`
+}
+
+type Carves struct {
+	Links  []LinkItem `json:"links"`
+	Items  []Carve    `json:"items"`
+	Offset int        `json:"offset,omitempty"`
+	Limit  int        `json:"limit,omitempty"`
+}
+
+type Carve struct {
+	ID        string `json:"id"`
+	Name      string `json:"-"` // Required but not actually in a carve
+	AssetID   string `json:"assetId,omitempty"`
+	Path      string `json:"path,omitempty"`
+	CreatedAt string `json:"createdAt,omitempty"`
+	UpdatedAt string `json:"updatedAt,omitempty"`
+	Status    string `json:"status,omitempty"`
+	//Error           interface{} `json:"error"` TODO
+	DeletedUserName string `json:"deletedUserName,omitempty"`
+	DeletedAt       string `json:"deletedAt,omitempty"`
+	AssetHostName   string `json:"assetHostName,omitempty"`
+	Offset          int    `json:"offset,omitempty"`
+	Length          int    `json:"length,omitempty"`
+}
+
 type iAPIType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve
 	GetID() string
 	GetName() string
 	KeysToDelete() []string
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves
 }
