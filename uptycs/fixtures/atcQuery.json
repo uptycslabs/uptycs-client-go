@@ -1,0 +1,83 @@
+{
+  "id": "dc0e9652-ec9a-4baa-9da3-8547333b3628",
+  "customerId": "111111111111-111111-11111-111111-111111111",
+  "name": "atc_chrome_browser_history",
+  "seedId": "f9d5c644-357a-4084-9ac0-e876a61eab8a",
+  "description": "Chrome Browser History",
+  "query": "SELECT urls.id id, urls.url url, urls.title title, urls.visit_count visit_count, urls.typed_count typed_count, urls.last_visit_time last_visit_time, urls.hidden hidden, visits.visit_time visit_time, visits.from_visit from_visit, visits.visit_duration visit_duration, visits.transition transition, visit_source.source source FROM urls JOIN visits ON urls.id = visits.url LEFT JOIN visit_source ON visits.id = visit_source.id",
+  "osPaths": {
+    "darwin": [
+      {
+        "path": "/Users/%/Library/Application Support/Google/Chrome/%/History"
+      }
+    ],
+    "debian": [
+      {
+        "path": "/home/%/.config/google-chrome/Default/History"
+      }
+    ],
+    "windows": [
+      {
+        "path": "C:\\Users\\%\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History"
+      }
+    ]
+  },
+  "columns": [
+    {
+      "name": "id",
+      "description": "Id"
+    },
+    {
+      "name": "path",
+      "description": "Path"
+    },
+    {
+      "name": "url",
+      "description": "Url"
+    },
+    {
+      "name": "visit_count",
+      "description": "VisitCount"
+    },
+    {
+      "name": "typed_count",
+      "description": "TypedCount"
+    },
+    {
+      "name": "last_visit_time",
+      "description": "LastVisitTime"
+    },
+    {
+      "name": "hidden",
+      "description": "Hidden"
+    },
+    {
+      "name": "visit_time",
+      "description": "VisitTime"
+    },
+    {
+      "name": "visit_duration",
+      "description": "VisitDuration"
+    },
+    {
+      "name": "source",
+      "description": "Source"
+    }
+  ],
+  "createdBy": "00000000-0000-0000-0000-000000000000",
+  "updatedBy": "00000000-0000-0000-0000-000000000000",
+  "createdAt": "2022-01-17T08:12:16.674Z",
+  "updatedAt": "2022-10-27T03:51:08.974Z",
+  "links": [
+    {
+      "rel": "self",
+      "title": "ATC query information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/atcQueries/dc0e9652-ec9a-4baa-9da3-8547333b3628"
+    },
+    {
+      "rel": "parent",
+      "title": "ATC queries information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/atcQueries"
+    }
+  ]
+}

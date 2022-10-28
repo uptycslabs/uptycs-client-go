@@ -685,13 +685,45 @@ type AssetGroupRule struct {
 	Links          []LinkItem `json:"links"`
 }
 
+type PathStruct struct {
+	Path string `json:"path,omitempty"`
+}
+
+type AtcQueries struct {
+	Links  []LinkItem `json:"links"`
+	Items  []AtcQuery `json:"items"`
+	Offset int        `json:"offset,omitempty"`
+	Limit  int        `json:"limit,omitempty"`
+}
+
+type AtcQuery struct {
+	ID          string `json:"id,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+	Query       string `json:"query,omitempty"`
+	OsPaths     struct {
+		Darwin  []PathStruct `json:"darwin,omitempty"`
+		Debian  []PathStruct `json:"debian,omitempty"`
+		Windows []PathStruct `json:"windows,omitempty"`
+	} `json:"osPaths,omitempty"`
+	Columns []struct {
+		Name        string `json:"name,omitempty"`
+		Description string `json:"description,omitempty"`
+	} `json:"columns,omitempty"`
+	CreatedBy string     `json:"createdBy,omitempty"`
+	UpdatedBy string     `json:"updatedBy,omitempty"`
+	CreatedAt string     `json:"createdAt,omitempty"`
+	UpdatedAt string     `json:"updatedAt,omitempty"`
+	Links     []LinkItem `json:"links"`
+}
+
 type iAPIType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery
 	GetID() string
 	GetName() string
 	KeysToDelete() []string
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries
 }
