@@ -186,13 +186,12 @@ type AlertRuleCategories struct {
 }
 
 type AlertRuleCategory struct {
-	ID         string     `json:"id"`
-	CustomerID string     `json:"customerId"`
-	RuleID     string     `json:"ruleId"`
-	Name       string     `json:"name"`
-	CreatedAt  string     `json:"createdAt"`
-	CreatedBy  string     `json:"createdBy"`
-	Links      []LinkItem `json:"links"`
+	ID        string     `json:"id"`
+	RuleID    string     `json:"ruleId"`
+	Name      string     `json:"name"`
+	CreatedAt string     `json:"createdAt"`
+	CreatedBy string     `json:"createdBy"`
+	Links     []LinkItem `json:"links"`
 }
 
 type EventExcludeProfiles struct {
@@ -663,13 +662,36 @@ type AuditEntry struct {
 	//Parameters           interface{} `json:"parameters"` // TODO there are no examples of this
 }
 
+type AssetGroupRules struct {
+	Links  []LinkItem       `json:"links"`
+	Items  []AssetGroupRule `json:"items"`
+	Offset int              `json:"offset,omitempty"`
+	Limit  int              `json:"limit,omitempty"`
+}
+
+type AssetGroupRule struct {
+	ID             string     `json:"id"`
+	Name           string     `json:"name"`
+	Description    string     `json:"description,omitempty"`
+	Query          string     `json:"query"`
+	Interval       int        `json:"interval,omitempty"`
+	OsqueryVersion string     `json:"osqueryVersion,omitempty"`
+	Platform       string     `json:"platform,omitempty"`
+	Enabled        bool       `json:"enabled"`
+	CreatedBy      string     `json:"createdBy,omitempty"`
+	UpdatedBy      string     `json:"updatedBy,omitempty"`
+	CreatedAt      string     `json:"createdAt,omitempty"`
+	UpdatedAt      string     `json:"updatedAt,omitempty"`
+	Links          []LinkItem `json:"links"`
+}
+
 type iAPIType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule
 	GetID() string
 	GetName() string
 	KeysToDelete() []string
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules
 }
