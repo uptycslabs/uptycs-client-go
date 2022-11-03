@@ -13,7 +13,7 @@ type ScriptConfig struct {
 	TableName        string `json:"tableName,omitempty"`
 	EventCode        string `json:"eventCode,omitempty"`
 	EventMinSeverity string `json:"eventMinSeverity,omitempty"`
-	Added            bool   `json:"added,omitempty"`
+	Added            bool   `json:"added"`
 }
 
 type EventRule struct {
@@ -24,10 +24,10 @@ type EventRule struct {
 	Type          string        `json:"type,omitempty"`
 	Rule          string        `json:"rule,omitempty"`
 	Grouping      string        `json:"grouping,omitempty"`
-	Enabled       bool          `json:"enabled,omitempty"`
-	Custom        bool          `json:"custom,omitempty"`
+	Enabled       bool          `json:"enabled"`
+	Custom        bool          `json:"custom"`
 	CreatedAt     string        `json:"createdAt,omitempty"`
-	IsInternal    bool          `json:"isInternal,omitempty"`
+	IsInternal    bool          `json:"isInternal"`
 	EventTags     []string      `json:"eventTags"`
 	CreatedBy     string        `json:"createdBy,omitempty"`
 	UpdatedAt     string        `json:"updatedAt,omitempty"`
@@ -35,7 +35,7 @@ type EventRule struct {
 	GroupingL2    string        `json:"groupingL2,omitempty"`
 	GroupingL3    string        `json:"groupingL3,omitempty"`
 	Score         string        `json:"score,omitempty"`
-	Lock          bool          `json:"lock,omitempty"`
+	Lock          bool          `json:"lock"`
 	ScriptConfig  *ScriptConfig `json:"scriptConfig,omitempty"`
 	SQLConfig     *SQLConfig    `json:"sqlConfig,omitempty"`
 	BuilderConfig BuilderConfig `json:"builderConfig,omitempty"`
@@ -94,11 +94,11 @@ type AlertRule struct {
 	Type                   string                 `json:"type,omitempty"`
 	Rule                   string                 `json:"rule,omitempty"`
 	Grouping               string                 `json:"grouping,omitempty"`
-	Enabled                bool                   `json:"enabled,omitempty"`
-	Custom                 bool                   `json:"custom,omitempty"`
-	Throttled              bool                   `json:"throttled,omitempty"`
+	Enabled                bool                   `json:"enabled"`
+	Custom                 bool                   `json:"custom"`
+	Throttled              bool                   `json:"throttled"`
 	CreatedAt              string                 `json:"createdAt,omitempty"`
-	IsInternal             bool                   `json:"isInternal,omitempty"`
+	IsInternal             bool                   `json:"isInternal"`
 	AlertTags              []string               `json:"alertTags"`
 	CreatedBy              string                 `json:"createdBy,omitempty"`
 	UpdatedAt              string                 `json:"updatedAt,omitempty"`
@@ -107,7 +107,7 @@ type AlertRule struct {
 	UpdatedBy              string                 `json:"updatedBy,omitempty"`
 	GroupingL2             string                 `json:"groupingL2,omitempty"`
 	GroupingL3             string                 `json:"groupingL3,omitempty"`
-	Lock                   bool                   `json:"lock,omitempty"`
+	Lock                   bool                   `json:"lock"`
 	AlertNotifyInterval    int                    `json:"alertNotifyInterval,omitempty"`
 	AlertNotifyCount       int                    `json:"alertNotifyCount,omitempty"`
 	AlertRuleExceptions    []RuleException        `json:"alertRuleExceptions"`
@@ -122,8 +122,8 @@ type AlertRuleDestination struct {
 	RuleID             string `json:"ruleId,omitempty"`
 	Severity           string `json:"severity,omitempty"`
 	DestinationID      string `json:"destinationId,omitempty"`
-	NotifyEveryAlert   bool   `json:"notifyEveryAlert,omitempty"`
-	CloseAfterDelivery bool   `json:"closeAfterDelivery,omitempty"`
+	NotifyEveryAlert   bool   `json:"notifyEveryAlert"`
+	CloseAfterDelivery bool   `json:"closeAfterDelivery"`
 	CreatedAt          string `json:"createdAt,omitempty"`
 }
 
@@ -161,8 +161,8 @@ type Destination struct {
 	CreatedBy string `json:"createdBy,omitempty"`
 	UpdatedAt string `json:"updatedAt,omitempty"`
 	UpdatedBy string `json:"updatedBy,omitempty"`
-	Enabled   bool   `json:"enabled,omitempty"`
-	Default   bool   `json:"default,omitempty"`
+	Enabled   bool   `json:"enabled"`
+	Default   bool   `json:"default"`
 	//Template TODO
 	Links []LinkItem `json:"links"`
 }
@@ -349,7 +349,7 @@ type ObjectGroup struct {
 	Description      string        `json:"description,omitempty"`
 	Secret           string        `json:"secret,omitempty"`
 	ObjectType       string        `json:"objectType,omitempty"`
-	Custom           bool          `json:"custom,omitempty"`
+	Custom           bool          `json:"custom"`
 	RetentionDays    int           `json:"retentionDays,omitempty"`
 	RangerID         int           `json:"rangerId,omitempty"`
 	CreatedBy        string        `json:"createdBy,omitempty"`
@@ -387,12 +387,12 @@ type TagRule struct {
 	Description    string `json:"description,omitempty"`
 	Query          string `json:"query,omitempty" validate:"required"`
 	Source         string `json:"source,omitempty" validate:"required,oneof=global realtime"`
-	RunOnce        bool   `json:"runOnce,omitempty"`
+	RunOnce        bool   `json:"runOnce"`
 	Interval       int    `json:"interval,omitempty" validate:"min=30,excluded_if=RunOnce false"`
 	OSqueryVersion string `json:"osqueryVersion,omitempty"`
 	Platform       string `json:"platform,omitempty" validate:"required_if=Source realtime"`
-	Enabled        bool   `json:"enabled,omitempty"`
-	System         bool   `json:"system,omitempty"`
+	Enabled        bool   `json:"enabled"`
+	System         bool   `json:"system"`
 	LastRunAt      string `json:"lastRunAt,omitempty"`
 	CreatedBy      string `json:"createdBy,omitempty"`
 	UpdatedBy      string `json:"updatedBy,omitempty"`
@@ -422,8 +422,8 @@ type Tag struct {
 	DNSBlockRuleID              string                   `json:"dnsBlockRuleId,omitempty"`
 	WindowsDefenderPreferenceID string                   `json:"windowsDefenderPreferenceId,omitempty"`
 	Tag                         string                   `json:"tag,omitempty"`
-	Custom                      bool                     `json:"custom,omitempty"`
-	System                      bool                     `json:"system,omitempty"`
+	Custom                      bool                     `json:"custom"`
+	System                      bool                     `json:"system"`
 	CreatedAt                   string                   `json:"createdAt,omitempty"`
 	TagRuleID                   string                   `json:"tagRuleId,omitempty"`
 	ExpireAt                    string                   `json:"expireAt,omitempty"`
@@ -523,7 +523,7 @@ type YaraGroupRule struct {
 	Name        string     `json:"name,omitempty"`
 	Description string     `json:"description,omitempty"`
 	Rules       string     `json:"rules,omitempty"`
-	Custom      bool       `json:"custom,omitempty"`
+	Custom      bool       `json:"custom"`
 	CreatedBy   string     `json:"createdBy,omitempty"`
 	UpdatedBy   string     `json:"updatedBy,omitempty"`
 	CreatedAt   string     `json:"createdAt,omitempty"`

@@ -22,3 +22,10 @@ repos:
   hooks:
     - id: go-fmt
       exclude: ^vendor/
+- repo: local
+  hooks:
+    - id: dont-omitempty-bools
+      name: dont-omitempty-bools
+      entry: bash -c "! grep -E 'bool.*omitempty' uptycs/models.go"
+      language: system
+      pass_filenames: false
