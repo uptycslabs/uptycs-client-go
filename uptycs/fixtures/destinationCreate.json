@@ -1,7 +1,7 @@
 {
-  "name": "tony-test",
+  "name": "me",
   "type": "email",
-  "address": "tony.snook@reddit.com",
+  "address": "me@example.com",
   "config": {
     "sender": null
   },

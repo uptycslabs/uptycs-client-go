@@ -16,11 +16,6 @@ func main() {
 		CustomerID: os.Getenv("UPTYCS_CUSTOMER_ID"),
 	})
 
-	customProfileByName, _ := c.GetCustomProfile(uptycs.CustomProfile{
-		Name: "reddit ubuntu",
-	})
-	log.Println("Got CustomProfile with ID ", customProfileByName.ID)
-
 	customProfileByID, _ := c.GetCustomProfile(uptycs.CustomProfile{
 		ID: "c6815103-33eb-41e0-bc2f-6a23cc2e1589",
 	})

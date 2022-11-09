@@ -6,7 +6,7 @@
   "description": "marcus test",
   "code": "test_marc",
   "type": "sql",
-  "rule": "SELECT\n    'foo' as description,\n    'Low' as severity,\n    instance_id as asset_id,\n    now() as time,\n    'Alert' AS key,\n    'marcus test' as value\nFROM upt_cloud_instance_inventory_current\nWHERE key_name not like 'reddit2'\nLIMIT 1\n-- :to :from\n",
+  "rule": "SELECT\n    'foo' as description,\n    'Low' as severity,\n    instance_id as asset_id,\n    now() as time,\n    'Alert' AS key,\n    'marcus test' as value\nFROM upt_cloud_instance_inventory_current\nWHERE key_name not like 'examplecorp2'\nLIMIT 1\n-- :to :from\n",
   "grouping": "MITRE",
   "enabled": true,
   "custom": true,
