@@ -417,6 +417,7 @@ type Tag struct {
 	UpdatedBy                   string                   `json:"updatedBy,omitempty"`
 	FlagProfileID               string                   `json:"flagProfileId,omitempty"`
 	CustomProfileID             string                   `json:"customProfileId,omitempty"`
+	CustomProfile               string                   `json:"-,omitempty"`
 	ComplianceProfileID         string                   `json:"complianceProfileId,omitempty"`
 	ProcessBlockRuleID          string                   `json:"processBlockRuleId,omitempty"`
 	DNSBlockRuleID              string                   `json:"dnsBlockRuleId,omitempty"`

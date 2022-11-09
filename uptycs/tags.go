@@ -13,10 +13,22 @@ func (T Tag) GetName() string {
 }
 
 func (T Tag) KeysToDelete() []string {
-	return []string{}
+	return []string{
+		"customProfile",
+		"system",
+	}
 }
 
 func (c *Client) CreateTag(tag Tag) (Tag, error) {
+	//Allow using a custom profile name instead of an ID if given
+	if len(tag.CustomProfile) > 0 && len(tag.CustomProfileID) == 0 {
+		_cp, _ := c.GetCustomProfile(CustomProfile{
+			Name: tag.CustomProfile,
+		})
+		tag.CustomProfileID = _cp.ID
+		tag.CustomProfile = ""
+	}
+
 	for ind, fpg := range tag.FilePathGroups {
 		if len(fpg.Name) > 0 && len(fpg.ID) == 0 {
 			_fpg, _ := c.GetFilePathGroup(FilePathGroup{
@@ -81,6 +93,14 @@ func (c *Client) CreateTag(tag Tag) (Tag, error) {
 }
 
 func (c *Client) UpdateTag(tag Tag) (Tag, error) {
+	//Allow using a custom profile name instead of an ID if given
+	if len(tag.CustomProfile) > 0 && len(tag.CustomProfileID) == 0 {
+		_cp, _ := c.GetCustomProfile(CustomProfile{
+			Name: tag.CustomProfile,
+		})
+		tag.CustomProfileID = _cp.ID
+		tag.CustomProfile = ""
+	}
 	for ind, fpg := range tag.FilePathGroups {
 		if len(fpg.Name) > 0 && len(fpg.ID) == 0 {
 			_fpg, _ := c.GetFilePathGroup(FilePathGroup{

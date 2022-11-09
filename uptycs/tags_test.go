@@ -100,7 +100,7 @@ func TestGetTags(t *testing.T) {
 				t.Log("Output does not match expected")
 				t.Logf("Input: %v", theT.in)
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", tagsResp)
+				t.Logf("Actual:   %v", tagsResp)
 				t.Fail()
 			}
 		})
