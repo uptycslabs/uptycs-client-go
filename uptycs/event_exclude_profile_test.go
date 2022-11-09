@@ -141,7 +141,7 @@ func TestGetEventExcludeProfile(t *testing.T) {
 			if !reflect.DeepEqual(eventExcludeProfileResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", eventExcludeProfileResp)
+				t.Logf("Actual:   %v", eventExcludeProfileResp)
 				t.Fail()
 			}
 		})

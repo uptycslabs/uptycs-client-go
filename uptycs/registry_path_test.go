@@ -81,7 +81,7 @@ func TestGetRegistryPath(t *testing.T) {
 			if !reflect.DeepEqual(registryPathResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", registryPathResp)
+				t.Logf("Actual:   %v", registryPathResp)
 				t.Fail()
 			}
 		})

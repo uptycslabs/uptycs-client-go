@@ -77,7 +77,7 @@ func TestGetTagRule(t *testing.T) {
 			if !reflect.DeepEqual(tagRuleResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", tagRuleResp)
+				t.Logf("Actual:   %v", tagRuleResp)
 				t.Fail()
 			}
 		})

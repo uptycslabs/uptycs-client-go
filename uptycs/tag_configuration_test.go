@@ -79,7 +79,7 @@ func TestGetTagConfiguration(t *testing.T) {
 			if !reflect.DeepEqual(tagConfigurationResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", tagConfigurationResp)
+				t.Logf("Actual:   %v", tagConfigurationResp)
 				t.Fail()
 			}
 		})

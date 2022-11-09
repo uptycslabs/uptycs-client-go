@@ -71,7 +71,7 @@ func TestGetAlertRuleCategory(t *testing.T) {
 			if !reflect.DeepEqual(alertRuleCategoryResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", alertRuleCategoryResp)
+				t.Logf("Actual:   %v", alertRuleCategoryResp)
 				t.Fail()
 			}
 		})

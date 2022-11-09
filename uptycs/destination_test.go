@@ -78,7 +78,7 @@ func TestGetDestination(t *testing.T) {
 			if !reflect.DeepEqual(destinationResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", destinationResp)
+				t.Logf("Actual:   %v", destinationResp)
 				t.Fail()
 			}
 		})

@@ -89,7 +89,7 @@ func TestGetEventRules(t *testing.T) {
 				t.Log("Output does not match expected")
 				t.Logf("Input: %v", theT.in)
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", eventRulesResp)
+				t.Logf("Actual:   %v", eventRulesResp)
 				t.Fail()
 			}
 		})

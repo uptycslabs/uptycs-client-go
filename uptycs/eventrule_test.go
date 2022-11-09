@@ -361,7 +361,7 @@ func TestGetEventRule(t *testing.T) {
 			if !reflect.DeepEqual(eventRuleResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", eventRuleResp)
+				t.Logf("Actual:   %v", eventRuleResp)
 				t.Fail()
 			}
 		})

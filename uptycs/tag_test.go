@@ -43,6 +43,7 @@ func TestGetTag(t *testing.T) {
 				Source:               "direct",
 				UpdatedAt:            "2022-02-03T05:06:53.918Z",
 				ResourceType:         "asset",
+				CustomProfileID:      "c6815103-33eb-41e0-bc2f-6a23cc2e1589",
 				FilePathGroups:       []TagConfigurationObject{},
 				EventExcludeProfiles: []TagConfigurationObject{},
 				RegistryPaths:        []TagConfigurationObject{},
@@ -79,7 +80,7 @@ func TestGetTag(t *testing.T) {
 			if !reflect.DeepEqual(tagResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", tagResp)
+				t.Logf("Actual:   %v", tagResp)
 				t.Fail()
 			}
 		})
