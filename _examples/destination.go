@@ -26,7 +26,6 @@ func main() {
 	log.Println("Got Destination with Name ", destinationByID.Name)
 
 	// Create a destination
-
 	newDestination, err := c.CreateDestination(uptycs.Destination{
 		Name:    "marcus test",
 		Type:    "email",
@@ -38,7 +37,6 @@ func main() {
 	log.Println(fmt.Sprintf("Created destination '%s' with id '%s'", newDestination.Name, newDestination.ID))
 
 	// Update a destination by ID
-
 	log.Println(fmt.Sprintf("Attempting to update destination with id '%s': '%s' to 'marcus test updated'", newDestination.ID, newDestination.Name))
 	updatedDestination, err := c.UpdateDestination(uptycs.Destination{
 		ID:   newDestination.ID,
@@ -50,7 +48,6 @@ func main() {
 	log.Println(fmt.Sprintf("Updated destination '%s' with id '%s'", updatedDestination.Name, updatedDestination.ID))
 
 	// Delete a destination by ID
-
 	_, err = c.DeleteDestination(uptycs.Destination{
 		ID: newDestination.ID,
 	})

@@ -106,6 +106,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	log.Println(fmt.Sprintf("Deleted customProfile '%s' with id '%s'", updatedCustomProfile.Name, newCustomProfile.ID))
+	log.Println(fmt.Sprintf("Deleted customProfile '%s' with id '%s'", newCustomProfile.Name, newCustomProfile.ID))
 
 }

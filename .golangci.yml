@@ -4,3 +4,4 @@ linters:
 issues:
   exclude:
     - "Error return value of .* is not checked"
+    - "repeats json tag \"-\" also at models.go"
