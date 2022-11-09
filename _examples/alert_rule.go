@@ -69,7 +69,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created Rule '%s' with id '%s'", rule.Name, rule.ID))
 
-	// Update an alert rule by by ID
+	// Update an alert rule by ID
 
 	updatedRule, err := c.UpdateAlertRule(uptycs.AlertRule{
 		ID:          rule.ID,

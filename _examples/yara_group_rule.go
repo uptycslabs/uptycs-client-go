@@ -36,7 +36,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created yaraGroupRule '%s' with id '%s'", newYaraGroupRule.Name, newYaraGroupRule.ID))
 
-	// Update a yaraGroupRule by by ID
+	// Update a yaraGroupRule by ID
 
 	log.Println(fmt.Sprintf("Attempting to update yaraGroupRule with id '%s': '%s' to 'marcus test updated'", newYaraGroupRule.ID, newYaraGroupRule.Name))
 	updatedYaraGroupRule, err := c.UpdateYaraGroupRule(uptycs.YaraGroupRule{

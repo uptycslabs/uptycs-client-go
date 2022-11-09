@@ -43,7 +43,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created filePathGroup '%s' with id '%s'", newFilePathGroup.Name, newFilePathGroup.ID))
 
-	// Update a filePathGroup by by ID
+	// Update a filePathGroup by ID
 
 	log.Println(fmt.Sprintf("Attempting to update filePathGroup with id '%s': '%s' to 'marcus test updated'", newFilePathGroup.ID, newFilePathGroup.Name))
 	updatedFilePathGroup, err := c.UpdateFilePathGroup(uptycs.FilePathGroup{

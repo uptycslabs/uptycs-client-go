@@ -34,7 +34,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created assetGroupRule '%s' with id '%s'", newAssetGroupRule.Name, newAssetGroupRule.ID))
 
-	// Update a assetGroupRule by by ID
+	// Update a assetGroupRule by ID
 
 	log.Println(fmt.Sprintf("Attempting to update assetGroupRule with id '%s': '%s' to 'marcus test updated'", newAssetGroupRule.ID, newAssetGroupRule.Name))
 	updatedAssetGroupRule, err := c.UpdateAssetGroupRule(uptycs.AssetGroupRule{

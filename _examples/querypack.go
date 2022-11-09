@@ -63,7 +63,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created querypack '%s' with id '%s'", newQuerypack.Name, newQuerypack.ID))
 
-	// Update a querypack by by ID
+	// Update a querypack by ID
 	log.Println(fmt.Sprintf("Attempting to update querypack with id '%s': '%s' to 'marcus test updated'", newQuerypack.ID, newQuerypack.Name))
 	updatedQuerypack, err := c.UpdateQuerypack(uptycs.Querypack{
 		ID:          newQuerypack.ID,

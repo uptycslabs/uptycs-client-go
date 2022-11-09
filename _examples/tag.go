@@ -50,7 +50,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created tag with id '%s' with %d fileGroupPaths and %d registryPaths", newTag.ID, len(newTag.FilePathGroups), len(newTag.RegistryPaths)))
 
-	// Update a tag by by ID
+	// Update a tag by ID
 	log.Println(fmt.Sprintf("Attempting to update tag with id '%s", newTag.ID))
 	updatedTag, err := c.UpdateTag(uptycs.Tag{
 		ID:             newTag.ID,

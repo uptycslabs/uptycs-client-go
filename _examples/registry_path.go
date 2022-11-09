@@ -38,7 +38,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created registryPath '%s' with id '%s'", newRegistryPath.Name, newRegistryPath.ID))
 
-	// Update a registryPath by by ID
+	// Update a registryPath by ID
 
 	log.Println(fmt.Sprintf("Attempting to update registryPath with id '%s': '%s' to 'marcus test updated'", newRegistryPath.ID, newRegistryPath.Name))
 	updatedRegistryPath, err := c.UpdateRegistryPath(uptycs.RegistryPath{
