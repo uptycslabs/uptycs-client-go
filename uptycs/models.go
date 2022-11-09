@@ -149,22 +149,22 @@ type Destinations struct {
 }
 
 type Destination struct {
-	ID      string `json:"id,omitempty"`
-	Name    string `json:"name,omitempty"`
-	Type    string `json:"type,omitempty"`
-	Address string `json:"address,omitempty"`
+	ID        string     `json:"id,omitempty"`
+	Name      string     `json:"name,omitempty"`
+	Type      string     `json:"type,omitempty"`
+	Address   string     `json:"address,omitempty"`
+	CreatedAt string     `json:"createdAt,omitempty"`
+	CreatedBy string     `json:"createdBy,omitempty"`
+	UpdatedAt string     `json:"updatedAt,omitempty"`
+	UpdatedBy string     `json:"updatedBy,omitempty"`
+	Enabled   bool       `json:"enabled"`
+	Default   bool       `json:"default"`
+	Links     []LinkItem `json:"links"`
+	//Template TODO
 	//Config TODO
 	//"config": {
 	//  "sender": null
 	//},
-	CreatedAt string `json:"createdAt,omitempty"`
-	CreatedBy string `json:"createdBy,omitempty"`
-	UpdatedAt string `json:"updatedAt,omitempty"`
-	UpdatedBy string `json:"updatedBy,omitempty"`
-	Enabled   bool   `json:"enabled"`
-	Default   bool   `json:"default"`
-	//Template TODO
-	Links []LinkItem `json:"links"`
 }
 
 type SQLConfig struct {
@@ -186,11 +186,11 @@ type AlertRuleCategories struct {
 }
 
 type AlertRuleCategory struct {
-	ID        string     `json:"id"`
-	RuleID    string     `json:"ruleId"`
-	Name      string     `json:"name"`
-	CreatedAt string     `json:"createdAt"`
-	CreatedBy string     `json:"createdBy"`
+	ID        string     `json:"id,omitempty"`
+	RuleID    string     `json:"ruleId,omitempty"`
+	Name      string     `json:"name,omitempty"`
+	CreatedAt string     `json:"createdAt,omitempty"`
+	CreatedBy string     `json:"createdBy,omitempty"`
 	Links     []LinkItem `json:"links"`
 }
 
@@ -317,7 +317,7 @@ type Roles struct {
 }
 
 type ComplianceProfile struct {
-	ID          string     `json:"id"`
+	ID          string     `json:"id,omitempty"`
 	Name        string     `json:"name,omitempty"`
 	Description string     `json:"description,omitempty"`
 	Custom      bool       `json:"custom"`
@@ -478,26 +478,26 @@ type FilePathGroups struct {
 }
 
 type FilePathGroup struct {
-	ID                    string   `json:"id,omitempty"`
-	Name                  string   `json:"name,omitempty"`
-	Description           string   `json:"description,omitempty"`
-	Grouping              string   `json:"grouping,omitempty"`
-	IncludePaths          []string `json:"includePaths"`
-	IncludePathExtensions []string `json:"includePathExtensions"`
-	ExcludePaths          []string `json:"excludePaths"`
-	Custom                bool     `json:"custom" validate:"required"`
-	CheckSignature        bool     `json:"checkSignature"`
-	FileAccesses          bool     `json:"fileAccesses"`
+	ID                    string                   `json:"id,omitempty"`
+	Name                  string                   `json:"name,omitempty"`
+	Description           string                   `json:"description,omitempty"`
+	Grouping              string                   `json:"grouping,omitempty"`
+	IncludePaths          []string                 `json:"includePaths"`
+	IncludePathExtensions []string                 `json:"includePathExtensions"`
+	ExcludePaths          []string                 `json:"excludePaths"`
+	Custom                bool                     `json:"custom" validate:"required"`
+	CheckSignature        bool                     `json:"checkSignature"`
+	FileAccesses          bool                     `json:"fileAccesses"`
+	ExcludeProcessNames   []string                 `json:"excludeProcessNames"`
+	PriorityPaths         []string                 `json:"priorityPaths"`
+	CreatedBy             string                   `json:"createdBy,omitempty"`
+	UpdatedBy             string                   `json:"updatedBy,omitempty"`
+	CreatedAt             string                   `json:"createdAt,omitempty"`
+	UpdatedAt             string                   `json:"updatedAt,omitempty"`
+	Signatures            []FilePathGroupSignature `json:"signatures" validate:"required,min=0"`
+	YaraGroupRules        []YaraGroupRule          `json:"yaraGroupRules" validate:"required,min=0"`
+	Links                 []LinkItem               `json:"links"`
 	//ExcludeProcessPaths   []string                 `json:"excludeProcessPaths"` //TODO this seems broken in the API. returns null or {}
-	ExcludeProcessNames []string                 `json:"excludeProcessNames"`
-	PriorityPaths       []string                 `json:"priorityPaths"`
-	CreatedBy           string                   `json:"createdBy,omitempty"`
-	UpdatedBy           string                   `json:"updatedBy,omitempty"`
-	CreatedAt           string                   `json:"createdAt,omitempty"`
-	UpdatedAt           string                   `json:"updatedAt,omitempty"`
-	Signatures          []FilePathGroupSignature `json:"signatures" validate:"required,min=0"`
-	YaraGroupRules      []YaraGroupRule          `json:"yaraGroupRules" validate:"required,min=0"`
-	Links               []LinkItem               `json:"links"`
 }
 
 type FilePathGroupSignature struct {
@@ -539,7 +539,7 @@ type RegistryPaths struct {
 }
 
 type RegistryPath struct {
-	ID                   string     `json:"id"`
+	ID                   string     `json:"id,omitempty"`
 	Name                 string     `json:"name,omitempty"`
 	Description          string     `json:"description,omitempty"`
 	Grouping             string     `json:"grouping,omitempty"`
@@ -562,8 +562,7 @@ type Querypacks struct {
 }
 
 type Querypack struct {
-	ID string `json:"id"`
-	//Sha              string           `json:"sha" validate:"required,max=40,min=1"` //TODO Does not work
+	ID               string           `json:"id,omitempty"`
 	Name             string           `json:"name,omitempty"`
 	Description      string           `json:"description" validate:"required,max=1024,min=1"`
 	Type             string           `json:"type" validate:"required,oneof=compliance default hardware incident system vulnerability"`
@@ -578,10 +577,11 @@ type Querypack struct {
 	Queries          []Query          `json:"queries"`
 	Conf             CustomJSONString `json:"conf,omitempty"`
 	Links            []LinkItem       `json:"links"`
+	//Sha              string           `json:"sha" validate:"required,max=40,min=1"` //TODO Does not work
 }
 
 type Query struct {
-	ID          string           `json:"id"`
+	ID          string           `json:"id,omitempty"`
 	Name        string           `json:"name,omitempty"`
 	Description string           `json:"description,omitempty"`
 	Query       string           `json:"query,omitempty"`
@@ -610,7 +610,7 @@ type AuditConfigurations struct {
 }
 
 type AuditConfiguration struct {
-	ID          string       `json:"id"`
+	ID          string       `json:"id,omitempty"`
 	Name        string       `json:"name,omitempty"`
 	Description string       `json:"description,omitempty"`
 	Framework   string       `json:"framework" validate:"required,oneof=CIS PCI CUSTOM FEDRAMP SOC2 HIPAA STIG NIST ISO VDA-TISAX"`
@@ -630,7 +630,7 @@ type AuditConfiguration struct {
 }
 
 type AuditEntry struct {
-	ID                   string   `json:"id"`
+	ID                   string   `json:"id,omitempty"`
 	AuditConfigurationID string   `json:"auditConfigurationId,omitempty"`
 	AuditName            []string `json:"auditName"`
 	Standard             string   `json:"standard,omitempty"`
@@ -670,7 +670,7 @@ type AssetGroupRules struct {
 }
 
 type AssetGroupRule struct {
-	ID             string     `json:"id"`
+	ID             string     `json:"id,omitempty"`
 	Name           string     `json:"name"`
 	Description    string     `json:"description,omitempty"`
 	Query          string     `json:"query"`
@@ -725,28 +725,48 @@ type Carves struct {
 }
 
 type Carve struct {
-	ID        string `json:"id"`
-	Name      string `json:"-"` // Required but not actually in a carve
-	AssetID   string `json:"assetId,omitempty"`
-	Path      string `json:"path,omitempty"`
-	CreatedAt string `json:"createdAt,omitempty"`
-	UpdatedAt string `json:"updatedAt,omitempty"`
-	Status    string `json:"status,omitempty"`
-	//Error           interface{} `json:"error"` TODO
+	ID              string `json:"id,omitempty"`
+	Name            string `json:"-"` // Required but not actually in a carve
+	AssetID         string `json:"assetId,omitempty"`
+	Path            string `json:"path,omitempty"`
+	CreatedAt       string `json:"createdAt,omitempty"`
+	UpdatedAt       string `json:"updatedAt,omitempty"`
+	Status          string `json:"status,omitempty"`
 	DeletedUserName string `json:"deletedUserName,omitempty"`
 	DeletedAt       string `json:"deletedAt,omitempty"`
 	AssetHostName   string `json:"assetHostName,omitempty"`
 	Offset          int    `json:"offset,omitempty"`
 	Length          int    `json:"length,omitempty"`
+	//Error           interface{} `json:"error"` TODO
+}
+type CustomProfiles struct {
+	Links  []LinkItem      `json:"links"`
+	Items  []CustomProfile `json:"items"`
+	Offset int             `json:"offset,omitempty"`
+	Limit  int             `json:"limit,omitempty"`
+}
+
+type CustomProfile struct {
+	ID             string           `json:"id,omitempty"`
+	Name           string           `json:"name,omitempty"`
+	Description    string           `json:"description,omitempty"`
+	QuerySchedules CustomJSONString `json:"querySchedules,omitempty" validate:"required,min=1"`
+	Priority       int              `json:"priority"`
+	CreatedBy      string           `json:"createdBy,omitempty"`
+	UpdatedBy      string           `json:"updatedBy,omitempty"`
+	CreatedAt      string           `json:"createdAt,omitempty"`
+	UpdatedAt      string           `json:"updatedAt,omitempty"`
+	ResourceType   string           `json:"resourceType,omitempty"`
+	Links          []LinkItem       `json:"links"`
 }
 
 type iAPIType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve | CustomProfile
 	GetID() string
 	GetName() string
 	KeysToDelete() []string
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles
 }
