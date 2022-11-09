@@ -101,6 +101,7 @@ func (c *Client) UpdateTag(tag Tag) (Tag, error) {
 		tag.CustomProfileID = _cp.ID
 		tag.CustomProfile = ""
 	}
+
 	for ind, fpg := range tag.FilePathGroups {
 		if len(fpg.Name) > 0 && len(fpg.ID) == 0 {
 			_fpg, _ := c.GetFilePathGroup(FilePathGroup{

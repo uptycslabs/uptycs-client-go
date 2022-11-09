@@ -469,7 +469,7 @@ type TagConfigurationObject struct {
 	RegistryPathTag        *TagConfigurationObjectDetails `json:"RegistryPathTag,omitempty"`
 	EventExcludeProfileTag *TagConfigurationObjectDetails `json:"EventExcludeProfileTag,omitempty"`
 	FilePathGroupTag       *TagConfigurationObjectDetails `json:"FilePathGroupTag,omitempty"`
-	Links                  []LinkItem                     `json:"links"`
+	Links                  []LinkItem                     `json:"links,omitempty"`
 }
 type FilePathGroups struct {
 	Links  []LinkItem      `json:"links"`
