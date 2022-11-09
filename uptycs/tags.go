@@ -149,6 +149,54 @@ func (c *Client) UpdateTag(tag Tag) (Tag, error) {
 		tag.CustomProfileID = _cp.ID
 		tag.CustomProfile = ""
 	}
+	//Allow using a flag profile name instead of an ID if given
+	if len(tag.FlagProfile) > 0 && len(tag.FlagProfileID) == 0 {
+		_cp, _ := c.GetFlagProfile(FlagProfile{
+			Name: tag.FlagProfile,
+		})
+		tag.FlagProfileID = _cp.ID
+		tag.FlagProfile = ""
+	}
+	//Allow using a compliance profile name instead of an ID if given
+	if len(tag.ComplianceProfile) > 0 && len(tag.ComplianceProfileID) == 0 {
+		_cp, _ := c.GetComplianceProfile(ComplianceProfile{
+			Name: tag.ComplianceProfile,
+		})
+		tag.ComplianceProfileID = _cp.ID
+		tag.ComplianceProfile = ""
+	}
+	//Allow using a process block rule name instead of an ID if given
+	if len(tag.ProcessBlockRule) > 0 && len(tag.ProcessBlockRuleID) == 0 {
+		_cp, _ := c.GetBlockRule(BlockRule{
+			Name: tag.ProcessBlockRule,
+		})
+		tag.ProcessBlockRuleID = _cp.ID
+		tag.ProcessBlockRule = ""
+	}
+	//Allow using a dns block rule name instead of an ID if given
+	if len(tag.DNSBlockRule) > 0 && len(tag.DNSBlockRuleID) == 0 {
+		_cp, _ := c.GetBlockRule(BlockRule{
+			Name: tag.DNSBlockRule,
+		})
+		tag.DNSBlockRuleID = _cp.ID
+		tag.DNSBlockRule = ""
+	}
+	//Allow using a windows defender preference name instead of an ID if given
+	if len(tag.WindowsDefenderPreference) > 0 && len(tag.WindowsDefenderPreferenceID) == 0 {
+		_cp, _ := c.GetWindowsDefenderPreference(WindowsDefenderPreference{
+			Name: tag.WindowsDefenderPreference,
+		})
+		tag.WindowsDefenderPreferenceID = _cp.ID
+		tag.WindowsDefenderPreference = ""
+	}
+	//Allow using a tag rule name instead of an ID if given
+	if len(tag.TagRule) > 0 && len(tag.TagRuleID) == 0 {
+		_cp, _ := c.GetTagRule(TagRule{
+			Name: tag.TagRule,
+		})
+		tag.TagRuleID = _cp.ID
+		tag.TagRule = ""
+	}
 
 	for ind, fpg := range tag.FilePathGroups {
 		if len(fpg.Name) > 0 && len(fpg.ID) == 0 {
