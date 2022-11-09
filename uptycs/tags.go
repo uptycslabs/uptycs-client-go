@@ -16,6 +16,7 @@ func (T Tag) KeysToDelete() []string {
 	return []string{
 		"customProfile",
 		"system",
+		"tagRuleId",
 	}
 }
 
@@ -68,14 +69,7 @@ func (c *Client) CreateTag(tag Tag) (Tag, error) {
 		tag.WindowsDefenderPreferenceID = _cp.ID
 		tag.WindowsDefenderPreference = ""
 	}
-	//Allow using a tag rule name instead of an ID if given
-	if len(tag.TagRule) > 0 && len(tag.TagRuleID) == 0 {
-		_cp, _ := c.GetTagRule(TagRule{
-			Name: tag.TagRule,
-		})
-		tag.TagRuleID = _cp.ID
-		tag.TagRule = ""
-	}
+	// Worth noting tagRuleId here is auto populated via the query on it, you cannot set it on /tags
 
 	for ind, fpg := range tag.FilePathGroups {
 		if len(fpg.Name) > 0 && len(fpg.ID) == 0 {
@@ -189,14 +183,7 @@ func (c *Client) UpdateTag(tag Tag) (Tag, error) {
 		tag.WindowsDefenderPreferenceID = _cp.ID
 		tag.WindowsDefenderPreference = ""
 	}
-	//Allow using a tag rule name instead of an ID if given
-	if len(tag.TagRule) > 0 && len(tag.TagRuleID) == 0 {
-		_cp, _ := c.GetTagRule(TagRule{
-			Name: tag.TagRule,
-		})
-		tag.TagRuleID = _cp.ID
-		tag.TagRule = ""
-	}
+	// Worth noting tagRuleId here is auto populated via the query on it, you cannot set it on /tags
 
 	for ind, fpg := range tag.FilePathGroups {
 		if len(fpg.Name) > 0 && len(fpg.ID) == 0 {
