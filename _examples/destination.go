@@ -16,14 +16,14 @@ func main() {
 	})
 
 	destinationByName, _ := c.GetDestination(uptycs.Destination{
-		Name: "#reddiconnect-alerts",
+		Name: "#examplecorpconnect-alerts",
 	})
-	log.Println("Got Destination with ID %s", destinationByName.ID)
+	log.Println("Got Destination with ID ", destinationByName.ID)
 
 	destinationByID, _ := c.GetDestination(uptycs.Destination{
 		ID: "b7c9c973-e2a3-4913-a755-919026267679",
 	})
-	log.Println("Got Destination with Name %s", destinationByID.Name)
+	log.Println("Got Destination with Name ", destinationByID.Name)
 
 	// Create a destination
 

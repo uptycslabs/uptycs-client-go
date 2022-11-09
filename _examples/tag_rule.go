@@ -18,12 +18,12 @@ func main() {
 	tagRuleByName, _ := c.GetTagRule(uptycs.TagRule{
 		Name: "AWS Account ID Tag",
 	})
-	log.Printf("Got TagRule with ID %s\n", tagRuleByName.ID)
+	log.Printf("Got TagRule with ID \n", tagRuleByName.ID)
 
 	tagRuleByID, _ := c.GetTagRule(uptycs.TagRule{
 		ID: "3b231f3a-f852-4d86-8611-2d3a1a368851",
 	})
-	log.Printf("Got TagRule with Name %s\n", tagRuleByID.Name)
+	log.Printf("Got TagRule with Name \n", tagRuleByID.Name)
 
 	// Create a tagRule
 

@@ -18,12 +18,12 @@ func main() {
 	filePathGroupByName, _ := c.GetFilePathGroup(uptycs.FilePathGroup{
 		Name: "fim_testing",
 	})
-	log.Println("Got FilePathGroup with ID %s", filePathGroupByName.ID)
+	log.Println("Got FilePathGroup with ID ", filePathGroupByName.ID)
 
 	filePathGroupByID, _ := c.GetFilePathGroup(uptycs.FilePathGroup{
 		ID: "2c4e7ba8-6456-4f67-8a3f-332043642be8",
 	})
-	log.Println("Got FilePathGroup with Name %s", filePathGroupByID.Name)
+	log.Println("Got FilePathGroup with Name ", filePathGroupByID.Name)
 
 	// Create a filePathGroup
 

@@ -18,12 +18,12 @@ func main() {
 	atcQueryByName, _ := c.GetAtcQuery(uptycs.AtcQuery{
 		Name: "atc_chrome_downloads",
 	})
-	log.Println("Got AtcQuery with ID %s", atcQueryByName.ID)
+	log.Println("Got AtcQuery with ID ", atcQueryByName.ID)
 
 	atcQueryByID, _ := c.GetAtcQuery(uptycs.AtcQuery{
 		ID: "dc0e9652-ec9a-4baa-9da3-8547333b3628",
 	})
-	log.Println("Got AtcQuery with Name %s", atcQueryByID.Name)
+	log.Println("Got AtcQuery with Name ", atcQueryByID.Name)
 
 	// Create a atcQuery
 	newAtcQuery, err := c.CreateAtcQuery(uptycs.AtcQuery{

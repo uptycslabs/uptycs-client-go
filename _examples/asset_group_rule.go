@@ -18,7 +18,7 @@ func main() {
 	assetGroupRuleByID, _ := c.GetAssetGroupRule(uptycs.AssetGroupRule{
 		ID: "d774ac13-ad82-4fb2-8bc9-893a1b957264",
 	})
-	log.Println("Got AssetGroupRule with Name %s", assetGroupRuleByID.Name)
+	log.Println("Got AssetGroupRule with Name ", assetGroupRuleByID.Name)
 
 	// Create a assetGroupRule
 

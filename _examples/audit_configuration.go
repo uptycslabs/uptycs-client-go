@@ -17,10 +17,10 @@ func main() {
 	auditConfigurationByID, _ := c.GetAuditConfiguration(uptycs.AuditConfiguration{
 		ID: "7d51a844-f28e-4dbf-8831-e4a063e16156",
 	})
-	log.Println("Got AuditConfiguration with Name %s", auditConfigurationByID.Name)
+	log.Println("Got AuditConfiguration with Name ", auditConfigurationByID.Name)
 
 	auditConfigurationByName, _ := c.GetAuditConfiguration(uptycs.AuditConfiguration{
 		Name: "CIS_Distribution_Independent_Linux_Benchmark_v200-Test",
 	})
-	log.Println("Got AuditConfiguration with ID %s", auditConfigurationByName.ID)
+	log.Println("Got AuditConfiguration with ID ", auditConfigurationByName.ID)
 }
