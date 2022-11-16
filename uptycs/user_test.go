@@ -76,7 +76,7 @@ func TestGetUser(t *testing.T) {
 			if !reflect.DeepEqual(userResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", userResp)
+				t.Logf("Actual:   %v", userResp)
 				t.Fail()
 			}
 		})

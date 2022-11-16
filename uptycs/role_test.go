@@ -73,7 +73,7 @@ func TestGetRole(t *testing.T) {
 			if !reflect.DeepEqual(roleResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", roleResp)
+				t.Logf("Actual:   %v", roleResp)
 				t.Fail()
 			}
 		})

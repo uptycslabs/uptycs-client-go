@@ -15,9 +15,9 @@
     {
       "id": "4c0dee1f-c19a-45fe-bf5d-fd031d6f694f",
       "customerId": "111111111111-111111-11111-111111-111111111",
-      "name": "tony-test",
+      "name": "me",
       "type": "email",
-      "address": "tony.snook@reddit.com",
+      "address": "me@example.com",
       "config": {
         "sender": null
       },

@@ -1,0 +1,32 @@
+{
+  "id": "ed4c1240-ffcb-492a-b95f-82976c8bbab5",
+  "customerId": "111111111111-111111-11111-111111-111111111",
+  "custom": false,
+  "name": "Container Events",
+  "seedId": "3018d44e-c0f3-4f4e-b59d-c663c0ea2de5",
+  "description": "Container Events",
+  "priority": 1111144,
+  "flags": {
+    "disable_audit": false,
+    "audit_allow_config": true,
+    "enable_docker_events": true,
+    "enable_containerd_events": true,
+    "add_container_image_to_events": true
+  },
+  "osFlags": null,
+  "createdBy": "00000000-0000-0000-0000-000000000000",
+  "updatedBy": null,
+  "createdAt": "2021-09-20T16:57:25.926Z",
+  "updatedAt": "2022-11-07T13:06:59.670Z",
+  "resourceType": "asset",
+  "links": [
+    {
+      "rel": "self",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/flagProfiles/ed4c1240-ffcb-492a-b95f-82976c8bbab5"
+    },
+    {
+      "rel": "parent",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/flagProfiles"
+    }
+  ]
+}

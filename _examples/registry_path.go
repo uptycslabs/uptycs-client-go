@@ -18,12 +18,12 @@ func main() {
 	registryPathByName, _ := c.GetRegistryPath(uptycs.RegistryPath{
 		Name: "upt_lsa_provider",
 	})
-	log.Println("Got RegistryPath with ID %s", registryPathByName.ID)
+	log.Println("Got RegistryPath with ID ", registryPathByName.ID)
 
 	registryPathByID, _ := c.GetRegistryPath(uptycs.RegistryPath{
 		ID: "0d52d170-f43a-4705-9c44-16133f31ecf4",
 	})
-	log.Println("Got RegistryPath with Name %s", registryPathByID.Name)
+	log.Println("Got RegistryPath with Name ", registryPathByID.Name)
 
 	// Create a registryPath
 
@@ -38,7 +38,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created registryPath '%s' with id '%s'", newRegistryPath.Name, newRegistryPath.ID))
 
-	// Update a registryPath by by ID
+	// Update a registryPath by ID
 
 	log.Println(fmt.Sprintf("Attempting to update registryPath with id '%s': '%s' to 'marcus test updated'", newRegistryPath.ID, newRegistryPath.Name))
 	updatedRegistryPath, err := c.UpdateRegistryPath(uptycs.RegistryPath{

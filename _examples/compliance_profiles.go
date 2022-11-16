@@ -30,7 +30,7 @@ func main() {
 	if err2 != nil {
 		panic(err2)
 	}
-	log.Printf("Got ComplianceProfile by ID with Name %s\n", complianceProfilesByID.Name)
+	log.Printf("Got ComplianceProfile by ID with Name \n", complianceProfilesByID.Name)
 
 	// Below works, but without perms to delete doesn't make sense to run
 	// newComplianceProfile, err3 := c.CreateComplianceProfile(uptycs.ComplianceProfile{
@@ -41,7 +41,7 @@ func main() {
 	// if err3 != nil {
 	// 	panic(err3)
 	// }
-	// log.Printf("Created new ComplianceProfile with ID %s\n", newComplianceProfile.ID)
+	// log.Printf("Created new ComplianceProfile with ID \n", newComplianceProfile.ID)
 
 	// No permissions to delete compliance profile
 	// _, err4 := c.DeleteComplianceProfile(uptycs.ComplianceProfile{

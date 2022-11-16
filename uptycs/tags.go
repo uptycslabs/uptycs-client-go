@@ -13,10 +13,64 @@ func (T Tag) GetName() string {
 }
 
 func (T Tag) KeysToDelete() []string {
-	return []string{}
+	return []string{
+		"customProfile",
+		"system",
+		"tagRuleId",
+	}
 }
 
 func (c *Client) CreateTag(tag Tag) (Tag, error) {
+	//Allow using a custom profile name instead of an ID if given
+	if len(tag.CustomProfile) > 0 && len(tag.CustomProfileID) == 0 {
+		_cp, _ := c.GetCustomProfile(CustomProfile{
+			Name: tag.CustomProfile,
+		})
+		tag.CustomProfileID = _cp.ID
+		tag.CustomProfile = ""
+	}
+	//Allow using a flag profile name instead of an ID if given
+	if len(tag.FlagProfile) > 0 && len(tag.FlagProfileID) == 0 {
+		_cp, _ := c.GetFlagProfile(FlagProfile{
+			Name: tag.FlagProfile,
+		})
+		tag.FlagProfileID = _cp.ID
+		tag.FlagProfile = ""
+	}
+	//Allow using a compliance profile name instead of an ID if given
+	if len(tag.ComplianceProfile) > 0 && len(tag.ComplianceProfileID) == 0 {
+		_cp, _ := c.GetComplianceProfile(ComplianceProfile{
+			Name: tag.ComplianceProfile,
+		})
+		tag.ComplianceProfileID = _cp.ID
+		tag.ComplianceProfile = ""
+	}
+	//Allow using a process block rule name instead of an ID if given
+	if len(tag.ProcessBlockRule) > 0 && len(tag.ProcessBlockRuleID) == 0 {
+		_cp, _ := c.GetBlockRule(BlockRule{
+			Name: tag.ProcessBlockRule,
+		})
+		tag.ProcessBlockRuleID = _cp.ID
+		tag.ProcessBlockRule = ""
+	}
+	//Allow using a dns block rule name instead of an ID if given
+	if len(tag.DNSBlockRule) > 0 && len(tag.DNSBlockRuleID) == 0 {
+		_cp, _ := c.GetBlockRule(BlockRule{
+			Name: tag.DNSBlockRule,
+		})
+		tag.DNSBlockRuleID = _cp.ID
+		tag.DNSBlockRule = ""
+	}
+	//Allow using a windows defender preference name instead of an ID if given
+	if len(tag.WindowsDefenderPreference) > 0 && len(tag.WindowsDefenderPreferenceID) == 0 {
+		_cp, _ := c.GetWindowsDefenderPreference(WindowsDefenderPreference{
+			Name: tag.WindowsDefenderPreference,
+		})
+		tag.WindowsDefenderPreferenceID = _cp.ID
+		tag.WindowsDefenderPreference = ""
+	}
+	// Worth noting tagRuleId here is auto populated via the query on it, you cannot set it on /tags
+
 	for ind, fpg := range tag.FilePathGroups {
 		if len(fpg.Name) > 0 && len(fpg.ID) == 0 {
 			_fpg, _ := c.GetFilePathGroup(FilePathGroup{
@@ -81,6 +135,56 @@ func (c *Client) CreateTag(tag Tag) (Tag, error) {
 }
 
 func (c *Client) UpdateTag(tag Tag) (Tag, error) {
+	//Allow using a custom profile name instead of an ID if given
+	if len(tag.CustomProfile) > 0 && len(tag.CustomProfileID) == 0 {
+		_cp, _ := c.GetCustomProfile(CustomProfile{
+			Name: tag.CustomProfile,
+		})
+		tag.CustomProfileID = _cp.ID
+		tag.CustomProfile = ""
+	}
+	//Allow using a flag profile name instead of an ID if given
+	if len(tag.FlagProfile) > 0 && len(tag.FlagProfileID) == 0 {
+		_cp, _ := c.GetFlagProfile(FlagProfile{
+			Name: tag.FlagProfile,
+		})
+		tag.FlagProfileID = _cp.ID
+		tag.FlagProfile = ""
+	}
+	//Allow using a compliance profile name instead of an ID if given
+	if len(tag.ComplianceProfile) > 0 && len(tag.ComplianceProfileID) == 0 {
+		_cp, _ := c.GetComplianceProfile(ComplianceProfile{
+			Name: tag.ComplianceProfile,
+		})
+		tag.ComplianceProfileID = _cp.ID
+		tag.ComplianceProfile = ""
+	}
+	//Allow using a process block rule name instead of an ID if given
+	if len(tag.ProcessBlockRule) > 0 && len(tag.ProcessBlockRuleID) == 0 {
+		_cp, _ := c.GetBlockRule(BlockRule{
+			Name: tag.ProcessBlockRule,
+		})
+		tag.ProcessBlockRuleID = _cp.ID
+		tag.ProcessBlockRule = ""
+	}
+	//Allow using a dns block rule name instead of an ID if given
+	if len(tag.DNSBlockRule) > 0 && len(tag.DNSBlockRuleID) == 0 {
+		_cp, _ := c.GetBlockRule(BlockRule{
+			Name: tag.DNSBlockRule,
+		})
+		tag.DNSBlockRuleID = _cp.ID
+		tag.DNSBlockRule = ""
+	}
+	//Allow using a windows defender preference name instead of an ID if given
+	if len(tag.WindowsDefenderPreference) > 0 && len(tag.WindowsDefenderPreferenceID) == 0 {
+		_cp, _ := c.GetWindowsDefenderPreference(WindowsDefenderPreference{
+			Name: tag.WindowsDefenderPreference,
+		})
+		tag.WindowsDefenderPreferenceID = _cp.ID
+		tag.WindowsDefenderPreference = ""
+	}
+	// Worth noting tagRuleId here is auto populated via the query on it, you cannot set it on /tags
+
 	for ind, fpg := range tag.FilePathGroups {
 		if len(fpg.Name) > 0 && len(fpg.ID) == 0 {
 			_fpg, _ := c.GetFilePathGroup(FilePathGroup{

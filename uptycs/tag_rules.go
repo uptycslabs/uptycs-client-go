@@ -13,6 +13,7 @@ func (T TagRule) GetName() string {
 func (T TagRule) KeysToDelete() []string {
 	return []string{
 		"resourceType",
+		"system",
 	}
 }
 

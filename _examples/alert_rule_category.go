@@ -46,7 +46,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created alertRuleCategory '%s' with id '%s'", newAlertRuleCategory.Name, newAlertRuleCategory.ID))
 
-	// Update a alertRuleCategory by by ID
+	// Update a alertRuleCategory by ID
 
 	log.Println(fmt.Sprintf("Attempting to update alertRuleCategory with id '%s': '%s' to 'marcus test updated'", newAlertRuleCategory.ID, newAlertRuleCategory.Name))
 	updatedAlertRuleCategory, err := c.UpdateAlertRuleCategory(uptycs.AlertRuleCategory{

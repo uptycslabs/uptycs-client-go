@@ -85,7 +85,7 @@ func TestPutAlertRule(t *testing.T) {
 				Description: "marcus test",
 				Code:        "test_marc",
 				Type:        "sql",
-				Rule:        "SELECT\n    'foo' as description,\n    'Low' as severity,\n    instance_id as asset_id,\n    now() as time,\n    'Alert' AS key,\n    'marcus test' as value\nFROM upt_cloud_instance_inventory_current\nWHERE key_name not like 'reddit2'\nLIMIT 1\n-- :to :from\n",
+				Rule:        "SELECT\n    'foo' as description,\n    'Low' as severity,\n    instance_id as asset_id,\n    now() as time,\n    'Alert' AS key,\n    'marcus test' as value\nFROM upt_cloud_instance_inventory_current\nWHERE key_name not like 'examplecorp2'\nLIMIT 1\n-- :to :from\n",
 				Grouping:    "MITRE",
 				Enabled:     true,
 				GroupingL2:  "Impact",
@@ -144,11 +144,11 @@ func TestGetAlertRule(t *testing.T) {
 			id:      "bcfe1cda-9eba-40fa-9686-9c1caea47732",
 			out: AlertRule{
 				ID:          "bcfe1cda-9eba-40fa-9686-9c1caea47732",
-				Name:        "Login Profile Changes Detected_REDDIT",
+				Name:        "Login Profile Changes Detected_EXAMPLECORP",
 				Description: "Changes detected in Login Profiles, which can result in Privilege Escalations",
-				Code:        "AWS_THREAT_PRIV_ESC_4_REDDIT",
+				Code:        "AWS_THREAT_PRIV_ESC_4_EXAMPLECORP",
 				Type:        "builder",
-				Rule:        "Auto create alert rule for Login Profile Changes Detected_REDDIT",
+				Rule:        "Auto create alert rule for Login Profile Changes Detected_EXAMPLECORP",
 				Grouping:    "ATTACK",
 				Enabled:     true,
 				Custom:      false,
@@ -237,7 +237,7 @@ func TestGetAlertRule(t *testing.T) {
 			if !reflect.DeepEqual(alertRuleResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", alertRuleResp)
+				t.Logf("Actual:   %v", alertRuleResp)
 				t.Fail()
 			}
 		})
@@ -268,7 +268,7 @@ func TestCreateAlertRule(t *testing.T) {
 				Description: "marcus test",
 				Code:        "test_marc",
 				Type:        "sql",
-				Rule:        "SELECT\n    'foo' as description,\n    'Low' as severity,\n    instance_id as asset_id,\n    now() as time,\n    'Alert' AS key,\n    'marcus test' as value\nFROM upt_cloud_instance_inventory_current\nWHERE key_name not like 'reddit2'\nLIMIT 1\n-- :to :from\n",
+				Rule:        "SELECT\n    'foo' as description,\n    'Low' as severity,\n    instance_id as asset_id,\n    now() as time,\n    'Alert' AS key,\n    'marcus test' as value\nFROM upt_cloud_instance_inventory_current\nWHERE key_name not like 'examplecorp2'\nLIMIT 1\n-- :to :from\n",
 				Grouping:    "MITRE",
 				Enabled:     true,
 				GroupingL2:  "Impact",

@@ -75,7 +75,7 @@ func TestGetYaraGroupRule(t *testing.T) {
 			if !reflect.DeepEqual(yaraGroupRuleResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", yaraGroupRuleResp)
+				t.Logf("Actual:   %v", yaraGroupRuleResp)
 				t.Fail()
 			}
 		})

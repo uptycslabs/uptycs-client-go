@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/MakeNowJust/heredoc"
 	"github.com/uptycslabs/uptycs-client-go/uptycs"
 	"log"
 	"os"
@@ -50,7 +51,22 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created tag with id '%s' with %d fileGroupPaths and %d registryPaths", newTag.ID, len(newTag.FilePathGroups), len(newTag.RegistryPaths)))
 
-	// Update a tag by by ID
+	// Create a customProfile
+	newCustomProfile, err := c.CreateCustomProfile(uptycs.CustomProfile{
+		Name:        "marcus test",
+		Description: "Test",
+		QuerySchedules: uptycs.CustomJSONString(heredoc.Doc(`{
+		  "processes": 100
+		}`)),
+		Priority:     2,
+		ResourceType: "asset",
+	})
+	if err != nil {
+		panic(err)
+	}
+	log.Println(fmt.Sprintf("Created customProfile '%s' with id '%s'", newCustomProfile.Name, newCustomProfile.ID))
+
+	// Update a tag by ID
 	log.Println(fmt.Sprintf("Attempting to update tag with id '%s", newTag.ID))
 	updatedTag, err := c.UpdateTag(uptycs.Tag{
 		ID:             newTag.ID,
@@ -63,6 +79,7 @@ func main() {
 				ID: "ce064913-0c00-4b14-8df3-b1dd90372f04",
 			},
 		},
+		CustomProfile:        newCustomProfile.Name,
 		Querypacks:           []uptycs.TagConfigurationObject{},
 		YaraGroupRules:       []uptycs.TagConfigurationObject{},
 		AuditConfigurations:  []uptycs.TagConfigurationObject{},
@@ -81,5 +98,14 @@ func main() {
 		panic(err)
 	}
 	log.Println(fmt.Sprintf("Deleted tag with id '%s'", newTag.ID))
+
+	// Delete a customProfile by ID
+	_, err = c.DeleteCustomProfile(uptycs.CustomProfile{
+		ID: newCustomProfile.ID,
+	})
+	if err != nil {
+		panic(err)
+	}
+	log.Println(fmt.Sprintf("Deleted customProfile '%s' with id '%s'", newCustomProfile.Name, newCustomProfile.ID))
 
 }

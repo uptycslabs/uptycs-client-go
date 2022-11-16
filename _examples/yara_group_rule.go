@@ -18,12 +18,12 @@ func main() {
 	yaraGroupRuleByName, _ := c.GetYaraGroupRule(uptycs.YaraGroupRule{
 		Name: "AmazonAccessKeyId",
 	})
-	log.Println("Got YaraGroupRule with ID %s", yaraGroupRuleByName.ID)
+	log.Println("Got YaraGroupRule with ID ", yaraGroupRuleByName.ID)
 
 	yaraGroupRuleByID, _ := c.GetYaraGroupRule(uptycs.YaraGroupRule{
 		ID: "c6655aac-abfd-42d4-b2bc-b0a59e98057a",
 	})
-	log.Println("Got YaraGroupRule with Name %s", yaraGroupRuleByID.Name)
+	log.Println("Got YaraGroupRule with Name ", yaraGroupRuleByID.Name)
 
 	// Create a yaraGroupRule
 
@@ -36,7 +36,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created yaraGroupRule '%s' with id '%s'", newYaraGroupRule.Name, newYaraGroupRule.ID))
 
-	// Update a yaraGroupRule by by ID
+	// Update a yaraGroupRule by ID
 
 	log.Println(fmt.Sprintf("Attempting to update yaraGroupRule with id '%s': '%s' to 'marcus test updated'", newYaraGroupRule.ID, newYaraGroupRule.Name))
 	updatedYaraGroupRule, err := c.UpdateYaraGroupRule(uptycs.YaraGroupRule{

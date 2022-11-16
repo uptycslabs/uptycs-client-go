@@ -21,7 +21,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	log.Printf("Got User by ID with Name %s\n", userByID.Name)
+	log.Printf("Got User by ID with Name \n", userByID.Name)
 
 	// Get User by Name
 	userByName, err := c.GetUser(uptycs.User{

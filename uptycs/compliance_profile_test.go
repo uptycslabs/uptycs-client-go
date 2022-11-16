@@ -93,7 +93,7 @@ func TestGetComplianceProfile(t *testing.T) {
 		if !reflect.DeepEqual(complianceProfileResp, simpleSuccessfulTestNeededValues.out) {
 			t.Log("Output does not match expected")
 			t.Logf("Expected: %v", simpleSuccessfulTestNeededValues.out)
-			t.Logf("Actual: %v", complianceProfileResp)
+			t.Logf("Actual:   %v", complianceProfileResp)
 			t.Fail()
 		}
 	})
@@ -132,7 +132,7 @@ func TestGetComplianceProfile(t *testing.T) {
 		if !reflect.DeepEqual(complianceProfileResp, simpleSuccessfulTestMultiple.out) {
 			t.Log("Output does not match expected")
 			t.Logf("Expected: %v", simpleSuccessfulTestMultiple.out)
-			t.Logf("Actual: %v", complianceProfileResp)
+			t.Logf("Actual:   %v", complianceProfileResp)
 			t.Fail()
 		}
 	})
@@ -186,7 +186,7 @@ func TestGetComplianceProfiles(t *testing.T) {
 		if !reflect.DeepEqual(complianceProfileResp, simpleSuccessfulTestProfiles.out) {
 			t.Log("Output does not match expected")
 			t.Logf("Expected: %v", simpleSuccessfulTestProfiles.out)
-			t.Logf("Actual: %v", complianceProfileResp)
+			t.Logf("Actual:   %v", complianceProfileResp)
 			t.Fail()
 		}
 	})

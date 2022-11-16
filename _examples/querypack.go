@@ -19,12 +19,12 @@ func main() {
 	querypackByID, _ := c.GetQuerypack(uptycs.Querypack{
 		ID: "65fdf96b-3c4a-44cb-ad9b-06424f81a90a",
 	})
-	log.Println("Got Querypack with Name %s", querypackByID.Name)
+	log.Println("Got Querypack with Name ", querypackByID.Name)
 
 	querypackByName, _ := c.GetQuerypack(uptycs.Querypack{
 		Name: "spring4shell",
 	})
-	log.Println("Got Querypack with ID %s", querypackByName.ID)
+	log.Println("Got Querypack with ID ", querypackByName.ID)
 
 	// Create a querypack
 	newQuerypack, err := c.CreateQuerypack(uptycs.Querypack{
@@ -63,7 +63,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created querypack '%s' with id '%s'", newQuerypack.Name, newQuerypack.ID))
 
-	// Update a querypack by by ID
+	// Update a querypack by ID
 	log.Println(fmt.Sprintf("Attempting to update querypack with id '%s': '%s' to 'marcus test updated'", newQuerypack.ID, newQuerypack.Name))
 	updatedQuerypack, err := c.UpdateQuerypack(uptycs.Querypack{
 		ID:          newQuerypack.ID,

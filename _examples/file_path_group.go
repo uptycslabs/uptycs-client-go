@@ -18,12 +18,12 @@ func main() {
 	filePathGroupByName, _ := c.GetFilePathGroup(uptycs.FilePathGroup{
 		Name: "fim_testing",
 	})
-	log.Println("Got FilePathGroup with ID %s", filePathGroupByName.ID)
+	log.Println("Got FilePathGroup with ID ", filePathGroupByName.ID)
 
 	filePathGroupByID, _ := c.GetFilePathGroup(uptycs.FilePathGroup{
 		ID: "2c4e7ba8-6456-4f67-8a3f-332043642be8",
 	})
-	log.Println("Got FilePathGroup with Name %s", filePathGroupByID.Name)
+	log.Println("Got FilePathGroup with Name ", filePathGroupByID.Name)
 
 	// Create a filePathGroup
 
@@ -43,7 +43,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created filePathGroup '%s' with id '%s'", newFilePathGroup.Name, newFilePathGroup.ID))
 
-	// Update a filePathGroup by by ID
+	// Update a filePathGroup by ID
 
 	log.Println(fmt.Sprintf("Attempting to update filePathGroup with id '%s': '%s' to 'marcus test updated'", newFilePathGroup.ID, newFilePathGroup.Name))
 	updatedFilePathGroup, err := c.UpdateFilePathGroup(uptycs.FilePathGroup{

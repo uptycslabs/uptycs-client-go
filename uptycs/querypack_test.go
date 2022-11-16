@@ -98,7 +98,7 @@ func TestGetQuerypack(t *testing.T) {
 			if !reflect.DeepEqual(querypackResp, theT.out) {
 				t.Log("Output does not match expected")
 				t.Logf("Expected: %v", theT.out)
-				t.Logf("Actual: %v", querypackResp)
+				t.Logf("Actual:   %v", querypackResp)
 				t.Fail()
 			}
 		})

@@ -18,7 +18,7 @@ func main() {
 	assetGroupRuleByID, _ := c.GetAssetGroupRule(uptycs.AssetGroupRule{
 		ID: "d774ac13-ad82-4fb2-8bc9-893a1b957264",
 	})
-	log.Println("Got AssetGroupRule with Name %s", assetGroupRuleByID.Name)
+	log.Println("Got AssetGroupRule with Name ", assetGroupRuleByID.Name)
 
 	// Create a assetGroupRule
 
@@ -34,7 +34,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created assetGroupRule '%s' with id '%s'", newAssetGroupRule.Name, newAssetGroupRule.ID))
 
-	// Update a assetGroupRule by by ID
+	// Update a assetGroupRule by ID
 
 	log.Println(fmt.Sprintf("Attempting to update assetGroupRule with id '%s': '%s' to 'marcus test updated'", newAssetGroupRule.ID, newAssetGroupRule.Name))
 	updatedAssetGroupRule, err := c.UpdateAssetGroupRule(uptycs.AssetGroupRule{

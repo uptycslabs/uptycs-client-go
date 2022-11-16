@@ -39,7 +39,7 @@ func main() {
 	}
 	log.Println(fmt.Sprintf("Created tagConfiguration with id '%s' with %d fileGroupPaths and %d registryPaths", newTagConfiguration.ID, len(newTagConfiguration.FilePathGroups), len(newTagConfiguration.RegistryPaths)))
 
-	// Update a tagConfiguration by by ID
+	// Update a tagConfiguration by ID
 	log.Println(fmt.Sprintf("Attempting to update tagConfiguration with id '%s", newTagConfiguration.ID))
 	updatedTagConfiguration, err := c.UpdateTagConfiguration(uptycs.TagConfiguration{
 		ID:             newTagConfiguration.ID,
