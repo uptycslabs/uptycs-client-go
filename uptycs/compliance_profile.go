@@ -31,7 +31,7 @@ func (c *Client) GetComplianceProfile(complianceProfile ComplianceProfile) (Comp
 	} else {
 		return doGet(c, complianceProfile, "complianceProfiles")
 	}
-	return complianceProfile, errors.New("Compliance profile was not found")
+	return complianceProfile, errors.New("complianceProfile was not found")
 }
 
 func (c *Client) DeleteComplianceProfile(complianceProfile ComplianceProfile) (ComplianceProfile, error) {

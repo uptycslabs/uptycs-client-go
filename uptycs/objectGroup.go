@@ -29,7 +29,7 @@ func (c *Client) GetObjectGroup(objectGroup ObjectGroup) (ObjectGroup, error) {
 	} else {
 		return doGet(c, objectGroup, "objectGroups")
 	}
-	return objectGroup, errors.New("user was not found")
+	return objectGroup, errors.New("objectGroup was not found")
 }
 
 // TODO: Only support GET for now until we fully understand what objectGroups are.

@@ -34,7 +34,7 @@ func (c *Client) GetEventRule(eventRule EventRule) (EventRule, error) {
 	} else {
 		return doGet(c, eventRule, "eventRules")
 	}
-	return eventRule, errors.New("event rule was not found")
+	return eventRule, errors.New("eventRule was not found")
 }
 
 func (c *Client) DeleteEventRule(eventRule EventRule) (EventRule, error) {

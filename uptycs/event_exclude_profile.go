@@ -34,7 +34,7 @@ func (c *Client) GetEventExcludeProfile(eventExcludeProfile EventExcludeProfile)
 	} else {
 		return doGet(c, eventExcludeProfile, "eventExcludeProfiles")
 	}
-	return eventExcludeProfile, errors.New("event exclude profile was not found")
+	return eventExcludeProfile, errors.New("eventExcludeProfile was not found")
 }
 
 func (c *Client) DeleteEventExcludeProfile(eventExcludeProfile EventExcludeProfile) (EventExcludeProfile, error) {
