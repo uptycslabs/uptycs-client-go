@@ -142,6 +142,31 @@ type LinkItem struct {
 	Href  string `json:"href,omitempty"`
 }
 
+type Exceptions struct {
+	Links  []LinkItem  `json:"links"`
+	Items  []Exception `json:"items"`
+	Offset int         `json:"offset,omitempty"`
+	Limit  int         `json:"limit,omitempty"`
+}
+
+type Exception struct {
+	ID              string           `json:"id"`
+	Name            string           `json:"name,omitempty"`
+	Description     string           `json:"description,omitempty"`
+	ExceptionType   string           `json:"exceptionType,omitempty"`
+	CreatedBy       string           `json:"createdBy,omitempty"`
+	CreatedAt       string           `json:"createdAt,omitempty"`
+	UpdatedAt       string           `json:"updatedAt,omitempty"`
+	UpdatedBy       string           `json:"updatedBy,omitempty"`
+	TableName       string           `json:"tableName,omitempty"`
+	IsGlobal        bool             `json:"isGlobal"`
+	Custom          bool             `json:"custom"`
+	Disabled        bool             `json:"disabled"`
+	CloseOpenAlerts bool             `json:"closeOpenAlerts"`
+	Rule            CustomJSONString `json:"rule,omitempty"`
+	Links           []LinkItem       `json:"links"`
+}
+
 type Destinations struct {
 	Links  []LinkItem    `json:"links"`
 	Items  []Destination `json:"items"`
@@ -894,12 +919,12 @@ type WindowsDefenderPreference struct {
 }
 
 type iAPIType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve | CustomProfile | FlagProfile | BlockRule | WindowsDefenderPreference
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve | CustomProfile | FlagProfile | BlockRule | WindowsDefenderPreference | Exception
 	GetID() string
 	GetName() string
 	KeysToDelete() []string
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles | FlagProfiles | BlockRules | WindowsDefenderPreferences
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles | FlagProfiles | BlockRules | WindowsDefenderPreferences | Exceptions
 }
