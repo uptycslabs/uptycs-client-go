@@ -270,7 +270,7 @@ func TestGetEventRule(t *testing.T) {
 				//EventRuleExceptions: []string{},
 				//Tags: []string{},
 				//CloudResourceTags: []string{},
-				//Exceptions: []string{},
+				Exceptions: []RuleException{},
 				//Transformations: []string{},
 				Links: []LinkItem{
 					LinkItem{Rel: "self", Title: "Event rule", Href: "/api/customers/111111111111-111111-11111-111111-111111111/eventRules/e2f5af43-0044-40ef-b915-6dab1617166d"},
@@ -325,7 +325,7 @@ func TestGetEventRule(t *testing.T) {
 				//EventRuleExceptions: []string{},
 				//Tags: []string{},
 				//CloudResourceTags: []string{},
-				//Exceptions: []string{},
+				Exceptions: []RuleException{},
 				//Transformations: []string{},
 				Links: []LinkItem{
 					LinkItem{Rel: "self", Title: "Event rule", Href: "/api/customers/111111111111-111111-11111-111111-111111111/eventRules/69bc42ba-d7c5-401d-b746-61afe5b372a2"},

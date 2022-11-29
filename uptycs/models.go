@@ -17,29 +17,30 @@ type ScriptConfig struct {
 }
 
 type EventRule struct {
-	ID            string        `json:"id,omitempty"`
-	Name          string        `json:"name,omitempty"`
-	Description   string        `json:"description,omitempty"`
-	Code          string        `json:"code,omitempty"`
-	Type          string        `json:"type,omitempty"`
-	Rule          string        `json:"rule,omitempty"`
-	Grouping      string        `json:"grouping,omitempty"`
-	Enabled       bool          `json:"enabled"`
-	Custom        bool          `json:"custom"`
-	CreatedAt     string        `json:"createdAt,omitempty"`
-	IsInternal    bool          `json:"isInternal"`
-	EventTags     []string      `json:"eventTags"`
-	CreatedBy     string        `json:"createdBy,omitempty"`
-	UpdatedAt     string        `json:"updatedAt,omitempty"`
-	UpdatedBy     string        `json:"updatedBy,omitempty"`
-	GroupingL2    string        `json:"groupingL2,omitempty"`
-	GroupingL3    string        `json:"groupingL3,omitempty"`
-	Score         string        `json:"score,omitempty"`
-	Lock          bool          `json:"lock"`
-	ScriptConfig  *ScriptConfig `json:"scriptConfig,omitempty"`
-	SQLConfig     *SQLConfig    `json:"sqlConfig,omitempty"`
-	BuilderConfig BuilderConfig `json:"builderConfig,omitempty"`
-	Links         []LinkItem    `json:"links,omitempty"`
+	ID            string          `json:"id,omitempty"`
+	Name          string          `json:"name,omitempty"`
+	Description   string          `json:"description,omitempty"`
+	Code          string          `json:"code,omitempty"`
+	Type          string          `json:"type,omitempty"`
+	Rule          string          `json:"rule,omitempty"`
+	Grouping      string          `json:"grouping,omitempty"`
+	Enabled       bool            `json:"enabled"`
+	Custom        bool            `json:"custom"`
+	CreatedAt     string          `json:"createdAt,omitempty"`
+	IsInternal    bool            `json:"isInternal"`
+	EventTags     []string        `json:"eventTags"`
+	CreatedBy     string          `json:"createdBy,omitempty"`
+	UpdatedAt     string          `json:"updatedAt,omitempty"`
+	UpdatedBy     string          `json:"updatedBy,omitempty"`
+	GroupingL2    string          `json:"groupingL2,omitempty"`
+	GroupingL3    string          `json:"groupingL3,omitempty"`
+	Score         string          `json:"score,omitempty"`
+	Lock          bool            `json:"lock"`
+	Exceptions    []RuleException `json:"exceptions"`
+	ScriptConfig  *ScriptConfig   `json:"scriptConfig,omitempty"`
+	SQLConfig     *SQLConfig      `json:"sqlConfig,omitempty"`
+	BuilderConfig BuilderConfig   `json:"builderConfig,omitempty"`
+	Links         []LinkItem      `json:"links,omitempty"`
 }
 
 type BuilderConfig struct {
