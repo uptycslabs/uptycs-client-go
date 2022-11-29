@@ -26,7 +26,7 @@ func main() {
 		Name:        "marcus test",
 		Description: "marc test",
 		TableName:   "aws_cloudtrail_events",
-		Rule:        "{\"and\":[{\"caseInsensitive\":true,\"isDate\":false,\"isVersion\":false,\"isWordMatch\":false,\"name\":\"account_id\",\"not\":false,\"operator\":\"EQUALS\",\"value\":\"636776063332\"}]}",
+		Rule:        "{\"and\":[{\"caseInsensitive\":true,\"isDate\":false,\"isVersion\":false,\"isWordMatch\":false,\"name\":\"account_id\",\"not\":false,\"operator\":\"EQUALS\",\"value\":\"11111111111\"}]}",
 	})
 	if err != nil {
 		panic(err)

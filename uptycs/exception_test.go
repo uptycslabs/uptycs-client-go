@@ -45,7 +45,7 @@ func TestGetException(t *testing.T) {
 				Custom:          false,
 				Disabled:        true,
 				CloseOpenAlerts: false,
-				Rule:            "{\"and\":[{\"caseInsensitive\":true,\"isDate\":false,\"isVersion\":false,\"isWordMatch\":false,\"name\":\"account_id\",\"not\":false,\"operator\":\"EQUALS\",\"value\":\"636776063332\"}]}",
+				Rule:            "{\"and\":[{\"caseInsensitive\":true,\"isDate\":false,\"isVersion\":false,\"isWordMatch\":false,\"name\":\"account_id\",\"not\":false,\"operator\":\"EQUALS\",\"value\":\"11111111111\"}]}",
 				Links: []LinkItem{
 					LinkItem{Rel: "self", Title: "Exception", Href: "/api/customers/11111111-1111-1111-1111-111111111111/exceptions/ce67f12a-91d1-4a79-b0ee-a60501c5990b"},
 					LinkItem{Rel: "parent", Title: "Exceptions", Href: "/api/customers/11111111-1111-1111-1111-111111111111/exceptions"},
@@ -170,7 +170,7 @@ func TestPutException(t *testing.T) {
 				Custom:          false,
 				Disabled:        true,
 				CloseOpenAlerts: false,
-				Rule:            "{\"and\":[{\"caseInsensitive\":true,\"isDate\":false,\"isVersion\":false,\"isWordMatch\":false,\"name\":\"account_id\",\"not\":false,\"operator\":\"EQUALS\",\"value\":\"636776063332\"}]}",
+				Rule:            "{\"and\":[{\"caseInsensitive\":true,\"isDate\":false,\"isVersion\":false,\"isWordMatch\":false,\"name\":\"account_id\",\"not\":false,\"operator\":\"EQUALS\",\"value\":\"11111111111\"}]}",
 				Links: []LinkItem{
 					LinkItem{Rel: "self", Title: "Exception", Href: "/api/customers/11111111-1111-1111-1111-111111111111/exceptions/ce67f12a-91d1-4a79-b0ee-a60501c5990b"},
 					LinkItem{Rel: "parent", Title: "Exceptions", Href: "/api/customers/11111111-1111-1111-1111-111111111111/exceptions"},
@@ -239,7 +239,7 @@ func TestCreateException(t *testing.T) {
 				Custom:          false,
 				Disabled:        true,
 				CloseOpenAlerts: false,
-				Rule:            "{\"and\":[{\"caseInsensitive\":true,\"isDate\":false,\"isVersion\":false,\"isWordMatch\":false,\"name\":\"account_id\",\"not\":false,\"operator\":\"EQUALS\",\"value\":\"636776063332\"}]}",
+				Rule:            "{\"and\":[{\"caseInsensitive\":true,\"isDate\":false,\"isVersion\":false,\"isWordMatch\":false,\"name\":\"account_id\",\"not\":false,\"operator\":\"EQUALS\",\"value\":\"11111111111\"}]}",
 				Links: []LinkItem{
 					LinkItem{Rel: "self", Title: "Exception", Href: "/api/customers/11111111-1111-1111-1111-111111111111/exceptions/ce67f12a-91d1-4a79-b0ee-a60501c5990b"},
 					LinkItem{Rel: "parent", Title: "Exceptions", Href: "/api/customers/11111111-1111-1111-1111-111111111111/exceptions"},

@@ -51,9 +51,9 @@ func TestGetTags(t *testing.T) {
 				Items: []Tag{
 					Tag{
 						ID:                   "9dfc53a4-bf1e-4efe-8f04-e1fd8802e9e3",
-						Key:                  "636776063332",
+						Key:                  "11111111111",
 						CreatedBy:            "66a9a52c-5fa0-4cf4-abe7-da5504f67950",
-						Tag:                  "636776063332",
+						Tag:                  "11111111111",
 						Custom:               true,
 						System:               false,
 						CreatedAt:            "2022-02-03T05:06:53.918Z",
