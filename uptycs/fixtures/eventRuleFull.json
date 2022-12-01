@@ -190,7 +190,36 @@
     "severity": "medium",
     "key": "Path",
     "valueField": "path",
-    "autoAlertConfig": null,
+    "autoAlertConfig": {
+      "raiseAlert": true,
+      "disableAlert": false,
+      "metadataSources": [
+        {
+          "as": "accountId",
+          "field": "upt_tenant_id",
+          "lookupSource": {
+            "type": "VALUE",
+            "table_name": null
+          }
+        },
+        {
+          "as": "accountName",
+          "field": "upt_tenant_name",
+          "lookupSource": {
+            "type": "VALUE",
+            "table_name": null
+          }
+        },
+        {
+          "as": "responseElements",
+          "field": "response_elements",
+          "lookupSource": {
+            "type": "VALUE",
+            "table_name": null
+          }
+        }
+      ]
+    },
     "addedStr": "true"
   },
   "eventRuleExceptions": [],

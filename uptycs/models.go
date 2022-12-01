@@ -76,8 +76,9 @@ func (bcfs CustomJSONString) MarshalJSON() ([]byte, error) {
 }
 
 type AutoAlertConfig struct {
-	RaiseAlert   bool `json:"raiseAlert"`
-	DisableAlert bool `json:"disableAlert"`
+	RaiseAlert      bool             `json:"raiseAlert"`
+	DisableAlert    bool             `json:"disableAlert"`
+	MetadataSources CustomJSONString `json:"metadataSources,omitempty"`
 }
 
 type AlertRules struct {
