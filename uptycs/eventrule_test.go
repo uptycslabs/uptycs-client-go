@@ -312,15 +312,50 @@ func TestGetEventRule(t *testing.T) {
 				Score:      "0.0",
 				Lock:       false,
 				BuilderConfig: BuilderConfig{
-					ID:              "69bc42ba-d7c5-401d-b746-61afe5b372a2",
-					TableName:       "process_file_events",
-					Added:           true,
-					MatchesFilter:   true,
-					Filters:         CustomJSONString(heredoc.Doc(`{"and":[{"or":[{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":false},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":91},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/sbin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/bin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/sbin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/bin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/games/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/local/games/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/snap/bin/"},{"and":[{"or":[{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/home/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/root/"}]},{"or":[{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/Downloads/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/Download/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/downloads/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/download/"}]}]}]}]}`)),
-					Severity:        "medium",
-					Key:             "Path",
-					ValueField:      "path",
-					AutoAlertConfig: AutoAlertConfig{},
+					ID:            "69bc42ba-d7c5-401d-b746-61afe5b372a2",
+					TableName:     "process_file_events",
+					Added:         true,
+					MatchesFilter: true,
+					Filters:       CustomJSONString(heredoc.Doc(`{"and":[{"or":[{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":false},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":91},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/sbin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/bin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/sbin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/bin/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/games/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/usr/local/games/"},{"caseInsensitive":true,"isDate":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/snap/bin/"},{"and":[{"or":[{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/home/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"STARTS_WITH","value":"/root/"}]},{"or":[{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/Downloads/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/Download/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/downloads/"},{"caseInsensitive":true,"isDate":false,"isVersion":false,"isWordMatch":false,"name":"path","not":false,"operator":"CONTAINS","value":"/download/"}]}]}]}]}`)),
+					Severity:      "medium",
+					Key:           "Path",
+					ValueField:    "path",
+					AutoAlertConfig: AutoAlertConfig{
+						RaiseAlert:   true,
+						DisableAlert: false,
+						MetadataSources: []MetadataSource{
+							{
+								As:    "accountId",
+								Field: "upt_tenant_id",
+								LookupSource: struct {
+									Type      string `json:"type"`
+									TableName string `json:"table_name"`
+								}{
+									Type: "VALUE",
+								},
+							},
+							{
+								As:    "accountName",
+								Field: "upt_tenant_name",
+								LookupSource: struct {
+									Type      string `json:"type"`
+									TableName string `json:"table_name"`
+								}{
+									Type: "VALUE",
+								},
+							},
+							{
+								As:    "responseElements",
+								Field: "response_elements",
+								LookupSource: struct {
+									Type      string `json:"type"`
+									TableName string `json:"table_name"`
+								}{
+									Type: "VALUE",
+								},
+							},
+						},
+					},
 				},
 				//EventRuleExceptions: []string{},
 				//Tags: []string{},
