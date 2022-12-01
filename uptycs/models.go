@@ -17,29 +17,30 @@ type ScriptConfig struct {
 }
 
 type EventRule struct {
-	ID            string        `json:"id,omitempty"`
-	Name          string        `json:"name,omitempty"`
-	Description   string        `json:"description,omitempty"`
-	Code          string        `json:"code,omitempty"`
-	Type          string        `json:"type,omitempty"`
-	Rule          string        `json:"rule,omitempty"`
-	Grouping      string        `json:"grouping,omitempty"`
-	Enabled       bool          `json:"enabled"`
-	Custom        bool          `json:"custom"`
-	CreatedAt     string        `json:"createdAt,omitempty"`
-	IsInternal    bool          `json:"isInternal"`
-	EventTags     []string      `json:"eventTags"`
-	CreatedBy     string        `json:"createdBy,omitempty"`
-	UpdatedAt     string        `json:"updatedAt,omitempty"`
-	UpdatedBy     string        `json:"updatedBy,omitempty"`
-	GroupingL2    string        `json:"groupingL2,omitempty"`
-	GroupingL3    string        `json:"groupingL3,omitempty"`
-	Score         string        `json:"score,omitempty"`
-	Lock          bool          `json:"lock"`
-	ScriptConfig  *ScriptConfig `json:"scriptConfig,omitempty"`
-	SQLConfig     *SQLConfig    `json:"sqlConfig,omitempty"`
-	BuilderConfig BuilderConfig `json:"builderConfig,omitempty"`
-	Links         []LinkItem    `json:"links,omitempty"`
+	ID            string          `json:"id,omitempty"`
+	Name          string          `json:"name,omitempty"`
+	Description   string          `json:"description,omitempty"`
+	Code          string          `json:"code,omitempty"`
+	Type          string          `json:"type,omitempty"`
+	Rule          string          `json:"rule,omitempty"`
+	Grouping      string          `json:"grouping,omitempty"`
+	Enabled       bool            `json:"enabled"`
+	Custom        bool            `json:"custom"`
+	CreatedAt     string          `json:"createdAt,omitempty"`
+	IsInternal    bool            `json:"isInternal"`
+	EventTags     []string        `json:"eventTags"`
+	CreatedBy     string          `json:"createdBy,omitempty"`
+	UpdatedAt     string          `json:"updatedAt,omitempty"`
+	UpdatedBy     string          `json:"updatedBy,omitempty"`
+	GroupingL2    string          `json:"groupingL2,omitempty"`
+	GroupingL3    string          `json:"groupingL3,omitempty"`
+	Score         string          `json:"score,omitempty"`
+	Lock          bool            `json:"lock"`
+	Exceptions    []RuleException `json:"exceptions"`
+	ScriptConfig  *ScriptConfig   `json:"scriptConfig,omitempty"`
+	SQLConfig     *SQLConfig      `json:"sqlConfig,omitempty"`
+	BuilderConfig BuilderConfig   `json:"builderConfig,omitempty"`
+	Links         []LinkItem      `json:"links,omitempty"`
 }
 
 type BuilderConfig struct {
@@ -139,6 +140,31 @@ type LinkItem struct {
 	Rel   string `json:"rel,omitempty"`
 	Title string `json:"title,omitempty"`
 	Href  string `json:"href,omitempty"`
+}
+
+type Exceptions struct {
+	Links  []LinkItem  `json:"links"`
+	Items  []Exception `json:"items"`
+	Offset int         `json:"offset,omitempty"`
+	Limit  int         `json:"limit,omitempty"`
+}
+
+type Exception struct {
+	ID              string           `json:"id"`
+	Name            string           `json:"name,omitempty"`
+	Description     string           `json:"description,omitempty"`
+	ExceptionType   string           `json:"exceptionType,omitempty"`
+	CreatedBy       string           `json:"createdBy,omitempty"`
+	CreatedAt       string           `json:"createdAt,omitempty"`
+	UpdatedAt       string           `json:"updatedAt,omitempty"`
+	UpdatedBy       string           `json:"updatedBy,omitempty"`
+	TableName       string           `json:"tableName,omitempty"`
+	IsGlobal        bool             `json:"isGlobal"`
+	Custom          bool             `json:"custom"`
+	Disabled        bool             `json:"disabled"`
+	CloseOpenAlerts bool             `json:"closeOpenAlerts"`
+	Rule            CustomJSONString `json:"rule,omitempty"`
+	Links           []LinkItem       `json:"links"`
 }
 
 type Destinations struct {
@@ -893,12 +919,12 @@ type WindowsDefenderPreference struct {
 }
 
 type iAPIType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve | CustomProfile | FlagProfile | BlockRule | WindowsDefenderPreference
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve | CustomProfile | FlagProfile | BlockRule | WindowsDefenderPreference | Exception
 	GetID() string
 	GetName() string
 	KeysToDelete() []string
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles | FlagProfiles | BlockRules | WindowsDefenderPreferences
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles | FlagProfiles | BlockRules | WindowsDefenderPreferences | Exceptions
 }

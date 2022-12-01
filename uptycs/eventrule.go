@@ -16,6 +16,7 @@ func (T EventRule) KeysToDelete() []string {
 	return []string{
 		"throttled",
 		"isInternal",
+		"exceptions", //"exceptions\" is not allowed" api response if included
 	}
 }
 
