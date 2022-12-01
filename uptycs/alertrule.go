@@ -18,13 +18,11 @@ func (T AlertRule) KeysToDelete() []string {
 		"type",
 		"rule",
 		"enabled",
-		"custom",
 		"isInternal",
 		"timeSuppresionStart",
 		"timeSuppresionDuration",
 		"seedId",
 		"throttled",
-		"lock",
 		"alertTags",
 		"links",
 	}

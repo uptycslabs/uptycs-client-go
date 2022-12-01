@@ -19,6 +19,8 @@ func SlimStructAsJSONString[T iAPIType](objectToSlim T, keysToDelete []string) (
 		"updatedAt",
 		"updatedBy",
 		"links",
+		"lock",   //"lock"  of event rule should be a boolean" api response if included
+		"custom", // You could set this on custom rules to true and cause issues requiring support
 	}
 	keysToDelete = append(keysToDelete, commonKeysToDelete...)
 
