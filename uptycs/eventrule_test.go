@@ -321,40 +321,9 @@ func TestGetEventRule(t *testing.T) {
 					Key:           "Path",
 					ValueField:    "path",
 					AutoAlertConfig: AutoAlertConfig{
-						RaiseAlert:   true,
-						DisableAlert: false,
-						MetadataSources: []MetadataSource{
-							{
-								As:    "accountId",
-								Field: "upt_tenant_id",
-								LookupSource: struct {
-									Type      string `json:"type"`
-									TableName string `json:"table_name"`
-								}{
-									Type: "VALUE",
-								},
-							},
-							{
-								As:    "accountName",
-								Field: "upt_tenant_name",
-								LookupSource: struct {
-									Type      string `json:"type"`
-									TableName string `json:"table_name"`
-								}{
-									Type: "VALUE",
-								},
-							},
-							{
-								As:    "responseElements",
-								Field: "response_elements",
-								LookupSource: struct {
-									Type      string `json:"type"`
-									TableName string `json:"table_name"`
-								}{
-									Type: "VALUE",
-								},
-							},
-						},
+						RaiseAlert:      true,
+						DisableAlert:    false,
+						MetadataSources: CustomJSONString(heredoc.Doc(`[{"as":"accountId","field":"upt_tenant_id","lookupSource":{"table_name":null,"type":"VALUE"}},{"as":"accountName","field":"upt_tenant_name","lookupSource":{"table_name":null,"type":"VALUE"}},{"as":"responseElements","field":"response_elements","lookupSource":{"table_name":null,"type":"VALUE"}}]`)),
 					},
 				},
 				//EventRuleExceptions: []string{},
