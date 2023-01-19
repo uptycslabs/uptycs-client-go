@@ -18,15 +18,11 @@ func (T AlertRule) KeysToDelete() []string {
 		"timeSuppresionDuration",
 		"seedId",
 		"throttled",
-		"alertTags",
 		"links",
 	}
 
 	if T.Type != "sql" {
 		keysToDelete = append(keysToDelete, "sqlConfig")
-	}
-	if T.Type != "javascript" {
-		keysToDelete = append(keysToDelete, "scriptConfig")
 	}
 
 	return keysToDelete
