@@ -38,11 +38,13 @@ func main() {
 
 	// Create an alert rule
 	rule, err := c.CreateAlertRule(uptycs.AlertRule{
-		Name:        "marcus test",
-		Description: "marcus test",
-		Grouping:    "MITRE",
-		GroupingL2:  "Impact",
-		GroupingL3:  "T1560",
+		Name:                "marcus test",
+		Description:         "marcus test",
+		Grouping:            "MITRE",
+		GroupingL2:          "Impact",
+		GroupingL3:          "T1560",
+		AlertNotifyCount:    1,
+		AlertNotifyInterval: 3600,
 		SQLConfig: &uptycs.SQLConfig{
 			IntervalSeconds: 3600,
 		},

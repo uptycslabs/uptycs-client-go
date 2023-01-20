@@ -12,26 +12,17 @@ func (T AlertRule) GetName() string {
 
 func (T AlertRule) KeysToDelete() []string {
 	keysToDelete := []string{
-		"name",
-		"description",
-		"code",
-		"type",
-		"rule",
 		"enabled",
 		"isInternal",
 		"timeSuppresionStart",
 		"timeSuppresionDuration",
 		"seedId",
 		"throttled",
-		"alertTags",
 		"links",
 	}
 
 	if T.Type != "sql" {
 		keysToDelete = append(keysToDelete, "sqlConfig")
-	}
-	if T.Type != "javascript" {
-		keysToDelete = append(keysToDelete, "scriptConfig")
 	}
 
 	return keysToDelete

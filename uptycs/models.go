@@ -7,15 +7,6 @@ type EventRules struct {
 	Limit  int         `json:"limit,omitempty"`
 }
 
-type ScriptConfig struct {
-	ID               string `json:"id,omitempty"`
-	QueryPackID      string `json:"querypackId,omitempty"`
-	TableName        string `json:"tableName,omitempty"`
-	EventCode        string `json:"eventCode,omitempty"`
-	EventMinSeverity string `json:"eventMinSeverity,omitempty"`
-	Added            bool   `json:"added"`
-}
-
 type EventRule struct {
 	ID            string          `json:"id,omitempty"`
 	Name          string          `json:"name,omitempty"`
@@ -37,7 +28,6 @@ type EventRule struct {
 	Score         string          `json:"score,omitempty"`
 	Lock          bool            `json:"lock"`
 	Exceptions    []RuleException `json:"exceptions"`
-	ScriptConfig  *ScriptConfig   `json:"scriptConfig,omitempty"`
 	SQLConfig     *SQLConfig      `json:"sqlConfig,omitempty"`
 	BuilderConfig BuilderConfig   `json:"builderConfig,omitempty"`
 	Links         []LinkItem      `json:"links,omitempty"`
@@ -93,7 +83,7 @@ type AlertRule struct {
 	Name                   string                 `json:"name,omitempty"`
 	Description            string                 `json:"description,omitempty"`
 	Code                   string                 `json:"code,omitempty"`
-	Type                   string                 `json:"type,omitempty"`
+	Type                   string                 `json:"type,omitempty" validate:"required,oneof=sql builder"`
 	Rule                   string                 `json:"rule,omitempty"`
 	Grouping               string                 `json:"grouping,omitempty"`
 	Enabled                bool                   `json:"enabled"`
@@ -115,7 +105,6 @@ type AlertRule struct {
 	AlertRuleExceptions    []RuleException        `json:"alertRuleExceptions"`
 	Destinations           []AlertRuleDestination `json:"destinations"`
 	SQLConfig              *SQLConfig             `json:"sqlConfig,omitempty"`
-	ScriptConfig           *ScriptConfig          `json:"scriptConfig,omitempty"`
 	Links                  []LinkItem             `json:"links,omitempty"`
 }
 
