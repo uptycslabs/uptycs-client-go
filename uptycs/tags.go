@@ -14,7 +14,6 @@ func (T Tag) GetName() string {
 
 func (T Tag) KeysToDelete() []string {
 	return []string{
-		"customProfile",
 		"system",
 		"tagRuleId",
 	}
