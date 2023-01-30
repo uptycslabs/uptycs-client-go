@@ -432,19 +432,12 @@ type Tag struct {
 	CreatedBy                   string                   `json:"createdBy,omitempty"`
 	UpdatedBy                   string                   `json:"updatedBy,omitempty"`
 	FlagProfileID               string                   `json:"flagProfileId,omitempty"`
-	FlagProfile                 string                   `json:"-,omitempty"`
 	CustomProfileID             string                   `json:"customProfileId,omitempty"`
-	CustomProfile               string                   `json:"-,omitempty"`
 	ComplianceProfileID         string                   `json:"complianceProfileId,omitempty"`
-	ComplianceProfile           string                   `json:"-,omitempty"`
 	ProcessBlockRuleID          string                   `json:"processBlockRuleId,omitempty"`
-	ProcessBlockRule            string                   `json:"-,omitempty"`
 	DNSBlockRuleID              string                   `json:"dnsBlockRuleId,omitempty"`
-	DNSBlockRule                string                   `json:"-,omitempty"`
 	WindowsDefenderPreferenceID string                   `json:"windowsDefenderPreferenceId,omitempty"`
-	WindowsDefenderPreference   string                   `json:"-,omitempty"`
 	TagRuleID                   string                   `json:"tagRuleId,omitempty"`
-	TagRule                     string                   `json:"-,omitempty"`
 	Tag                         string                   `json:"tag,omitempty"`
 	Custom                      bool                     `json:"custom"`
 	System                      bool                     `json:"system"`
