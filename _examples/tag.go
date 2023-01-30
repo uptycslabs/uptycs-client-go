@@ -79,7 +79,7 @@ func main() {
 				ID: "ce064913-0c00-4b14-8df3-b1dd90372f04",
 			},
 		},
-		CustomProfileID:      newCustomProfile.Name,
+		CustomProfileID:      newCustomProfile.ID,
 		Querypacks:           []uptycs.TagConfigurationObject{},
 		YaraGroupRules:       []uptycs.TagConfigurationObject{},
 		AuditConfigurations:  []uptycs.TagConfigurationObject{},
