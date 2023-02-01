@@ -84,6 +84,7 @@ func TestPutAlertRule(t *testing.T) {
 				Name:        "marcus test",
 				Description: "marcus test",
 				Code:        "test_marc",
+				AlertTags:   []string{},
 				Type:        "sql",
 				Rule:        "SELECT\n    'foo' as description,\n    'Low' as severity,\n    instance_id as asset_id,\n    now() as time,\n    'Alert' AS key,\n    'marcus test' as value\nFROM upt_cloud_instance_inventory_current\nWHERE key_name not like 'examplecorp2'\nLIMIT 1\n-- :to :from\n",
 				Grouping:    "MITRE",

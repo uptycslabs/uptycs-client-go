@@ -1,6 +1,8 @@
 package uptycs
 
-import "errors"
+import (
+	"errors"
+)
 
 func (T AlertRule) GetID() string {
 	return T.ID
@@ -51,9 +53,25 @@ func (c *Client) DeleteAlertRule(alertRule AlertRule) (AlertRule, error) {
 }
 
 func (c *Client) CreateAlertRule(alertRule AlertRule) (AlertRule, error) {
+	if alertRule.AlertTags == nil {
+		// For some reason this sometimes defaults to null
+		alertRule.AlertTags = []string{}
+	}
 	return doCreate(c, alertRule, "alertRules")
 }
 
 func (c *Client) UpdateAlertRule(alertRule AlertRule) (AlertRule, error) {
+	if alertRule.AlertTags == nil {
+		// For some reason this sometimes defaults to null
+		alertRule.AlertTags = []string{}
+	}
+	if alertRule.Type == "builder" {
+		attachedEventRule, _ := c.GetEventRule(EventRule{ID: alertRule.ID})
+		if attachedEventRule.BuilderConfig.AutoAlertConfig.RaiseAlert && !attachedEventRule.BuilderConfig.AutoAlertConfig.DisableAlert {
+			alertRule.BuilderConfig = &BuilderConfigLite{
+				ID: attachedEventRule.BuilderConfig.ID,
+			}
+		}
+	}
 	return doUpdate(c, alertRule, "alertRules")
 }
