@@ -404,7 +404,7 @@ type TagRule struct {
 	Query          string `json:"query,omitempty" validate:"required"`
 	Source         string `json:"source,omitempty" validate:"required,oneof=global realtime"`
 	RunOnce        bool   `json:"runOnce"`
-	Interval       int    `json:"interval,omitempty" validate:"excluded_if=RunOnce true"`
+	Interval       int    `json:"interval,omitempty" validate:"required_if=RunOnce false"`
 	OSqueryVersion string `json:"osqueryVersion,omitempty"`
 	Platform       string `json:"platform,omitempty" validate:"required_if=Source realtime"`
 	Enabled        bool   `json:"enabled"`
