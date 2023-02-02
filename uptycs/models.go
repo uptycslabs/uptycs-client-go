@@ -29,7 +29,7 @@ type EventRule struct {
 	Lock          bool            `json:"lock"`
 	Exceptions    []RuleException `json:"exceptions"`
 	SQLConfig     *SQLConfig      `json:"sqlConfig,omitempty"`
-	BuilderConfig BuilderConfig   `json:"builderConfig"`
+	BuilderConfig *BuilderConfig  `json:"builderConfig"`
 	Links         []LinkItem      `json:"links,omitempty"`
 }
 

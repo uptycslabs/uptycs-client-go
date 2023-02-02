@@ -42,7 +42,7 @@ func main() {
 		Code:        "1651259159841CODE",
 		Type:        "builder",
 		Rule:        "builder",
-		BuilderConfig: uptycs.BuilderConfig{
+		BuilderConfig: &uptycs.BuilderConfig{
 			TableName:     "process_open_sockets",
 			Added:         true,
 			MatchesFilter: true,
@@ -88,7 +88,6 @@ func main() {
 
 	_, err = c.UpdateAlertRule(uptycs.AlertRule{
 		ID:                  rule.ID,
-		Enabled:             false,
 		AlertRuleExceptions: []uptycs.RuleException{},
 		Destinations:        []uptycs.AlertRuleDestination{},
 		Type:                "builder",
