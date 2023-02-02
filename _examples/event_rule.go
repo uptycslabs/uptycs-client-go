@@ -91,6 +91,9 @@ func main() {
 		AlertRuleExceptions: []uptycs.RuleException{},
 		Destinations:        []uptycs.AlertRuleDestination{},
 		Type:                "builder",
+		BuilderConfig: &uptycs.BuilderConfigLite{
+			ID: rule.BuilderConfig.ID,
+		},
 	})
 	if err != nil {
 		log.Println(err)
