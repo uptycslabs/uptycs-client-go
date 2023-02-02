@@ -59,7 +59,7 @@ func (c *Client) CreateAlertRule(alertRule AlertRule) (AlertRule, error) {
 	}
 
 	if alertRule.BuilderConfig == nil {
-		return doUpdate(c, alertRule, "alertRules", []string{"builderConfig"})
+		return doCreate(c, alertRule, "alertRules", []string{"builderConfig"})
 	}
 	return doCreate(c, alertRule, "alertRules", []string{})
 }
