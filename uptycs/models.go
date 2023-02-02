@@ -906,13 +906,208 @@ type WindowsDefenderPreference struct {
 	//SignatureDefinitionUpdateFileSharesSources    interface{} `json:"signatureDefinitionUpdateFileSharesSources"` // TODO cant find any
 }
 
+type Assets struct {
+	Links  []LinkItem `json:"links"`
+	Items  []Asset    `json:"items"`
+	Offset int        `json:"offset,omitempty"`
+	Limit  int        `json:"limit,omitempty"`
+}
+
+type City struct {
+	ID                 string `json:"id"`
+	Name               string `json:"name,omitempty"`
+	SubdivisionIsoCode string `json:"subdivisionIsoCode,omitempty"`
+	SubdivisionName    string `json:"subdivisionName,omitempty"`
+	CountryIsoCode     string `json:"countryIsoCode,omitempty"`
+	CountryName        string `json:"countryName,omitempty"`
+}
+
+type AssetCloudInfo struct {
+	CloudID  string `json:"cloudId,omitempty"`
+	Provider string `json:"provider,omitempty"`
+	Account  string `json:"account,omitempty"`
+	Image    string `json:"image,omitempty"`
+	Type     string `json:"type,omitempty"`
+	Region   string `json:"region,omitempty"`
+	Zone     string `json:"zone,omitempty"`
+	Service  string `json:"service,omitempty"`
+}
+
+type AssetCapabilities struct {
+	ID               string `json:"id"`
+	AssetID          string `json:"assetId,omitempty"`
+	Name             string `json:"name,omitempty"`
+	Status           string `json:"status,omitempty"`
+	IndividualStatus struct {
+		ConfigurationStatus  string `json:"configurationStatus,omitempty"`
+		FlagStatus           string `json:"flagStatus,omitempty"`
+		ScheduledQueryStatus string `json:"scheduledQueryStatus,omitempty"`
+	} `json:"individualStatus,omitempty"`
+	CreatedAt string `json:"createdAt,omitempty"`
+	UpdatedAt string `json:"updatedAt,omitempty"`
+}
+
+type AssetInterface struct {
+	Name      string `json:"name"`
+	Mac       string `json:"mac"`
+	IP        string `json:"ip"`
+	Mask      string `json:"mask"`
+	IsPrimary bool   `json:"isPrimary"`
+}
+
+type Asset struct {
+	Gateway                   string                 `json:"gateway,omitempty"`
+	Name                      string                 `json:"hostname,omitempty"` // there is no name, use hostname for ease
+	CityID                    string                 `json:"cityId,omitempty"`
+	CreatedAt                 string                 `json:"createdAt,omitempty"`
+	Disabled                  bool                   `json:"disabled"`
+	HostName                  string                 `json:"hostName,omitempty"`
+	ID                        string                 `json:"id,omitempty"`
+	LastEnrolledAt            string                 `json:"lastEnrolledAt,omitempty"`
+	Os                        string                 `json:"os,omitempty"`
+	OsFlavor                  string                 `json:"osFlavor,omitempty"`
+	OsqueryVersion            string                 `json:"osqueryVersion,omitempty"`
+	OsVersion                 string                 `json:"osVersion,omitempty"`
+	Status                    string                 `json:"status,omitempty"`
+	UpgradeState              bool                   `json:"upgradeState"`
+	ObjectGroupID             string                 `json:"objectGroupId,omitempty"`
+	Live                      bool                   `json:"live"`
+	Location                  string                 `json:"location,omitempty"`
+	ManualSlackAssignment     bool                   `json:"manualSlackAssignment"`
+	HardwareVendor            string                 `json:"hardwareVendor,omitempty"`
+	AssetObjectGroupID        string                 `json:"assetObjectGroupId,omitempty"`
+	PackageObjectGroupID      string                 `json:"packageObjectGroupId,omitempty"`
+	ObjectGroup               ObjectGroup            `json:"objectGroup"`
+	City                      City                   `json:"city"`
+	AssetCloudInfo            AssetCloudInfo         `json:"assetCloudInfo"`
+	LastActivityAt            string                 `json:"lastActivityAt,omitempty"`
+	LastUpgradedAt            string                 `json:"lastUpgradedAt,omitempty"`
+	EventExcludeProfiles      []EventExcludeProfiles `json:"eventExcludeProfiles"`
+	Tags                      []string               `json:"tags"`
+	Capabilities              []AssetCapabilities    `json:"capabilities"`
+	OsDisplay                 string                 `json:"osDisplay,omitempty"`
+	Description               string                 `json:"description,omitempty"`
+	Latitude                  float64                `json:"latitude"`
+	Longitude                 float64                `json:"longitude"`
+	CPUBrand                  string                 `json:"cpuBrand,omitempty"`
+	HardwareModel             string                 `json:"hardwareModel,omitempty"`
+	HardwareSerial            string                 `json:"hardwareSerial,omitempty"`
+	Cores                     int                    `json:"cores"`
+	LogicalCores              int                    `json:"logicalCores"`
+	MemoryMb                  int                    `json:"memoryMb"`
+	OsKey                     string                 `json:"osKey,omitempty"`
+	OsVersionSortable         string                 `json:"osVersionSortable,omitempty"`
+	ProfileID                 string                 `json:"profileId,omitempty"`
+	OsqueryVersionSortable    string                 `json:"osqueryVersionSortable,omitempty"`
+	UpgradeOsqueryVersion     string                 `json:"upgradeOsqueryVersion,omitempty"`
+	NewEpoch                  bool                   `json:"newEpoch"`
+	LastEpoch                 string                 `json:"lastEpoch,omitempty"`
+	ComplianceProfileID       string                 `json:"complianceProfileId,omitempty"`
+	Flags                     CustomJSONString       `json:"flags"`
+	UpdatedBy                 string                 `json:"updatedBy,omitempty"`
+	UpdatedAt                 string                 `json:"updatedAt,omitempty"`
+	DeletedAt                 string                 `json:"deletedAt,omitempty"`
+	FlagsFile                 string                 `json:"flagsFile,omitempty"`
+	FlagsFileChecksum         string                 `json:"flagsFileChecksum,omitempty"`
+	ActiveFlagProfileID       string                 `json:"activeFlagProfileId,omitempty"`
+	ActiveFlagProfileSource   string                 `json:"activeFlagProfileSource,omitempty"`
+	ActiveCustomProfileID     string                 `json:"activeCustomProfileId,omitempty"`
+	ActiveCustomProfileSource string                 `json:"activeCustomProfileSource,omitempty"`
+	Protect                   bool                   `json:"protect"`
+	AgentVersion              string                 `json:"agentVersion,omitempty"`
+	AgentVersionSortable      string                 `json:"agentVersionSortable,omitempty"`
+	AgentID                   string                 `json:"agentId,omitempty"`
+	AgentType                 string                 `json:"agentType,omitempty"`
+	ResourceType              string                 `json:"resourceType,omitempty"`
+	Arch                      string                 `json:"arch,omitempty"`
+	Platform                  string                 `json:"platform,omitempty"`
+	PlatformLike              string                 `json:"platformLike,omitempty"`
+	AssetCapabilities         []AssetCapabilities    `json:"assetCapabilities"`
+	Interfaces                []AssetInterface       `json:"interfaces"`
+	Links                     []LinkItem             `json:"links"`
+	//TagQuerypacks                           []interface{}          `json:"tagQuerypacks"`                           // TODO cant find any examples
+	//TagEventExcludeProfiles                 []interface{}          `json:"tagEventExcludeProfiles"`                 // TODO cant find any examples
+	//TagFilePathGroups                       []interface{}          `json:"tagFilePathGroups"`                       // TODO cant find any examples
+	//TagPrometheusTargets                    []interface{}          `json:"tagPrometheusTargets"`                    // TODO cant find any examples
+	//TagRegistryPaths                        []interface{}          `json:"tagRegistryPaths"`                        // TODO cant find any examples
+	//TagAtcQueries                           []interface{}          `json:"tagAtcQueries"`                           // TODO cant find any examples
+	//TagYaraGroupRules                       []interface{}          `json:"tagYaraGroupRules"`                       // TODO cant find any examples
+	//TagRedactions                           []interface{}          `json:"tagRedactions"`                           // TODO cant find any examples
+	//PrometheusTargets                       []interface{}          `json:"prometheusTargets"`                       // TODO cant find any examples
+	//TagImageLoadExclusions                  []interface{}          `json:"tagImageLoadExclusions"`                  // TODO cant find any examples
+	//TagAuditGroups                          []interface{}          `json:"tagAuditGroups"`                          // TODO cant find any examples
+	//TagAuditRules                           []interface{}          `json:"tagAuditRules"`                           // TODO cant find any examples
+	//FinalAuditConfigurations                []interface{}          `json:"finalAuditConfigurations"`                // TODO cant find any examples
+	//Cloud                                   string                 `json:"cloud"`                                   // TODO cant find any examples
+	//ActiveComplianceProfileID               string                 `json:"activeComplianceProfileId"`               // TODO cant find any examples
+	//ActiveComplianceProfileSource           string                 `json:"activeComplianceProfileSource"`           // TODO cant find any examples
+	//AssetInfo                               string                 `json:"assetInfo"`                               // TODO cant find any examples
+	//ActiveProcessBlockRuleID                string                 `json:"activeProcessBlockRuleId"`                // TODO cant find any examples
+	//ActiveProcessBlockRuleSource            string                 `json:"activeProcessBlockRuleSource"`            // TODO cant find any examples
+	//ActiveDNSBlockRuleID                    string                 `json:"activeDnsBlockRuleId"`                    // TODO cant find any examples
+	//ActiveDNSBlockRuleSource                string                 `json:"activeDnsBlockRuleSource"`                // TODO cant find any examples
+	//ActiveWindowsDefenderPreferenceID       string                 `json:"activeWindowsDefenderPreferenceId"`       // TODO cant find any examples
+	//ActiveWindowsDefenderPreferenceIDSource string                 `json:"activeWindowsDefenderPreferenceIdSource"` // TODO cant find any examples
+	//AssetLastActivityAt                     struct {               // dupe of .lastActivityAt
+	//	LastActivityAt string `json:"lastActivityAt"`
+	//} `json:"assetLastActivityAt"`
+	//FlagProfile struct { // TODO cant find any examples
+	//	ID   string `json:"id"`
+	//	Name string `json:"name"`
+	//} `json:"flagProfile"`
+	//CustomProfile struct { // TODO cant find any examples
+	//	ID   interface{} `json:"id"`
+	//	Name interface{} `json:"name"`
+	//} `json:"customProfile"`
+	//AssetUpgrade struct {
+	//	UpgradeState   bool   `json:"upgradeState"`
+	//	LastUpgradedAt string `json:"lastUpgradedAt"`
+	//	//UpgradeAfterTime      interface{} `json:"upgradeAfterTime"` //TODO cant find any examples
+	//	//UpgradeOsqueryVersion interface{} `json:"upgradeOsqueryVersion"` //TODO cant find any examples
+	//} `json:"assetUpgrade"`
+	//Querypacks                  []interface{} `json:"querypacks"`                  // TODO cant find any examples
+	//FilePathGroups              []interface{} `json:"filePathGroups"`              // TODO cant find any examples
+	//AtcQueries                  []interface{} `json:"atcQueries"`                  // TODO cant find any examples
+	//RegistryPaths               []interface{} `json:"registryPaths"`               // TODO cant find any examples
+	//Redactions                  []interface{} `json:"redactions"`                  // TODO cant find any examples
+	//AuditRules                  []interface{} `json:"auditRules"`                  // TODO cant find any examples
+	//AuditConfigurations         []interface{} `json:"auditConfigurations"`         // TODO cant find any examples
+	//TagAuditConfigurations      []interface{} `json:"tagAuditConfigurations"`      // TODO cant find any examples
+	//YaraGroupRules              []interface{} `json:"yaraGroupRules"`              // TODO cant find any examples
+	//ImageLoadExclusions         []interface{} `json:"imageLoadExclusions"`         // TODO cant find any examples
+	//AuditGroups                 []interface{} `json:"auditGroups"`                 // TODO cant find any examples
+	//UpgradeAfterTime            interface{}   `json:"upgradeAfterTime"`            //TODO cant find any examples
+	//FlagProfileID               interface{}   `json:"flagProfileId"`               //TODO cant find any examples
+	//CustomProfileID             interface{}   `json:"customProfileId"`             //TODO cant find any examples
+	//ProcessBlockRuleID          interface{}   `json:"processBlockRuleId"`          //TODO cant find any examples
+	//DNSBlockRuleID              interface{}   `json:"dnsBlockRuleId"`              //TODO cant find any examples
+	//WindowsDefenderPreferenceID interface{}   `json:"windowsDefenderPreferenceId"` //TODO cant find any examples
+	//SlackUserID                 interface{}   `json:"slackUserId"`                 //TODO cant find any examples
+	//QuarantinedStatus           interface{}   `json:"quarantinedStatus"`           //TODO cant find any examples
+
+}
+
+// This wont actually exist, cant get assetTags
+type AssetTags struct {
+	Links  []LinkItem `json:"links"`
+	Items  []AssetTag `json:"items"`
+	Offset int        `json:"offset,omitempty"`
+	Limit  int        `json:"limit,omitempty"`
+}
+
+// AssetTag only supports PUT/POST/DELETE, not GET
+type AssetTag struct {
+	ID   string `json:"tagId,omitempty"`
+	Name string `json:"-,omitempty"`
+}
+
 type iAPIType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve | CustomProfile | FlagProfile | BlockRule | WindowsDefenderPreference | Exception
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve | CustomProfile | FlagProfile | BlockRule | WindowsDefenderPreference | Exception | AssetTag | Asset
 	GetID() string
 	GetName() string
 	KeysToDelete() []string
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles | FlagProfiles | BlockRules | WindowsDefenderPreferences | Exceptions
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles | FlagProfiles | BlockRules | WindowsDefenderPreferences | Exceptions | AssetTags | Assets
 }

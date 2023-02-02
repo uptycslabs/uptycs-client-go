@@ -1,0 +1,264 @@
+{
+  "id": "ed5750fb-4588-59b6-b15f-35cc7dc2fbb9",
+  "customerId": "11111111-1111-1111-1111-111111111111",
+  "hostName": "C02F50H1MD6V",
+  "description": null,
+  "location": "Snohomish, Washington, United States",
+  "latitude": 47.8581,
+  "longitude": -122.0872,
+  "gateway": "50.35.120.181",
+  "cityId": "93e08dcb-4454-48dd-bfb6-95b004246450",
+  "cpuBrand": "Intel(R) Core(TM) i9-9980HK CPU @ 2.40GHz",
+  "hardwareModel": "MacBookPro16,1",
+  "hardwareSerial": "C02F50H1MD6V",
+  "hardwareVendor": "Apple Inc.",
+  "cores": 8,
+  "logicalCores": 16,
+  "memoryMb": 32768,
+  "os": "macOS",
+  "osVersion": "12.6",
+  "osFlavor": "darwin",
+  "osKey": "darwin_12.6",
+  "osVersionSortable": "0000000012.0000000006",
+  "profileId": "darwin_seed",
+  "customProfileId": null,
+  "osqueryVersion": "5.0.1.16-Uptycs",
+  "osqueryVersionSortable": "0000000005.0000000000.0000000001.016-Uptycs",
+  "upgradeOsqueryVersion": null,
+  "newEpoch": false,
+  "lastEpoch": "2022-06-30T16:38:08.739Z",
+  "flagProfileId": null,
+  "complianceProfileId": null,
+  "flags": {
+    "enable_wmi": true,
+    "disable_audit": false,
+    "disable_carver": false,
+    "win_allow_sockets": true,
+    "enable_yara_process_events": true,
+    "watchdog_utilization_limit": "0",
+    "generate_process_hash_in_process_event": true
+  },
+  "objectGroupId": "6f49e4cb-ae9e-4a8a-a80b-4f747731b802",
+  "status": "active",
+  "disabled": true,
+  "upgradeState": false,
+  "upgradeAfterTime": null,
+  "lastEnrolledAt": "2022-09-15T06:47:16.479Z",
+  "live": false,
+  "lastActivityAt": "2022-07-01T17:21:44.056Z",
+  "updatedBy": "3d56cffc-1c2d-42ff-aedd-06d6ca18b463",
+  "createdAt": "2021-08-03T16:57:26.027Z",
+  "updatedAt": "2022-09-15T06:47:16.484Z",
+  "deletedAt": null,
+  "flagsFile": "--add_container_image_to_events=true",
+  "flagsFileChecksum": "f9c64898ea0c7699430d5f23f612794e7083513cb0f548cab9aad03254cd161a",
+  "activeFlagProfileId": "9c78cc0a-7cac-42ca-92ae-ceac261b838d",
+  "activeFlagProfileSource": "tag",
+  "activeCustomProfileId": null,
+  "activeCustomProfileSource": "default",
+  "slackUserId": null,
+  "manualSlackAssignment": false,
+  "cloud": null,
+  "activeComplianceProfileId": null,
+  "activeComplianceProfileSource": null,
+  "packageObjectGroupId": "6f49e4cb-ae9e-4a8a-a80b-4f747731b802",
+  "assetObjectGroupId": "6f49e4cb-ae9e-4a8a-a80b-4f747731b802",
+  "assetInfo": null,
+  "processBlockRuleId": null,
+  "activeProcessBlockRuleId": null,
+  "activeProcessBlockRuleSource": null,
+  "dnsBlockRuleId": null,
+  "activeDnsBlockRuleId": null,
+  "activeDnsBlockRuleSource": null,
+  "windowsDefenderPreferenceId": null,
+  "activeWindowsDefenderPreferenceId": null,
+  "activeWindowsDefenderPreferenceIdSource": null,
+  "protect": false,
+  "agentVersion": "5.0.1.16-Uptycs",
+  "agentVersionSortable": "0000000005.0000000000.0000000001.016-Uptycs",
+  "agentId": "ed5750fb-4588-59b6-b15f-35cc7dc2fbb9",
+  "agentType": "asset",
+  "resourceType": "asset",
+  "arch": "x86_64h",
+  "quarantinedStatus": null,
+  "platform": "darwin",
+  "platformLike": "darwin",
+  "city": {
+    "id": "93e08dcb-4454-48dd-bfb6-95b004246450",
+    "customerId": "11111111-1111-1111-1111-111111111111",
+    "geonameId": 5810988,
+    "name": "Snohomish",
+    "subdivisionGeonameId": 5815135,
+    "subdivisionIsoCode": "WA",
+    "subdivisionName": "Washington",
+    "countryGeonameId": 6252001,
+    "countryIsoCode": "US",
+    "countryName": "United States",
+    "latitude": 47.8581,
+    "longitude": -122.0872,
+    "createdAt": "2022-04-11T16:28:59.770Z",
+    "updatedAt": "2022-04-11T16:28:59.770Z"
+  },
+  "objectGroup": {
+    "id": "6f49e4cb-ae9e-4a8a-a80b-4f747731b802",
+    "customerId": "11111111-1111-1111-1111-111111111111",
+    "name": "assets",
+    "key": null,
+    "value": null,
+    "assetGroupRuleId": null,
+    "description": "Default asset group",
+    "secret": "67066459-0d4f-4ed8-a7cf-2ca0549ccdee",
+    "objectType": "ASSET",
+    "custom": false,
+    "retentionDays": 0,
+    "rangerId": 296,
+    "createdBy": null,
+    "updatedBy": null,
+    "createdAt": "2021-06-01T17:39:15.969Z",
+    "updatedAt": "2021-10-18T15:57:04.023Z"
+  },
+  "customProfile": null,
+  "assetLastActivityAt": {
+    "customerId": "11111111-1111-1111-1111-111111111111",
+    "assetId": "ed5750fb-4588-59b6-b15f-35cc7dc2fbb9",
+    "lastActivityAt": "2022-07-01T17:21:44.056Z"
+  },
+  "assetCapabilities": [
+    {
+      "id": "334e7585-e09d-400f-80ba-198bf83b4387",
+      "customerId": "11111111-1111-1111-1111-111111111111",
+      "assetId": "ed5750fb-4588-59b6-b15f-35cc7dc2fbb9",
+      "name": "Yara",
+      "status": "PARTIAL",
+      "individualStatus": {
+        "flagStatus": "CONFIGURED",
+        "configurationStatus": "PARTIAL",
+        "scheduledQueryStatus": "CONFIGURED"
+      },
+      "createdAt": "2022-04-11T16:29:00.362Z",
+      "updatedAt": "2022-04-30T07:47:42.063Z"
+    },
+    {
+      "id": "4830e4a7-a434-4385-b5bc-7659bcde2b8f",
+      "customerId": "11111111-1111-1111-1111-111111111111",
+      "assetId": "ed5750fb-4588-59b6-b15f-35cc7dc2fbb9",
+      "name": "Blocking",
+      "status": "NOT-CONFIGURED",
+      "individualStatus": {},
+      "createdAt": "2022-04-11T16:29:00.398Z",
+      "updatedAt": "2022-04-30T07:47:42.080Z"
+    }
+  ],
+  "osDisplay": "macOS 12.6",
+  "interfaces": [
+    {
+      "customerId": "11111111-1111-1111-1111-111111111111",
+      "name": "lo0",
+      "mac": "00:00:00:00:00:00",
+      "ip": "127.0.0.1",
+      "mask": "255.0.0.0",
+      "isPrimary": false
+    },
+    {
+      "customerId": "11111111-1111-1111-1111-111111111111",
+      "name": "lo0",
+      "mac": "00:00:00:00:00:00",
+      "ip": "::1",
+      "mask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+      "isPrimary": false
+    }
+  ],
+  "assetCloudInfo": null,
+  "prometheusTargets": [],
+  "querypacks": [],
+  "tagQuerypacks": [
+    {
+      "id": "20d50550-40f6-4018-8664-9768c37c8b57",
+      "name": "vuln-management.conf",
+      "links": [
+        {
+          "rel": "self",
+          "title": "Query pack information",
+          "href": "/api/customers/11111111-1111-1111-1111-111111111111/querypacks/20d50550-40f6-4018-8664-9768c37c8b57"
+        }
+      ]
+    }
+  ],
+  "tagPrometheusTargets": [],
+  "filePathGroups": [],
+  "eventExcludeProfiles": [],
+  "tagEventExcludeProfiles": [
+    {
+      "id": "2a86d4ad-3aa3-42f1-8430-6da238c82b11",
+      "name": "Uptycs default event exclude profile",
+      "links": [
+        {
+          "rel": "self",
+          "title": "Event exclude profile information",
+          "href": "/api/customers/11111111-1111-1111-1111-111111111111/eventExcludeProfiles/2a86d4ad-3aa3-42f1-8430-6da238c82b11"
+        }
+      ]
+    },
+    {
+      "id": "500bc4ed-fc1f-4434-903f-f8ec1bda8420",
+      "name": "Uptycs Custom Exclusions",
+      "links": [
+        {
+          "rel": "self",
+          "title": "Event exclude profile information",
+          "href": "/api/customers/11111111-1111-1111-1111-111111111111/eventExcludeProfiles/500bc4ed-fc1f-4434-903f-f8ec1bda8420"
+        }
+      ]
+    },
+    {
+      "id": "fe34b97a-47e5-4186-aa24-bfa8c19491be",
+      "name": "Custom Event Exclude",
+      "links": [
+        {
+          "rel": "self",
+          "title": "Event exclude profile information",
+          "href": "/api/customers/11111111-1111-1111-1111-111111111111/eventExcludeProfiles/fe34b97a-47e5-4186-aa24-bfa8c19491be"
+        }
+      ]
+    }
+  ],
+  "atcQueries": [],
+  "tagAtcQueries": [],
+  "registryPaths": [],
+  "assetUpgrade": {
+    "id": "eeadc0e0-9554-4b45-bd52-e1bb025df0c6",
+    "customerId": "11111111-1111-1111-1111-111111111111",
+    "upgradeOsqueryVersion": null,
+    "upgradeState": false,
+    "upgradeAfterTime": null,
+    "assetId": "ed5750fb-4588-59b6-b15f-35cc7dc2fbb9",
+    "lastUpgradedAt": "2021-11-10T16:15:31.573Z"
+  },
+  "tagFilePathGroups": [],
+  "tags": [
+    "darwin",
+    "asset-group=assets",
+    "all"
+  ],
+  "tagRedactions": [],
+  "auditRules": [],
+  "tagAuditRules": [],
+  "auditConfigurations": [],
+  "yaraGroupRules": [],
+  "redactions": [],
+  "tagRegistryPaths": [],
+  "auditGroups": [],
+  "tagAuditConfigurations": [],
+  "tagYaraGroupRules": [],
+  "tagAuditGroups": [],
+  "imageLoadExclusions": [],
+  "tagImageLoadExclusions": [],
+  "finalAuditConfigurations": [],
+  "links": [
+    {
+      "rel": "self",
+      "title": "Asset information",
+      "href": "/api/customers/11111111-1111-1111-1111-111111111111/assets/ed5750fb-4588-59b6-b15f-35cc7dc2fbb9"
+    }
+  ]
+}
