@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/MakeNowJust/heredoc"
 	"github.com/uptycslabs/uptycs-client-go/uptycs"
 	"log"
 	"os"
@@ -30,6 +31,14 @@ func main() {
 		Name:        "marcus test",
 		Description: "marcus test",
 		Priority:    50,
+		Flags: uptycs.CustomJSONString(heredoc.Doc(`{
+				"disable_audit": false,
+				"audit_allow_config": true,
+				"enable_docker_events": true,
+				"enable_containerd_events": true,
+				"add_container_image_to_events": true
+			}
+		`)),
 	})
 	if err != nil {
 		panic(err)
@@ -41,6 +50,14 @@ func main() {
 	updatedFlagProfile, err := c.UpdateFlagProfile(uptycs.FlagProfile{
 		ID:   newFlagProfile.ID,
 		Name: "marcus test updated",
+		Flags: uptycs.CustomJSONString(heredoc.Doc(`{
+				"disable_audit": false,
+				"audit_allow_config": true,
+				"enable_docker_events": true,
+				"enable_containerd_events": true,
+				"add_container_image_to_events": true
+			}
+		`)),
 	})
 	if err != nil {
 		panic(err)

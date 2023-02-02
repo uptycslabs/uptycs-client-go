@@ -795,7 +795,7 @@ type FlagProfile struct {
 	Description  string           `json:"description,omitempty"`
 	Priority     int              `json:"priority"`
 	Flags        CustomJSONString `json:"flags,omitempty" validate:"required,min=1"`
-	OsFlags      CustomJSONString `json:"osFlags,omitempty" validate:"required,min=1"`
+	OsFlags      CustomJSONString `json:"osFlags,omitempty"`
 	CreatedBy    string           `json:"createdBy,omitempty"`
 	UpdatedBy    string           `json:"updatedBy,omitempty"`
 	CreatedAt    string           `json:"createdAt,omitempty"`

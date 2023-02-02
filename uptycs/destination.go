@@ -11,7 +11,9 @@ func (T Destination) GetName() string {
 }
 
 func (T Destination) KeysToDelete() []string {
-	return []string{}
+	return []string{
+		"enabled",
+	}
 }
 
 func (c *Client) CreateDestination(destination Destination) (Destination, error) {

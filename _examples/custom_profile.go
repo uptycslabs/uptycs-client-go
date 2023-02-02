@@ -28,7 +28,7 @@ func main() {
 		QuerySchedules: uptycs.CustomJSONString(heredoc.Doc(`{
 		  "processes": 100
 		}`)),
-		Priority:     2,
+		Priority:     133715,
 		ResourceType: "asset",
 	})
 	if err != nil {
