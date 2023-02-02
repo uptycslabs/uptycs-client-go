@@ -15,11 +15,11 @@ func (T Carve) KeysToDelete() []string {
 }
 
 func (c *Client) CreateCarve(carve Carve) (Carve, error) {
-	return doCreate(c, carve, "carves")
+	return doCreate(c, carve, "carves", []string{})
 }
 
 func (c *Client) UpdateCarve(carve Carve) (Carve, error) {
-	return doUpdate(c, carve, "carves")
+	return doUpdate(c, carve, "carves", []string{})
 }
 
 func (c *Client) GetCarves() (Carves, error) {

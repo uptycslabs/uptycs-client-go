@@ -42,7 +42,7 @@ func main() {
 		Code:        "1651259159841CODE",
 		Type:        "builder",
 		Rule:        "builder",
-		BuilderConfig: uptycs.BuilderConfig{
+		BuilderConfig: &uptycs.BuilderConfig{
 			TableName:     "process_open_sockets",
 			Added:         true,
 			MatchesFilter: true,
@@ -57,10 +57,13 @@ func main() {
 			    ]
 			  }
 			`)),
-			Severity:        "low",
-			Key:             "Test",
-			ValueField:      "pid",
-			AutoAlertConfig: uptycs.AutoAlertConfig{},
+			Severity:   "low",
+			Key:        "Test",
+			ValueField: "pid",
+			AutoAlertConfig: uptycs.AutoAlertConfig{
+				RaiseAlert:   true,
+				DisableAlert: false,
+			},
 		},
 		EventTags: []string{
 			"Tactic=Persistence",
@@ -76,7 +79,30 @@ func main() {
 		log.Println(err)
 		return
 	}
+
 	log.Println(fmt.Sprintf("Created Rule '%s' with id %s", rule.Name, rule.ID))
+	attachedAlertRule, err := c.GetAlertRule(uptycs.AlertRule{
+		ID: rule.ID,
+	})
+	log.Println(fmt.Sprintf("Attached rule has enabled:%s", attachedAlertRule.Enabled))
+
+	_, err = c.UpdateAlertRule(uptycs.AlertRule{
+		ID:                  rule.ID,
+		AlertRuleExceptions: []uptycs.RuleException{},
+		Destinations:        []uptycs.AlertRuleDestination{},
+		Type:                "builder",
+	})
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	_, err = c.UpdateAlertRule(uptycs.AlertRule{
+		Enabled: false,
+	})
+	updatedRule, err := c.GetAlertRule(uptycs.AlertRule{
+		ID: rule.ID,
+	})
+	log.Println(fmt.Sprintf("Updated Rule '%s' with id '%s'", updatedRule.Name, updatedRule.ID))
 
 	// Delete an event rule by ID
 	_, err = c.DeleteEventRule(uptycs.EventRule{

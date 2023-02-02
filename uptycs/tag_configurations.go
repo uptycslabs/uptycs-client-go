@@ -15,11 +15,11 @@ func (T TagConfiguration) KeysToDelete() []string {
 }
 
 func (c *Client) CreateTagConfiguration(tagConfiguration TagConfiguration) (TagConfiguration, error) {
-	return doCreate(c, tagConfiguration, "tagConfigurations")
+	return doCreate(c, tagConfiguration, "tagConfigurations", []string{})
 }
 
 func (c *Client) UpdateTagConfiguration(tagConfiguration TagConfiguration) (TagConfiguration, error) {
-	return doUpdate(c, tagConfiguration, "tagConfigurations")
+	return doUpdate(c, tagConfiguration, "tagConfigurations", []string{})
 }
 
 func (c *Client) GetTagConfigurations() (TagConfigurations, error) {

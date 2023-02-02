@@ -15,11 +15,11 @@ func (T CustomProfile) KeysToDelete() []string {
 }
 
 func (c *Client) CreateCustomProfile(customProfile CustomProfile) (CustomProfile, error) {
-	return doCreate(c, customProfile, "customProfiles")
+	return doCreate(c, customProfile, "customProfiles", []string{})
 }
 
 func (c *Client) UpdateCustomProfile(customProfile CustomProfile) (CustomProfile, error) {
-	return doUpdate(c, customProfile, "customProfiles")
+	return doUpdate(c, customProfile, "customProfiles", []string{})
 }
 
 func (c *Client) GetCustomProfiles() (CustomProfiles, error) {

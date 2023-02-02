@@ -39,9 +39,9 @@ func (c *Client) DeleteComplianceProfile(complianceProfile ComplianceProfile) (C
 }
 
 func (c *Client) CreateComplianceProfile(complianceProfile ComplianceProfile) (ComplianceProfile, error) {
-	return doCreate(c, complianceProfile, "complianceProfiles")
+	return doCreate(c, complianceProfile, "complianceProfiles", []string{})
 }
 
 func (c *Client) UpdateComplianceProfile(complianceProfile ComplianceProfile) (ComplianceProfile, error) {
-	return doUpdate(c, complianceProfile, "complianceProfiles")
+	return doUpdate(c, complianceProfile, "complianceProfiles", []string{})
 }

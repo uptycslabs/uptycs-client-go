@@ -15,11 +15,11 @@ func (T YaraGroupRule) KeysToDelete() []string {
 }
 
 func (c *Client) CreateYaraGroupRule(yaraGroupRule YaraGroupRule) (YaraGroupRule, error) {
-	return doCreate(c, yaraGroupRule, "yaraGroupRules")
+	return doCreate(c, yaraGroupRule, "yaraGroupRules", []string{})
 }
 
 func (c *Client) UpdateYaraGroupRule(yaraGroupRule YaraGroupRule) (YaraGroupRule, error) {
-	return doUpdate(c, yaraGroupRule, "yaraGroupRules")
+	return doUpdate(c, yaraGroupRule, "yaraGroupRules", []string{})
 }
 
 func (c *Client) GetYaraGroupRules() (YaraGroupRules, error) {

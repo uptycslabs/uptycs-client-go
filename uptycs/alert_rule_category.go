@@ -15,11 +15,11 @@ func (T AlertRuleCategory) KeysToDelete() []string {
 }
 
 func (c *Client) CreateAlertRuleCategory(alertRuleCategory AlertRuleCategory) (AlertRuleCategory, error) {
-	return doCreate(c, alertRuleCategory, "alertRuleCategories")
+	return doCreate(c, alertRuleCategory, "alertRuleCategories", []string{})
 }
 
 func (c *Client) UpdateAlertRuleCategory(alertRuleCategory AlertRuleCategory) (AlertRuleCategory, error) {
-	return doUpdate(c, alertRuleCategory, "alertRuleCategories")
+	return doUpdate(c, alertRuleCategory, "alertRuleCategories", []string{})
 }
 
 func (c *Client) GetAlertRuleCategories() (AlertRuleCategories, error) {

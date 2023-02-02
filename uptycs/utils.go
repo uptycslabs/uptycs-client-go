@@ -107,13 +107,13 @@ func doGet[T iAPIType](c *Client, apiObject T, endpointStr string) (T, error) {
 	return foundItems[0], nil
 }
 
-func doCreate[T iAPIType](c *Client, apiObject T, endpointStr string) (T, error) {
+func doCreate[T iAPIType](c *Client, apiObject T, endpointStr string, additionalKeysToDelete []string) (T, error) {
 	err := validate.Struct(apiObject)
 	if err != nil {
 		return apiObject, err
 	}
 
-	slimmedObj, err := SlimStructAsJSONString(apiObject, apiObject.KeysToDelete())
+	slimmedObj, err := SlimStructAsJSONString(apiObject, append(apiObject.KeysToDelete(), additionalKeysToDelete...))
 	if err != nil {
 		return apiObject, err
 	}
@@ -139,16 +139,15 @@ func doCreate[T iAPIType](c *Client, apiObject T, endpointStr string) (T, error)
 	if err != nil {
 		return apiObject, err
 	}
-
 	return newAPIObject[0], nil
 }
 
-func doUpdate[T iAPIType](c *Client, apiObject T, endpointStr string) (T, error) {
+func doUpdate[T iAPIType](c *Client, apiObject T, endpointStr string, additionalKeysToDelete []string) (T, error) {
 	err := validate.Struct(apiObject)
 	if err != nil {
 		return apiObject, err
 	}
-	slimmedObj, err := SlimStructAsJSONString(apiObject, apiObject.KeysToDelete())
+	slimmedObj, err := SlimStructAsJSONString(apiObject, append(apiObject.KeysToDelete(), additionalKeysToDelete...))
 	if err != nil {
 		return apiObject, err
 	}

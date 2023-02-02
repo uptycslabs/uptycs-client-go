@@ -29,8 +29,12 @@ type EventRule struct {
 	Lock          bool            `json:"lock"`
 	Exceptions    []RuleException `json:"exceptions"`
 	SQLConfig     *SQLConfig      `json:"sqlConfig,omitempty"`
-	BuilderConfig BuilderConfig   `json:"builderConfig,omitempty"`
+	BuilderConfig *BuilderConfig  `json:"builderConfig"`
 	Links         []LinkItem      `json:"links,omitempty"`
+}
+
+type BuilderConfigLite struct {
+	ID string `json:"id"`
 }
 
 type BuilderConfig struct {
@@ -91,7 +95,7 @@ type AlertRule struct {
 	Throttled              bool                   `json:"throttled"`
 	CreatedAt              string                 `json:"createdAt,omitempty"`
 	IsInternal             bool                   `json:"isInternal"`
-	AlertTags              []string               `json:"alertTags"`
+	AlertTags              []string               `json:"alertTags" validate:"required_if=Type sql"`
 	CreatedBy              string                 `json:"createdBy,omitempty"`
 	UpdatedAt              string                 `json:"updatedAt,omitempty"`
 	TimeSuppresionStart    string                 `json:"timeSuppresionStart,omitempty"`
@@ -106,6 +110,7 @@ type AlertRule struct {
 	Destinations           []AlertRuleDestination `json:"destinations"`
 	SQLConfig              *SQLConfig             `json:"sqlConfig,omitempty"`
 	Links                  []LinkItem             `json:"links,omitempty"`
+	BuilderConfig          *BuilderConfigLite     `json:"builderConfig"`
 }
 
 type AlertRuleDestination struct {

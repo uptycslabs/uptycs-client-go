@@ -15,11 +15,11 @@ func (T RegistryPath) KeysToDelete() []string {
 }
 
 func (c *Client) CreateRegistryPath(registryPath RegistryPath) (RegistryPath, error) {
-	return doCreate(c, registryPath, "registryPaths")
+	return doCreate(c, registryPath, "registryPaths", []string{})
 }
 
 func (c *Client) UpdateRegistryPath(registryPath RegistryPath) (RegistryPath, error) {
-	return doUpdate(c, registryPath, "registryPaths")
+	return doUpdate(c, registryPath, "registryPaths", []string{})
 }
 
 func (c *Client) GetRegistryPaths() (RegistryPaths, error) {

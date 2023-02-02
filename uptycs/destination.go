@@ -15,11 +15,11 @@ func (T Destination) KeysToDelete() []string {
 }
 
 func (c *Client) CreateDestination(destination Destination) (Destination, error) {
-	return doCreate(c, destination, "destinations")
+	return doCreate(c, destination, "destinations", []string{})
 }
 
 func (c *Client) UpdateDestination(destination Destination) (Destination, error) {
-	return doUpdate(c, destination, "destinations")
+	return doUpdate(c, destination, "destinations", []string{})
 }
 
 func (c *Client) GetDestinations() (Destinations, error) {

@@ -43,9 +43,15 @@ func (c *Client) DeleteEventRule(eventRule EventRule) (EventRule, error) {
 }
 
 func (c *Client) CreateEventRule(eventRule EventRule) (EventRule, error) {
-	return doCreate(c, eventRule, "eventRules")
+	if eventRule.BuilderConfig == nil {
+		return doCreate(c, eventRule, "eventRules", []string{"builderConfig"})
+	}
+	return doCreate(c, eventRule, "eventRules", []string{})
 }
 
 func (c *Client) UpdateEventRule(eventRule EventRule) (EventRule, error) {
-	return doUpdate(c, eventRule, "eventRules")
+	if eventRule.BuilderConfig == nil {
+		return doUpdate(c, eventRule, "eventRules", []string{"builderConfig"})
+	}
+	return doUpdate(c, eventRule, "eventRules", []string{})
 }

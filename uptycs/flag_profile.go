@@ -15,11 +15,11 @@ func (T FlagProfile) KeysToDelete() []string {
 }
 
 func (c *Client) CreateFlagProfile(flagProfile FlagProfile) (FlagProfile, error) {
-	return doCreate(c, flagProfile, "flagProfiles")
+	return doCreate(c, flagProfile, "flagProfiles", []string{})
 }
 
 func (c *Client) UpdateFlagProfile(flagProfile FlagProfile) (FlagProfile, error) {
-	return doUpdate(c, flagProfile, "flagProfiles")
+	return doUpdate(c, flagProfile, "flagProfiles", []string{})
 }
 
 func (c *Client) GetFlagProfiles() (FlagProfiles, error) {

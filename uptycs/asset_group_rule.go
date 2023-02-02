@@ -15,11 +15,11 @@ func (T AssetGroupRule) KeysToDelete() []string {
 }
 
 func (c *Client) CreateAssetGroupRule(assetGroupRule AssetGroupRule) (AssetGroupRule, error) {
-	return doCreate(c, assetGroupRule, "assetGroupRules")
+	return doCreate(c, assetGroupRule, "assetGroupRules", []string{})
 }
 
 func (c *Client) UpdateAssetGroupRule(assetGroupRule AssetGroupRule) (AssetGroupRule, error) {
-	return doUpdate(c, assetGroupRule, "assetGroupRules")
+	return doUpdate(c, assetGroupRule, "assetGroupRules", []string{})
 }
 
 func (c *Client) GetAssetGroupRules() (AssetGroupRules, error) {

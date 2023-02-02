@@ -19,11 +19,11 @@ func (T Querypack) KeysToDelete() []string {
 }
 
 func (c *Client) CreateQuerypack(querypack Querypack) (Querypack, error) {
-	return doCreate(c, querypack, "querypacks")
+	return doCreate(c, querypack, "querypacks", []string{})
 }
 
 func (c *Client) UpdateQuerypack(querypack Querypack) (Querypack, error) {
-	return doUpdate(c, querypack, "querypacks")
+	return doUpdate(c, querypack, "querypacks", []string{})
 }
 
 func (c *Client) GetQuerypacks() (Querypacks, error) {

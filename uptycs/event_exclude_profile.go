@@ -54,7 +54,7 @@ func (c *Client) CreateEventExcludeProfile(eventExcludeProfile EventExcludeProfi
 	if eventExcludeProfile.Priority > 999999999 {
 		return eventExcludeProfile, errors.New("priority is too large. Should be less than 999999999")
 	}
-	return doCreate(c, eventExcludeProfile, "eventExcludeProfiles")
+	return doCreate(c, eventExcludeProfile, "eventExcludeProfiles", []string{})
 }
 
 func (c *Client) UpdateEventExcludeProfile(eventExcludeProfile EventExcludeProfile) (EventExcludeProfile, error) {
@@ -71,5 +71,5 @@ func (c *Client) UpdateEventExcludeProfile(eventExcludeProfile EventExcludeProfi
 		return eventExcludeProfile, errors.New("priority is too large. Should be less than 999999999")
 	}
 
-	return doUpdate(c, eventExcludeProfile, "eventExcludeProfiles")
+	return doUpdate(c, eventExcludeProfile, "eventExcludeProfiles", []string{})
 }

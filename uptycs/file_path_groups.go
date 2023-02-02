@@ -28,7 +28,7 @@ func (c *Client) CreateFilePathGroup(filePathGroup FilePathGroup) (FilePathGroup
 			}
 		}
 	}
-	return doCreate(c, filePathGroup, "filePathGroups")
+	return doCreate(c, filePathGroup, "filePathGroups", []string{})
 }
 
 func (c *Client) UpdateFilePathGroup(filePathGroup FilePathGroup) (FilePathGroup, error) {
@@ -43,7 +43,7 @@ func (c *Client) UpdateFilePathGroup(filePathGroup FilePathGroup) (FilePathGroup
 			}
 		}
 	}
-	return doUpdate(c, filePathGroup, "filePathGroups")
+	return doUpdate(c, filePathGroup, "filePathGroups", []string{})
 }
 
 func (c *Client) GetFilePathGroups() (FilePathGroups, error) {

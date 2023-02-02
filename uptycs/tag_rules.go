@@ -18,11 +18,11 @@ func (T TagRule) KeysToDelete() []string {
 }
 
 func (c *Client) CreateTagRule(tagRule TagRule) (TagRule, error) {
-	return doCreate(c, tagRule, "tagRules")
+	return doCreate(c, tagRule, "tagRules", []string{})
 }
 
 func (c *Client) UpdateTagRule(tagRule TagRule) (TagRule, error) {
-	return doUpdate(c, tagRule, "tagRules")
+	return doUpdate(c, tagRule, "tagRules", []string{})
 }
 
 func (c *Client) GetTagRules() (TagRules, error) {
