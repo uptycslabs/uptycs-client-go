@@ -15,11 +15,11 @@ func (T AtcQuery) KeysToDelete() []string {
 }
 
 func (c *Client) CreateAtcQuery(atcQuery AtcQuery) (AtcQuery, error) {
-	return doCreate(c, atcQuery, "atcQueries")
+	return doCreate(c, atcQuery, "atcQueries", []string{})
 }
 
 func (c *Client) UpdateAtcQuery(atcQuery AtcQuery) (AtcQuery, error) {
-	return doUpdate(c, atcQuery, "atcQueries")
+	return doUpdate(c, atcQuery, "atcQueries", []string{})
 }
 
 func (c *Client) GetAtcQueries() (AtcQueries, error) {

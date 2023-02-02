@@ -20,11 +20,11 @@ func (T Tag) KeysToDelete() []string {
 }
 
 func (c *Client) CreateTag(tag Tag) (Tag, error) {
-	return doCreate(c, tag, "tags")
+	return doCreate(c, tag, "tags", []string{})
 }
 
 func (c *Client) UpdateTag(tag Tag) (Tag, error) {
-	return doUpdate(c, tag, "tags")
+	return doUpdate(c, tag, "tags", []string{})
 }
 
 func (c *Client) GetTags() (Tags, error) {

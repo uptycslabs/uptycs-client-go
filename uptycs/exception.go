@@ -15,11 +15,11 @@ func (T Exception) KeysToDelete() []string {
 }
 
 func (c *Client) CreateException(exception Exception) (Exception, error) {
-	return doCreate(c, exception, "exceptions")
+	return doCreate(c, exception, "exceptions", []string{})
 }
 
 func (c *Client) UpdateException(exception Exception) (Exception, error) {
-	return doUpdate(c, exception, "exceptions")
+	return doUpdate(c, exception, "exceptions", []string{})
 }
 
 func (c *Client) GetExceptions() (Exceptions, error) {

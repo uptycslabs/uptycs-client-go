@@ -44,9 +44,9 @@ func (c *Client) DeleteUser(user User) (User, error) {
 }
 
 func (c *Client) CreateUser(user User) (User, error) {
-	return doCreate(c, user, "users")
+	return doCreate(c, user, "users", []string{})
 }
 
 func (c *Client) UpdateUser(user User) (User, error) {
-	return doUpdate(c, user, "users")
+	return doUpdate(c, user, "users", []string{})
 }

@@ -57,7 +57,11 @@ func (c *Client) CreateAlertRule(alertRule AlertRule) (AlertRule, error) {
 		// For some reason this sometimes defaults to null
 		alertRule.AlertTags = []string{}
 	}
-	return doCreate(c, alertRule, "alertRules")
+
+	if alertRule.BuilderConfig == nil {
+		return doUpdate(c, alertRule, "alertRules", []string{"builderConfig"})
+	}
+	return doCreate(c, alertRule, "alertRules", []string{})
 }
 
 func (c *Client) UpdateAlertRule(alertRule AlertRule) (AlertRule, error) {
@@ -65,13 +69,8 @@ func (c *Client) UpdateAlertRule(alertRule AlertRule) (AlertRule, error) {
 		// For some reason this sometimes defaults to null
 		alertRule.AlertTags = []string{}
 	}
-	if alertRule.Type == "builder" {
-		attachedEventRule, _ := c.GetEventRule(EventRule{ID: alertRule.ID})
-		if attachedEventRule.BuilderConfig.AutoAlertConfig.RaiseAlert && !attachedEventRule.BuilderConfig.AutoAlertConfig.DisableAlert {
-			alertRule.BuilderConfig = &BuilderConfigLite{
-				ID: attachedEventRule.BuilderConfig.ID,
-			}
-		}
+	if alertRule.BuilderConfig == nil {
+		return doUpdate(c, alertRule, "alertRules", []string{"builderConfig"})
 	}
-	return doUpdate(c, alertRule, "alertRules")
+	return doUpdate(c, alertRule, "alertRules", []string{})
 }

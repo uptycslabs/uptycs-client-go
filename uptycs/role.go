@@ -39,9 +39,9 @@ func (c *Client) DeleteRole(role Role) (Role, error) {
 }
 
 func (c *Client) CreateRole(role Role) (Role, error) {
-	return doCreate(c, role, "roles")
+	return doCreate(c, role, "roles", []string{})
 }
 
 func (c *Client) UpdateRole(role Role) (Role, error) {
-	return doUpdate(c, role, "roles")
+	return doUpdate(c, role, "roles", []string{})
 }
