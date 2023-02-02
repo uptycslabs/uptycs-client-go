@@ -15,18 +15,17 @@ func main() {
 		CustomerID: os.Getenv("UPTYCS_CUSTOMER_ID"),
 	})
 
-	carveByID, _ := c.GetCarve(uptycs.Carve{
-		ID: "b718f613-055d-43f3-ba58-b665f7633e48",
-	})
-	log.Println("Got Carve with Path %s", carveByID.Path)
+	allCarves, _ := c.GetCarves()
+	if len(allCarves.Items) > 0 {
+		log.Println("Found a Carve %s with Path %s", allCarves.Items[0].Name, allCarves.Items[0].Path)
+	}
 
 	// Create a carve
-
 	newCarve, err := c.CreateCarve(uptycs.Carve{
 		Path: "marcus test",
 	})
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	log.Println(fmt.Sprintf("Created carve '%s' with id '%s'", newCarve.Path, newCarve.ID))
 
@@ -37,17 +36,16 @@ func main() {
 		Path: "marcus test updated",
 	})
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	log.Println(fmt.Sprintf("Updated carve '%s' with id '%s'", updatedCarve.Path, updatedCarve.ID))
 
 	// Delete a carve by ID
-
 	_, err = c.DeleteCarve(uptycs.Carve{
 		ID: newCarve.ID,
 	})
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	log.Println(fmt.Sprintf("Deleted carve '%s' with id '%s'", updatedCarve.Path, newCarve.ID))
 

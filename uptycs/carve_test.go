@@ -119,12 +119,12 @@ func TestDeleteCarve(t *testing.T) {
 			)
 
 			_, err := c.DeleteCarve(theT.in)
-			if err != nil {
-				t.Errorf(err.Error())
+			if err == nil {
+				t.Errorf("Delete isnt supported, this should error.")
 			}
 			countInfo := httpmock.GetCallCountInfo()
 
-			assert.Equal(t, countInfo[fmt.Sprintf("DELETE https://uptycs.foo/public/api/customers/d/carves/%v", theT.in.ID)], 1)
+			assert.Equal(t, countInfo[fmt.Sprintf("DELETE https://uptycs.foo/public/api/customers/d/carves/%v", theT.in.ID)], 0)
 			// TODO: assert the body that was intercepted by the mock
 		})
 	}
@@ -171,12 +171,12 @@ func TestPutCarve(t *testing.T) {
 			)
 
 			_, err := c.UpdateCarve(theT.in)
-			if err != nil {
-				t.Errorf(err.Error())
+			if err == nil {
+				t.Errorf("Update isnt supported, this should error.")
 			}
 			countInfo := httpmock.GetCallCountInfo()
 
-			assert.Equal(t, countInfo[fmt.Sprintf("PUT https://uptycs.foo/public/api/customers/d/carves/%v", theT.in.ID)], 1)
+			assert.Equal(t, countInfo[fmt.Sprintf("PUT https://uptycs.foo/public/api/customers/d/carves/%v", theT.in.ID)], 0)
 			// TODO: assert the body that was intercepted by the mock
 		})
 	}
@@ -223,12 +223,12 @@ func TestCreateCarve(t *testing.T) {
 			)
 
 			_, err := c.CreateCarve(theT.in)
-			if err != nil {
-				t.Errorf(err.Error())
+			if err == nil {
+				t.Errorf("Create isnt supported, this should error.")
 			}
 			countInfo := httpmock.GetCallCountInfo()
 
-			assert.Equal(t, countInfo["POST https://uptycs.foo/public/api/customers/d/carves"], 1)
+			assert.Equal(t, countInfo["POST https://uptycs.foo/public/api/customers/d/carves"], 0)
 		})
 	}
 }

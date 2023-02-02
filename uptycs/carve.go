@@ -15,11 +15,11 @@ func (T Carve) KeysToDelete() []string {
 }
 
 func (c *Client) CreateCarve(carve Carve) (Carve, error) {
-	return doCreate(c, carve, "carves", []string{})
+	return Carve{}, errors.New("POST is not supported for carves")
 }
 
 func (c *Client) UpdateCarve(carve Carve) (Carve, error) {
-	return doUpdate(c, carve, "carves", []string{})
+	return Carve{}, errors.New("PUT is not supported for assets")
 }
 
 func (c *Client) GetCarves() (Carves, error) {
@@ -41,5 +41,5 @@ func (c *Client) GetCarve(carve Carve) (Carve, error) {
 }
 
 func (c *Client) DeleteCarve(carve Carve) (Carve, error) {
-	return doDelete(c, carve, "carves")
+	return Carve{}, errors.New("DELETE is not supported for assets")
 }
