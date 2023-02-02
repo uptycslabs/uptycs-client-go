@@ -36,9 +36,6 @@ func main() {
 			{
 				ID: "a7335d0e-bf70-4ec1-b422-feefedb6dcd9",
 			},
-			{
-				Name: "FIM - USB Storage File Events",
-			},
 		},
 		RegistryPaths:        []uptycs.TagConfigurationObject{},
 		Querypacks:           []uptycs.TagConfigurationObject{},
@@ -58,7 +55,7 @@ func main() {
 		QuerySchedules: uptycs.CustomJSONString(heredoc.Doc(`{
 		  "processes": 100
 		}`)),
-		Priority:     2,
+		Priority:     999999,
 		ResourceType: "asset",
 	})
 	if err != nil {
