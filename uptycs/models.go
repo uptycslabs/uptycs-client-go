@@ -1,5 +1,163 @@
 package uptycs
 
+type QueryJobColumn struct {
+	Name         string `json:"name"`
+	Type         string `json:"type"`
+	OriginalName string `json:"originalName"`
+	Link         string `json:"link"`
+}
+
+type QueryJobParameter struct {
+	Key          string `json:"key"`
+	DataType     string `json:"dataType"`
+	Multiple     bool   `json:"multiple"`
+	Optional     bool   `json:"optional"`
+	DefaultValue string `json:"defaultValue"`
+}
+
+type QueryJobs struct {
+	Links  []LinkItem `json:"links"`
+	Items  []QueryJob `json:"items"`
+	Offset int        `json:"offset,omitempty"`
+	Limit  int        `json:"limit,omitempty"`
+}
+
+type QueryJob struct {
+	ID              string              `json:"id"`
+	Name            string              `json:"name"`
+	Query           string              `json:"query" validate:"required"`
+	Type            string              `json:"type" validate:"required,oneof=global"`
+	Parameters      []QueryJobParameter `json:"parameters"`
+	ParameterValues struct {
+		From string `json:"from"`
+		To   string `json:"to"`
+	} `json:"parameterValues"`
+	QueryID           string           `json:"queryId"`
+	Status            string           `json:"status"`
+	RowCount          int              `json:"rowCount"`
+	Columns           []QueryJobColumn `json:"columns"`
+	StartTime         string           `json:"startTime"`
+	EndTime           string           `json:"endTime"`
+	Error             QueryError       `json:"error"`
+	Purged            bool             `json:"purged"`
+	IncompleteResults bool             `json:"incompleteResults"`
+	AlertID           string           `json:"alertId"`
+	CreatedBy         string           `json:"createdBy"`
+	UpdatedBy         string           `json:"updatedBy"`
+	CreatedAt         string           `json:"createdAt"`
+	UpdatedAt         string           `json:"updatedAt"`
+	Source            string           `json:"source"`
+	ResultStore       string           `json:"resultStore"`
+	AgentType         string           `json:"agentType"`
+	ResourceType      string           `json:"resourceType"`
+	Links             []LinkItem       `json:"links"`
+	//SessionProperties interface{} `json:"sessionProperties"` # TODO: cant find any examples of this
+	//Filters  interface{} `json:"filters"` # TODO: cant find any examples of this
+	//QueryStats        interface{} `json:"queryStats"` # TODO: cant find any examples of this
+}
+
+type QueryError struct {
+	Message struct {
+		Detail string `json:"detail"`
+	} `json:"message"`
+}
+
+type QueryJobResult struct {
+	CreatedAt   string `json:"createdAt"`
+	RowDataHash string `json:"rowDataHash"`
+	CustomerID  string `json:"customerId"`
+	RowData     string `json:"rowData"`
+	RowNumber   int    `json:"rowNumber"`
+	QueryJobID  string `json:"queryJobId"`
+}
+
+type QueryJobResultColumn struct {
+	Name         string `json:"name"`
+	Type         string `json:"type"`
+	OriginalName string `json:"originalName"`
+	Link         string `json:"link"`
+}
+
+type QueryJobResultsStats struct {
+	CPUTimeMillis     int `json:"cpuTimeMillis"`
+	ProcessedRows     int `json:"processedRows"`
+	ProcessedBytes    int `json:"processedBytes"`
+	ElapsedTimeMillis int `json:"elapsedTimeMillis"`
+}
+
+type QueryJobResults struct {
+	Links       []LinkItem             `json:"links"`
+	Items       []QueryJobResult       `json:"items"`
+	QueryStats  QueryJobResultsStats   `json:"queryStats"`
+	Status      string                 `json:"status"`
+	ID          string                 `json:"id"`
+	Error       QueryError             `json:"error"`
+	EndTime     string                 `json:"endTime"`
+	StartTime   string                 `json:"startTime"`
+	RowCount    int                    `json:"rowCount"`
+	ResultStore string                 `json:"resultStore"`
+	Columns     []QueryJobResultColumn `json:"columns"`
+	Offset      int                    `json:"offset,omitempty"`
+	Limit       int                    `json:"limit,omitempty"`
+}
+
+type LookupTables struct {
+	Links  []LinkItem    `json:"links"`
+	Items  []LookupTable `json:"items"`
+	Offset int           `json:"offset,omitempty"`
+	Limit  int           `json:"limit,omitempty"`
+}
+
+type DataLookupTable struct {
+	ID                      string `json:"id"`
+	LookupTableID           string `json:"lookupTableId"`
+	LookupTableName         string `json:"lookupTableName"`
+	LookupKeyName           string `json:"lookupKeyName"`
+	Enabled                 bool   `json:"enabled"`
+	RefreshFrequencyMinutes int    `json:"refreshFrequencyMinutes"`
+	LastRefreshAt           string `json:"lastRefreshAt"`
+	RefreshInfo             struct {
+		Key               string `json:"key"`
+		Query             string `json:"query"`
+		UptDay            int    `json:"uptDay"`
+		UptBatch          int    `json:"uptBatch"`
+		TableName         string `json:"tableName"`
+		CustomerDb        string `json:"customerDb"`
+		LookupTable       string `json:"lookupTable"`
+		LookupSchema      string `json:"lookupSchema"`
+		LastRefreshAt     int64  `json:"lastRefreshAt"`
+		RefreshFrequency  int    `json:"refreshFrequency"`
+		QueryForDashboard string `json:"queryForDashboard"`
+	} `json:"refreshInfo"`
+}
+
+type LookupTable struct {
+	ID              string               `json:"id"`
+	Name            string               `json:"name"`
+	Description     string               `json:"description,omitempty"`
+	Active          bool                 `json:"active"`
+	IDField         string               `json:"idField,omitempty"`
+	RowCount        int                  `json:"rowCount"`
+	ForRuleEngine   bool                 `json:"forRuleEngine"`
+	CreatedBy       string               `json:"createdBy"`
+	UpdatedBy       string               `json:"updatedBy"`
+	CreatedAt       string               `json:"createdAt"`
+	UpdatedAt       string               `json:"updatedAt"`
+	DataLookupTable DataLookupTable      `json:"dataLookupTable,omitempty"`
+	FetchRowsquery  string               `json:"fetchRowsquery"`
+	DataRows        []LookupTableDataRow `json:"-,omitempty"`
+	Links           []LinkItem           `json:"links"`
+}
+
+type LookupTableDataRow struct {
+	ID            string           `json:"id"`
+	Name          string           `json:"-"` //Not provided
+	LookupTableID string           `json:"lookupTableId"`
+	IDFieldValue  string           `json:"idFieldValue"`
+	Data          CustomJSONString `json:"data"`
+	CreatedAt     string           `json:"createdAt"`
+}
+
 type EventRules struct {
 	Links  []LinkItem  `json:"links"`
 	Items  []EventRule `json:"items"`
@@ -1102,12 +1260,12 @@ type AssetTag struct {
 }
 
 type iAPIType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve | CustomProfile | FlagProfile | BlockRule | WindowsDefenderPreference | Exception | AssetTag | Asset
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve | CustomProfile | FlagProfile | BlockRule | WindowsDefenderPreference | Exception | AssetTag | Asset | LookupTable | LookupTableDataRow | QueryJob | QueryJobResult
 	GetID() string
 	GetName() string
 	KeysToDelete() []string
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles | FlagProfiles | BlockRules | WindowsDefenderPreferences | Exceptions | AssetTags | Assets
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles | FlagProfiles | BlockRules | WindowsDefenderPreferences | Exceptions | AssetTags | Assets | LookupTables | QueryJobResults | QueryJobs
 }

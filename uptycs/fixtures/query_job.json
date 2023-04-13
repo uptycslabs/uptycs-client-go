@@ -1,0 +1,59 @@
+{
+  "links": [
+    {
+      "rel": "self",
+      "title": "Query job information",
+      "href": "/api/customers/11111111-1111-1111-1111-111111111111/queryJobs/b6885999-3bb0-4d8e-84b3-46883f4d7506"
+    },
+    {
+      "rel": "parent",
+      "title": "Query jobs information",
+      "href": "/api/customers/11111111-1111-1111-1111-111111111111/queryJobs"
+    }
+  ],
+  "id": "b6885999-3bb0-4d8e-84b3-46883f4d7506",
+  "customerId": "11111111-1111-1111-1111-111111111111",
+  "type": "global",
+  "name": "b86c2befb58987cb5d4f14210784c9df",
+  "query": "test",
+  "parameters": [
+    {
+      "key": "from",
+      "dataType": "DATE",
+      "multiple": false,
+      "optional": false,
+      "defaultValue": "2023-05-22T17:22:36.323Z"
+    },
+    {
+      "key": "to",
+      "dataType": "DATE",
+      "multiple": false,
+      "optional": false,
+      "defaultValue": "2023-05-22T19:27:08.322Z"
+    }
+  ],
+  "parameterValues": {
+    "to": "2023-05-22T19:27:08.322Z",
+    "from": "2023-05-22T17:22:36.323Z"
+  },
+  "filters": null,
+  "queryId": "4934a4b8-0625-452f-b5ec-0d6be1da2d85",
+  "status": "QUEUED",
+  "rowCount": 0,
+  "startTime": null,
+  "endTime": null,
+  "error": null,
+  "purged": false,
+  "incompleteResults": false,
+  "alertId": null,
+  "createdBy": "f48f4c40-9c4a-47bb-9e3f-797d4deca92a",
+  "updatedBy": null,
+  "createdAt": "2023-05-22T19:27:08.334Z",
+  "updatedAt": "2023-05-22T19:27:08.334Z",
+  "source": "SCHEDULED",
+  "resultStore": null,
+  "agentType": "asset",
+  "resourceType": "asset",
+  "queryStats": null,
+  "sessionProperties": null
+}
