@@ -27,29 +27,29 @@ type QueryJob struct {
 	Name            string              `json:"name"`
 	Query           string              `json:"query" validate:"required"`
 	Type            string              `json:"type" validate:"required,oneof=global"`
-	Parameters      []QueryJobParameter `json:"parameters"`
+	Parameters      []QueryJobParameter `json:"parameters,omitempty"`
 	ParameterValues struct {
-		From string `json:"from"`
-		To   string `json:"to"`
-	} `json:"parameterValues"`
-	QueryID           string           `json:"queryId"`
-	Status            string           `json:"status"`
+		From string `json:"from,omitempty"`
+		To   string `json:"to,omitempty"`
+	} `json:"parameterValues,omitempty"`
+	QueryID           string           `json:"queryId,omitempty"`
+	Status            string           `json:"status,omitempty"`
 	RowCount          int              `json:"rowCount"`
-	Columns           []QueryJobColumn `json:"columns"`
-	StartTime         string           `json:"startTime"`
-	EndTime           string           `json:"endTime"`
+	Columns           []QueryJobColumn `json:"columns,omitempty"`
+	StartTime         string           `json:"startTime,omitempty"`
+	EndTime           string           `json:"endTime,omitempty"`
 	Error             QueryError       `json:"error"`
 	Purged            bool             `json:"purged"`
 	IncompleteResults bool             `json:"incompleteResults"`
-	AlertID           string           `json:"alertId"`
+	AlertID           string           `json:"alertId,omitempty"`
 	CreatedBy         string           `json:"createdBy"`
 	UpdatedBy         string           `json:"updatedBy"`
 	CreatedAt         string           `json:"createdAt"`
 	UpdatedAt         string           `json:"updatedAt"`
-	Source            string           `json:"source"`
-	ResultStore       string           `json:"resultStore"`
-	AgentType         string           `json:"agentType"`
-	ResourceType      string           `json:"resourceType"`
+	Source            string           `json:"source,omitempty"`
+	ResultStore       string           `json:"resultStore,omitempty"`
+	AgentType         string           `json:"agentType,omitempty"`
+	ResourceType      string           `json:"resourceType,omitempty"`
 	Links             []LinkItem       `json:"links"`
 	//SessionProperties interface{} `json:"sessionProperties"` # TODO: cant find any examples of this
 	//Filters  interface{} `json:"filters"` # TODO: cant find any examples of this
@@ -63,19 +63,30 @@ type QueryError struct {
 }
 
 type QueryJobResult struct {
-	CreatedAt   string `json:"createdAt"`
-	RowDataHash string `json:"rowDataHash"`
-	CustomerID  string `json:"customerId"`
-	RowData     string `json:"rowData"`
-	RowNumber   int    `json:"rowNumber"`
-	QueryJobID  string `json:"queryJobId"`
-}
-
-type QueryJobResultColumn struct {
-	Name         string `json:"name"`
-	Type         string `json:"type"`
-	OriginalName string `json:"originalName"`
-	Link         string `json:"link"`
+	QueryStats struct {
+		CPUTimeMillis     int `json:"cpuTimeMillis"`
+		ProcessedRows     int `json:"processedRows"`
+		ProcessedBytes    int `json:"processedBytes"`
+		ElapsedTimeMillis int `json:"elapsedTimeMillis"`
+	} `json:"queryStats"`
+	Status      string           `json:"status"`
+	ID          string           `json:"id"`
+	Name        string           `json:"-"`
+	RowDataHash string           `json:"rowDataHash"`
+	Error       interface{}      `json:"error"`
+	EndTime     string           `json:"endTime"`
+	StartTime   string           `json:"startTime"`
+	RowCount    int              `json:"rowCount"`
+	ResultStore string           `json:"resultStore"`
+	RowData     CustomJSONString `json:"rowData"`
+	CreatedAt   string           `json:"createdAt"`
+	RowNumber   int              `json:"rowNumber"`
+	QueryJobID  string           `json:"queryJobId"`
+	Columns     []QueryJobColumn `json:"columns"`
+	Offset      int              `json:"offset"`
+	Limit       int              `json:"limit"`
+	Items       []QueryJobResult `json:"items"`
+	Links       []LinkItem       `json:"links"`
 }
 
 type QueryJobResultsStats struct {
@@ -83,22 +94,6 @@ type QueryJobResultsStats struct {
 	ProcessedRows     int `json:"processedRows"`
 	ProcessedBytes    int `json:"processedBytes"`
 	ElapsedTimeMillis int `json:"elapsedTimeMillis"`
-}
-
-type QueryJobResults struct {
-	Links       []LinkItem             `json:"links"`
-	Items       []QueryJobResult       `json:"items"`
-	QueryStats  QueryJobResultsStats   `json:"queryStats"`
-	Status      string                 `json:"status"`
-	ID          string                 `json:"id"`
-	Error       QueryError             `json:"error"`
-	EndTime     string                 `json:"endTime"`
-	StartTime   string                 `json:"startTime"`
-	RowCount    int                    `json:"rowCount"`
-	ResultStore string                 `json:"resultStore"`
-	Columns     []QueryJobResultColumn `json:"columns"`
-	Offset      int                    `json:"offset,omitempty"`
-	Limit       int                    `json:"limit,omitempty"`
 }
 
 type LookupTables struct {
@@ -1267,5 +1262,5 @@ type iAPIType interface {
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles | FlagProfiles | BlockRules | WindowsDefenderPreferences | Exceptions | AssetTags | Assets | LookupTables | QueryJobResults | QueryJobs
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles | FlagProfiles | BlockRules | WindowsDefenderPreferences | Exceptions | AssetTags | Assets | LookupTables | QueryJobs | QueryJobResult
 }

@@ -13,6 +13,13 @@ func (T QueryJob) GetName() string {
 func (T QueryJob) KeysToDelete() []string {
 	return []string{
 		"enabled",
+		"error",
+		"incompleteResults",
+		"purged",
+		"queryId",
+		"resourceType",
+		"resultStore",
+		"rowCount",
 	}
 }
 

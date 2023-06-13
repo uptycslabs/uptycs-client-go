@@ -53,11 +53,11 @@ func TestGetQueryJob(t *testing.T) {
 					},
 				},
 				ParameterValues: struct {
-					From string `json:"from"`
-					To   string `json:"to"`
+					From string `json:"from,omitempty"`
+					To   string `json:"to,omitempty"`
 				}{
-					To:   "2023-05-22T19:27:08.322Z",
 					From: "2023-05-22T17:22:36.323Z",
+					To:   "2023-05-22T19:27:08.322Z",
 				},
 				QueryID:           "4934a4b8-0625-452f-b5ec-0d6be1da2d85",
 				Status:            "QUEUED",

@@ -1,0 +1,75 @@
+{
+  "items": [
+    {
+      "createdAt": "2023-06-13",
+      "rowDataHash": "248f094d-c546-34dc-8ca2-06c869c4bbed",
+      "customerId": "11111111-1111-1111-1111-111111111111",
+      "rowData": {
+        "instance_id": "i-027e4ca22fe5a1518",
+        "tags": "{\"Foo\":\"some foo\"}",
+        "foo": 1
+      },
+      "rowNumber": 1,
+      "queryJobId": "7bc5024f-003b-4934-97d6-478bc603a684"
+    },
+    {
+      "createdAt": "2023-06-13",
+      "rowDataHash": "8917663c-4f37-3d28-b771-acfd00f2e816",
+      "customerId": "11111111-1111-1111-1111-111111111111",
+      "rowData": {
+        "instance_id": "i-08c0f696e648e37cd",
+        "tags": "{\"Foo\":\"some other foo\"}",
+        "foo": 2
+      },
+      "rowNumber": 2,
+      "queryJobId": "7bc5024f-003b-4934-97d6-478bc603a684"
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "title": "Query job results information",
+      "href": "/api/customers/11111111-1111-1111-1111-111111111111/queryJobs/7bc5024f-003b-4934-97d6-478bc603a684/results"
+    },
+    {
+      "rel": "parent",
+      "title": "Query job information",
+      "href": "/api/customers/11111111-1111-1111-1111-111111111111/queryJobs/7bc5024f-003b-4934-97d6-478bc603a684"
+    }
+  ],
+  "queryStats": {
+    "cpuTimeMillis": 106,
+    "processedRows": 5963,
+    "processedBytes": 0,
+    "elapsedTimeMillis": 386
+  },
+  "status": "FINISHED",
+  "id": "7bc5024f-003b-4934-97d6-478bc603a684",
+  "error": null,
+  "endTime": "2023-06-13T15:27:01.209Z",
+  "startTime": "2023-06-13T15:27:00.692Z",
+  "rowCount": 2,
+  "resultStore": "cache",
+  "columns": [
+    {
+      "name": "instance_id",
+      "type": "TEXT",
+      "originalName": "instance_id",
+      "link": ""
+    },
+    {
+      "name": "tags",
+      "type": "TEXT",
+      "originalName": "tags",
+      "link": ""
+    },
+    {
+      "name": "foo",
+      "type": "NUMBER_INTEGER",
+      "originalName": "foo",
+      "link": ""
+    }
+  ],
+  "offset": 0,
+  "limit": 50000
+}
