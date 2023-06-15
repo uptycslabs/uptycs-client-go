@@ -1,0 +1,28 @@
+{
+  "id": "7f042e5a-e4e8-47e7-8077-a0581411d4fd",
+  "customerId": "111111111111-111111-11111-111111-111111111",
+  "name": "aws_account_metadata",
+  "description": "Used to lookup business context on AWS accounts.",
+  "active": true,
+  "idField": "id",
+  "rowCount": 3,
+  "forRuleEngine": true,
+  "createdBy": "66a9a52c-5fa0-4cf4-abe7-da5504f67950",
+  "updatedBy": "66a9a52c-5fa0-4cf4-abe7-da5504f67950",
+  "createdAt": "2022-06-22T03:58:40.114Z",
+  "updatedAt": "2022-06-22T03:58:40.349Z",
+  "dataLookupTable": null,
+  "links": [
+    {
+      "rel": "self",
+      "title": "Lookup Table information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/lookupTables/7f042e5a-e4e8-47e7-8077-a0581411d4fd"
+    },
+    {
+      "rel": "parent",
+      "title": "Lookup Tables information",
+      "href": "/api/customers/111111111111-111111-11111-111111-111111111/lookupTables"
+    }
+  ],
+  "fetchRowsquery": "SELECT id_field_value,data FROM upt_lookup_rows WHERE lookup_table_id = '7f042e5a-e4e8-47e7-8077-a0581411d4fd'"
+}
