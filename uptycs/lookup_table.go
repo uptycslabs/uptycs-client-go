@@ -49,7 +49,7 @@ func (c *Client) GetLookupTable(lookupTable LookupTable) (LookupTable, error) {
 		all, _ := c.GetLookupTables()
 		for _, _item := range all.Items {
 			if _item.Name == lookupTable.Name {
-				_lookupTableDataRows, _ := GetAllLookupTableData(c, fmt.Sprintf("lookupTables/%s/data", lookupTable.ID))
+				_lookupTableDataRows, _ := GetAllLookupTableData(c, fmt.Sprintf("lookupTables/%s/data", _item.ID))
 				_item.DataRows = append(_item.DataRows, _lookupTableDataRows...)
 				return _item, nil
 			}
