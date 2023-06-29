@@ -28,9 +28,23 @@ func main() {
 	// Create a destination
 	newDestination, err := c.CreateDestination(uptycs.Destination{
 		Name:    "marcus test",
-		Type:    "email",
-		Address: "test@email.com",
+		Type:    "http",
+		Address: "https://foo",
+		Enabled: true,
+		Config: uptycs.DestinationConfig{
+			Method:   "POST",
+			Username: "a",
+			Password: "b",
+			DataKey:  "c",
+			Headers:  "{\"foo\":\"bar\"}",
+		},
+		Template: struct {
+			Template string `json:"template,omitempty"`
+		}{
+			Template: `{\n"message" : "test-{{ detection.score }}-{{{ detection.name }}}"\n\n}`,
+		},
 	})
+
 	if err != nil {
 		panic(err)
 	}
@@ -41,6 +55,7 @@ func main() {
 	updatedDestination, err := c.UpdateDestination(uptycs.Destination{
 		ID:   newDestination.ID,
 		Name: "marcus test updated",
+		Type: "http",
 	})
 	if err != nil {
 		panic(err)
