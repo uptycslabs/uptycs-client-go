@@ -217,23 +217,27 @@ func TestCreateDestination(t *testing.T) {
 		in      Destination
 	}
 
-	theTests := []convTest{
+	var theTests = []convTest{
 		{
 			name:    "TestDestination",
 			fixture: "fixtures/destinationCreate.json",
 			in: Destination{
-				ID:      "b7c9c973-e2a3-4913-a755-919026267679",
-				Name:    "#it-sec-alerts",
-				Type:    "slack",
-				Address: "https://hooks.slack.com/services/wut/foo/asdf",
-				//Config: {}, TODO
+				ID:        "b7c9c973-e2a3-4913-a755-919026267679",
+				Name:      "#it-sec-alerts",
+				Type:      "slack",
+				Address:   "https://hooks.slack.com/services/wut/foo/asdf",
 				CreatedAt: "2022-03-09T20:49:04.283Z",
 				CreatedBy: "e9b93444-a442-437f-82f6-6d65e9c787d3",
 				UpdatedAt: "2022-03-09T20:49:41.189Z",
 				UpdatedBy: "e9b93444-a442-437f-82f6-6d65e9c787d3",
 				Enabled:   true,
 				Default:   false,
-				//Template: {}, TODO
+				Config:    DestinationConfig{},
+				Template: struct {
+					Template string `json:"template,omitempty"`
+				}{
+					Template: `{\n"message" : "test-{{ detection.score }}"\n\n}`,
+				},
 				Links: []LinkItem{
 					LinkItem{Rel: "self", Title: "Notification destination", Href: "/api/customers/111111111111-111111-11111-111111-111111111/destinations/b7c9c973-e2a3-4913-a755-919026267679"},
 					LinkItem{Rel: "parent", Title: "Notification destinations", Href: "/api/customers/111111111111-111111-11111-111111-111111111/destinations"},
@@ -241,7 +245,6 @@ func TestCreateDestination(t *testing.T) {
 			},
 		},
 	}
-
 	for _, theT := range theTests {
 		httpmock.Activate()
 		defer httpmock.DeactivateAndReset()

@@ -323,22 +323,32 @@ type Destinations struct {
 }
 
 type Destination struct {
-	ID        string     `json:"id,omitempty"`
-	Name      string     `json:"name,omitempty"`
-	Type      string     `json:"type,omitempty"`
-	Address   string     `json:"address,omitempty"`
-	CreatedAt string     `json:"createdAt,omitempty"`
-	CreatedBy string     `json:"createdBy,omitempty"`
-	UpdatedAt string     `json:"updatedAt,omitempty"`
-	UpdatedBy string     `json:"updatedBy,omitempty"`
-	Enabled   bool       `json:"enabled"`
-	Default   bool       `json:"default"`
-	Links     []LinkItem `json:"links,omitempty"`
-	//Template TODO
-	//Config TODO
-	//"config": {
-	//  "sender": null
-	//},
+	ID        string            `json:"id,omitempty"`
+	Name      string            `json:"name,omitempty"`
+	Type      string            `json:"type,omitempty" validate:"oneof=email slack http pagerduty azure"`
+	Address   string            `json:"address,omitempty"`
+	CreatedAt string            `json:"createdAt,omitempty"`
+	CreatedBy string            `json:"createdBy,omitempty"`
+	UpdatedAt string            `json:"updatedAt,omitempty"`
+	UpdatedBy string            `json:"updatedBy,omitempty"`
+	Enabled   bool              `json:"enabled"`
+	Default   bool              `json:"default"`
+	Config    DestinationConfig `json:"config,omitempty"`
+	Template  struct {
+		Template string `json:"template,omitempty"`
+	} `json:"template,omitempty"`
+	Links []LinkItem `json:"links,omitempty"`
+}
+
+type DestinationConfig struct {
+	Sender          string           `json:"sender,omitempty"`
+	Method          string           `json:"method,omitempty"`
+	Username        string           `json:"username,omitempty"`
+	Password        string           `json:"password,omitempty"`
+	DataKey         string           `json:"dataKey,omitempty"`
+	Token           string           `json:"token,omitempty"`
+	SlackAttachment bool             `json:"slackAttachment,omitempty"` //noqa
+	Headers         CustomJSONString `json:"headers,omitempty"`
 }
 
 type SQLConfig struct {

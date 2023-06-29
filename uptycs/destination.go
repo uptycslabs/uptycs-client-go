@@ -13,6 +13,7 @@ func (T Destination) GetName() string {
 func (T Destination) KeysToDelete() []string {
 	return []string{
 		"enabled",
+		"default",
 	}
 }
 
