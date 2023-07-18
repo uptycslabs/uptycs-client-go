@@ -14,7 +14,6 @@ func (T AlertRule) GetName() string {
 
 func (T AlertRule) KeysToDelete() []string {
 	keysToDelete := []string{
-		"enabled",
 		"isInternal",
 		"timeSuppresionStart",
 		"timeSuppresionDuration",
