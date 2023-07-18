@@ -187,7 +187,8 @@ type EventRule struct {
 }
 
 type BuilderConfigLite struct {
-	ID string `json:"id"`
+	ID              string          `json:"id"`
+	AutoAlertConfig AutoAlertConfig `json:"autoAlertConfig"`
 }
 
 type BuilderConfig struct {
