@@ -1,0 +1,39 @@
+{
+  "id": "1e60d444-31dd-4c34-9c77-a73a86c731b3",
+  "customerId": "11111111-1111-1111-1111-111111111111",
+  "seedId": "b9cdad97-5b97-42f5-874e-d32614ace42d",
+  "name": "6/15/22 putobjectacl investigation",
+  "description": null,
+  "query": "select * from aws_cloudtrail_events limit 1;",
+  "type": "default",
+  "executionType": "global",
+  "grouping": "temp-investigation-queries",
+  "custom": true,
+  "shared": true,
+  "assetView": "LIST",
+  "resultView": "TABLE",
+  "viewConfig": null,
+  "parameters": null,
+  "createdBy": "66a9a52c-5fa0-4cf4-abe7-da5504f67950",
+  "updatedBy": "66a9a52c-5fa0-4cf4-abe7-da5504f67950",
+  "deletedBy": null,
+  "createdAt": "2022-06-15T13:48:00.862Z",
+  "updatedAt": "2022-06-15T13:57:56.649Z",
+  "deletedAt": null,
+  "filters": null,
+  "agentType": "asset",
+  "resourceType": "asset",
+  "sessionProperties": null,
+  "destinations": [],
+  "querySchedule": null,
+  "links": [
+    {
+      "rel": "self",
+      "href": "/api/customers/11111111-1111-1111-1111-111111111111/queries/1e60d444-31dd-4c34-9c77-a73a86c731b3"
+    },
+    {
+      "rel": "parent",
+      "href": "/api/customers/11111111-1111-1111-1111-111111111111/queries"
+    }
+  ]
+}

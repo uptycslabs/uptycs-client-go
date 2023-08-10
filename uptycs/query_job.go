@@ -32,7 +32,7 @@ func (c *Client) UpdateQueryJob(queryJob QueryJob) (QueryJob, error) {
 }
 
 func (c *Client) GetQueryJobs() (QueryJobs, error) {
-	return doGetMany(c, QueryJobs{}, "queryTables")
+	return doGetMany(c, QueryJobs{}, "queryJobs")
 }
 
 func (c *Client) GetQueryJob(queryJob QueryJob) (QueryJob, error) {
