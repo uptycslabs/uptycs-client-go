@@ -764,6 +764,13 @@ type Querypack struct {
 	//Sha              string           `json:"sha" validate:"required,max=40,min=1"` //TODO Does not work
 }
 
+type Queries struct {
+	Links  []LinkItem `json:"links"`
+	Items  []Query    `json:"items"`
+	Offset int        `json:"offset,omitempty"`
+	Limit  int        `json:"limit,omitempty"`
+}
+
 type Query struct {
 	ID          string           `json:"id,omitempty"`
 	Name        string           `json:"name,omitempty"`
@@ -1265,12 +1272,12 @@ type AssetTag struct {
 }
 
 type iAPIType interface {
-	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve | CustomProfile | FlagProfile | BlockRule | WindowsDefenderPreference | Exception | AssetTag | Asset | LookupTable | LookupTableDataRow | QueryJob | QueryJobResult
+	AlertRule | Destination | EventExcludeProfile | EventRule | User | Role | ObjectGroup | TagConfiguration | TagRule | Tag | FilePathGroup | YaraGroupRule | RegistryPath | Querypack | AuditConfiguration | ComplianceProfile | AlertRuleCategory | AssetGroupRule | AtcQuery | Carve | CustomProfile | FlagProfile | BlockRule | WindowsDefenderPreference | Exception | AssetTag | Asset | LookupTable | LookupTableDataRow | QueryJob | QueryJobResult | Query
 	GetID() string
 	GetName() string
 	KeysToDelete() []string
 }
 
 type iAPITypes interface {
-	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles | FlagProfiles | BlockRules | WindowsDefenderPreferences | Exceptions | AssetTags | Assets | LookupTables | QueryJobs | QueryJobResult
+	AlertRules | Destinations | EventExcludeProfiles | EventRules | Users | Roles | ObjectGroups | TagConfigurations | TagRules | Tags | FilePathGroups | YaraGroupRules | RegistryPaths | Querypacks | AuditConfigurations | ComplianceProfiles | AlertRuleCategories | AssetGroupRules | AtcQueries | Carves | CustomProfiles | FlagProfiles | BlockRules | WindowsDefenderPreferences | Exceptions | AssetTags | Assets | LookupTables | QueryJobs | QueryJobResult | Queries
 }
